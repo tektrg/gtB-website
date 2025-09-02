@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gptbreeze.io/sitemap-index.xml
+

@@ -1,3 +1,26 @@
+
+DNS Setup
+
+- Point apex gptbreeze.io to GitHub Pages with A records:
+    - 185.199.108.153
+    - 185.199.109.153
+    - 185.199.110.153
+    - 185.199.111.153
+- Optional IPv6 AAAA:
+    - 2606:50c0:8000::153
+    - 2606:50c0:8001::153
+    - 2606:50c0:8002::153
+    - 2606:50c0:8003::153
+
+GitHub Pages
+
+- In repo Settings → Pages:
+    - Custom domain: gptbreeze.io
+    - Enforce HTTPS: enable after DNS propagates
+- Actions will deploy to the custom domain automatically after Pages picks up
+the CNAME.
+
+
 # Astro + GitHub Pages — SEO-ready, CMS-free, ship-fast setup
 
 You: Claude on laptop → Markdown/MDX in repo → Astro builds → GitHub Pages deploys. No database, no “admin panel,” no whiny plugins. Here’s the exact path.
