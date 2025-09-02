@@ -1,8 +1,268 @@
 ---
 import Base from "@/layouts/Base.astro";
 ---
-<Base title="GPT Breeze" description="Static site powered by Astro. Content lives in Git.">
-  <h1>Welcome</h1>
-  <p>Static site powered by Astro. Content lives in Git.</p>
-  <p><a href="/blog/">Go to Blog</a></p>
+<Base
+  title="GPT Breeze — AI productivity shortcuts in your tab"
+  description="Save time with AI summaries, tab management, and one‑click shortcuts for YouTube, selected text, and any website."
+>
+  <style slot="head">
+      :root {
+        --bg: #ffffff;
+        --fg: #0f172a;
+        --muted: #475569;
+        --accent: #2563eb;
+        --border: #e2e8f0;
+        --surface: #f8fafc;
+        --radius: 12px;
+        --maxw: 960px;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height: 1.6; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .container { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+      header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.8); backdrop-filter: saturate(180%) blur(10px); border-bottom: 1px solid var(--border); }
+      .nav { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+      .brand { font-weight: 700; letter-spacing: -0.01em; }
+      .menu { display: flex; gap: 16px; font-size: 0.95rem; }
+      .hero { padding: 56px 0 32px; }
+      .hero h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin: 0 0 12px; }
+      .hero p.lead { color: var(--muted); font-size: 1.1rem; margin: 0 0 16px; }
+      .cta { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: var(--fg); color: #fff; border: 1px solid var(--fg); }
+      .cta.secondary { background: transparent; color: var(--fg); }
+      .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
+      section { padding: 32px 0; border-top: 1px solid var(--border); }
+      .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+      .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .muted { color: var(--muted); }
+      .kicker { display: inline-block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+      .list { margin: 8px 0 0 0; padding-left: 18px; }
+      .list li { margin: 6px 0; }
+      details { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+      summary { cursor: pointer; font-weight: 600; }
+      footer { padding: 24px 0 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; }
+      .two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+      .price { font-size: 2rem; font-weight: 800; }
+      .strike { text-decoration: line-through; opacity: 0.6; font-weight: 600; }
+      .section-title { margin: 0 0 8px; font-size: 1.6rem; }
+      .subtle { font-size: 0.95rem; color: var(--muted); margin: 0 0 16px; }
+      .inline { display: inline-flex; align-items: center; gap: 8px; }
+      .stack { display: grid; gap: 8px; }
+      .center { text-align: center; }
+      @media (min-width: 800px) { .hero { padding: 72px 0 40px; } }
+  </style>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">GPT Breeze</div>
+      <nav class="menu" aria-label="Main Navigation">
+        <a href="#home">Home</a>
+        <a href="#guide">Guide</a>
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy policy</a>
+        <a href="#issues">Issue report</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <span class="kicker">AI productivity shortcuts in your tab</span>
+      <h1>Save hours every week with AI in one click</h1>
+      <p class="lead">Let AI summarize web content, manage your tabs, and save your prompts as one‑click shortcuts.</p>
+      <div class="inline" style="gap:12px; margin-top:12px;">
+        <a class="cta" href="#pricing">Get GPT Breeze</a>
+        <a class="cta secondary" href="#features">See features</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title">Features</h2>
+      <p class="subtle">AI manages tabs, summarizes content, and speeds your workflow.</p>
+
+      <div class="cards" style="margin-top:12px;">
+        <div class="card stack">
+          <h3>AI manages your browser tabs/history/bookmarks</h3>
+          <p class="muted">Let AI help you organize your browser:</p>
+          <ul class="list">
+            <li>“Sort my open tabs in logical order”</li>
+            <li>“Show me bookmarks about product management”</li>
+            <li>“Bookmark those Reddit tabs for digest later”</li>
+          </ul>
+          <p class="muted">Perfect for taming tab overload and staying focused.</p>
+        </div>
+
+        <div class="card stack">
+          <h3>Summarize YouTube videos</h3>
+          <p>Navigate videos with clickable, time‑stamped sections. Extract the full transcript or create a custom AI shortcut for the video.</p>
+          <p class="muted">Demonstration: free YouTube long‑video summarizer Chrome extension.</p>
+        </div>
+
+        <div class="card stack">
+          <h3>Web page summarization and chat</h3>
+          <p>Get concise bullet‑point summaries and ask follow‑up questions to explore deeper without losing time.</p>
+          <p class="muted">Demonstration: website long‑article summarizer Chrome extension.</p>
+        </div>
+
+        <div class="card stack">
+          <h3>Assist your creation process</h3>
+          <p>Highlight text to get explanations, translations, or summaries. Improve your writing in one click.</p>
+          <p class="muted">Free ChatGPT Chrome extension to improve writing and translate selected text.</p>
+        </div>
+
+        <div class="card stack">
+          <h3>Use different AI models</h3>
+          <p>Instantly switch between popular AI models inside GPT Breeze to maximize strengths as needed.</p>
+          <p class="muted">GPT‑4.1 Nano is impressively fast for summaries. Claude Sonnet 4 excels at coding and complex reasoning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="container two">
+      <div class="card">
+        <h3>Customers' reviews</h3>
+        <p class="muted">Reviews from Chrome Web Store</p>
+      </div>
+      <div class="card">
+        <h3>&nbsp;</h3>
+        <p class="muted">Reviews from Gumroad</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <h2 class="section-title">Pricing</h2>
+      <div class="two" style="margin-top:12px;">
+        <div class="card stack">
+          <h3>Free</h3>
+          <div class="price">$0 <span class="muted" style="font-size:0.9rem; font-weight:600;">USD</span></div>
+          <ul class="list">
+            <li>Unlimited usage of AI shortcuts (BYOM)</li>
+            <li>AI shortcuts for YouTube videos</li>
+            <li>AI shortcuts for selected text</li>
+            <li>AI shortcuts for any website</li>
+            <li>(Lots of) future updates</li>
+          </ul>
+        </div>
+        <div class="card stack">
+          <h3>One‑time purchase</h3>
+          <div class="inline" style="gap:8px;">
+            <div class="price">$9.99</div>
+            <div class="strike">$29</div>
+            <div>USD</div>
+          </div>
+          <p class="muted">Everything in Free, plus:</p>
+          <ul class="list">
+            <li>Create custom AI shortcuts</li>
+          </ul>
+          <p class="muted">Current promotion discounts for early adopters.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <h2 class="section-title">F.A.Q</h2>
+      <div class="stack" style="margin-top:12px;">
+        <details>
+          <summary>What is GPT Breeze?</summary>
+          <p class="muted">A free Chrome extension that adds AI shortcuts to your browsing workflow.</p>
+        </details>
+        <details>
+          <summary>GPT Breeze is free without usage limit, why and how?</summary>
+          <p class="muted">Bring your own API key to use models; we don’t meter your usage.</p>
+        </details>
+        <details>
+          <summary>How does GPT Breeze guarantee privacy and data security?</summary>
+          <p class="muted">We keep processing local when possible and never sell your data. See privacy policy below.</p>
+        </details>
+        <details>
+          <summary>Can I get a refund?</summary>
+          <p class="muted">Yes. If you’re not satisfied within 14 days, contact support.</p>
+        </details>
+        <details>
+          <summary>How to use GPT Breeze</summary>
+          <p class="muted">Install the extension, open the panel with the toolbar button, then run shortcuts on tabs, videos, text, or pages.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="guide">
+    <div class="container">
+      <h2 class="section-title">Guide</h2>
+      <div class="two" style="margin-top:12px;">
+        <div class="card">
+          <h3>Installation</h3>
+          <p class="muted">Add the Chrome extension and pin it for quick access.</p>
+        </div>
+        <div class="card">
+          <h3>UI options</h3>
+          <p class="muted">Customize shortcuts and layout from Settings.</p>
+        </div>
+        <div class="card">
+          <h3>Setup AI model</h3>
+          <p class="muted">Use your own API key for OpenAI, Anthropic, etc.</p>
+        </div>
+        <div class="card">
+          <h3>Get a license key</h3>
+          <p class="muted">Unlock paid features with a one‑time purchase.</p>
+        </div>
+        <div class="card">
+          <h3>Partner</h3>
+          <p class="muted">Contact us to bundle GPT Breeze with your product.</p>
+        </div>
+      </div>
+      <p style="margin-top:12px;" class="muted">Learn more in the documentation.</p>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <div class="container">
+      <h2 class="section-title">Privacy policy</h2>
+      <p class="muted">We prioritize privacy and data security. BYO API keys stay on your device and requests go directly to providers when feasible. Minimal telemetry, no selling of personal data.</p>
+    </div>
+  </section>
+
+  <section id="issues">
+    <div class="container">
+      <h2 class="section-title">Issue report</h2>
+      <p class="muted">Found a bug or have feedback? Please open an issue or reach out below.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container two">
+      <div class="card">
+        <h3>Get in touch</h3>
+        <p class="stack">
+          <span><a href="#" rel="noopener">X (Twitter)</a></span>
+          <span><a href="#" rel="noopener">YouTube</a></span>
+          <span><a href="#" rel="noopener">Chrome Web Store</a></span>
+          <span>Email: <a href="mailto:[email protected]">[email protected]</a></span>
+        </p>
+      </div>
+      <div class="card center">
+        <h3>Join thousands saving time</h3>
+        <p class="muted">Boost your focus and ship faster.</p>
+        <p><a class="cta" href="#pricing">Get GPT Breeze</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="two">
+        <div>©2025 GPT Breeze — All Rights Reserved</div>
+        <div class="muted">Made with Astro</div>
+      </div>
+    </div>
+  </footer>
+  
 </Base>
