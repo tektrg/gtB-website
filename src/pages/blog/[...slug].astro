@@ -1,25 +1,20 @@
 ---
 import { getCollection } from 'astro:content';
+import Base from "@/layouts/Base.astro";
 const { slug } = Astro.params;
 const posts = await getCollection('blog');
 const post = posts.find((p) => (p.slug ?? p.id) === slug);
 if (!post) throw new Error('Not found');
 const { Content } = await post.render();
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{post.data.title}</title>
-    {post.data.canonicalURL && (
-      <link rel="canonical" href={post.data.canonicalURL} />
-    )}
-  </head>
-  <body>
-    <article>
-      <h1>{post.data.title}</h1>
-      <Content />
-    </article>
-  </body>
-</html>
-
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  canonical={post.data.canonicalURL}
+  ogType="article"
+>
+  <article>
+    <h1>{post.data.title}</h1>
+    <Content />
+  </article>
+</Base>
