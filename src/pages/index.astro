@@ -5,51 +5,70 @@ import Base from "@/layouts/Base.astro";
   title="GPT Breeze — AI productivity shortcuts in your tab"
   description="Save time with AI summaries, tab management, and one‑click shortcuts for YouTube, selected text, and any website."
 >
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link slot="head" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta slot="head" name="theme-color" content="#F6F4F0" />
   <style slot="head">
-      :root {
-        --bg: #ffffff;
-        --fg: #0f172a;
-        --muted: #475569;
-        --accent: #2563eb;
-        --border: #e2e8f0;
-        --surface: #f8fafc;
-        --radius: 12px;
-        --maxw: 960px;
-      }
-      * { box-sizing: border-box; }
-      body { margin: 0; background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height: 1.6; }
-      a { color: var(--accent); text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      .container { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
-      header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.8); backdrop-filter: saturate(180%) blur(10px); border-bottom: 1px solid var(--border); }
-      .nav { display: flex; align-items: center; justify-content: space-between; height: 56px; }
-      .brand { font-weight: 700; letter-spacing: -0.01em; }
-      .menu { display: flex; gap: 16px; font-size: 0.95rem; }
-      .hero { padding: 56px 0 32px; }
-      .hero h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin: 0 0 12px; }
-      .hero p.lead { color: var(--muted); font-size: 1.1rem; margin: 0 0 16px; }
-      .cta { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: var(--fg); color: #fff; border: 1px solid var(--fg); }
-      .cta.secondary { background: transparent; color: var(--fg); }
-      .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
-      section { padding: 32px 0; border-top: 1px solid var(--border); }
-      .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
-      .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-      .muted { color: var(--muted); }
-      .kicker { display: inline-block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
-      .list { margin: 8px 0 0 0; padding-left: 18px; }
-      .list li { margin: 6px 0; }
-      details { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
-      summary { cursor: pointer; font-weight: 600; }
-      footer { padding: 24px 0 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; }
-      .two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-      .price { font-size: 2rem; font-weight: 800; }
-      .strike { text-decoration: line-through; opacity: 0.6; font-weight: 600; }
-      .section-title { margin: 0 0 8px; font-size: 1.6rem; }
-      .subtle { font-size: 0.95rem; color: var(--muted); margin: 0 0 16px; }
-      .inline { display: inline-flex; align-items: center; gap: 8px; }
-      .stack { display: grid; gap: 8px; }
-      .center { text-align: center; }
-      @media (min-width: 800px) { .hero { padding: 72px 0 40px; } }
+    :root {
+      --bg: #F6F4F0;
+      --fg: #22221F;
+      --muted: #667085;
+      --accent: #22221F;
+      --accent-fg: #ffffff;
+      --border: #e3e1dc;
+      --surface: #ffffff;
+      --radius: 14px;
+      --maxw: 1120px;
+      --header-h: 68px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: Nunito, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    header { position: sticky; top: 0; z-index: 20; background: rgba(246,244,240,0.65); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: none; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
+    .brand { font-weight: 800; letter-spacing: -0.01em; font-size: 1.05rem; }
+    .menu { display: flex; gap: 18px; font-size: 0.98rem; align-items: center; }
+    .install { display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-fg); font-weight: 600; }
+    .install.secondary { background: transparent; color: var(--fg); }
+    .hero { position: relative; overflow: hidden; padding: calc(120px + var(--header-h)) 0 80px; margin-top: calc(-1 * var(--header-h)); border-top: none; }
+    .bg { z-index:99; position: absolute; inset: -20% -20% auto -20%; height: 60vh; background: radial-gradient(60% 60% at 20% 30%, rgba(75,183,215,0.3) 0%, rgba(75,183,215,0) 60%), radial-gradient(50% 50% at 80% 0%, rgba(246,244,240,0.9) 0%, rgba(246,244,240,0) 60%); filter: blur(40px); opacity: 0.8; pointer-events: none; }
+    .hero h1, .display { font-size: clamp(2.6rem, 6vw, 4.25rem); line-height: 1.05; margin: 0 0 16px; letter-spacing: -0.02em; text-align: center; }
+    .em { font-style: italic; font-weight: 400; }
+    .hero p.lead { color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.2rem); margin: 0 0 28px; }
+    .hero-actions { display:flex; gap:14px; justify-content:center; margin: 50px 0 40px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding: 12px 18px; border-radius:999px; font-weight:600; border:1px solid var(--accent); }
+    .btn.primary { background: var(--accent); color: var(--accent-fg); }
+    .btn.outline { background: transparent; color: var(--fg); }
+    .hero-media { display:flex; justify-content:center; margin-top: 80px; }
+    .device-frame { width: min(1100px, 100%); border-radius: 24px; border: 10px solid #d0cecd7d; box-shadow: 0 8px 32px rgba(16,24,40,0.15), 0 2px 8px rgba(16,24,40,0.08); overflow: hidden; position: relative; }
+    .ratio { aspect-ratio: 16 / 10; position: relative; width: 100%; }
+    /* Lightweight YouTube with poster */
+    .yt-lite { position: absolute; inset: 0; width: 100%; height: 100%; background-position: center; background-size: cover; cursor: pointer; }
+    .yt-lite > .play { cursor:pointer; position: absolute; inset: 0; margin: auto; width: 72px; height: 72px; border-radius: 999px; border: 0; background: rgba(255,255,255,0.9); display: grid; place-items: center; z-index: 1; box-shadow: 0 8px 24px rgba(16,24,40,0.25); }
+    .yt-lite > .play::before { content: ""; display: block; width: 0; height: 0; border-left: 18px solid #000; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 4px; }
+    .yt-lite.loading .play { opacity: 0; pointer-events: none; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
+    section { padding: 40px 0; border-top: 1px solid var(--border); scroll-margin-top: calc(var(--header-h) + 16px); }
+    .card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: 0 1px 0 rgba(16,24,40,0.02); }
+    .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .muted { color: var(--muted); }
+    .kicker { display: inline-block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; margin-bottom: 10px; background: #EAF7FB; border: 1px solid #D0EEF7; padding: 4px 8px; border-radius: 999px; }
+    .list { margin: 8px 0 0 0; padding-left: 18px; }
+    .list li { margin: 6px 0; }
+    details { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+    summary { cursor: pointer; font-weight: 600; }
+    footer { padding: 24px 0 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; background: transparent; }
+    .two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .price { font-size: 2rem; font-weight: 800; }
+    .strike { text-decoration: line-through; opacity: 0.6; font-weight: 600; }
+    .section-title { margin: 0 0 8px; font-size: clamp(1.6rem, 2vw, 2rem); letter-spacing: -0.01em; }
+    .subtle { font-size: 0.95rem; color: var(--muted); margin: 0 0 16px; }
+    .inline { display: inline-flex; align-items: center; gap: 8px; }
+    .stack { display: grid; gap: 8px; }
+    .center { text-align: center; }
   </style>
 
   <header>
@@ -67,12 +86,32 @@ import Base from "@/layouts/Base.astro";
 
   <section id="home" class="hero">
     <div class="container">
-      <span class="kicker">AI productivity shortcuts in your tab</span>
-      <h1>Save hours every week with AI in one click</h1>
-      <p class="lead">Let AI summarize web content, manage your tabs, and save your prompts as one‑click shortcuts.</p>
-      <div class="inline" style="gap:12px; margin-top:12px;">
-        <a class="cta" href="#pricing">Get GPT Breeze</a>
-        <a class="cta secondary" href="#features">See features</a>
+      <div class="bg"></div>
+      <h1 class="display">
+        Save <span class="em">hours</span>
+        consuming long content on the web
+      </h1>
+      <p class="lead center" style="max-width: 720px; margin-inline:auto;">
+        GPT Breeze Extension summarizes YouTube videos and articles, accelerates your writing, by saving your prompts as one-click shortcuts.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#pricing">Add to Chrome for free</a>
+      </div>
+
+      <div class="hero-media">
+        <div class="device-frame">
+          <div class="ratio">
+            <div
+              class="yt-lite"
+              data-yt-id="BbCnw9iSvVc"
+              aria-label="Play product overview video"
+              style="background-image:url('/media/hero/gpt-breeze-hero-video-placeholder-1280x800.jpg')"
+              tabindex="0"
+            >
+              <button class="play" aria-label="Play video"></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -265,4 +304,44 @@ import Base from "@/layouts/Base.astro";
     </div>
   </footer>
   
+  <script is:inline>
+    // Replace poster with YouTube iframe on click or Enter/Space
+    const initLiteYT = () => {
+      document.querySelectorAll('.yt-lite').forEach((el) => {
+        const id = el.getAttribute('data-yt-id');
+        if (!id) return;
+        const src = (autoplay = true) => `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=${autoplay ? 1 : 0}`;
+        const load = () => {
+          if (el.dataset.loaded) return;
+          el.classList.add('loading');
+          const iframe = document.createElement('iframe');
+          iframe.src = src(true);
+          iframe.title = 'GPT Breeze overview';
+          iframe.loading = 'eager';
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.allowFullscreen = true;
+          iframe.style.position = 'absolute';
+          iframe.style.inset = '0';
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.border = '0';
+          el.replaceWith(iframe);
+          el.dataset.loaded = '1';
+        };
+        el.addEventListener('click', load, { once: true });
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            load();
+          }
+        });
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initLiteYT);
+    } else {
+      initLiteYT();
+    }
+  </script>
 </Base>
