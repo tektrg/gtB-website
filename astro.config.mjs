@@ -6,5 +6,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://gptbreeze.io',
   // base removed for custom domain
+  alias: {
+    '@': './src',
+  },
   integrations: [sitemap()],
 });

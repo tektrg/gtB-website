@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "types": ["astro/client"],
     "jsx": "preserve",
     "module": "ESNext",
@@ -10,4 +13,3 @@
     "skipLibCheck": true
   }
 }
-
