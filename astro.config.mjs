@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 // Adjust `site` to your final domain.
 // For project sites under <username>.github.io/<repo>, uncomment `base`.
 export default defineConfig({
-  site: 'https://gptbreeze.io',
+  // Allow overriding the canonical site via env for beta/preview deploys
+  site: process.env.PUBLIC_SITE ?? 'https://gptbreeze.io',
   // base removed for custom domain
   alias: {
     '@': './src',
