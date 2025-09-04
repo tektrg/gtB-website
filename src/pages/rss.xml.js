@@ -1,11 +1,11 @@
-import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import rss from "@astrojs/rss";
+import { getCollection } from "astro:content";
 
 export async function GET({ site }) {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
   return rss({
-    title: 'Your Blog',
-    description: 'Fresh takes, no fluff',
+    title: "Your Blog",
+    description: "Fresh takes, no fluff",
     site,
     items: posts
       .filter((p) => new Date(p.data.pubDate) <= new Date())
@@ -17,4 +17,3 @@ export async function GET({ site }) {
       })),
   });
 }
-

@@ -8,4 +8,3 @@ canonicalURL: "https://example.com/hello-world"
 ---
 
 Welcome to your new Astro-powered blog. Write Markdown here, commit, and push. The GitHub Action builds and deploys automatically.
-

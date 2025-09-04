@@ -35,4 +35,3 @@ Static, CMS-free blog powered by Astro, deployed via GitHub Pages Actions.
 
 - To use sitemap, `@astrojs/sitemap` is already configured in `astro.config.mjs`.
 - For a custom domain, add `public/CNAME` and set `site` to that domain.
-
