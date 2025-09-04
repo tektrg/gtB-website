@@ -1,7 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from "@/layouts/Base.astro";
-const { slug } = Astro.params;
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((p) => ({
+    params: { slug: p.slug ?? p.id },
+  }));
+}
+const slugParam = Astro.params.slug;
+const slug = Array.isArray(slugParam) ? slugParam.join('/') : slugParam;
 const posts = await getCollection('blog');
 const post = posts.find((p) => (p.slug ?? p.id) === slug);
 if (!post) throw new Error('Not found');
