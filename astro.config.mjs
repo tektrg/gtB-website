@@ -1,6 +1,8 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
+import tailwind from "@astrojs/tailwind";
+
 // Adjust `site` to your final domain.
 // For project sites under <username>.github.io/<repo>, uncomment `base`.
 export default defineConfig({
@@ -10,5 +12,5 @@ export default defineConfig({
   alias: {
     "@": "./src",
   },
-  integrations: [sitemap()],
+  integrations: [sitemap(), tailwind()],
 });
