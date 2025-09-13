@@ -6,6 +6,7 @@ interface Props {
   canonical?: string;
   ogType?: 'website' | 'article';
   noIndex?: boolean;
+  isLandingPage?: boolean;
 }
 
 const envNoIndex = import.meta.env.PUBLIC_NOINDEX === '1' || import.meta.env.PUBLIC_NOINDEX === 'true';
@@ -15,6 +16,7 @@ const {
   canonical,
   ogType = 'website',
   noIndex = envNoIndex,
+  isLandingPage = false,
 } = Astro.props as Props;
 
 const computedCanonical = canonical ?? (Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined);
@@ -39,10 +41,25 @@ const computedCanonical = canonical ?? (Astro.site ? new URL(Astro.url.pathname,
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap&subset=vietnamese" rel="stylesheet">
+    <style>
+      /* Decorative light blue glow near top-right, similar to index.astro */
+      .site-gradient {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: min(720px, 400px);
+        height: min(520px, 220px);
+        background: radial-gradient(100% 80% at 0% 0%, rgba(75, 183, 215, 0.28) 0%, rgba(75, 183, 215, 0) 60%);
+        filter: blur(20px);
+        opacity: 0.8;
+        pointer-events: none;
+      }
+    </style>
     <slot name="head" />
   </head>
-  <body class="bg-warm-light text-warm-dark">
-    <main class="max-w-3xl mx-auto px-4 py-8">
+  <body class:list={[{'bg-warm-light text-warm-dark': !isLandingPage}]}>
+    { !isLandingPage && <div class="site-gradient" aria-hidden="true"></div> }
+    <main class:list={[{'max-w-3xl mx-auto px-4 py-8 relative z-10': !isLandingPage}]}>
       <slot />
     </main>
   </body>
