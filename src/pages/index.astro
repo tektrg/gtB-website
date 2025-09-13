@@ -4,6 +4,7 @@ import Base from "@/layouts/Base.astro";
 <Base
   title="GPT Breeze — AI productivity shortcuts in your tab"
   description="Save time with AI summaries, tab management, and one‑click shortcuts for YouTube, selected text, and any website."
+  isLandingPage={true}
 >
   <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
   <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +24,7 @@ import Base from "@/layouts/Base.astro";
       --header-h: 68px;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--fg); font-family: Montserrat, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; line-height: 1.6; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; line-height: 1.6; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { opacity: 0.8; }
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
@@ -38,6 +39,12 @@ import Base from "@/layouts/Base.astro";
     .hero h1, .display { font-size: clamp(2.6rem, 6vw, 4.25rem); line-height: 1.05; margin: 0 0 16px; letter-spacing: -0.02em; text-align: center; }
     .em { font-style: italic; font-weight: 400; }
     .hero p.lead { color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.2rem); margin: 0 0 28px; }
+    .rating-badge { display:flex; flex-direction: column; align-items:center; justify-content:center; gap:6px; margin: 8px 0 0; color: var(--muted); font-weight: 600; }
+    .rating-badge .rating-top { display:inline-flex; align-items:center; gap:10px; }
+    .rating-badge img.logo { width: 22px; height: 22px; display:block; }
+    .rating-badge .stars { display:inline-flex; gap:2px; }
+    .rating-badge .star { width: 16px; height: 16px; display:block; }
+    .rating-badge .star path { fill: #FEC84B; }
     .hero-actions { display:flex; gap:14px; justify-content:center; margin: 50px 0 40px; }
     .btn { display:inline-flex; align-items:center; gap:8px; padding: 12px 18px; border-radius:999px; font-weight:600; border:1px solid var(--accent); }
     .btn.primary { background: var(--accent); color: var(--accent-fg); }
@@ -64,11 +71,64 @@ import Base from "@/layouts/Base.astro";
     .two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .price { font-size: 2rem; font-weight: 800; }
     .strike { text-decoration: line-through; opacity: 0.6; font-weight: 600; }
-    .section-title { margin: 0 0 8px; font-size: clamp(1.6rem, 2vw, 2rem); letter-spacing: -0.01em; }
+    .section-title { margin: 0 0 8px; font-size: clamp(2rem, 2vw, 2rem); letter-spacing: -0.01em; }
     .subtle { font-size: 0.95rem; color: var(--muted); margin: 0 0 16px; }
     .inline { display: inline-flex; align-items: center; gap: 8px; }
     .stack { display: grid; gap: 8px; }
     .center { text-align: center; }
+
+    /* Features section: side-by-side with video larger */
+    .features-sbs { margin: 48px 0; }
+    @media (min-width: 900px) { .features-sbs { margin: 100px 0 180px 0; } }
+    .features-grid { display: grid; gap: 20px; grid-template-columns: 1fr; align-items: center; }
+    @media (min-width: 900px) { .features-grid { grid-template-columns: 7fr 5fr; gap: 28px; } }
+    @media (min-width: 900px) { .features-grid.rev { grid-template-columns: 5fr 7fr; } }
+    .features-video { width: 100%; border-radius: 20px; overflow: hidden; border: 1px solid #d0cecd7d; box-shadow: 0 6px 20px rgba(16,24,40,0.1); }
+    .features-video .ratio { aspect-ratio: 16 / 9; }
+    .features-text h3 { margin: 0 0 8px; font-size: clamp(1.6rem, 2.4vw, 2rem); }
+    .features-text p { margin: 0 0 10px; color: var(--muted); }
+    .features-list { margin: 12px 0 0; padding-left: 18px; }
+    .features-list li { margin: 6px 0; }
+    .placeholder { position: absolute; inset: 0; display: grid; place-items: center; color: #a8a29e; background: repeating-linear-gradient(45deg, #f6f4f0, #f6f4f0 12px, #f1efe9 12px, #f1efe9 24px); font-weight: 600; letter-spacing: 0.02em; 
+    iframe { height: 100vh; position:absolute;}}
+    .review-stars { display: inline-flex; gap: 2px; vertical-align: middle; }
+
+    /* Reviews: make each review its own card */
+    #reviews .card { background: transparent; border: none; padding: 0; box-shadow: none; }
+    #reviews .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    #reviews .stack > div { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: 0 1px 0 rgba(16,24,40,0.02); }
+
+    /* Reviews intro animation */
+    @keyframes review-in {
+      from { opacity: 0; transform: translateY(8px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    #reviews .stack > div {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+      will-change: transform, opacity;
+      transform-origin: 50% 60%;
+    }
+    #reviews .stack > div.is-visible {
+      animation: review-in 520ms cubic-bezier(.2,.7,.2,1) both;
+    }
+    /* Staggered delays for a gentle cascade */
+    #reviews .stack > div:nth-child(1)  { animation-delay: 40ms; }
+    #reviews .stack > div:nth-child(2)  { animation-delay: 90ms; }
+    #reviews .stack > div:nth-child(3)  { animation-delay: 140ms; }
+    #reviews .stack > div:nth-child(4)  { animation-delay: 190ms; }
+    #reviews .stack > div:nth-child(5)  { animation-delay: 240ms; }
+    #reviews .stack > div:nth-child(6)  { animation-delay: 290ms; }
+    #reviews .stack > div:nth-child(7)  { animation-delay: 340ms; }
+    #reviews .stack > div:nth-child(8)  { animation-delay: 390ms; }
+    #reviews .stack > div:nth-child(9)  { animation-delay: 440ms; }
+    #reviews .stack > div:nth-child(10) { animation-delay: 490ms; }
+    #reviews .stack > div:nth-child(11) { animation-delay: 540ms; }
+    #reviews .stack > div:nth-child(12) { animation-delay: 590ms; }
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      #reviews .stack > div { animation: none; opacity: 1; transform: none; }
+    }
   </style>
 
   <header>
@@ -78,8 +138,9 @@ import Base from "@/layouts/Base.astro";
         <a href="#home">Home</a>
         <a href="#guide">Guide</a>
         <a href="#features">Features</a>
-        <a href="#privacy">Privacy policy</a>
+        <a href="/privacy">Privacy policy</a>
         <a href="#issues">Issue report</a>
+        <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
       </nav>
     </div>
   </header>
@@ -94,8 +155,21 @@ import Base from "@/layouts/Base.astro";
       <p class="lead center" style="max-width: 720px; margin-inline:auto;">
         GPT Breeze Extension summarizes YouTube videos and articles, accelerates your writing, by saving your prompts as one-click shortcuts.
       </p>
+      <div class="rating-badge" aria-label="Chrome Web Store rating">
+        <div class="rating-top">
+          <img class="logo" src="https://fonts.gstatic.com/s/i/productlogos/chrome_store/v7/192px.svg" alt="" width="22" height="22" loading="lazy" />
+          <div class="stars" aria-hidden="true">
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          </div>
+        </div>
+        <span class="rating-text"><strong style="color: var(--fg);">4.9 stars</strong> on Chrome Web Store</span>
+      </div>
       <div class="hero-actions">
-        <a class="btn primary" href="#pricing">Add to Chrome for free</a>
+        <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome for free</a>
       </div>
 
       <div class="hero-media">
@@ -121,57 +195,378 @@ import Base from "@/layouts/Base.astro";
       <h2 class="section-title">Features</h2>
       <p class="subtle">AI manages tabs, summarizes content, and speeds your workflow.</p>
 
-      <div class="cards" style="margin-top:12px;">
-        <div class="card stack">
-          <h3>AI manages your browser tabs/history/bookmarks</h3>
-          <p class="muted">Let AI help you organize your browser:</p>
-          <ul class="list">
-            <li>“Sort my open tabs in logical order”</li>
-            <li>“Show me bookmarks about product management”</li>
-            <li>“Bookmark those Reddit tabs for digest later”</li>
-          </ul>
-          <p class="muted">Perfect for taming tab overload and staying focused.</p>
-        </div>
+      <div class="features-sbs">
+        <div class="features-grid">
+          <div class="features-video">
+            <div class="ratio">
+              <div class="placeholder">
+              <iframe
+                title="YouTube summarize demo"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/pOXdFaqTszU?autoplay=1&mute=1&controls=0&loop=1&playlist=pOXdFaqTszU&modestbranding=1&rel=0&playsinline=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              </div>
+            </div>
+          </div>
 
-        <div class="card stack">
-          <h3>Summarize YouTube videos</h3>
-          <p>Navigate videos with clickable, time‑stamped sections. Extract the full transcript or create a custom AI shortcut for the video.</p>
-          <p class="muted">Demonstration: free YouTube long‑video summarizer Chrome extension.</p>
+          <div class="features-text">
+            <h3>Summarize YouTube videos</h3>
+            <p>Navigate long videos with clickable, time‑stamped sections. Extract transcripts and turn insights into one‑click AI shortcuts.</p>
+            <ul class="features-list">
+              <li>Web page summarization and follow‑up chat</li>
+              <li>Highlight text: explain, translate, improve writing</li>
+              <li>AI helps with tabs/history/bookmarks organization</li>
+              <li>Switch between models (OpenAI, Anthropic, etc.)</li>
+            </ul>
+          </div>
         </div>
+      </div>
 
-        <div class="card stack">
-          <h3>Web page summarization and chat</h3>
-          <p>Get concise bullet‑point summaries and ask follow‑up questions to explore deeper without losing time.</p>
-          <p class="muted">Demonstration: website long‑article summarizer Chrome extension.</p>
+      <!-- Other features with video placeholders -->
+      <div class="features-sbs">
+        <div class="features-grid rev">
+          <div class="features-text">
+            <h3>Web page summarization and chat</h3>
+            <p>Get concise bullet‑point summaries of long articles. Ask follow‑up questions and dig deeper without losing time.</p>
+            <ul class="features-list">
+              <li>One‑click summary on any page</li>
+              <li>Ask clarifying questions as you read</li>
+              <li>Extract key quotes and sections</li>
+            </ul>
+          </div>
+          <div class="features-video">
+            <div class="ratio" style="position: relative;">
+              <div class="placeholder">
+                <iframe
+                title="YouTube summarize demo"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/SeR-G-5l25Q?autoplay=1&mute=1&controls=0&loop=1&playlist=SeR-G-5l25Q&modestbranding=1&rel=0&playsinline=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div class="card stack">
-          <h3>Assist your creation process</h3>
-          <p>Highlight text to get explanations, translations, or summaries. Improve your writing in one click.</p>
-          <p class="muted">Free ChatGPT Chrome extension to improve writing and translate selected text.</p>
+      <div class="features-sbs">
+        <div class="features-grid">
+          <div class="features-video">
+            <div class="ratio" style="position: relative;">
+              <div class="placeholder">
+                <iframe
+                title="YouTube summarize demo"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/2WftJLH3Zoc?autoplay=1&mute=1&controls=0&loop=1&playlist=2WftJLH3Zoc&modestbranding=1&rel=0&playsinline=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="features-text">
+            <h3>Assist your creation process</h3>
+            <p>Highlight text to get explanations, translations, or quick improvements. Turn repeated prompts into one‑click actions.</p>
+            <ul class="features-list">
+              <li>Explain complex concepts in context</li>
+              <li>Translate selected text across languages</li>
+              <li>Improve tone, clarity, and brevity</li>
+            </ul>
+          </div>
         </div>
+      </div>
 
-        <div class="card stack">
-          <h3>Use different AI models</h3>
-          <p>Instantly switch between popular AI models inside GPT Breeze to maximize strengths as needed.</p>
-          <p class="muted">GPT‑4.1 Nano is impressively fast for summaries. Claude Sonnet 4 excels at coding and complex reasoning.</p>
+      <!-- <div class="features-sbs">
+        <div class="features-grid rev">
+          <div class="features-text">
+            <h3>AI manages your tabs, history, and bookmarks</h3>
+            <p>Let AI organize your browsing to keep you focused and tidy.</p>
+            <ul class="features-list">
+              <li>“Sort my open tabs in logical order”</li>
+              <li>“Show me bookmarks about product management”</li>
+              <li>“Bookmark these Reddit tabs for a digest later”</li>
+            </ul>
+          </div>
+          <div class="features-video">
+            <div class="ratio" style="position: relative;">
+              <div class="placeholder">Insert video URL (iframe) here</div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="features-sbs">
+        <div class="features-grid">
+          <div class="features-video">
+            <div class="ratio" style="position: relative;">
+              <div class="placeholder">
+                <iframe
+                title="YouTube summarize demo"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/QS7TU0xuvDk?autoplay=1&mute=1&controls=0&loop=1&playlist=QS7TU0xuvDk&modestbranding=1&rel=0&playsinline=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="features-text">
+            <h3>Use different AI models</h3>
+            <p>Switch between models to match the task — faster for summaries, deeper for reasoning.</p>
+            <ul class="features-list">
+              <li>OpenAI, Anthropic, and more (BYOM)</li>
+              <li>Quickly swap models in the panel</li>
+              <li>Save preferred settings as shortcuts</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <section id="reviews">
-    <div class="container two">
+    <div class="container">
+      <h2 class="section-title">Customer Reviews</h2>
       <div class="card">
-        <h3>Customers' reviews</h3>
         <p class="muted">Reviews from Chrome Web Store</p>
+        <div class="stack" style="margin-top:12px; gap:14px;">
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjWlSnKqfvg_us9THTOIwGlMeHIYBGMKLP6wqXQMe4tdkgI6manj=s96-w96-h96" alt="Avatar of Phil Berndt" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Phil Berndt</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span>May 19, 2025</span>
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">I picked up this extension a few months ago, back when they were just getting started. I had to pause using it for a little while because of some performance hiccups, but it seems like those issues are all sorted now. There were a few bugs along the way, but I really appreciate how much the developer listens to feedback. In fact, they even added one of my suggestions—being able to add custom icons to custom prompts! Big thanks to the devs for that!</p>
+          </div>
+
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjWqhtCE40fXQYmEg50_Qziz64HYxS-jyudqh5tcqMwIo4zFPq4=s96-w96-h96" alt="Avatar of Phat Pham" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Phat Pham</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span>Mar 7, 2025</span>
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">beautiful UI with great summary feature on Youtube</p>
+          </div>
+
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjUrHBx_-lHLlajmV5L25SXtmYm99QcM5-gw436XEIB6dKLwAQ1HBw=s96-w96-h96" alt="Avatar of Kehao Chen" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Kehao Chen</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span>Mar 2, 2025</span>
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">While searching for alternatives to HAPRA AI, I discovered this Chrome extension. My requirements are simple: I need assistance with summarizing web pages and YouTube transcripts, the ability to interact with web content, and, importantly, the option to use my own API key for pay-as-you-go billing instead of a subscription model. GPT Breeze meets all my needs and requires only a one-time purchase. It has become an indispensable tool in my daily life.</p>
+          </div>
+
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjW7NofjXItdcqljn5AizOH9axqGEOX7jNTnXmXibUw90_KQxMR4yg=s96-w96-h96" alt="Avatar of Pete Z" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Pete Z</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span>Dec 13, 2024</span>
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">Exactly what I've been looking for! And love that I can use my ChatGPT API. The custom prompt feature is efficient for quick explanations and rewrites, providing clear messages that maintain my original intent. I appreciate how it allows me to adjust the tone for different professional or casual audiences. Overall, it's a valuable tool for enhancing messaging efficiency.</p>
+          </div>
+
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjXlrW4S-2Y-Edv0FPpdoyrRHoOEXzMhxeINfeC3PrNywNqE7LI=s96-w96-h96" alt="Avatar of Nguyen Huong" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Nguyen Huong</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span>Aug 28, 2024</span>
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">This one is great, no requires an account or login, can use different AI models and free, wow</p>
+          </div>
+
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjVA1tzvtL-cb25JNafbAjl4AoPe7iD3Uza0mL4OiBHHm-qEgXE=s96-w96-h96" alt="Avatar of Notion Promax" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Notion Promax</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span>Aug 6, 2024</span>
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">The ChatGPT web session was convenient, but it sometimes failed to respond. After switching to the API key, it has become fast and reliable. 4 stars, but consider the fact that it's free, 5 then.</p>
+          </div>
+        </div>
       </div>
       <div class="card">
-        <h3>&nbsp;</h3>
         <p class="muted">Reviews from Gumroad</p>
+        <div class="stack" style="margin-top:12px; gap:14px;">
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Phil" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Phil</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">I picked up this extension a few months ago, back when they were just getting started. I had to pause using it for a little while because of some performance hiccups, but it seems like those issues are all sorted now. There were a few bugs along the way, but I really appreciate how much the developer listens to feedback. In fact, they even added one of my suggestions—being able to add custom icons to custom prompts! Big thanks to the devs for that!</p>
+          </div>
+
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Pete" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Pete</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">This is the upgrade to ChatGPT I've been looking for!! Many that (try to) resemble this app, charge subscriptions and don't even measure up to GPT Breeze. Thank you, Developer(s)!</p>
+          </div>
+
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Anonimm" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Anonimm</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">Just wanted to share my experience with GPT Breeze - this Chrome extension is seriously awesome! 🙌 Started with the free version and honestly, I love it. Being able to chat with AI right on any webpage while browsing? Game changer! After seeing how much time it saved me, upgrading to premium was a no-brainer.</p>
+          </div>
+
+          <div>
+            <div class="inline" style="gap:10px; align-items:center;">
+              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Tri Vo" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <div>
+                <div style="font-weight:700;">Tri Vo</div>
+                <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="muted" style="margin:8px 0 0;">I love how the team create this Premium option. As a frequent user of AI application, I always try to support the builder. GPT Breeze helps me in my workflow from Youtube videos to content writing, so that I think paying for its premium features is a bargain for me. Keep up the good work, team!</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+  <script is:inline>
+    (() => {
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const cards = Array.from(document.querySelectorAll('#reviews .stack > div'));
+      if (!cards.length) return;
+
+      if (prefersReduced) {
+        cards.forEach((el) => el.classList.add('is-visible'));
+        return;
+      }
+
+      const io = new IntersectionObserver((entries, observer) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        }
+      }, { root: null, rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+
+      cards.forEach((el) => io.observe(el));
+    })();
+  </script>
 
   <section id="pricing">
     <div class="container">
@@ -283,14 +678,14 @@ import Base from "@/layouts/Base.astro";
         <p class="stack">
           <span><a href="#" rel="noopener">X (Twitter)</a></span>
           <span><a href="#" rel="noopener">YouTube</a></span>
-          <span><a href="#" rel="noopener">Chrome Web Store</a></span>
+          <span><a href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog" rel="noopener">Chrome Web Store</a></span>
           <span>Email: <a href="mailto:[email protected]">[email protected]</a></span>
         </p>
       </div>
       <div class="card center">
         <h3>Join thousands saving time</h3>
         <p class="muted">Boost your focus and ship faster.</p>
-        <p><a class="cta" href="#pricing">Get GPT Breeze</a></p>
+        <p><a class="cta" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Get GPT Breeze</a></p>
       </div>
     </div>
   </section>
@@ -299,6 +694,7 @@ import Base from "@/layouts/Base.astro";
     <div class="container">
       <div class="two">
         <div>©2025 GPT Breeze — All Rights Reserved</div>
+        <div><a href="/privacy">Privacy Policy</a></div>
       </div>
     </div>
   </footer>
