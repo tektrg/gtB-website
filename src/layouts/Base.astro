@@ -7,6 +7,8 @@ interface Props {
   ogType?: 'website' | 'article';
   noIndex?: boolean;
   isLandingPage?: boolean;
+  showBreadcrumbs?: boolean;
+  breadcrumbs?: Array<{ label: string; href?: string }>;
 }
 
 const envNoIndex = import.meta.env.PUBLIC_NOINDEX === '1' || import.meta.env.PUBLIC_NOINDEX === 'true';
@@ -17,9 +19,40 @@ const {
   ogType = 'website',
   noIndex = envNoIndex,
   isLandingPage = false,
+  showBreadcrumbs = true,
+  breadcrumbs,
 } = Astro.props as Props;
 
 const computedCanonical = canonical ?? (Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined);
+
+// Build default breadcrumbs from the current URL if none provided
+const path = Astro.url.pathname;
+const segments = path
+  .split('/')
+  .filter((s) => s.length > 0);
+
+function humanize(segment: string) {
+  const decoded = decodeURIComponent(segment.replace(/-/g, ' '));
+  return decoded
+    .split(' ')
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(' ');
+}
+
+let computedCrumbs: Array<{ label: string; href?: string }> = breadcrumbs ?? [];
+if (!breadcrumbs) {
+  const items: Array<{ label: string; href?: string }> = [];
+  let acc = '';
+  segments.forEach((seg, idx) => {
+    acc += `/${seg}`;
+    const isLast = idx === segments.length - 1;
+    items.push({
+      label: humanize(seg),
+      href: isLast ? undefined : `${acc}/`,
+    });
+  });
+  computedCrumbs = items;
+}
 ---
 <html lang="en">
   <head>
@@ -36,6 +69,10 @@ const computedCanonical = canonical ?? (Astro.site ? new URL(Astro.url.pathname,
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,6 +97,33 @@ const computedCanonical = canonical ?? (Astro.site ? new URL(Astro.url.pathname,
   <body class:list={[{'bg-warm-light text-warm-dark': !isLandingPage}]}>
     { !isLandingPage && <div class="site-gradient" aria-hidden="true"></div> }
     <main class:list={[{'max-w-3xl mx-auto px-4 py-8 relative z-10': !isLandingPage}]}>
+      {(!isLandingPage && showBreadcrumbs && path !== '/') && (
+        <nav aria-label="Breadcrumb" class="mb-6" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <ol class="flex flex-wrap items-center gap-1 text-sm text-gray-600">
+            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="inline-flex items-center gap-1">
+              <a href="/" class="text-gray-600 no-underline hover:underline" itemprop="item"><span itemprop="name">Home</span></a>
+              <meta itemprop="position" content="1" />
+            </li>
+            {computedCrumbs.length > 0 && <li aria-hidden="true" class="text-gray-400">/</li>}
+            {computedCrumbs.map((c, i) => {
+              const isLast = i === computedCrumbs.length - 1;
+              return (
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="inline-flex items-center gap-1">
+                  {c.href && !isLast ? (
+                    <a href={c.href} class="text-gray-600 no-underline hover:underline" itemprop="item">
+                      <span itemprop="name">{c.label}</span>
+                    </a>
+                  ) : (
+                    <span class="text-gray-500" itemprop="name">{c.label}</span>
+                  )}
+                  <meta itemprop="position" content={(i + 2).toString()} />
+                  {!isLast && <span aria-hidden="true" class="text-gray-400">/</span>}
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
+      )}
       <slot />
     </main>
   </body>
