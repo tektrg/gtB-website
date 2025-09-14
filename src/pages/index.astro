@@ -9,6 +9,7 @@ import Base from "@/layouts/Base.astro";
   <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
   <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link slot="head" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link slot="head" rel="preload" as="image" href="/media/hero/logo-56.png" />
   <meta slot="head" name="theme-color" content="#F6F4F0" />
   <style slot="head">
     :root {
@@ -30,7 +31,8 @@ import Base from "@/layouts/Base.astro";
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
     header { position: sticky; top: 0; z-index: 20; background: rgba(246,244,240,0.65); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: none; }
     .nav { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
-    .brand { font-weight: 800; letter-spacing: -0.01em; font-size: 1.05rem; }
+    .brand { display:inline-flex; align-items:center; gap:10px; font-weight: 800; letter-spacing: -0.01em; font-size: 1.05rem; }
+    .brand-logo { width: 28px; height: 28px; display:block; border-radius: 50%; }
     .menu { display: flex; gap: 18px; font-size: 0.98rem; align-items: center; }
     .install { display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-fg); font-weight: 600; }
     .install.secondary { background: transparent; color: var(--fg); }
@@ -133,13 +135,25 @@ import Base from "@/layouts/Base.astro";
 
   <header>
     <div class="container nav">
-      <div class="brand">GPT Breeze</div>
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="/media/hero/logo-56.png"
+          srcset="/media/hero/logo-28.png 1x, /media/hero/logo-56.png 2x"
+          alt="GPT Breeze logo"
+          width="28"
+          height="28"
+          loading="eager"
+          decoding="async"
+        />
+        GPT Breeze
+      </div>
       <nav class="menu" aria-label="Main Navigation">
         <a href="#home">Home</a>
         <a href="#guide">Guide</a>
         <a href="#features">Features</a>
         <a href="/privacy">Privacy policy</a>
-        <a href="#issues">Issue report</a>
+        <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
         <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
       </nav>
     </div>
@@ -674,14 +688,21 @@ import Base from "@/layouts/Base.astro";
   <section id="privacy">
     <div class="container">
       <h2 class="section-title">Privacy policy</h2>
-      <p class="muted">We prioritize privacy and data security. BYO API keys stay on your device and requests go directly to providers when feasible. Minimal telemetry, no selling of personal data.</p>
+      <p class="muted">
+      We prioritize privacy and data security. BYO API keys stay on your device and requests go directly to providers when feasible. Minimal telemetry, no selling of personal data.
+      <br />
+      <span>Read more at <a href="/privacy">privacy policy</a></span>
+      </p>
     </div>
   </section>
 
   <section id="issues">
     <div class="container">
       <h2 class="section-title">Issue report</h2>
-      <p class="muted">Found a bug or have feedback? Please open an issue or reach out below.</p>
+      <p class="muted">
+      Found a bug or have feedback? Please open an issue or reach out below.<br />
+      <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6" target="_blank" rel="noopener">Open issue report</a>
+      </p>
     </div>
   </section>
 
@@ -693,7 +714,7 @@ import Base from "@/layouts/Base.astro";
           <span><a href="#" rel="noopener">X (Twitter)</a></span>
           <span><a href="#" rel="noopener">YouTube</a></span>
           <span><a href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog" rel="noopener">Chrome Web Store</a></span>
-          <span>Email: <a href="mailto:[email protected]">[email protected]</a></span>
+          <span>Email: <a href="mailto:yourfiend@gptbreeze.io">yourfriend@gptbreeze.io</a></span>
         </p>
       </div>
       <div class="card center">
