@@ -1,0 +1,116 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+<Base
+  title="Uninstall Feedback — GPT Breeze"
+  description="Help us improve GPT Breeze by sharing your feedback about uninstalling the extension."
+>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link slot="head" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta slot="head" name="theme-color" content="#F6F4F0" />
+  <style slot="head">
+    :root {
+      --bg: #F6F4F0;
+      --fg: #22221F;
+      --muted: #667085;
+      --accent: #22221F;
+      --accent-fg: #ffffff;
+      --border: #e3e1dc;
+      --surface: #ffffff;
+      --radius: 14px;
+      --maxw: 900px;
+      --header-h: 68px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    
+    header { position: sticky; top: 0; z-index: 20; background: rgba(246,244,240,0.65); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: none; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
+    .brand { display:inline-flex; align-items:center; gap:10px; font-weight: 800; letter-spacing: -0.01em; font-size: 1.05rem; }
+    .brand-logo { width: 28px; height: 28px; display:block; border-radius: 50%; }
+    .menu { display: flex; gap: 18px; font-size: 0.98rem; align-items: center; }
+    .home-link { display: inline-flex; align-items: center; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--fg); font-weight: 500; }
+    
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; }
+      .brand { font-size: 1rem; gap: 8px; }
+      .brand-logo { width: 24px; height: 24px; }
+      .menu { gap: 8px; font-size: 0.9rem; }
+      .home-link { padding: 6px 10px; font-size: 0.85rem; }
+    }
+    
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .nav { padding: 0px 20px; }
+      .brand { font-size: 0.9rem; gap: 6px; flex-shrink: 0; }
+      .brand-logo { width: 22px; height: 22px; }
+      .home-link { padding: 5px 8px; font-size: 0.8rem; }
+    }
+    
+    main { padding: 0 0 80px; }
+    .content { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; box-shadow: 0 1px 0 rgba(16,24,40,0.02); }
+    
+    h1 { font-size: clamp(2rem, 4vw, 2.5rem); line-height: 1.2; margin: 0 0 24px; letter-spacing: -0.01em; text-align: center; }
+    .intro { text-align: center; color: var(--muted); margin: 0 0 32px; font-size: 1.1rem; }
+    .avatar { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--border); margin: 0 auto 20px; display: block; }
+    .feedback-form { margin: 32px 0; }
+    .feedback-form iframe { width: 100%; height: 1200px; border: 1px solid var(--border); border-radius: var(--radius); }
+    
+    footer { padding: 24px 0 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; background: transparent; margin-top: 40px; }
+    
+    @media (max-width: 768px) {
+      .content { padding: 24px; }
+      .feedback-form iframe { height: 500px; }
+    }
+    
+    @media (max-width: 480px) {
+      .content { padding: 20px; }
+      main { padding: calc(80px) 0 60px; }
+    }
+  </style>
+
+
+  <main>
+    <div class="container">
+      <div class="content">
+        <div class="intro">
+          <img 
+            src="/duythanh.png" 
+            alt="Duy Thanh" 
+            class="avatar"
+            width="80"
+            height="80"
+            style="object-fit: cover;"
+          />
+          <p>Hi, I'm <a href="https://x.com/p_d_d_t" target="_blank" rel="noopener">Duy Thanh</a>, the Product Manager for GPT Breeze. We'd really appreciate it if you could let us know why you decided to uninstall the extension.</p>
+          <p>We appreciate your input & hope to serve you again in the future!</p>
+        </div>
+
+        <div class="feedback-form">
+          <iframe 
+            src="https://gptbreezedocs.notion.site/ebd/1fd731c62105802e801ff29f285b839b" 
+            width="100%" 
+            height="1200" 
+            style="border: 0;" 
+            allowfullscreen
+            title="Uninstall Feedback Form"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>©2025 GPT Breeze — All Rights Reserved</div>
+        <div style="text-align: right;"><a href="/privacy">Privacy Policy</a></div>
+      </div>
+    </div>
+  </footer>
+</Base>
