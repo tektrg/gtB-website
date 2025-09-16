@@ -3,31 +3,47 @@
 @tailwind utilities;
 
 @layer base {
+  /* Headings: consistent sizing, tighter leading, balanced margins */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-wide;
+    @apply font-bold leading-tight;
   }
   h1 {
-    @apply text-4xl mt-8;
+    @apply text-4xl mt-10 mb-4;
   }
   h2 {
-    @apply text-3xl mt-6;
+    @apply text-3xl mt-8 mb-3;
   }
   h3 {
-    @apply text-2xl mt-4;
+    @apply text-2xl mt-6 mb-2;
   }
+
+  /* Paragraphs: standard readable rhythm */
   p {
-    @apply leading-relaxed my-6;
+    @apply leading-relaxed mb-4;
   }
+
+  /* Lists: moderate spacing consistent with paragraphs */
   ul {
-    @apply list-disc list-inside my-6;
+    @apply list-disc list-inside my-4;
   }
   li {
     @apply my-1;
   }
+
+  /* Media + links */
   img {
     @apply rounded-lg;
   }
   a {
     @apply text-blue-600 underline;
+  }
+  /* Remove extra top margin for the first element in content areas */
+  main > :first-child, .prose > :first-child {
+    @apply mt-0;
+  }
+
+  /* Ordered lists */
+  ol {
+    @apply list-decimal list-inside my-4;
   }
 }
