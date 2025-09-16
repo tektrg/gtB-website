@@ -248,6 +248,6 @@ Ready to revolutionize your AI costs? Start experimenting with GPT-5 Nano today 
 
 ---
 
-**Ready to slash your AI costs by 91%?** [Get started with GPT-5 Nano](https://platform.openai.com/docs/models/gpt-5-nano) and join thousands of developers who've already made the switch to affordable, high-performance AI.
+**Ready to slash your AI costs by 91%?** Get started with GPT-5 Nano and join thousands of developers who've already made the switch to affordable, high-performance AI.
 
 **What's your experience with AI model pricing?** Share your cost optimization strategies and let us know how much you're saving with budget-friendly AI alternatives in the comments below.
