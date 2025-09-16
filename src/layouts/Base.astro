@@ -75,18 +75,17 @@ if (!breadcrumbs) {
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap&subset=vietnamese" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap&subset=vietnamese" rel="stylesheet" />
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-30EX1TYBPM"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
       gtag('config', 'G-30EX1TYBPM');
     </script>
-    
     <style>
       /* Decorative light blue glow near top-right, similar to index.astro */
       .site-gradient {
@@ -103,17 +102,17 @@ if (!breadcrumbs) {
     </style>
     <slot name="head" />
   </head>
-  <body class:list={[{'bg-warm-light text-warm-dark': !isLandingPage}]}>
-    { !isLandingPage && <div class="site-gradient" aria-hidden="true"></div> }
-    <main class:list={[{'max-w-3xl mx-auto px-4 py-8 relative z-10': !isLandingPage}]}>
-      {(!isLandingPage && showBreadcrumbs && path !== '/') && (
+  <body class:list={[{ 'bg-warm-light text-warm-dark': !isLandingPage }]}> 
+    {!isLandingPage && <div class="site-gradient" aria-hidden="true"></div>}
+    <main class:list={[{ 'max-w-3xl mx-auto px-4 py-8 relative z-10': !isLandingPage }]}> 
+      {!isLandingPage && showBreadcrumbs && path !== '/' && (
         <nav aria-label="Breadcrumb" class="mb-6" itemscope itemtype="https://schema.org/BreadcrumbList">
           <ol class="flex flex-wrap items-center gap-1 text-sm text-gray-600">
             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="inline-flex items-center gap-1">
-              <a href="/" class="text-gray-600 no-underline hover:underline" itemprop="item"><span itemprop="name">Home</span></a>
+              <a href="/" class="text-gray-600 no-underline hover:underline" itemprop="item"><span itemprop="name">GPT Breeze</span></a>
               <meta itemprop="position" content="1" />
             </li>
-            {computedCrumbs.length > 0 && <li aria-hidden="true" class="text-gray-400">/</li>}
+            {computedCrumbs.length > 0 && <li aria-hidden="true" class="text-gray-400" style="list-style: none;">/</li>}
             {computedCrumbs.map((c, i) => {
               const isLast = i === computedCrumbs.length - 1;
               return (
