@@ -12,24 +12,12 @@ import Base from "@/layouts/Base.astro";
   <link slot="head" rel="preload" as="image" href="/media/hero/logo-56.png" />
   <meta slot="head" name="theme-color" content="#F6F4F0" />
   <style slot="head">
-    :root {
-      --bg: #F6F4F0;
-      --fg: #22221F;
-      --muted: #667085;
-      --accent: #22221F;
-      --accent-fg: #ffffff;
-      --border: #e3e1dc;
-      --surface: #ffffff;
-      --radius: 14px;
-      --maxw: 1120px;
-      --header-h: 68px;
-    }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; line-height: 1.6; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { opacity: 0.8; }
     .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
-    header { position: sticky; top: 0; z-index: 20; background: rgba(246,244,240,0.65); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: none; }
+    header { position: sticky; top: 0; z-index: 20; background: theme('colors.header-backdrop'); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: none; }
     .nav { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
     .brand { display:inline-flex; align-items:center; gap:10px; font-weight: 800; letter-spacing: -0.01em; font-size: 1.05rem; }
     .brand-logo { width: 28px; height: 28px; display:block; border-radius: 50%; }
@@ -61,7 +49,7 @@ import Base from "@/layouts/Base.astro";
       .install { padding: 4px 6px; font-size: 0.75rem; }
     }
     .hero { position: relative; overflow: hidden; padding: calc(120px + var(--header-h)) 0 80px; margin-top: calc(-1 * var(--header-h)); border-top: none; }
-    .bg { z-index:99; position: absolute; inset: -20% -20% auto -20%; height: 60vh; background: radial-gradient(60% 60% at 20% 30%, rgba(75,183,215,0.3) 0%, rgba(75,183,215,0) 60%), radial-gradient(50% 50% at 80% 0%, rgba(246,244,240,0.9) 0%, rgba(246,244,240,0) 60%); filter: blur(40px); opacity: 0.8; pointer-events: none; }
+    .bg { z-index:99; position: absolute; inset: -20% -20% auto -20%; height: 60vh; background: radial-gradient(60% 60% at 20% 30%, theme('colors.accent-blue-light') 0%, rgba(75,183,215,0) 60%), radial-gradient(50% 50% at 80% 0%, rgba(246,244,240,0.9) 0%, rgba(246,244,240,0) 60%); filter: blur(40px); opacity: 0.8; pointer-events: none; }
     .hero h1, .display { font-size: clamp(2.6rem, 6vw, 4.25rem); line-height: 1.05; margin: 0 0 16px; letter-spacing: -0.02em; text-align: center; }
     .em { font-style: italic; font-weight: 400; }
     .hero p.lead { color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.2rem); margin: 0 0 28px; }
@@ -70,30 +58,30 @@ import Base from "@/layouts/Base.astro";
     .rating-badge img.logo { width: 22px; height: 22px; display:block; }
     .rating-badge .stars { display:inline-flex; gap:2px; }
     .rating-badge .star { width: 16px; height: 16px; display:block; }
-    .rating-badge .star path { fill: #FEC84B; }
+    .rating-badge .star path { fill: theme('colors.accent-star'); }
     .hero-actions { display:flex; gap:14px; justify-content:center; margin: 50px 0 40px; }
     .btn { display:inline-flex; align-items:center; gap:8px; padding: 12px 18px; border-radius:999px; font-weight:600; border:1px solid var(--accent); }
     .btn.primary { background: var(--accent); color: var(--accent-fg); }
     .btn.outline { background: transparent; color: var(--fg); }
     .hero-media { display:flex; justify-content:center; margin-top: 80px; }
-    .device-frame { width: min(1100px, 100%); border-radius: 24px; border: 1px solid #d0cecd7d; overflow: hidden; position: relative; }
+    .device-frame { width: min(1100px, 100%); border-radius: 24px; border: 1px solid theme('colors.device-border'); overflow: hidden; position: relative; }
     .ratio { aspect-ratio: 16 / 10; position: relative; width: 100%; }
     /* Lightweight YouTube with poster */
     .yt-lite { position: absolute; inset: 0; width: 100%; height: 100%; background-position: center; background-size: cover; cursor: pointer; }
-    .yt-lite > .play { cursor:pointer; position: absolute; inset: 0; margin: auto; width: 72px; height: 72px; border-radius: 999px; border: 0; background: rgba(255,255,255,0.9); display: grid; place-items: center; z-index: 1; box-shadow: 0 8px 24px rgba(16,24,40,0.25); }
-    .yt-lite > .play::before { content: ""; display: block; width: 0; height: 0; border-left: 18px solid #000; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 4px; }
+    .yt-lite > .play { cursor:pointer; position: absolute; inset: 0; margin: auto; width: 72px; height: 72px; border-radius: 999px; border: 0; background: rgba(255,255,255,0.9); display: grid; place-items: center; z-index: 1; box-shadow: 0 8px 24px theme('colors.shadow-dark'); }
+    .yt-lite > .play::before { content: ""; display: block; width: 0; height: 0; border-left: 18px solid black; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 4px; }
     .yt-lite.loading .play { opacity: 0; pointer-events: none; }
     .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
-    section { padding: 40px 0; border-top: 1px solid var(--border); scroll-margin-top: calc(var(--header-h) + 16px); }
-    .card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: 0 1px 0 rgba(16,24,40,0.02); }
+    section { padding: 40px 0; scroll-margin-top: calc(var(--header-h) + 16px); }
+    .card { background: theme('colors.ui-surface'); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: 0 1px 0 theme('colors.shadow-light'); }
     .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
     .muted { color: var(--muted); }
-    .kicker { display: inline-block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; margin-bottom: 10px; background: #EAF7FB; border: 1px solid #D0EEF7; padding: 4px 8px; border-radius: 999px; }
+    .kicker { display: inline-block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; margin-bottom: 10px; background: theme('colors.blue-light'); border: 1px solid theme('colors.blue-border'); padding: 4px 8px; border-radius: 999px; }
     .list { margin: 8px 0 0 0; padding-left: 18px; }
     .list li { margin: 6px 0; }
     details { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
     summary { cursor: pointer; font-weight: 600; }
-    footer { padding: 24px 0 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; background: transparent; }
+    footer { padding: 24px 0 48px; color: var(--muted); font-size: 0.95rem; background: transparent; }
     .two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .price { font-size: 2rem; font-weight: 800; }
     .strike { text-decoration: line-through; opacity: 0.6; font-weight: 600; }
@@ -109,20 +97,20 @@ import Base from "@/layouts/Base.astro";
     .features-grid { display: grid; gap: 20px; grid-template-columns: 1fr; align-items: center; }
     @media (min-width: 900px) { .features-grid { grid-template-columns: 7fr 5fr; gap: 28px; } }
     @media (min-width: 900px) { .features-grid.rev { grid-template-columns: 5fr 7fr; } }
-    .features-video { width: 100%; border-radius: 20px; overflow: hidden; border: 1px solid #d0cecd7d; box-shadow: 0 6px 20px rgba(16,24,40,0.1); }
+    .features-video { width: 100%; border-radius: 20px; overflow: hidden; border: 1px solid theme('colors.device-border'); box-shadow: 0 6px 20px theme('colors.shadow-medium'); }
     .features-video .ratio { aspect-ratio: 16 / 9; }
     .features-text h3 { margin: 0 0 8px; font-size: clamp(1.6rem, 2.4vw, 2rem); }
     .features-text p { margin: 0 0 10px; color: var(--muted); }
     .features-list { margin: 12px 0 0; padding-left: 18px; }
     .features-list li { margin: 6px 0; }
-    .placeholder { position: absolute; inset: 0; display: grid; place-items: center; color: #a8a29e; background: repeating-linear-gradient(45deg, #f6f4f0, #f6f4f0 12px, #f1efe9 12px, #f1efe9 24px); font-weight: 600; letter-spacing: 0.02em; 
+    .placeholder { position: absolute; inset: 0; display: grid; place-items: center; color: theme('colors.placeholder-text'); background: repeating-linear-gradient(45deg, theme('colors.placeholder-bg-1'), theme('colors.placeholder-bg-1') 12px, theme('colors.placeholder-bg-2') 12px, theme('colors.placeholder-bg-2') 24px); font-weight: 600; letter-spacing: 0.02em; 
     iframe { height: 100vh; position:absolute;}}
     .review-stars { display: inline-flex; gap: 2px; vertical-align: middle; }
 
     /* Reviews: make each review its own card */
     #reviews .card { background: transparent; border: none; padding: 0; box-shadow: none; }
     #reviews .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-    #reviews .stack > div { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: 0 1px 0 rgba(16,24,40,0.02); }
+    #reviews .stack > div { background: theme('colors.ui-surface'); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: 0 1px 0 theme('colors.shadow-light'); }
 
     /* Reviews intro animation */
     @keyframes review-in {
@@ -387,12 +375,12 @@ import Base from "@/layouts/Base.astro";
                 <div style="font-weight:700;">Phil Berndt</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
                   <span>May 19, 2025</span>
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -407,12 +395,12 @@ import Base from "@/layouts/Base.astro";
                 <div style="font-weight:700;">Phat Pham</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
                   <span>Mar 7, 2025</span>
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -427,12 +415,12 @@ import Base from "@/layouts/Base.astro";
                 <div style="font-weight:700;">Kehao Chen</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
                   <span>Mar 2, 2025</span>
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -447,12 +435,12 @@ import Base from "@/layouts/Base.astro";
                 <div style="font-weight:700;">Pete Z</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
                   <span>Dec 13, 2024</span>
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -467,12 +455,12 @@ import Base from "@/layouts/Base.astro";
                 <div style="font-weight:700;">Nguyen Huong</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
                   <span>Aug 28, 2024</span>
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -487,12 +475,12 @@ import Base from "@/layouts/Base.astro";
                 <div style="font-weight:700;">Notion Promax</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
                   <span>Aug 6, 2024</span>
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -510,12 +498,12 @@ import Base from "@/layouts/Base.astro";
               <div>
                 <div style="font-weight:700;">Phil</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -529,12 +517,12 @@ import Base from "@/layouts/Base.astro";
               <div>
                 <div style="font-weight:700;">Pete</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -548,12 +536,12 @@ import Base from "@/layouts/Base.astro";
               <div>
                 <div style="font-weight:700;">Anonimm</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -567,12 +555,12 @@ import Base from "@/layouts/Base.astro";
               <div>
                 <div style="font-weight:700;">Tri Vo</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
-                  <span class="review-stars" aria-label="5 out of 5 stars" title="5 out of 5">
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
-                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FEC84B" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                  <span class="review-stars text-accent-star" aria-label="5 out of 5 stars" title="5 out of 5">
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+                    <svg style="width:14px;height:14px;" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
                   </span>
                 </div>
               </div>
@@ -750,15 +738,6 @@ import Base from "@/layouts/Base.astro";
     </div>
   </section>
 
-  <footer>
-    <div class="container">
-      <div class="two">
-        <div>©2025 GPT Breeze — All Rights Reserved</div>
-        <div><a href="/privacy">Privacy Policy</a></div>
-      </div>
-    </div>
-  </footer>
-  
   <script is:inline>
     // Replace poster with YouTube iframe on click or Enter/Space
     const initLiteYT = () => {
