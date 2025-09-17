@@ -15,6 +15,7 @@ With **GPT-5 Nano pricing** starting at just **$0.05 per million input tokens**,
 OpenAI's aggressive pricing strategy for GPT-5 Nano represents a seismic shift in the AI landscape. At **$0.05 for input tokens and $0.40 for output tokens per million**, GPT-5 Nano delivers what industry experts are calling "dirt-cheap" AI processing.
 
 **Key Pricing Benefits:**
+
 - **91% cost savings** compared to premium AI models
 - **50% cheaper** than GPT-4o on input tokens
 - **90% discount** on cached inputs for conversational apps
@@ -25,19 +26,23 @@ The model's **cheap AI model** positioning doesn't compromise on capability. Wit
 ## Complete GPT-5 Nano Cost Breakdown
 
 ### Input/Output Token Pricing
+
 - **Input tokens**: $0.05 per 1 million tokens
 - **Output tokens**: $0.40 per 1 million tokens
 - **Cached input tokens**: $0.125 per 1 million (90% discount)
 
 ### Context Limits
+
 - **Input limit**: 272,000 tokens
 - **Output limit**: 128,000 tokens
 - **Total context**: ~400,000 tokens
 
 ### Reasoning Levels
+
 GPT-5 Nano can operate at four different reasoning intensities:
+
 - Minimal
-- Low  
+- Low
 - Medium
 - High
 
@@ -46,21 +51,27 @@ This flexibility allows you to optimize costs based on your specific use case re
 ## AI Model Cost Comparison: GPT-5 Nano vs. Competitors
 
 ### GPT-5 Nano vs. Claude (Anthropic)
+
 **Claude Pricing:**
+
 - Claude 4 Sonnet: $3.00-$15.00 input / $15.00-$75.00 output per 1M tokens
 - Claude Haiku: $0.25 input / $1.25 output per 1M tokens
 
 **Winner:** GPT-5 Nano offers **5x cheaper input processing** than even Claude's most affordable option.
 
 ### GPT-5 Nano vs. Google Gemini
+
 **Gemini Pricing:**
+
 - Gemini 2.5 Flash: ~$0.17 per 1M tokens (blended rate)
 - Gemini 1.5 Pro: $7 input / $21 output per 1M tokens
 
 **Winner:** GPT-5 Nano undercuts Gemini Flash by **70% on input costs**.
 
 ### GPT-5 Nano vs. GPT-4o
+
 **GPT-4o Pricing:**
+
 - Input: $0.10 per 1M tokens
 - Output: $0.40 per 1M tokens
 
@@ -69,14 +80,17 @@ This flexibility allows you to optimize costs based on your specific use case re
 ## Real-World Cost Savings Examples
 
 ### Startup Development Scenario
+
 **Monthly API Usage:** 100 million input tokens, 20 million output tokens
 
 **GPT-5 Nano Cost:**
+
 - Input: 100M × $0.05 = $5.00
 - Output: 20M × $0.40 = $8.00
 - **Total: $13.00/month**
 
 **Claude Haiku Cost:**
+
 - Input: 100M × $0.25 = $25.00
 - Output: 20M × $1.25 = $25.00
 - **Total: $50.00/month**
@@ -84,6 +98,7 @@ This flexibility allows you to optimize costs based on your specific use case re
 **Savings with GPT-5 Nano: $37.00/month (74% reduction)**
 
 ### Enterprise Classification Task
+
 **Daily Processing:** 1 billion input tokens for document classification
 
 **GPT-5 Nano:** $50/day
@@ -95,9 +110,11 @@ This flexibility allows you to optimize costs based on your specific use case re
 ## Best Use Cases for Budget AI with GPT-5 Nano
 
 ### Perfect Applications
+
 **GPT-5 Nano excels in:**
+
 - **Text classification** and tagging at scale
-- **Content summarization** for high-volume processing  
+- **Content summarization** for high-volume processing
 - **Data extraction** from documents
 - **Simple chatbot** implementations
 - **API prototyping** and testing
@@ -105,6 +122,7 @@ This flexibility allows you to optimize costs based on your specific use case re
 - **IoT device** integration
 
 ### Cost Optimization Strategies
+
 1. **Leverage cached inputs** for 90% discounts on repeated content
 2. **Use minimal reasoning level** for simple tasks
 3. **Batch process** multiple requests efficiently
@@ -120,7 +138,9 @@ Despite being the **most affordable GPT-5 variant**, GPT-5 Nano maintains impres
 - **Code Generation:** Reliable for basic programming tasks
 
 ### When to Choose GPT-5 Nano
+
 **Choose GPT-5 Nano when:**
+
 - Budget constraints are a primary concern
 - High-volume, simple tasks need processing
 - You're prototyping or testing AI implementations
@@ -128,6 +148,7 @@ Despite being the **most affordable GPT-5 variant**, GPT-5 Nano maintains impres
 - Classification and tagging are your main use cases
 
 **Consider alternatives when:**
+
 - Complex reasoning is critical
 - Premium code generation is needed
 - Advanced creative tasks are required
@@ -137,6 +158,7 @@ Despite being the **most affordable GPT-5 variant**, GPT-5 Nano maintains impres
 Industry analysts predict GPT-5's aggressive pricing strategy, particularly for the Nano variant, could trigger a **pricing war** among AI providers. The **$0.05 per million tokens** price point represents a new floor for AI model pricing.
 
 **Market Implications:**
+
 - Forces competitors to reduce prices
 - Makes AI accessible to smaller businesses
 - Enables new business models based on AI processing
@@ -145,8 +167,9 @@ Industry analysts predict GPT-5's aggressive pricing strategy, particularly for 
 ## Getting Started with Affordable AI Development
 
 ### API Setup Process
+
 1. **Create OpenAI account** and add payment method
-2. **Generate API key** from the platform dashboard  
+2. **Generate API key** from the platform dashboard
 3. **Set usage limits** to control costs
 4. **Implement caching** for repeated requests
 5. **Monitor usage** through built-in analytics
@@ -160,7 +183,7 @@ Industry analysts predict GPT-5's aggressive pricing strategy, particularly for 
 GPT Breeze's **"Bring Your Own Model" (BYOM)** approach means you pay only for what you use at GPT-5 Nano's **$0.05 per million tokens** rate. No subscription fees, no markup - just direct API pricing for:
 
 - **YouTube video summarization** with clickable timestamps
-- **Web page summaries** and follow-up questions  
+- **Web page summaries** and follow-up questions
 - **Text highlighting** for explanations, translations, improvements
 - **Custom AI shortcuts** for repeated tasks
 
@@ -170,20 +193,24 @@ GPT Breeze's **"Bring Your Own Model" (BYOM)** approach means you pay only for w
 Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog) from Chrome Web Store (free with 4.9-star rating).
 
 **2. Open Extension Panel**
+
 - Click the GPT Breeze icon in your Chrome toolbar
 - Select "Settings" to configure your AI model
 
 **3. Connect Your OpenAI API Key**
+
 - Choose "OpenAI API" from the AI model dropdown
 - Paste your OpenAI API key (the same one that gives you GPT-5 Nano access)
 - **Privacy-First**: Your API key stays in your browser - GPT Breeze doesn't store it on their servers
 
 **4. Select GPT-5 Nano Model**
+
 - In the model settings, select **GPT-5 Nano** for maximum cost savings
 - Enable cost tracking to monitor your ultra-low usage costs
 - Set up usage alerts if desired
 
 **5. Start Saving Money Immediately**
+
 - Summarize YouTube videos at **$0.05 per million input tokens**
 - Get web page insights for **90% less** than premium models
 - Use custom shortcuts for repeated tasks at dirt-cheap rates
@@ -191,13 +218,15 @@ Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-bree
 #### Real-World GPT Breeze + GPT-5 Nano Savings:
 
 **Daily YouTube Learning:**
+
 - Summarize 20 videos (avg 10K tokens each) = 200K tokens
 - **GPT-5 Nano cost**: $0.01 per day
 - **Premium model cost**: $0.30+ per day
 - **Annual savings**: $105+
 
 **Research & Writing:**
-- Process 50 web articles monthly = 5M tokens  
+
+- Process 50 web articles monthly = 5M tokens
 - **GPT-5 Nano cost**: $0.25/month
 - **Competing AI tools**: $20-50/month subscription
 - **Savings**: 95%+ cost reduction
@@ -212,6 +241,7 @@ Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-bree
 Ready to combine GPT-5 Nano's affordable pricing with GPT Breeze's productivity features? [Install the extension](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog) and start saving immediately.
 
 ### Cost Management Tips
+
 - **Set monthly budgets** to prevent overspending
 - **Use development quotas** for testing
 - **Implement request batching** for efficiency
@@ -221,21 +251,27 @@ Ready to combine GPT-5 Nano's affordable pricing with GPT Breeze's productivity 
 ## Frequently Asked Questions
 
 ### How cheap is GPT-5 Nano compared to other AI models?
+
 GPT-5 Nano costs $0.05 per million input tokens, making it **5x cheaper than Claude Haiku** ($0.25) and **2x cheaper than GPT-4o** ($0.10). This represents savings of 70-91% compared to premium alternatives.
 
 ### What's the catch with such low AI model pricing?
+
 There's no significant catch. GPT-5 Nano is designed for **high-volume, simpler tasks** where extreme cost efficiency matters more than cutting-edge reasoning capabilities. It maintains excellent performance for classification, summarization, and basic generation tasks.
 
 ### Can small businesses afford GPT-5 Nano for daily use?
+
 Absolutely. A small business processing **10 million tokens monthly** would pay just **$0.50 for inputs** and **$4.00 for outputs** - a total of **$4.50/month**. This makes AI integration feasible for virtually any budget.
 
 ### How does cached input pricing work?
+
 GPT-5 Nano offers **90% discounts on cached inputs** at $0.125 per million tokens. If you reuse system instructions, prompts, or examples across multiple API calls, you'll see dramatic cost reductions of 70-90%.
 
 ### Is GPT-5 Nano suitable for production applications?
+
 Yes, for appropriate use cases. GPT-5 Nano works excellently for **content classification, data extraction, simple chatbots, and summarization**. However, for complex reasoning or premium code generation, consider GPT-5 Mini or the full GPT-5 model.
 
 ### What's the maximum context window for GPT-5 Nano?
+
 GPT-5 Nano supports up to **272,000 input tokens and 128,000 output tokens**, with a total context window approaching **400,000 tokens** - more than sufficient for most applications.
 
 ## The Future of Affordable AI

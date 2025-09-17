@@ -120,4 +120,3 @@ We may update our Privacy Policy and will notify you of changes through our Serv
 ## Contact Us
 
 For any questions or feedback, please reach out to us at yourfriend@gptbreeze.io.
-

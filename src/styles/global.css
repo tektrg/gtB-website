@@ -4,13 +4,13 @@
 
 /* Centralized color variables using Tailwind theme */
 :root {
-  --bg: theme('colors.brand-bg');
-  --fg: theme('colors.brand-fg');
-  --muted: theme('colors.brand-muted');
-  --accent: theme('colors.brand-accent');
-  --accent-fg: theme('colors.brand-accent-fg');
-  --border: theme('colors.ui-border');
-  --surface: theme('colors.ui-surface');
+  --bg: theme("colors.brand-bg");
+  --fg: theme("colors.brand-fg");
+  --muted: theme("colors.brand-muted");
+  --accent: theme("colors.brand-accent");
+  --accent-fg: theme("colors.brand-accent-fg");
+  --border: theme("colors.ui-border");
+  --surface: theme("colors.ui-surface");
   --radius: 14px;
   --maxw: 1120px;
   --header-h: 68px;
@@ -18,7 +18,12 @@
 
 @layer base {
   /* Headings: consistent sizing, tighter leading, balanced margins */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold leading-tight;
   }
   h1 {
@@ -52,7 +57,8 @@
     @apply text-black underline;
   }
   /* Remove extra top margin for the first element in content areas */
-  main > :first-child, .prose > :first-child {
+  main > :first-child,
+  .prose > :first-child {
     @apply mt-0;
   }
 
