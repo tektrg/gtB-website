@@ -86,6 +86,171 @@ if (!breadcrumbs) {
       gtag('js', new Date());
       gtag('config', 'G-30EX1TYBPM');
     </script>
+    <script>
+      // Table of Contents functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const tocList = document.getElementById('toc-list');
+        const tocListMobile = document.getElementById('toc-list-mobile');
+        const mobileBtn = document.getElementById('toc-mobile-btn');
+        const mobileOverlay = document.getElementById('toc-mobile-overlay');
+        const mobileClose = document.getElementById('toc-mobile-close');
+        const desktopToggle = document.getElementById('toc-desktop-toggle');
+
+        if (!tocList || !tocListMobile) return;
+
+        // Generate TOC from headings
+        function generateTOC() {
+          const headings = document.querySelectorAll('main h1, main h2, main h3, main h4, main h5, main h6');
+          if (headings.length === 0) {
+            // Hide TOC elements if no headings found
+            const tocSidebar = document.getElementById('toc-sidebar');
+            const tocMobileBtn = document.getElementById('toc-mobile-btn');
+            if (tocSidebar) tocSidebar.style.display = 'none';
+            if (tocMobileBtn) tocMobileBtn.style.display = 'none';
+            return;
+          }
+
+          const tocItems = [];
+          
+          headings.forEach((heading, index) => {
+            // Create unique ID if not exists
+            if (!heading.id) {
+              heading.id = `heading-${index}`;
+            }
+
+            const level = parseInt(heading.tagName.charAt(1));
+            const text = heading.textContent.trim();
+            const id = heading.id;
+
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            
+            link.href = `#${id}`;
+            link.textContent = text;
+            link.className = `block py-1 px-2 rounded text-brand-muted hover:bg-gray-100 hover:text-brand-fg transition-colors no-underline`;
+            
+            // Add indentation based on heading level
+            if (level > 1) {
+              link.style.paddingLeft = `${(level - 1) * 0.75}rem`;
+              link.classList.add('text-muted-light');
+            }
+
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              
+              // Close mobile overlay if open
+              if (mobileOverlay && !mobileOverlay.classList.contains('hidden')) {
+              mobileOverlay.classList.add('hidden');
+              }
+
+              // Update active state
+              document.querySelectorAll('.toc-active').forEach(el => el.classList.remove('toc-active', 'bg-accent-blue-light', 'text-accent-blue', 'bg-gray-200', 'text-brand-fg'));
+              link.classList.add('toc-active', 'bg-gray-200', 'text-brand-fg');
+            });
+
+            listItem.appendChild(link);
+            tocItems.push({ element: listItem.cloneNode(true), level });
+          });
+
+          // Populate both desktop and mobile TOCs
+          tocItems.forEach(item => {
+            tocList.appendChild(item.element);
+            tocListMobile.appendChild(item.element.cloneNode(true));
+          });
+
+          // Re-bind click events for mobile TOC
+          tocListMobile.querySelectorAll('a').forEach((link, index) => {
+            const originalLink = tocList.querySelectorAll('a')[index];
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const targetId = link.getAttribute('href');
+              const target = document.querySelector(targetId);
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                mobileOverlay.classList.add('hidden');
+                
+                // Update active state in both TOCs
+                document.querySelectorAll('.toc-active').forEach(el => el.classList.remove('toc-active', 'bg-accent-blue-light', 'text-accent-blue'));
+                link.classList.add('toc-active', 'bg-accent-blue-light', 'text-accent-blue');
+                originalLink.classList.add('toc-active', 'bg-accent-blue-light', 'text-accent-blue');
+              }
+            });
+          });
+        }
+
+        // Mobile toggle functionality
+        if (mobileBtn && mobileOverlay && mobileClose) {
+          mobileBtn.addEventListener('click', function() {
+            mobileOverlay.classList.toggle('hidden');
+          });
+
+          mobileClose.addEventListener('click', function() {
+            mobileOverlay.classList.add('hidden');
+          });
+
+          mobileOverlay.addEventListener('click', function(e) {
+            if (e.target === mobileOverlay) {
+              mobileOverlay.classList.add('hidden');
+            }
+          });
+        }
+
+        // Desktop toggle functionality
+        if (desktopToggle && tocList) {
+          desktopToggle.addEventListener('click', function() {
+            const expandIcon = document.getElementById('toc-expand-icon');
+            const collapseIcon = document.getElementById('toc-collapse-icon');
+            const isCollapsed = tocList.classList.contains('hidden');
+            
+            if (isCollapsed) {
+              // Expand
+              tocList.classList.remove('hidden');
+              expandIcon.classList.add('hidden');
+              collapseIcon.classList.remove('hidden');
+            } else {
+              // Collapse
+              tocList.classList.add('hidden');
+              expandIcon.classList.remove('hidden');
+              collapseIcon.classList.add('hidden');
+            }
+          });
+        }
+
+        // Initialize TOC
+        generateTOC();
+
+        // Highlight current section on scroll (optional enhancement)
+        let ticking = false;
+        function updateActiveSection() {
+          if (!ticking) {
+            requestAnimationFrame(function() {
+              const headings = document.querySelectorAll('main h1, main h2, main h3, main h4, main h5, main h6');
+              const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              
+              let current = null;
+              headings.forEach(heading => {
+                const rect = heading.getBoundingClientRect();
+                if (rect.top <= 100) {
+                  current = heading;
+                }
+              });
+
+              if (current) {
+                document.querySelectorAll('.toc-active').forEach(el => el.classList.remove('toc-active', 'bg-accent-blue-light', 'text-accent-blue'));
+                const activeLinks = document.querySelectorAll(`a[href="#${current.id}"]`);
+                activeLinks.forEach(link => link.classList.add('toc-active', 'bg-accent-blue-light', 'text-accent-blue'));
+              }
+
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }
+
+        window.addEventListener('scroll', updateActiveSection);
+      });
+    </script>
     <style>
       /* Decorative light blue glow near top-right, similar to index.astro */
       .site-gradient {
@@ -94,7 +259,7 @@ if (!breadcrumbs) {
         left: 0px;
         width: min(720px, 400px);
         height: min(520px, 220px);
-        background: radial-gradient(100% 80% at 0% 0%, rgba(75, 183, 215, 0.28) 0%, rgba(75, 183, 215, 0) 60%);
+        background: radial-gradient(100% 80% at 0% 0%, theme('colors.accent-blue-light') 0%, rgba(75, 183, 215, 0) 60%);
         filter: blur(20px);
         opacity: 0.8;
         pointer-events: none;
@@ -104,28 +269,76 @@ if (!breadcrumbs) {
   </head>
   <body class:list={[{ 'bg-warm-light text-warm-dark': !isLandingPage }]}> 
     {!isLandingPage && <div class="site-gradient" aria-hidden="true"></div>}
+    
+    <!-- Table of Contents - Desktop Sidebar -->
+    {!isLandingPage && (
+      <nav id="toc-sidebar" class="fixed left-4 top-24 w-[20%] h-[calc(100vh-6rem)] overflow-y-auto p-4 z-20 hidden lg:block">
+        <button id="toc-desktop-toggle" class="flex items-center justify-around w-full mb-3 text-left rounded p-2 -m-2 transition-colors" aria-label="Toggle table of contents">
+            <h3 class="text-sm font-semibold text-brand-fg uppercase tracking-wide" style="margin:0;">Table of Contents</h3>
+          <svg id="toc-expand-icon" class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+          <svg id="toc-collapse-icon" class="w-4 h-4 text-brand-muted hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+          </svg>
+        </button>
+        <ul id="toc-list" class="space-y-1 text-sm list-none hidden"></ul>
+      </nav>
+    )}
+
+    <!-- Table of Contents - Mobile Toggle -->
+    {!isLandingPage && (
+      <div>
+        <!-- Mobile TOC Button -->
+        <button 
+          id="toc-mobile-btn" 
+          class="fixed bottom-6 left-6 w-12 h-12 bg-ui-surface/70 backdrop-blur-md text-brand-fg rounded-full shadow-lg z-30 flex items-center justify-center lg:hidden transition-transform hover:scale-105"
+          aria-label="Toggle table of contents"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+        
+        <!-- Mobile TOC Overlay -->
+        <div id="toc-mobile-overlay" class="fixed inset-0 bg-black-50 z-40 hidden lg:hidden">
+          <nav class="fixed left-4 right-4 bottom-20 max-h-96 overflow-y-auto bg-ui-surface rounded-lg p-4 shadow-xl">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-semibold text-brand-fg uppercase tracking-wide">Table of Contents</h3>
+              <button id="toc-mobile-close" class="text-brand-muted hover:text-brand-fg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+            <ul id="toc-list-mobile" class="space-y-1 text-sm list-none"></ul>
+          </nav>
+        </div>
+      </div>
+    )}
+
     <main class:list={[{ 'max-w-3xl mx-auto px-4 py-8 relative z-10': !isLandingPage }]}> 
       {!isLandingPage && showBreadcrumbs && path !== '/' && (
         <nav aria-label="Breadcrumb" class="mb-6" itemscope itemtype="https://schema.org/BreadcrumbList">
-          <ol class="flex flex-wrap items-center gap-1 text-sm text-gray-600">
+          <ol class="flex flex-wrap items-center gap-1 text-sm text-brand-muted">
             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="inline-flex items-center gap-1">
-              <a href="/" class="text-gray-600 no-underline hover:underline" itemprop="item"><span itemprop="name">GPT Breeze</span></a>
+              <a href="/" class="text-brand-muted no-underline hover:underline" itemprop="item"><span itemprop="name">GPT Breeze</span></a>
               <meta itemprop="position" content="1" />
             </li>
-            {computedCrumbs.length > 0 && <li aria-hidden="true" class="text-gray-400" style="list-style: none;">/</li>}
+            {computedCrumbs.length > 0 && <li aria-hidden="true" class="text-muted-light" style="list-style: none;">/</li>}
             {computedCrumbs.map((c, i) => {
               const isLast = i === computedCrumbs.length - 1;
               return (
                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="inline-flex items-center gap-1">
                   {c.href && !isLast ? (
-                    <a href={c.href} class="text-gray-600 no-underline hover:underline" itemprop="item">
+                    <a href={c.href} class="text-brand-muted no-underline hover:underline" itemprop="item">
                       <span itemprop="name">{c.label}</span>
                     </a>
                   ) : (
-                    <span class="text-gray-500" itemprop="name">{c.label}</span>
+                    <span class="text-muted-light" itemprop="name">{c.label}</span>
                   )}
                   <meta itemprop="position" content={(i + 2).toString()} />
-                  {!isLast && <span aria-hidden="true" class="text-gray-400">/</span>}
+                  {!isLast && <span aria-hidden="true" class="text-muted-light">/</span>}
                 </li>
               );
             })}
@@ -134,5 +347,14 @@ if (!breadcrumbs) {
       )}
       <slot />
     </main>
+    
+    <footer style="padding: 24px 0 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; background: transparent;">
+      <div style="max-width: var(--maxw, 1200px); margin: 0 auto; padding: 0 20px;">
+        <div style="display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+          <div>©2025 GPT Breeze — All Rights Reserved</div>
+          <div><a href="/privacy">Privacy Policy</a></div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
