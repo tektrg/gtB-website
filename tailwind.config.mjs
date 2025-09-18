@@ -10,13 +10,13 @@ export default {
       },
       colors: {
         // Main theme colors
-        "warm-dark": "#1C1C1C",
+        "warm-dark": "#2a2a2aff",
         "warm-light": "#F6F4F0",
 
         // Primary brand colors
         "brand-bg": "#F6F4F0",
         "brand-fg": "#22221F",
-        "brand-muted": "#667085",
+        "brand-muted": "#6a6a6aff",
         "brand-accent": "#22221F",
         "brand-accent-fg": "#ffffff",
 
@@ -33,17 +33,17 @@ export default {
         "blue-light": "#EAF7FB",
         "blue-border": "#D0EEF7",
         "blue-100": "rgb(219, 234, 254)",
-        "blue-700": "rgb(29, 78, 216)",
+        "blue-700": "#24596aff",
 
         // Gray scale
-        "gray-100": "rgb(243, 244, 246)",
-        "gray-200": "rgb(229, 231, 235)",
-        "gray-400": "rgb(156, 163, 175)",
-        "gray-500": "rgb(107, 114, 128)",
-        "gray-600": "rgb(75, 85, 99)",
-        "gray-700": "rgb(55, 65, 81)",
-        "gray-800": "rgb(31, 41, 55)",
-        "gray-900": "rgb(17, 24, 39)",
+        "gray-100": "rgba(244, 244, 244, 1)",
+        "gray-200": "rgba(236, 236, 236, 1)",
+        "gray-400": "rgba(173, 173, 173, 1)",
+        "gray-500": "rgba(131, 131, 131, 1)",
+        "gray-600": "rgba(103, 103, 103, 1)",
+        "gray-700": "rgba(77, 77, 77, 1)",
+        "gray-800": "rgba(50, 50, 50, 1)",
+        "gray-900": "rgba(38, 38, 38, 1)",
 
         // Black variations with opacity
         "black-50": "rgba(0, 0, 0, 0.5)",
