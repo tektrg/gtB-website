@@ -7,12 +7,141 @@ const posts = (await getCollection('blog', ({ data }) =>
 )).sort((a, b) => +b.data.pubDate - +a.data.pubDate);
 ---
 <Base title="Blog" description="Latest posts and updates from GPT Breeze.">
-  <h1>Blog</h1>
-  <ul>
-    {posts.map((p) => (
-      <li style="list-style: none;">
-        <a href={`/blog/${p.slug ?? p.id}/`}>{p.data.title}</a>
-      </li>
-    ))}
-  </ul>
+  <style>
+    .blog-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    
+    .blog-card {
+      background: theme('colors.ui-surface');
+      border: 1px solid theme('colors.ui-border');
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px theme('colors.shadow-medium');
+      border-color: theme('colors.accent-blue');
+    }
+    
+    .blog-card h2 {
+      margin: 0 0 12px 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: theme('colors.brand-fg');
+    }
+    
+    .blog-card p {
+      margin: 0 0 16px 0;
+      color: theme('colors.brand-muted');
+      line-height: 1.6;
+    }
+    
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.9rem;
+      color: theme('colors.brand-muted');
+      margin-top: auto;
+    }
+    
+    .blog-date {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .blog-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      background: theme('colors.gray-200');
+      color: theme('colors.gray-600');
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .read-time {
+      opacity: 0.7;
+    }
+    
+    .no-posts {
+      text-align: center;
+      padding: 48px 24px;
+      color: theme('colors.brand-muted');
+    }
+    
+    @media (max-width: 768px) {
+      .blog-card {
+        padding: 20px;
+      }
+      
+      .blog-card h2 {
+        font-size: 1.25rem;
+      }
+      
+      .blog-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+  </style>
+
+  <header>
+    <h1>Blog</h1>
+    <p class="subtitle">Latest insights on AI productivity, BYOM strategies, and Chrome extensions</p>
+  </header>
+
+  {posts.length > 0 ? (
+    <div class="blog-grid">
+      {posts.map((post) => (
+        <a href={`/blog/${post.slug ?? post.id}/`} class="blog-card" style="text-decoration: none; color: inherit; display: block;">
+          <h2>{post.data.title}</h2>
+          {post.data.description && (
+            <p>{post.data.description}</p>
+          )}
+          <div class="blog-meta">
+            {post.data.pubDate && (
+              <time class="blog-date" datetime={post.data.pubDate.toISOString()}>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                </svg>
+                {new Intl.DateTimeFormat('en-US', {
+                  year: 'numeric',
+                  month: 'long', 
+                  day: 'numeric'
+                }).format(post.data.pubDate)}
+              </time>
+            )}
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="blog-tags">
+                {post.data.tags.slice(0, 3).map((tag: string) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )}
+            <span class="read-time">~ 5 min read</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  ) : (
+    <div class="no-posts">
+      <p>No blog posts available yet. Check back soon for AI productivity insights and tips!</p>
+    </div>
+  )}
 </Base>
