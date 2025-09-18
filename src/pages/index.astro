@@ -13,17 +13,17 @@ import Base from "@/layouts/Base.astro";
   <meta slot="head" name="theme-color" content="#F6F4F0" />
   <style slot="head">
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--fg); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; line-height: 1.6; }
-    a { color: var(--accent); text-decoration: none; }
+    body { margin: 0; background: theme('colors.brand-bg'); color: theme('colors.brand-fg'); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; line-height: 1.6; }
+    a { color: theme('colors.brand-accent'); text-decoration: none; }
     a:hover { opacity: 0.8; }
-    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
     header { position: sticky; top: 0; z-index: 20; background: theme('colors.header-backdrop'); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: none; }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
     .brand { display:inline-flex; align-items:center; gap:10px; font-weight: 800; letter-spacing: -0.01em; font-size: 1.05rem; }
     .brand-logo { width: 28px; height: 28px; display:block; border-radius: 50%; }
     .menu { display: flex; gap: 18px; font-size: 0.98rem; align-items: center; }
-    .install { display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-fg); font-weight: 600; }
-    .install.secondary { background: transparent; color: var(--fg); }
+    .install { display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 999px; border: 1px solid theme('colors.brand-accent'); background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); font-weight: 600; }
+    .install.secondary { background: transparent; color: theme('colors.brand-fg'); }
     
     /* Mobile responsive styles */
     @media (max-width: 768px) {
@@ -48,21 +48,21 @@ import Base from "@/layouts/Base.astro";
       .brand { font-size: 0.85rem; }
       .install { padding: 4px 6px; font-size: 0.75rem; }
     }
-    .hero { position: relative; overflow: hidden; padding: calc(120px + var(--header-h)) 0 80px; margin-top: calc(-1 * var(--header-h)); border-top: none; }
+    .hero { position: relative; overflow: hidden; padding: calc(120px + 68px) 0 80px; margin-top: calc(-1 * 68px); border-top: none; }
     .bg { z-index:99; position: absolute; inset: -20% -20% auto -20%; height: 60vh; background: radial-gradient(60% 60% at 20% 30%, theme('colors.accent-blue-light') 0%, rgba(75,183,215,0) 60%), radial-gradient(50% 50% at 80% 0%, rgba(246,244,240,0.9) 0%, rgba(246,244,240,0) 60%); filter: blur(40px); opacity: 0.8; pointer-events: none; }
     .hero h1, .display { font-size: clamp(2.6rem, 6vw, 4.25rem); line-height: 1.05; margin: 0 0 16px; letter-spacing: -0.02em; text-align: center; }
     .em { font-style: italic; font-weight: 400; }
-    .hero p.lead { color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.2rem); margin: 0 0 28px; }
-    .rating-badge { display:flex; flex-direction: column; align-items:center; justify-content:center; gap:6px; margin: 8px 0 0; color: var(--muted); font-weight: 600; }
+    .hero p.lead { color: theme('colors.brand-muted'); font-size: clamp(1.05rem, 1.5vw, 1.2rem); margin: 0 0 28px; }
+    .rating-badge { display:flex; flex-direction: column; align-items:center; justify-content:center; gap:6px; margin: 8px 0 0; color: theme('colors.brand-muted'); font-weight: 600; }
     .rating-badge .rating-top { display:inline-flex; align-items:center; gap:10px; }
     .rating-badge img.logo { width: 22px; height: 22px; display:block; }
     .rating-badge .stars { display:inline-flex; gap:2px; }
     .rating-badge .star { width: 16px; height: 16px; display:block; }
     .rating-badge .star path { fill: theme('colors.accent-star'); }
     .hero-actions { display:flex; gap:14px; justify-content:center; margin: 50px 0 40px; }
-    .btn { display:inline-flex; align-items:center; gap:8px; padding: 12px 18px; border-radius:999px; font-weight:600; border:1px solid var(--accent); }
-    .btn.primary { background: var(--accent); color: var(--accent-fg); }
-    .btn.outline { background: transparent; color: var(--fg); }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding: 12px 18px; border-radius:999px; font-weight:600; border:1px solid theme('colors.brand-accent'); }
+    .btn.primary { background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); }
+    .btn.outline { background: transparent; color: theme('colors.brand-fg'); }
     .hero-media { display:flex; justify-content:center; margin-top: 80px; }
     .device-frame { width: min(1100px, 100%); border-radius: 24px; border: 1px solid theme('colors.device-border'); overflow: hidden; position: relative; }
     .ratio { aspect-ratio: 16 / 10; position: relative; width: 100%; }
@@ -72,21 +72,21 @@ import Base from "@/layouts/Base.astro";
     .yt-lite > .play::before { content: ""; display: block; width: 0; height: 0; border-left: 18px solid black; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 4px; }
     .yt-lite.loading .play { opacity: 0; pointer-events: none; }
     .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
-    section { padding: 40px 0; scroll-margin-top: calc(var(--header-h) + 16px); }
-    .card { background: theme('colors.ui-surface'); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: 0 1px 0 theme('colors.shadow-light'); }
+    section { padding: 40px 0; scroll-margin-top: calc(68px + 16px); }
+    .card { background: theme('colors.ui-surface'); border: 1px solid theme('colors.ui-border'); border-radius: 14px; padding: 18px; box-shadow: 0 1px 0 theme('colors.shadow-light'); }
     .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-    .muted { color: var(--muted); }
-    .kicker { display: inline-block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 700; margin-bottom: 10px; background: theme('colors.blue-light'); border: 1px solid theme('colors.blue-border'); padding: 4px 8px; border-radius: 999px; }
+    .muted { color: theme('colors.brand-muted'); }
+    .kicker { display: inline-block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: theme('colors.brand-accent'); font-weight: 700; margin-bottom: 10px; background: theme('colors.blue-light'); border: 1px solid theme('colors.blue-border'); padding: 4px 8px; border-radius: 999px; }
     .list { margin: 8px 0 0 0; padding-left: 18px; }
-    .list li { margin: 6px 0; }
-    details { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+    .list li { margin: 6px 0; color: theme('colors.brand-muted'); }
+    details { background: theme('colors.ui-surface'); border: 1px solid theme('colors.ui-border'); border-radius: 14px; padding: 12px 14px; }
     summary { cursor: pointer; font-weight: 600; }
-    footer { padding: 24px 0 48px; color: var(--muted); font-size: 0.95rem; background: transparent; }
+    footer { padding: 24px 0 48px; color: theme('colors.brand-muted'); font-size: 0.95rem; background: transparent; }
     .two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
     .price { font-size: 2rem; font-weight: 800; }
     .strike { text-decoration: line-through; opacity: 0.6; font-weight: 600; }
     .section-title { margin: 0 0 8px; font-size: clamp(2rem, 2vw, 2rem); letter-spacing: -0.01em; }
-    .subtle { font-size: 0.95rem; color: var(--muted); margin: 0 0 16px; }
+    .subtle { font-size: 0.95rem; color: theme('colors.brand-muted'); margin: 0 0 16px; }
     .inline { display: inline-flex; align-items: center; gap: 8px; }
     .stack { display: grid; gap: 8px; }
     .center { text-align: center; }
@@ -100,9 +100,9 @@ import Base from "@/layouts/Base.astro";
     .features-video { width: 100%; border-radius: 20px; overflow: hidden; border: 1px solid theme('colors.device-border'); box-shadow: 0 6px 20px theme('colors.shadow-medium'); }
     .features-video .ratio { aspect-ratio: 16 / 9; }
     .features-text h3 { margin: 0 0 8px; font-size: clamp(1.6rem, 2.4vw, 2rem); }
-    .features-text p { margin: 0 0 10px; color: var(--muted); }
+    .features-text p { margin: 0 0 10px; color: theme('colors.brand-muted'); }
     .features-list { margin: 12px 0 0; padding-left: 18px; }
-    .features-list li { margin: 6px 0; }
+    .features-list li { margin: 6px 0; color: theme('colors.brand-muted'); }
     .placeholder { position: absolute; inset: 0; display: grid; place-items: center; color: theme('colors.placeholder-text'); background: repeating-linear-gradient(45deg, theme('colors.placeholder-bg-1'), theme('colors.placeholder-bg-1') 12px, theme('colors.placeholder-bg-2') 12px, theme('colors.placeholder-bg-2') 24px); font-weight: 600; letter-spacing: 0.02em; 
     iframe { height: 100vh; position:absolute;}}
     .review-stars { display: inline-flex; gap: 2px; vertical-align: middle; }
@@ -110,7 +110,7 @@ import Base from "@/layouts/Base.astro";
     /* Reviews: make each review its own card */
     #reviews .card { background: transparent; border: none; padding: 0; box-shadow: none; }
     #reviews .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-    #reviews .stack > div { background: theme('colors.ui-surface'); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: 0 1px 0 theme('colors.shadow-light'); }
+    #reviews .stack > div { background: theme('colors.ui-surface'); border: 1px solid theme('colors.ui-border'); border-radius: 14px; padding: 14px; box-shadow: 0 1px 0 theme('colors.shadow-light'); }
 
     /* Reviews intro animation */
     @keyframes review-in {
@@ -172,6 +172,49 @@ import Base from "@/layouts/Base.astro";
     </div>
   </header>
 
+  <!-- Software Application Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GPT Breeze",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "description": "Save time with AI summaries, tab management, and one‑click shortcuts for YouTube, selected text, and any website.",
+    "url": "https://gptbreeze.io",
+    "downloadUrl": "https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog",
+    "author": {
+      "@type": "Organization",
+      "name": "GPT Breeze",
+      "url": "https://gptbreeze.io"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "100",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "featureList": [
+      "YouTube video summarization",
+      "Web page analysis",
+      "AI-powered writing assistance",
+      "Custom shortcuts",
+      "Bring your own API key (BYOM)",
+      "Privacy-focused design"
+    ],
+    "softwareVersion": "1.0",
+    "datePublished": "2024-01-01",
+    "screenshot": "https://gptbreeze.io/media/hero/logo-56.png"
+  }
+  </script>
+
   <section id="home" class="hero">
     <div class="container">
       <div class="bg"></div>
@@ -193,7 +236,7 @@ import Base from "@/layouts/Base.astro";
           <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
           </div>
         </div>
-        <span class="rating-text"><strong style="color: var(--fg);">4.9 stars</strong> on Chrome Web Store</span>
+        <span class="rating-text"><strong style="color: theme('colors.brand-fg');">4.9 stars</strong> on Chrome Web Store</span>
       </div>
       <div class="hero-actions">
         <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome for free</a>
@@ -362,6 +405,73 @@ import Base from "@/layouts/Base.astro";
     </div>
   </section>
 
+  <!-- Reviews Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "GPT Breeze",
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Phil Berndt"
+        },
+        "datePublished": "2025-05-19",
+        "reviewBody": "I picked up this extension a few months ago, back when they were just getting started. I had to pause using it for a little while because of some performance hiccups, but it seems like those issues are all sorted now. There were a few bugs along the way, but I really appreciate how much the developer listens to feedback. In fact, they even added one of my suggestions—being able to add custom icons to custom prompts! Big thanks to the devs for that!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Phat Pham"
+        },
+        "datePublished": "2025-03-07",
+        "reviewBody": "beautiful UI with great summary feature on Youtube"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Kehao Chen"
+        },
+        "datePublished": "2025-03-02",
+        "reviewBody": "While searching for alternatives to HAPRA AI, I discovered this Chrome extension. My requirements are simple: I need assistance with summarizing web pages and YouTube transcripts, the ability to interact with web content, and, importantly, the option to use my own API key for pay-as-you-go billing instead of a subscription model. GPT Breeze meets all my needs and requires only a one-time purchase. It has become an indispensable tool in my daily life."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Pete Z"
+        },
+        "datePublished": "2024-12-13",
+        "reviewBody": "Exactly what I've been looking for! And love that I can use my ChatGPT API. The custom prompt feature is efficient for quick explanations and rewrites, providing clear messages that maintain my original intent. I appreciate how it allows me to adjust the tone for different professional or casual audiences. Overall, it's a valuable tool for enhancing messaging efficiency."
+      }
+    ]
+  }
+  </script>
+
   <section id="reviews">
     <div class="container">
       <h2 class="section-title">Customer Reviews</h2>
@@ -370,7 +480,7 @@ import Base from "@/layouts/Base.astro";
         <div class="stack" style="margin-top:12px; gap:14px;">
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://lh3.googleusercontent.com/a-/ALV-UjWlSnKqfvg_us9THTOIwGlMeHIYBGMKLP6wqXQMe4tdkgI6manj=s96-w96-h96" alt="Avatar of Phil Berndt" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjWlSnKqfvg_us9THTOIwGlMeHIYBGMKLP6wqXQMe4tdkgI6manj=s96-w96-h96" alt="Avatar of Phil Berndt" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Phil Berndt</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -390,7 +500,7 @@ import Base from "@/layouts/Base.astro";
 
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://lh3.googleusercontent.com/a-/ALV-UjWqhtCE40fXQYmEg50_Qziz64HYxS-jyudqh5tcqMwIo4zFPq4=s96-w96-h96" alt="Avatar of Phat Pham" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjWqhtCE40fXQYmEg50_Qziz64HYxS-jyudqh5tcqMwIo4zFPq4=s96-w96-h96" alt="Avatar of Phat Pham" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Phat Pham</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -410,7 +520,7 @@ import Base from "@/layouts/Base.astro";
 
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://lh3.googleusercontent.com/a-/ALV-UjUrHBx_-lHLlajmV5L25SXtmYm99QcM5-gw436XEIB6dKLwAQ1HBw=s96-w96-h96" alt="Avatar of Kehao Chen" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjUrHBx_-lHLlajmV5L25SXtmYm99QcM5-gw436XEIB6dKLwAQ1HBw=s96-w96-h96" alt="Avatar of Kehao Chen" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Kehao Chen</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -430,7 +540,7 @@ import Base from "@/layouts/Base.astro";
 
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://lh3.googleusercontent.com/a-/ALV-UjW7NofjXItdcqljn5AizOH9axqGEOX7jNTnXmXibUw90_KQxMR4yg=s96-w96-h96" alt="Avatar of Pete Z" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjW7NofjXItdcqljn5AizOH9axqGEOX7jNTnXmXibUw90_KQxMR4yg=s96-w96-h96" alt="Avatar of Pete Z" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Pete Z</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -450,7 +560,7 @@ import Base from "@/layouts/Base.astro";
 
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://lh3.googleusercontent.com/a-/ALV-UjXlrW4S-2Y-Edv0FPpdoyrRHoOEXzMhxeINfeC3PrNywNqE7LI=s96-w96-h96" alt="Avatar of Nguyen Huong" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjXlrW4S-2Y-Edv0FPpdoyrRHoOEXzMhxeINfeC3PrNywNqE7LI=s96-w96-h96" alt="Avatar of Nguyen Huong" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Nguyen Huong</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -470,7 +580,7 @@ import Base from "@/layouts/Base.astro";
 
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://lh3.googleusercontent.com/a-/ALV-UjVA1tzvtL-cb25JNafbAjl4AoPe7iD3Uza0mL4OiBHHm-qEgXE=s96-w96-h96" alt="Avatar of Notion Promax" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://lh3.googleusercontent.com/a-/ALV-UjVA1tzvtL-cb25JNafbAjl4AoPe7iD3Uza0mL4OiBHHm-qEgXE=s96-w96-h96" alt="Avatar of Notion Promax" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Notion Promax</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -494,7 +604,7 @@ import Base from "@/layouts/Base.astro";
         <div class="stack" style="margin-top:12px; gap:14px;">
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Phil" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Phil" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Phil</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -513,7 +623,7 @@ import Base from "@/layouts/Base.astro";
 
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Pete" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Pete" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Pete</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -532,7 +642,7 @@ import Base from "@/layouts/Base.astro";
 
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Anonimm" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Anonimm" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Anonimm</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -551,7 +661,7 @@ import Base from "@/layouts/Base.astro";
 
           <div>
             <div class="inline" style="gap:10px; align-items:center;">
-              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Tri Vo" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--border);" loading="lazy" />
+              <img src="https://assets.gumroad.com/assets/gumroad-default-avatar-5-623b6723477dd15920db554b0a4e9aac6a5e41159fd3d7bb4c9f9745a44e4f85.png" alt="Avatar of Tri Vo" width="36" height="36" style="width:36px;height:36px;border-radius:50%;border:1px solid theme('colors.ui-border');" loading="lazy" />
               <div>
                 <div style="font-weight:700;">Tri Vo</div>
                 <div class="muted" style="font-size:0.9rem; display:flex; align-items:center; gap:8px;">
@@ -626,6 +736,56 @@ import Base from "@/layouts/Base.astro";
       </div>
     </div>
   </section>
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is GPT Breeze?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GPT Breeze is a simple AI Chrome extension. It helps with various tasks you do on the internet, such as summarizing YouTube videos and web articles. It also helps you improve your writing and answer any questions. Compared to ChatGPT, GPT Breeze operates right in your current tab, saving you the effort of switching tabs and copying and pasting. It's FREE to use, with the option to unlock advanced features such as custom AI shortcuts with the purchase of a license key. The word 'breeze' means something easy to achieve. Its vision is to make AI easier to use anywhere and help users maximize productivity while browsing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "GPT Breeze is free without usage limit, why and how?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We struggled to find a good, free extension for basic AI (LLM) functions like summarizing YouTube videos or page content. Most options come with a monthly subscription or strict usage limits for free users. GPT Breeze is the little tool that you use to interact with your chosen AI model, via either web sessions or your API key, we don't host AI models ourself. In other word, it's Bring your own model approach. Developing such an extension costs us very little to maintain. Therefore, we decided to make it free to use. However it's important to highlight that while GPT Breeze is free and has no usage limits, the AI models you use are subject to their policies. If you use an API key, it operates on a pay-as-you-go basis. We make money by adding premium features for advanced users, such as the ability to create custom AI shortcuts to optimize their workflow."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does GPT Breeze guarantee privacy and data security?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GPT Breeze prioritizes your privacy by not processing your conversation data on our server. Instead, it sends the conversation directly to your chosen AI (e.g., ChatGPT, Bing Copilot, Claude). Therefore, we do not store any of your personal data or conversations with the AI on our server. Read more on our privacy policy. You don't even need to create an account to use GPT Breeze."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get a refund?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can apply for a refund within 24 hours after the purchase by sending the application to [email protected]. Please state the reason for your refund request in your application."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to use GPT Breeze",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Install the extension, open the panel with the toolbar button, then run shortcuts on tabs, videos, text, or pages."
+        }
+      }
+    ]
+  }
+  </script>
 
   <section id="faq">
     <div class="container">
