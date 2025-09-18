@@ -1,0 +1,210 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+<Base 
+  title="About the Author - GPT Breeze Team" 
+  description="Learn about the team behind GPT Breeze, the privacy-focused AI Chrome extension that helps you save time with AI-powered productivity shortcuts."
+>
+  <style>
+    .author-hero {
+      text-align: center;
+      padding: 48px 0;
+      background: linear-gradient(135deg, theme('colors.accent-blue-light') 0%, theme('colors.ui-surface') 100%);
+      border-radius: 16px;
+      margin-bottom: 48px;
+    }
+    
+    .author-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      background: theme('colors.accent-blue');
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .author-content {
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    
+    .author-content h2 {
+      color: theme('colors.brand-fg');
+      margin: 32px 0 16px;
+    }
+    
+    .author-content p {
+      color: theme('colors.brand-muted');
+      margin: 16px 0;
+    }
+    
+    .expertise-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin: 32px 0;
+    }
+    
+    .expertise-item {
+      background: theme('colors.ui-surface');
+      border: 1px solid theme('colors.ui-border');
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .expertise-item h3 {
+      margin: 0 0 8px;
+      color: theme('colors.brand-fg');
+      font-size: 1.1rem;
+    }
+    
+    .expertise-item p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: theme('colors.brand-muted');
+    }
+    
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 48px 0;
+      flex-wrap: wrap;
+    }
+    
+    .contact-links a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: theme('colors.ui-surface');
+      border: 1px solid theme('colors.ui-border');
+      border-radius: 8px;
+      text-decoration: none;
+      color: theme('colors.brand-fg');
+      transition: all 0.2s ease;
+    }
+    
+    .contact-links a:hover {
+      background: theme('colors.accent-blue-light');
+      border-color: theme('colors.accent-blue');
+    }
+    
+    @media (max-width: 768px) {
+      .author-hero {
+        padding: 32px 20px;
+      }
+      
+      .author-avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+      }
+      
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+
+  <article class="author-content">
+    <div class="author-hero">
+      <div class="author-avatar">GB</div>
+      <h1>GPT Breeze Team</h1>
+      <p style="font-size: 1.1rem; margin: 0;">Building privacy-focused AI tools for everyone</p>
+    </div>
+
+    <div class="author-content">
+      <h2>Our Mission</h2>
+      <p>
+        We're a small team passionate about making AI accessible, affordable, and privacy-focused. 
+        GPT Breeze was born out of frustration with expensive subscription models and privacy concerns 
+        surrounding AI productivity tools.
+      </p>
+
+      <p>
+        Our philosophy is simple: you should own your data, control your costs, and have the freedom 
+        to choose which AI models work best for your needs. That's why we built GPT Breeze with a 
+        BYOM (Bring Your Own Model) approach.
+      </p>
+
+      <h2>What We Bring to the Table</h2>
+      <div class="expertise-list">
+        <div class="expertise-item">
+          <h3>🔒 Privacy First</h3>
+          <p>Your data goes directly to your chosen AI provider. We don't store conversations or personal information.</p>
+        </div>
+        
+        <div class="expertise-item">
+          <h3>💡 User-Centric Design</h3>
+          <p>Every feature is designed based on real user feedback and productivity needs.</p>
+        </div>
+        
+        <div class="expertise-item">
+          <h3>⚡ Performance Focus</h3>
+          <p>Lightweight extension that doesn't slow down your browsing experience.</p>
+        </div>
+        
+        <div class="expertise-item">
+          <h3>🛠️ Technical Excellence</h3>
+          <p>Clean code, secure architecture, and continuous improvement based on user needs.</p>
+        </div>
+      </div>
+
+      <h2>Our Story</h2>
+      <p>
+        Like many professionals, we found ourselves paying $20+ monthly subscriptions for AI tools 
+        we only used occasionally. We wanted something simple: a browser extension that could 
+        summarize content, help with writing, and save time - without the privacy concerns or 
+        subscription fatigue.
+      </p>
+
+      <p>
+        After trying various solutions and finding them lacking, we decided to build our own. 
+        GPT Breeze represents our vision of what AI productivity tools should be: transparent, 
+        affordable, and respectful of user privacy.
+      </p>
+
+      <h2>Looking Forward</h2>
+      <p>
+        We're continuously working to improve GPT Breeze based on user feedback. Our roadmap includes 
+        more AI provider integrations, enhanced productivity features, and better local AI support.
+      </p>
+
+      <p>
+        We believe the future of AI tools is user-controlled, privacy-focused, and built around 
+        genuine value rather than subscription lock-in.
+      </p>
+
+      <div class="contact-links">
+        <a href="https://x.com/gptBreeze_io" target="_blank" rel="noopener">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          Follow us on X
+        </a>
+        
+        <a href="https://www.youtube.com/channel/UCLQy78epuhpwyJHdejH8kYA" target="_blank" rel="noopener">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          Watch tutorials
+        </a>
+        
+        <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6" target="_blank" rel="noopener">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          Report issues
+        </a>
+      </div>
+    </div>
+  </article>
+</Base>
