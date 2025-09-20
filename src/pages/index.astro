@@ -28,9 +28,27 @@ import Base from "@/layouts/Base.astro";
         GPT Breeze
       </div>
       <nav class="menu" aria-label="Main Navigation">
-        <a href="#home">Home</a>
         <a href="#guide">Guide</a>
         <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/blog">Blog</a>
+        <a href="/privacy">Privacy policy</a>
+        <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
+        <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+    </div>
+    
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu-overlay" aria-hidden="true">
+      <nav class="mobile-menu" aria-label="Mobile Navigation">
+        <a href="#guide">Guide</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
         <a href="/blog">Blog</a>
         <a href="/privacy">Privacy policy</a>
         <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
@@ -579,6 +597,35 @@ import Base from "@/layouts/Base.astro";
     })();
   </script>
 
+  <section id="use-cases">
+    <div class="container">
+      <h2 class="section-title">Perfect for Every User Type</h2>
+      <p class="subtle">Discover how GPT Breeze adapts to your specific workflow and productivity needs.</p>
+      <div class="two" style="margin-top:12px;">
+        <a class="card" href="/for-researchers" rel="noopener">
+          <h3>For Researchers</h3>
+          <p class="muted">Summarize academic papers, analyze documents, and extract key insights instantly.</p>
+        </a>
+        <a class="card" href="/for-creators" rel="noopener">
+          <h3>For Content Creators</h3>
+          <p class="muted">Accelerate video research and content planning with AI-powered YouTube summaries.</p>
+        </a>
+        <a class="card" href="/for-power-users" rel="noopener">
+          <h3>For Power Users</h3>
+          <p class="muted">Advanced shortcuts, custom workflows, and seamless integration with your favorite tools.</p>
+        </a>
+        <a class="card" href="/for-teams" rel="noopener">
+          <h3>For Teams</h3>
+          <p class="muted">Streamline collaboration with shared AI shortcuts and consistent productivity workflows.</p>
+        </a>
+        <a class="card" href="/for-educators" rel="noopener">
+          <h3>For Educators</h3>
+          <p class="muted">Create lesson plans, summarize educational content, and enhance teaching materials.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section id="pricing">
     <div class="container">
       <h2 class="section-title">Pricing</h2>
@@ -806,10 +853,70 @@ import Base from "@/layouts/Base.astro";
         });
       });
     };
+    
+    // Mobile menu functionality
+    const initMobileMenu = () => {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const overlay = document.querySelector('.mobile-menu-overlay');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      
+      if (!toggle || !overlay || !mobileMenu) return;
+      
+      const openMenu = () => {
+        overlay.classList.add('active');
+        toggle.classList.add('active');
+        toggle.setAttribute('aria-expanded', 'true');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+      
+      const closeMenu = () => {
+        overlay.classList.remove('active');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+      
+      // Toggle menu on button click
+      toggle.addEventListener('click', () => {
+        if (overlay.classList.contains('active')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+      
+      // Close menu when clicking outside
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          closeMenu();
+        }
+      });
+      
+      // Close menu when clicking on a link
+      mobileMenu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+          closeMenu();
+        }
+      });
+      
+      // Close menu on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    };
+    
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initLiteYT);
+      document.addEventListener('DOMContentLoaded', () => {
+        initLiteYT();
+        initMobileMenu();
+      });
     } else {
       initLiteYT();
+      initMobileMenu();
     }
   </script>
 </Base>
