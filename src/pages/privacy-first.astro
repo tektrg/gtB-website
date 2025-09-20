@@ -1,0 +1,507 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+
+<Base
+  title="Privacy-First AI Tool - BYOM Chrome Extension | GPT Breeze"
+  description="Use AI without compromising privacy. GPT Breeze brings your own AI model approach ensures your data goes directly to your chosen provider. No subscriptions, no data collection."
+  isLandingPage={true}
+>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link slot="head" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style slot="head">
+    * { box-sizing: border-box; }
+    body { margin: 0; background: theme('colors.brand-bg'); color: theme('colors.brand-fg'); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; line-height: 1.6; }
+    a { color: theme('colors.brand-accent'); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    header { position: sticky; top: 0; z-index: 20; background: theme('colors.header-backdrop'); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%); border-bottom: none; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .brand { display:inline-flex; align-items:center; gap:10px; font-weight: 800; letter-spacing: -0.01em; font-size: 1.05rem; }
+    .brand-logo { width: 28px; height: 28px; display:block; border-radius: 50%; }
+    .menu { display: flex; gap: 18px; font-size: 0.98rem; align-items: center; }
+    .install { display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 999px; border: 1px solid theme('colors.brand-accent'); background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); font-weight: 600; }
+    .install.secondary { background: transparent; color: theme('colors.brand-fg'); }
+    
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      .nav { padding: 0 16px; }
+      .brand { font-size: 1rem; gap: 8px; }
+      .brand-logo { width: 24px; height: 24px; }
+      .menu { gap: 8px; font-size: 0.9rem; flex-wrap: nowrap; }
+      .menu a:not(.install) { display: none; }
+      .install { padding: 6px 10px; font-size: 0.85rem; white-space: nowrap; }
+    }
+    
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .nav { padding: 0px 20px; }
+      .brand { font-size: 0.9rem; gap: 6px; flex-shrink: 0; }
+      .brand-logo { width: 22px; height: 22px; }
+      .menu { min-width: 0; }
+      .install { padding: 5px 8px; font-size: 0.8rem; }
+    }
+    
+    @media (max-width: 380px) {
+      .brand { font-size: 0.85rem; }
+      .install { padding: 4px 6px; font-size: 0.75rem; }
+    }
+    .hero { position: relative; overflow: hidden; padding: calc(120px + 68px) 0 80px; margin-top: calc(-1 * 68px); border-top: none; }
+    .bg { z-index:99; position: absolute; inset: -20% -20% auto -20%; height: 60vh; background: radial-gradient(60% 60% at 20% 30%, theme('colors.accent-blue-light') 0%, rgba(75,183,215,0) 60%), radial-gradient(50% 50% at 80% 0%, rgba(246,244,240,0.9) 0%, rgba(246,244,240,0) 60%); filter: blur(40px); opacity: 0.8; pointer-events: none; }
+    .hero h1, .display { font-size: clamp(2.6rem, 6vw, 4.25rem); line-height: 1.05; margin: 0 0 16px; letter-spacing: -0.02em; text-align: center; }
+    .em { font-style: italic; font-weight: 400; }
+    .hero p.lead { color: theme('colors.brand-muted'); font-size: clamp(1.05rem, 1.5vw, 1.2rem); margin: 0 0 28px; }
+    .rating-badge { display:flex; flex-direction: column; align-items:center; justify-content:center; gap:6px; margin: 8px 0 0; color: theme('colors.brand-muted'); font-weight: 600; }
+    .rating-badge .rating-top { display:inline-flex; align-items:center; gap:10px; }
+    .rating-badge img.logo { width: 22px; height: 22px; display:block; }
+    .rating-badge .stars { display:inline-flex; gap:2px; }
+    .rating-badge .star { width: 16px; height: 16px; display:block; }
+    .rating-badge .star path { fill: theme('colors.accent-star'); }
+    .hero-actions { display:flex; gap:14px; justify-content:center; margin: 50px 0 40px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding: 12px 18px; border-radius:999px; font-weight:600; border:1px solid theme('colors.brand-accent'); }
+    .btn.primary { background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); }
+    .btn.outline { background: transparent; color: theme('colors.brand-fg'); }
+    .hero-media { display:flex; justify-content:center; margin-top: 80px; }
+    .device-frame { width: min(1100px, 100%); border-radius: 24px; border: 1px solid theme('colors.device-border'); overflow: hidden; position: relative; }
+    .ratio { aspect-ratio: 16 / 10; position: relative; width: 100%; }
+    /* Lightweight YouTube with poster */
+    .yt-lite { position: absolute; inset: 0; width: 100%; height: 100%; background-position: center; background-size: cover; cursor: pointer; }
+    .yt-lite > .play { cursor:pointer; position: absolute; inset: 0; margin: auto; width: 72px; height: 72px; border-radius: 999px; border: 0; background: rgba(255,255,255,0.9); display: grid; place-items: center; z-index: 1; box-shadow: 0 8px 24px theme('colors.shadow-dark'); }
+    .yt-lite > .play::before { content: ""; display: block; width: 0; height: 0; border-left: 18px solid black; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 4px; }
+    .yt-lite.loading .play { opacity: 0; pointer-events: none; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
+    section { padding: 40px 0; scroll-margin-top: calc(68px + 16px); }
+    .card { background: theme('colors.ui-surface'); border: 1px solid theme('colors.ui-border'); border-radius: 14px; padding: 18px; box-shadow: 0 1px 0 theme('colors.shadow-light'); }
+    .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .muted { color: theme('colors.brand-muted'); }
+    .kicker { display: inline-block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: theme('colors.brand-accent'); font-weight: 700; margin-bottom: 10px; background: theme('colors.blue-light'); border: 1px solid theme('colors.blue-border'); padding: 4px 8px; border-radius: 999px; }
+    .list { margin: 8px 0 0 0; padding-left: 18px; }
+    .list li { margin: 6px 0; color: theme('colors.brand-muted'); }
+    details { background: theme('colors.ui-surface'); border: 1px solid theme('colors.ui-border'); border-radius: 14px; padding: 12px 14px; }
+    summary { cursor: pointer; font-weight: 600; }
+    footer { padding: 24px 0 48px; color: theme('colors.brand-muted'); font-size: 0.95rem; background: transparent; }
+    .two { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .price { font-size: 2rem; font-weight: 800; }
+    .strike { text-decoration: line-through; opacity: 0.6; font-weight: 600; }
+    .section-title { margin: 0 0 8px; font-size: clamp(2rem, 2vw, 2rem); letter-spacing: -0.01em; }
+    .subtle { font-size: 0.95rem; color: theme('colors.brand-muted'); margin: 0 0 16px; }
+    .inline { display: inline-flex; align-items: center; gap: 8px; }
+    .stack { display: grid; gap: 8px; }
+    .center { text-align: center; }
+  </style>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="/media/hero/logo-56.png"
+          srcset="/media/hero/logo-28.png 1x, /media/hero/logo-56.png 2x"
+          alt="GPT Breeze logo"
+          width="28"
+          height="28"
+          loading="eager"
+          decoding="async"
+        />
+        GPT Breeze
+      </div>
+      <nav class="menu" aria-label="Main Navigation">
+        <a href="/#home">Home</a>
+        <a href="/#guide">Guide</a>
+        <a href="/#features">Features</a>
+        <a href="/blog">Blog</a>
+        <a href="/privacy">Privacy policy</a>
+        <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
+        <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="container">
+      <div class="bg"></div>
+      <div class="kicker">Privacy-First AI Assistant</div>
+      <h1 class="display">
+        Use AI Without <span class="em">Compromising Privacy</span>
+      </h1>
+      <p class="lead center" style="max-width: 720px; margin-inline:auto;">
+        GPT Breeze's BYOM (Bring Your Own Model) approach ensures your data goes directly to your chosen AI provider. No middleman, no data collection, no vendor lock-in.
+      </p>
+      <div class="rating-badge" aria-label="Privacy Features">
+        <div class="rating-top" style="gap: 20px;">
+          <div class="inline" style="gap: 8px;">
+            <span style="font-size: 1.2rem;">🔒</span>
+            <span style="font-size: 0.9rem; font-weight: 600;">No Account Required</span>
+          </div>
+          <div class="inline" style="gap: 8px;">
+            <span style="font-size: 1.2rem;">🚫</span>
+            <span style="font-size: 0.9rem; font-weight: 600;">Zero Data Collection</span>
+          </div>
+          <div class="inline" style="gap: 8px;">
+            <span style="font-size: 1.2rem;">🔑</span>
+            <span style="font-size: 0.9rem; font-weight: 600;">Your API Keys</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Install Privacy-First Extension</a>
+        <a class="btn outline" href="#privacy-details">How It Protects You</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Common Privacy Concerns with AI Tools</h2>
+      <p class="subtle">73% of professionals avoid AI tools due to privacy concerns, missing out on productivity gains because they can't trust the platforms.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>👀 Data Privacy Concerns</h3>
+          <p class="muted">Most AI tools send your sensitive data to third-party servers where it's processed, stored, and potentially used for training.</p>
+        </div>
+        <div class="card">
+          <h3>💳 Subscription Fatigue</h3>
+          <p class="muted">Endless monthly fees for AI tools add up quickly, and you're locked into their ecosystem with no control over costs.</p>
+        </div>
+        <div class="card">
+          <h3>🔒 Vendor Lock-in</h3>
+          <p class="muted">Once you invest in a proprietary AI platform, switching becomes expensive and your data remains trapped in their system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">True Privacy with AI Power</h2>
+      <div class="two">
+        <div class="card">
+          <h3>❌ Traditional AI Tools</h3>
+          <ul class="list muted">
+            <li>Your data processed on their servers</li>
+            <li>Unclear data retention policies</li>
+            <li>Monthly subscription fees</li>
+            <li>Limited model choices</li>
+            <li>Account registration required</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>✅ GPT Breeze BYOM Approach</h3>
+          <ul class="list muted">
+            <li>Data goes directly to your chosen provider</li>
+            <li>You control data retention policies</li>
+            <li>Pay-as-you-use model costs</li>
+            <li>Choose from multiple AI providers</li>
+            <li>No account or registration needed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy-details">
+    <div class="container">
+      <h2 class="section-title">Privacy-First Architecture</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>🔐 BYOM (Bring Your Own Model)</h3>
+          <p class="muted">Connect directly to OpenAI, Anthropic, OpenRouter, or local models. Your API keys, your control, your data never touches our servers.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Your data → Your chosen AI provider</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>🚫 No Account Required</h3>
+          <p class="muted">Install and start using immediately. No email registration, no personal information collection, no user tracking or analytics.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Install → Use → Done</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>💾 Local Data Storage</h3>
+          <p class="muted">Your shortcuts and preferences are stored locally in your browser. Nothing is synced to cloud servers unless you choose to.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Your browser → Your control</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>🏠 Local AI Model Support</h3>
+          <p class="muted">Run AI models locally with Ollama, LM Studio, or other local inference engines. Complete privacy with zero external dependencies.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Your computer → Your AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Privacy Comparison</h2>
+      <div class="card" style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid theme('colors.ui-border');">
+              <th style="text-align: left; padding: 16px; font-weight: 600;">Feature</th>
+              <th style="text-align: center; padding: 16px; font-weight: 600; color: theme('colors.brand-muted');">Traditional AI Tools</th>
+              <th style="text-align: center; padding: 16px; font-weight: 600; color: theme('colors.brand-accent');">GPT Breeze</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid theme('colors.ui-border');">
+              <td style="padding: 12px 16px; font-weight: 500;">Data Processing</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-muted');">Their servers</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-accent'); font-weight: 500;">Your chosen provider</td>
+            </tr>
+            <tr style="border-bottom: 1px solid theme('colors.ui-border');">
+              <td style="padding: 12px 16px; font-weight: 500;">Account Required</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-muted');">Yes</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-accent'); font-weight: 500;">No</td>
+            </tr>
+            <tr style="border-bottom: 1px solid theme('colors.ui-border');">
+              <td style="padding: 12px 16px; font-weight: 500;">Data Retention</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-muted');">Their policy</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-accent'); font-weight: 500;">Your control</td>
+            </tr>
+            <tr style="border-bottom: 1px solid theme('colors.ui-border');">
+              <td style="padding: 12px 16px; font-weight: 500;">API Keys</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-muted');">Hidden</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-accent'); font-weight: 500;">Your own</td>
+            </tr>
+            <tr style="border-bottom: 1px solid theme('colors.ui-border');">
+              <td style="padding: 12px 16px; font-weight: 500;">Local Models</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-muted');">Not supported</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-accent'); font-weight: 500;">Full support</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; font-weight: 500;">Vendor Lock-in</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-muted');">High</td>
+              <td style="padding: 12px 16px; text-align: center; color: theme('colors.brand-accent'); font-weight: 500;">None</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Privacy-Conscious Users Love GPT Breeze</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="inline" style="gap:12px; margin-bottom: 12px;">
+            <span style="font-size: 2rem;">🔒</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Security Professional</h4>
+              <p class="muted" style="margin: 0; font-size: 0.9rem;">Cybersecurity Consultant</p>
+            </div>
+          </div>
+          <p class="muted" style="font-style: italic; border-left: 3px solid theme('colors.brand-accent'); padding-left: 14px;">"I need AI tools that comply with our strict data policies. GPT Breeze lets me use cutting-edge AI while maintaining complete control over where my data goes. It's the only tool approved by our security team."</p>
+          <div class="inline" style="gap:8px; margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.7rem;">100% Compliant</span>
+            <span class="kicker" style="font-size: 0.7rem;">Zero Data Leaks</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="inline" style="gap:12px; margin-bottom: 12px;">
+            <span style="font-size: 2rem;">🏢</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Enterprise User</h4>
+              <p class="muted" style="margin: 0; font-size: 0.9rem;">Fortune 500 Company</p>
+            </div>
+          </div>
+          <p class="muted" style="font-style: italic; border-left: 3px solid theme('colors.brand-accent'); padding-left: 14px;">"Our legal team won't approve cloud-based AI tools, but they're fine with GPT Breeze because our data goes directly to our enterprise AI accounts. We get AI productivity without compliance headaches."</p>
+          <div class="inline" style="gap:8px; margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.7rem;">Enterprise Ready</span>
+            <span class="kicker" style="font-size: 0.7rem;">Legal Approved</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="inline" style="gap:12px; margin-bottom: 12px;">
+            <span style="font-size: 2rem;">🏡</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Privacy Advocate</h4>
+              <p class="muted" style="margin: 0; font-size: 0.9rem;">Local AI Enthusiast</p>
+            </div>
+          </div>
+          <p class="muted" style="font-style: italic; border-left: 3px solid theme('colors.brand-accent'); padding-left: 14px;">"I run everything locally with Ollama and LM Studio. GPT Breeze is the only browser extension that works seamlessly with my local setup. No cloud dependencies, complete privacy."</p>
+          <div class="inline" style="gap:8px; margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.7rem;">100% Local</span>
+            <span class="kicker" style="font-size: 0.7rem;">Zero Cloud Deps</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">How Privacy Protection Works</h2>
+      <div class="cards">
+        <div class="card center">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 16px;">1</div>
+          <h3>Install Extension</h3>
+          <p class="muted">Download from Chrome Web Store. No account creation, no personal information required. Start using immediately.</p>
+        </div>
+        <div class="card center">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 16px;">2</div>
+          <h3>Connect Your AI</h3>
+          <p class="muted">Add your own API keys for OpenAI, Anthropic, or set up local models. Your keys stay in your browser.</p>
+        </div>
+        <div class="card center">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 16px;">3</div>
+          <h3>Private Processing</h3>
+          <p class="muted">Your data flows directly from browser to your chosen AI provider. We never see or store your content.</p>
+        </div>
+      </div>
+      
+      <div class="center" style="margin-top: 40px;">
+        <h3 style="margin-bottom: 20px;">Data Flow Visualization</h3>
+        <div class="inline" style="justify-content: center; gap: 20px; flex-wrap: wrap;">
+          <div class="card" style="min-width: 120px; text-align: center; border: 2px solid theme('colors.brand-accent');">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🌐</div>
+            <span style="font-size: 0.9rem; font-weight: 600;">Your Browser</span>
+          </div>
+          <div style="font-size: 1.5rem; color: theme('colors.brand-accent'); font-weight: bold; align-self: center;">→</div>
+          <div class="card" style="min-width: 120px; text-align: center; border: 2px solid theme('colors.brand-muted'); opacity: 0.6;">
+            <div style="font-size: 2rem; margin-bottom: 8px;">❌</div>
+            <span style="font-size: 0.9rem; font-weight: 600;">GPT Breeze Servers</span>
+            <div style="font-size: 0.75rem; color: theme('colors.brand-muted');">(Never touches)</div>
+          </div>
+          <div style="font-size: 1.5rem; color: theme('colors.brand-accent'); font-weight: bold; align-self: center;">→</div>
+          <div class="card" style="min-width: 120px; text-align: center; border: 2px solid theme('colors.brand-accent');">
+            <div style="font-size: 2rem; margin-bottom: 8px;">🤖</div>
+            <span style="font-size: 0.9rem; font-weight: 600;">Your Chosen AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Maximum Privacy with Local AI</h2>
+      <div class="two">
+        <div class="card">
+          <h3>Run AI Models Locally</h3>
+          <p class="muted">For ultimate privacy, run AI models on your own hardware. GPT Breeze supports popular local inference engines:</p>
+          <ul class="list">
+            <li><strong>Ollama:</strong> Easy local model management</li>
+            <li><strong>LM Studio:</strong> User-friendly interface</li>
+            <li><strong>Text Generation WebUI:</strong> Advanced configurations</li>
+            <li><strong>LocalAI:</strong> OpenAI-compatible local API</li>
+          </ul>
+          <p class="muted">Your data never leaves your computer. Perfect for sensitive work, compliance requirements, or complete independence from cloud services.</p>
+        </div>
+        <div class="card">
+          <h3>Benefits of Local AI</h3>
+          <div class="stack">
+            <div class="inline" style="gap: 12px;">
+              <span style="font-size: 1.5rem;">🔒</span>
+              <span>Complete Privacy</span>
+            </div>
+            <div class="inline" style="gap: 12px;">
+              <span style="font-size: 1.5rem;">💰</span>
+              <span>No API Costs</span>
+            </div>
+            <div class="inline" style="gap: 12px;">
+              <span style="font-size: 1.5rem;">⚡</span>
+              <span>No Internet Required</span>
+            </div>
+            <div class="inline" style="gap: 12px;">
+              <span style="font-size: 1.5rem;">🎛️</span>
+              <span>Full Control</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Privacy-Respecting Economics</h2>
+      <div class="two">
+        <div class="card">
+          <h3>True Cost Transparency</h3>
+          <ul class="list">
+            <li><strong>No Hidden Fees:</strong> One-time purchase, no subscriptions</li>
+            <li><strong>Your API Costs:</strong> Pay AI providers directly at wholesale rates</li>
+            <li><strong>Local Option:</strong> Use local models for zero ongoing costs</li>
+            <li><strong>Scale Freely:</strong> No per-user or usage limits</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Cost Comparison</h3>
+          <div class="stack" style="gap: 12px;">
+            <div class="inline" style="justify-content: space-between; padding: 8px 0; border-bottom: 1px solid theme('colors.ui-border');">
+              <span class="muted">Subscription AI Tool:</span>
+              <span>$20-50/month</span>
+            </div>
+            <div class="inline" style="justify-content: space-between; padding: 8px 0; border-bottom: 1px solid theme('colors.ui-border');">
+              <span class="muted">GPT Breeze + API costs:</span>
+              <span>$1-5/month</span>
+            </div>
+            <div class="inline" style="justify-content: space-between; padding: 8px 0; border-bottom: 1px solid theme('colors.ui-border');">
+              <span class="muted">Local AI setup:</span>
+              <span>$0/month</span>
+            </div>
+            <div class="inline" style="justify-content: space-between; padding: 12px; background: theme('colors.blue-light'); border-radius: 8px; font-weight: 600; color: theme('colors.brand-accent');">
+              <span>Annual savings:</span>
+              <span>$240-600</span>
+            </div>
+          </div>
+          <p class="muted center" style="margin-top: 12px; font-style: italic;">Plus: Complete privacy and data control</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="stack">
+        <details>
+          <summary>How do you ensure my data never reaches your servers?</summary>
+          <p class="muted">GPT Breeze runs entirely in your browser. When you make a request, it goes directly from your browser to your chosen AI provider (OpenAI, Anthropic, etc.) using your API keys. We never act as a middleman.</p>
+        </details>
+        <details>
+          <summary>Can I audit the privacy claims?</summary>
+          <p class="muted">Absolutely! GPT Breeze is transparent about its architecture. You can inspect network traffic to verify that no data goes to our servers. The extension code is also available for security review.</p>
+        </details>
+        <details>
+          <summary>What about my API keys? Are they secure?</summary>
+          <p class="muted">Your API keys are stored locally in your browser using Chrome's secure storage API. They're encrypted and never transmitted to our servers. Only you have access to them.</p>
+        </details>
+        <details>
+          <summary>Can I use this in a corporate environment?</summary>
+          <p class="muted">Yes! Many enterprises use GPT Breeze because it works with their existing AI provider contracts. Your data flows directly to your approved AI services, maintaining compliance.</p>
+        </details>
+        <details>
+          <summary>What if I want to use local AI models only?</summary>
+          <p class="muted">Perfect! GPT Breeze fully supports local AI setups like Ollama and LM Studio. Your data never leaves your computer, providing maximum privacy and zero cloud dependencies.</p>
+        </details>
+        <details>
+          <summary>Do you track usage or collect analytics?</summary>
+          <p class="muted">No. We don't collect any usage analytics, track your activity, or store any personal information. The extension works completely independently.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container center">
+      <h2 class="section-title">Reclaim Your AI Privacy Today</h2>
+      <p class="muted">Join privacy-conscious users who've discovered they don't need to compromise security for AI productivity.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Install Privacy-First Extension</a>
+        <a class="btn outline" href="/blog/privacy-guide">Privacy Setup Guide</a>
+      </div>
+      <div class="inline" style="gap: 12px; margin-top: 20px;">
+        <span class="kicker" style="font-size: 0.75rem;">✓ No Account Needed</span>
+        <span class="kicker" style="font-size: 0.75rem;">✓ Zero Data Collection</span>
+        <span class="kicker" style="font-size: 0.75rem;">✓ Local AI Support</span>
+      </div>
+    </div>
+  </section>
+</Base>

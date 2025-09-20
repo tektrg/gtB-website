@@ -1,0 +1,501 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+
+<Base 
+  title="AI Teaching Assistant Tool for Educators | GPT Breeze"
+  description="Transform how you process educational content with GPT Breeze. Analyze curriculum materials, research educational videos, and accelerate lesson planning with AI-powered content analysis."
+  isLandingPage={true}
+>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link slot="head" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <header slot="header" class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="nav-brand">
+          <img src="/logo.svg" alt="GPT Breeze" width="32" height="32">
+          <span>GPT Breeze</span>
+        </a>
+        <div class="nav-links">
+          <a href="/blog">Blog</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/for-researchers">For Researchers</a>
+          <a href="https://chrome.google.com/webstore/detail/gpt-breeze/bpeemfpcgfkfmgnjjeddkpofnmhkeaho" target="_blank" rel="noopener" class="btn primary">Get Extension</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="kicker">For Educators</div>
+      <h1 class="display">
+        Transform How You Process Educational Content
+      </h1>
+      <p class="lead">
+        Stop spending hours reviewing educational materials manually. GPT Breeze helps teachers, professors, and administrators quickly analyze content, research topics, and enhance curriculum development.
+      </p>
+      <div class="hero-actions">
+        <a href="https://chrome.google.com/webstore/detail/gpt-breeze/bpeemfpcgfkfmgnjjeddkpofnmhkeaho" class="btn primary" target="_blank" rel="noopener">
+          Get Teaching Assistant
+        </a>
+        <a href="#education-features" class="btn outline">See Education Features</a>
+      </div>
+      <div class="rating-badge">
+        <span>📚 Curriculum Support</span>
+        <span>🎓 Research Analysis</span>
+        <span>⚡ Lesson Planning</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Statement -->
+  <section class="bg section">
+    <div class="container">
+      <h2 class="section-title">Educational Content Overload?</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">⏰</div>
+          <h3>Time-Intensive Content Review</h3>
+          <p>Reviewing educational videos, research papers, and curriculum materials manually takes hours away from actual teaching and student interaction.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <h3>Keeping Up with Research</h3>
+          <p>Staying current with educational research, new teaching methodologies, and subject matter updates requires constant content consumption.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Curriculum Development Pressure</h3>
+          <p>Creating engaging, relevant curriculum requires analyzing trends, best practices, and student needs from multiple sources.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 2rem; text-align: center; background: #fef5e7; border-left: 4px solid theme('colors.accent');">
+        <p><strong>The Education Reality:</strong> Teachers spend 60% of their time on administrative and content review tasks, leaving only 40% for actual teaching and student engagement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution Overview -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">AI-Powered Educational Efficiency</h2>
+      <div class="two">
+        <div class="stack">
+          <h3>Traditional Content Review</h3>
+          <ul class="list" style="--check-color: #e53e3e;">
+            <li style="text-decoration: line-through;">Watch entire educational videos manually</li>
+            <li style="text-decoration: line-through;">Read through lengthy research papers</li>
+            <li style="text-decoration: line-through;">Manually organize and synthesize information</li>
+            <li style="text-decoration: line-through;">Spend hours on curriculum research</li>
+            <li style="text-decoration: line-through;">Struggle to stay current with trends</li>
+          </ul>
+        </div>
+        <div class="stack">
+          <h3>GPT Breeze Educational Workflow</h3>
+          <ul class="list">
+            <li>Get video summaries with key teaching points</li>
+            <li>Extract insights from research papers quickly</li>
+            <li>Automatically organize content by themes</li>
+            <li>Accelerate curriculum development research</li>
+            <li>Stay current with educational trends effortlessly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Features -->
+  <section class="bg section" id="education-features">
+    <div class="container">
+      <h2 class="section-title">Built for Educational Excellence</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🎥</div>
+          <h3>Educational Video Analysis</h3>
+          <p>Summarize educational videos with key learning objectives, main concepts, and practical applications. Perfect for lesson planning and resource evaluation.</p>
+          <div class="muted" style="margin-top: 1rem; font-size: 0.875rem;">
+            <span>Video → Teaching insights</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📄</div>
+          <h3>Academic Paper Summarization</h3>
+          <p>Extract key findings, methodologies, and implications from educational research papers. Stay current without spending hours reading.</p>
+          <div class="muted" style="margin-top: 1rem; font-size: 0.875rem;">
+            <span>Research → Actionable insights</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <h3>Curriculum Development Support</h3>
+          <p>Analyze curriculum standards, best practices, and teaching resources to develop comprehensive lesson plans and course materials.</p>
+          <div class="muted" style="margin-top: 1rem; font-size: 0.875rem;">
+            <span>Standards → Lesson plans</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">✅</div>
+          <h3>Student Content Review</h3>
+          <p>Quickly evaluate student submissions, essays, and projects. Generate feedback frameworks and identify common themes across student work.</p>
+          <div class="muted" style="margin-top: 1rem; font-size: 0.875rem;">
+            <span>Student work → Feedback insights</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Use Cases -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Educators Love GPT Breeze</h2>
+      <div class="cards">
+        <div class="card">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem;">
+            <div style="font-size: 3rem;">👨‍🏫</div>
+            <div>
+              <h4 style="margin: 0; color: theme('colors.foreground');">High School Science Teacher</h4>
+              <p style="margin: 0; color: theme('colors.muted'); font-size: 0.875rem;">Chemistry & Biology</p>
+            </div>
+          </div>
+          <blockquote style="font-style: italic; margin: 1rem 0; color: theme('colors.muted'); border-left: 3px solid theme('colors.accent'); padding-left: 1rem;">
+            "I use GPT Breeze to quickly review educational YouTube videos before sharing them with students. I can summarize key concepts and create discussion questions in minutes instead of watching entire videos multiple times."
+          </blockquote>
+          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <span style="background: #bee3f8; color: #2c5282; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500;">75% time saved</span>
+            <span style="background: #bee3f8; color: #2c5282; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500;">Better resources</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem;">
+            <div style="font-size: 3rem;">👩‍🎓</div>
+            <div>
+              <h4 style="margin: 0; color: theme('colors.foreground');">University Professor</h4>
+              <p style="margin: 0; color: theme('colors.muted'); font-size: 0.875rem;">Education Research</p>
+            </div>
+          </div>
+          <blockquote style="font-style: italic; margin: 1rem 0; color: theme('colors.muted'); border-left: 3px solid theme('colors.accent'); padding-left: 1rem;">
+            "Staying current with educational research used to consume my weekends. Now I can quickly scan papers for relevant findings and focus my deep reading on the most impactful studies for my courses."
+          </blockquote>
+          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <span style="background: #bee3f8; color: #2c5282; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500;">5x more papers</span>
+            <span style="background: #bee3f8; color: #2c5282; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500;">Current curriculum</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display: flex; align-items: center; margin-bottom: 1rem; gap: 1rem;">
+            <div style="font-size: 3rem;">👨‍💼</div>
+            <div>
+              <h4 style="margin: 0; color: theme('colors.foreground');">Curriculum Director</h4>
+              <p style="margin: 0; color: theme('colors.muted'); font-size: 0.875rem;">K-12 District</p>
+            </div>
+          </div>
+          <blockquote style="font-style: italic; margin: 1rem 0; color: theme('colors.muted'); border-left: 3px solid theme('colors.accent'); padding-left: 1rem;">
+            "When developing new curriculum standards, I analyze best practices from multiple districts and research papers. GPT Breeze helps me synthesize information from dozens of sources into actionable guidelines."
+          </blockquote>
+          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <span style="background: #bee3f8; color: #2c5282; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500;">Comprehensive analysis</span>
+            <span style="background: #bee3f8; color: #2c5282; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.875rem; font-weight: 500;">Faster development</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaching Templates -->
+  <section class="bg section">
+    <div class="container">
+      <h2 class="section-title">Education-Specific Templates</h2>
+      <div class="cards">
+        <div class="card" style="border-left: 4px solid theme('colors.accent');">
+          <h3 style="margin-bottom: 1rem; color: theme('colors.foreground');"><span style="margin-right: 0.5rem;">📚</span>Content Analysis Templates</h3>
+          <ul class="list">
+            <li>Educational video summary with key concepts</li>
+            <li>Research paper analysis for educators</li>
+            <li>Curriculum standards alignment check</li>
+            <li>Learning objective extraction</li>
+            <li>Best practices identification</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left: 4px solid theme('colors.accent');">
+          <h3 style="margin-bottom: 1rem; color: theme('colors.foreground');"><span style="margin-right: 0.5rem;">📝</span>Lesson Planning Templates</h3>
+          <ul class="list">
+            <li>Topic overview and background research</li>
+            <li>Activity and assignment generation</li>
+            <li>Discussion question creation</li>
+            <li>Assessment rubric development</li>
+            <li>Resource recommendation engine</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left: 4px solid theme('colors.accent');">
+          <h3 style="margin-bottom: 1rem; color: theme('colors.foreground');"><span style="margin-right: 0.5rem;">👥</span>Student Work Analysis</h3>
+          <ul class="list">
+            <li>Essay and assignment feedback framework</li>
+            <li>Common theme identification</li>
+            <li>Progress tracking insights</li>
+            <li>Peer comparison analysis</li>
+            <li>Improvement recommendation system</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left: 4px solid theme('colors.accent');">
+          <h3 style="margin-bottom: 1rem; color: theme('colors.foreground');"><span style="margin-right: 0.5rem;">🔍</span>Research & Development</h3>
+          <ul class="list">
+            <li>Educational trend analysis</li>
+            <li>Policy document summarization</li>
+            <li>Competitive curriculum analysis</li>
+            <li>Technology integration planning</li>
+            <li>Professional development research</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Workflow -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Streamlined Educational Workflow</h2>
+      <div class="cards">
+        <div class="card" style="text-align: center;">
+          <div style="width: 3rem; height: 3rem; border-radius: 50%; background: theme('colors.accent'); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin: 0 auto 1rem;">
+            1
+          </div>
+          <h3>Content Discovery</h3>
+          <p>Find educational videos, research papers, or curriculum materials relevant to your subject area and teaching goals.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div style="width: 3rem; height: 3rem; border-radius: 50%; background: theme('colors.accent'); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin: 0 auto 1rem;">
+            2
+          </div>
+          <h3>AI Analysis</h3>
+          <p>Use education-specific templates to extract key concepts, learning objectives, and practical applications from the content.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div style="width: 3rem; height: 3rem; border-radius: 50%; background: theme('colors.accent'); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin: 0 auto 1rem;">
+            3
+          </div>
+          <h3>Curriculum Integration</h3>
+          <p>Transform insights into lesson plans, discussion questions, assignments, and assessment materials for your students.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div style="width: 3rem; height: 3rem; border-radius: 50%; background: theme('colors.accent'); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; margin: 0 auto 1rem;">
+            4
+          </div>
+          <h3>Student Engagement</h3>
+          <p>Use the processed content to create engaging learning experiences that connect current research with practical applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subject Area Examples -->
+  <section class="bg section">
+    <div class="container">
+      <h2 class="section-title">Perfect for Any Subject Area</h2>
+      <div class="cards">
+        <div class="card" style="text-align: center;">
+          <div class="card-icon">🧪</div>
+          <h3>STEM Education</h3>
+          <p>Analyze scientific research papers, educational videos about new discoveries, and technology integration best practices.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div class="card-icon">📚</div>
+          <h3>Language Arts</h3>
+          <p>Review literary criticism, analyze educational content about writing techniques, and develop reading comprehension materials.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div class="card-icon">🌍</div>
+          <h3>Social Studies</h3>
+          <p>Summarize historical documentaries, analyze policy papers, and extract insights from cultural and social research.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div class="card-icon">🎨</div>
+          <h3>Arts & Humanities</h3>
+          <p>Process art history videos, music theory content, and cultural studies research for comprehensive curriculum development.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div class="card-icon">💼</div>
+          <h3>Business Education</h3>
+          <p>Analyze industry trends, case study videos, and business research to keep curriculum current with market realities.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div class="card-icon">🏥</div>
+          <h3>Health Sciences</h3>
+          <p>Review medical education content, healthcare policy documents, and research papers for evidence-based curriculum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Time Savings Calculator -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Reclaim Your Teaching Time</h2>
+      <div class="two">
+        <div class="card">
+          <h3>Weekly Time Savings Calculator</h3>
+          <div style="margin-bottom: 1.5rem;">
+            <h4 style="margin-bottom: 1rem; color: theme('colors.foreground'); border-bottom: 2px solid theme('colors.accent'); padding-bottom: 0.5rem;">Content Review Tasks</h4>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; padding: 0.5rem; background: #f7fafc; border-radius: 4px;">
+              <span>Educational video review:</span>
+              <span style="color: #e53e3e; text-decoration: line-through;">5 hours</span>
+              <span>→</span>
+              <span style="color: #38a169; font-weight: 600;">1 hour</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; padding: 0.5rem; background: #f7fafc; border-radius: 4px;">
+              <span>Research paper analysis:</span>
+              <span style="color: #e53e3e; text-decoration: line-through;">4 hours</span>
+              <span>→</span>
+              <span style="color: #38a169; font-weight: 600;">1 hour</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; padding: 0.5rem; background: #f7fafc; border-radius: 4px;">
+              <span>Curriculum research:</span>
+              <span style="color: #e53e3e; text-decoration: line-through;">6 hours</span>
+              <span>→</span>
+              <span style="color: #38a169; font-weight: 600;">2 hours</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; padding: 0.5rem; background: #f7fafc; border-radius: 4px;">
+              <span>Resource evaluation:</span>
+              <span style="color: #e53e3e; text-decoration: line-through;">3 hours</span>
+              <span>→</span>
+              <span style="color: #38a169; font-weight: 600;">45 minutes</span>
+            </div>
+          </div>
+          <div style="padding: 1.5rem; background: #bee3f8; border-radius: 8px; text-align: center;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span>Total weekly time saved:</span>
+              <span style="font-size: 2rem; font-weight: 700; color: #2c5282;">13.25 hours</span>
+            </div>
+            <p style="color: #2c5282; font-style: italic; margin: 0;">That's almost 2 full work days back every week for teaching!</p>
+          </div>
+        </div>
+        <div class="stack">
+          <h3>What You Can Do With Saved Time</h3>
+          <div style="display: flex; align-items: flex-start; margin-bottom: 2rem; gap: 1rem;">
+            <span style="font-size: 2rem; flex-shrink: 0;">👥</span>
+            <div>
+              <h4 style="margin-bottom: 0.5rem; color: theme('colors.foreground');">More Student Interaction</h4>
+              <p>Spend extra time providing personalized feedback and support to students who need it most.</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; margin-bottom: 2rem; gap: 1rem;">
+            <span style="font-size: 2rem; flex-shrink: 0;">🎯</span>
+            <div>
+              <h4 style="margin-bottom: 0.5rem; color: theme('colors.foreground');">Enhanced Lesson Quality</h4>
+              <p>Use insights from broader research to create more engaging and effective learning experiences.</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; margin-bottom: 2rem; gap: 1rem;">
+            <span style="font-size: 2rem; flex-shrink: 0;">📈</span>
+            <div>
+              <h4 style="margin-bottom: 0.5rem; color: theme('colors.foreground');">Professional Development</h4>
+              <p>Stay current with educational trends and invest time in your own learning and growth.</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; margin-bottom: 2rem; gap: 1rem;">
+            <span style="font-size: 2rem; flex-shrink: 0;">⚖️</span>
+            <div>
+              <h4 style="margin-bottom: 0.5rem; color: theme('colors.foreground');">Work-Life Balance</h4>
+              <p>Reduce weekend work and evening prep time to maintain a healthier balance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy & Security for Education -->
+  <section class="bg section">
+    <div class="container">
+      <h2 class="section-title">Education-Safe Privacy Approach</h2>
+      <div class="two">
+        <div class="stack">
+          <h3>Perfect for Educational Settings</h3>
+          <ul class="list">
+            <li><strong>No Student Data Collection:</strong> GPT Breeze never stores or processes student information</li>
+            <li><strong>FERPA Compliant:</strong> Your content analysis stays private with direct AI provider connections</li>
+            <li><strong>Institutional Control:</strong> Use your school's AI accounts for complete oversight</li>
+            <li><strong>Local Processing Option:</strong> Run AI models on school servers for maximum data control</li>
+          </ul>
+        </div>
+        <div class="stack">
+          <h3>Institutional Benefits</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div style="padding: 1rem; background: #f7fafc; border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: theme('colors.foreground'); font-size: 1rem;">🏫 District-Wide Deployment</h4>
+              <p style="font-size: 0.875rem; color: theme('colors.muted'); margin: 0;">Easy to deploy across multiple schools with centralized AI account management and consistent policies.</p>
+            </div>
+            <div style="padding: 1rem; background: #f7fafc; border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: theme('colors.foreground'); font-size: 1rem;">📊 Usage Transparency</h4>
+              <p style="font-size: 0.875rem; color: theme('colors.muted'); margin: 0;">Complete visibility into AI usage costs and patterns through your institution's AI provider dashboard.</p>
+            </div>
+            <div style="padding: 1rem; background: #f7fafc; border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: theme('colors.foreground'); font-size: 1rem;">🔒 Compliance Ready</h4>
+              <p style="font-size: 0.875rem; color: theme('colors.muted'); margin: 0;">Meets educational data privacy requirements with no third-party data processing or storage.</p>
+            </div>
+            <div style="padding: 1rem; background: #f7fafc; border-radius: 8px;">
+              <h4 style="margin-bottom: 0.5rem; color: theme('colors.foreground'); font-size: 1rem;">💰 Cost Control</h4>
+              <p style="font-size: 0.875rem; color: theme('colors.muted'); margin: 0;">Transparent, usage-based pricing through your chosen AI provider - no hidden subscription costs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Educator FAQ</h2>
+      <div class="cards">
+        <details class="card">
+          <summary style="font-weight: 600; cursor: pointer; margin-bottom: 1rem; color: theme('colors.foreground');">Is this appropriate for K-12 education?</summary>
+          <p>Absolutely! GPT Breeze is perfect for teachers at all levels. The privacy-first approach ensures no student data is ever processed, making it ideal for K-12 environments with strict data protection requirements.</p>
+        </details>
+        <details class="card">
+          <summary style="font-weight: 600; cursor: pointer; margin-bottom: 1rem; color: theme('colors.foreground');">Can I use it with my school's existing AI accounts?</summary>
+          <p>Yes! Many schools have institutional accounts with AI providers. GPT Breeze works seamlessly with your school's existing AI subscriptions, ensuring compliance and cost control.</p>
+        </details>
+        <details class="card">
+          <summary style="font-weight: 600; cursor: pointer; margin-bottom: 1rem; color: theme('colors.foreground');">How does it help with lesson planning?</summary>
+          <p>Transform content analysis into teaching materials instantly. Extract learning objectives from videos, create discussion questions from research papers, and generate assessment ideas from curriculum standards.</p>
+        </details>
+        <details class="card">
+          <summary style="font-weight: 600; cursor: pointer; margin-bottom: 1rem; color: theme('colors.foreground');">What about academic integrity concerns?</summary>
+          <p>GPT Breeze is designed for educator use in content analysis and lesson planning, not for student assignments. It helps teachers process information more efficiently, similar to how a research assistant would help summarize materials.</p>
+        </details>
+        <details class="card">
+          <summary style="font-weight: 600; cursor: pointer; margin-bottom: 1rem; color: theme('colors.foreground');">Can I share templates with other teachers?</summary>
+          <p>Yes! Create and share education-specific templates with your department or district. Standardize analysis approaches across your teaching team for consistent quality and efficiency.</p>
+        </details>
+        <details class="card">
+          <summary style="font-weight: 600; cursor: pointer; margin-bottom: 1rem; color: theme('colors.foreground');">Does it work with all types of educational content?</summary>
+          <p>GPT Breeze works with any web-based content including YouTube videos, PDFs, articles, and documents. Perfect for analyzing everything from TED Talks to research papers to curriculum guides.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="hero">
+    <div class="container">
+      <h2 class="display" style="font-size: clamp(1.75rem, 4vw, 2.5rem);">Transform Your Educational Workflow Today</h2>
+      <p class="lead">Join thousands of educators who've discovered the power of AI-assisted content analysis for better teaching outcomes.</p>
+      <div class="hero-actions">
+        <a href="https://chrome.google.com/webstore/detail/gpt-breeze/bpeemfpcgfkfmgnjjeddkpofnmhkeaho" class="btn primary" target="_blank" rel="noopener">
+          Get Teaching Assistant
+        </a>
+        <a href="/blog/educator-guide" class="btn outline">Educator Setup Guide</a>
+      </div>
+      <div class="rating-badge">
+        <span>✓ Privacy-Safe</span>
+        <span>✓ Education Templates</span>
+        <span>✓ FERPA Compliant</span>
+      </div>
+    </div>
+  </section>
+</Base>
+

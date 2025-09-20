@@ -1,0 +1,439 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+
+<Base
+  title="Advanced AI Browser Extension for Power Users | GPT Breeze"
+  description="Build custom AI workflows with GPT Breeze. Advanced customization, multi-model switching, custom shortcuts, and workflow automation for power users who demand control."
+  isLandingPage={true}
+>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link slot="head" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="/media/hero/logo-56.png"
+          srcset="/media/hero/logo-28.png 1x, /media/hero/logo-56.png 2x"
+          alt="GPT Breeze logo"
+          width="28"
+          height="28"
+          loading="eager"
+          decoding="async"
+        />
+        GPT Breeze
+      </div>
+      <nav class="menu" aria-label="Main Navigation">
+        <a href="/#home">Home</a>
+        <a href="/#guide">Guide</a>
+        <a href="/#features">Features</a>
+        <a href="/blog">Blog</a>
+        <a href="/privacy">Privacy policy</a>
+        <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
+        <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="container">
+      <div class="bg"></div>
+      <div class="kicker">For Power Users & Developers</div>
+      <h1 class="display">
+        Build <span class="em">Custom AI Workflows</span>
+        That Scale
+      </h1>
+      <p class="lead center" style="max-width: 720px; margin-inline:auto;">
+        Stop settling for basic AI tools. GPT Breeze gives power users the advanced customization, multi-model switching, and workflow automation they need to maximize productivity.
+      </p>
+      <div class="rating-badge" aria-label="Power User Features">
+        <div class="rating-top" style="gap: 20px;">
+          <div class="inline" style="gap: 8px;">
+            <span style="font-size: 1.2rem;">⚡</span>
+            <span style="font-size: 0.9rem; font-weight: 600;">Unlimited Customization</span>
+          </div>
+          <div class="inline" style="gap: 8px;">
+            <span style="font-size: 1.2rem;">🔧</span>
+            <span style="font-size: 0.9rem; font-weight: 600;">Multi-Model Support</span>
+          </div>
+          <div class="inline" style="gap: 8px;">
+            <span style="font-size: 1.2rem;">🚀</span>
+            <span style="font-size: 0.9rem; font-weight: 600;">Workflow Automation</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Install Advanced Extension</a>
+        <a class="btn outline" href="#advanced-features">See Advanced Features</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Common Power User Frustrations</h2>
+      <p class="subtle">Advanced users typically use 3-5 different AI tools to get the flexibility they need, spending $150+ per month on subscriptions.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>🔒 Vendor Lock-in</h3>
+          <p class="muted">Most AI tools trap you in their ecosystem with limited model choices and inflexible workflows that don't adapt to your needs.</p>
+        </div>
+        <div class="card">
+          <h3>🎯 Limited Customization</h3>
+          <p class="muted">Generic AI tools don't understand your specific workflows, forcing you to adapt to their limitations instead of the other way around.</p>
+        </div>
+        <div class="card">
+          <h3>💰 Subscription Overload</h3>
+          <p class="muted">Multiple AI subscriptions add up quickly, and you're paying for features you don't need while missing the ones you do.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Uncompromising Power and Flexibility</h2>
+      <div class="two">
+        <div class="card">
+          <h3>❌ Traditional AI Tools</h3>
+          <ul class="list muted">
+            <li>Locked to one AI model or provider</li>
+            <li>Fixed templates and limited customization</li>
+            <li>Monthly subscriptions with usage limits</li>
+            <li>No workflow automation options</li>
+            <li>Basic integration capabilities</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>✅ GPT Breeze Power Features</h3>
+          <ul class="list muted">
+            <li>Switch between any AI model on demand</li>
+            <li>Create unlimited custom shortcuts and templates</li>
+            <li>Pay-as-you-use with your own API keys</li>
+            <li>Advanced workflow automation and chaining</li>
+            <li>Deep browser integration and customization</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="advanced-features">
+    <div class="container">
+      <h2 class="section-title">Power User Features</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>🔀 Multi-Model Switching</h3>
+          <p class="muted">Seamlessly switch between GPT-4, Claude, local models, and more. Use the best model for each specific task without changing tools.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">OpenAI → Anthropic → Local in seconds</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>⚙️ Custom Shortcut Creation</h3>
+          <p class="muted">Build unlimited custom shortcuts with complex prompts, variable substitution, and conditional logic. Save hours on repetitive tasks.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">One keystroke → Complex AI task</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>🔗 Workflow Automation</h3>
+          <p class="muted">Chain multiple AI operations together. Process content through multiple models, apply different prompts sequentially, and automate complex workflows.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Multi-step AI pipelines</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>📊 Advanced Prompt Templates</h3>
+          <p class="muted">Create sophisticated prompt templates with variables, conditions, and context injection. Build reusable AI workflows for any use case.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Professional prompt engineering</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Power Users in Action</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="inline" style="gap:12px; margin-bottom: 12px;">
+            <span style="font-size: 2rem;">👨‍💻</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Senior Developer</h4>
+              <p class="muted" style="margin: 0; font-size: 0.9rem;">Tech Lead at Startup</p>
+            </div>
+          </div>
+          <p class="muted" style="font-style: italic; border-left: 3px solid theme('colors.brand-accent'); padding-left: 14px;">"I've built custom shortcuts for code review, documentation generation, and debugging. I can switch from GPT-4 for complex logic to Claude for writing docs, all within the same workflow. It's like having a personalized AI assistant."</p>
+          <div class="inline" style="gap:8px; margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.7rem;">50+ Custom shortcuts</span>
+            <span class="kicker" style="font-size: 0.7rem;">3x faster development</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="inline" style="gap:12px; margin-bottom: 12px;">
+            <span style="font-size: 2rem;">📈</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Management Consultant</h4>
+              <p class="muted" style="margin: 0; font-size: 0.9rem;">Strategy & Operations</p>
+            </div>
+          </div>
+          <p class="muted" style="font-style: italic; border-left: 3px solid theme('colors.brand-accent'); padding-left: 14px;">"I've created client-specific templates for analysis frameworks. Each client gets customized AI workflows for their industry and methodology. I can deliver insights 5x faster while maintaining quality standards."</p>
+          <div class="inline" style="gap:8px; margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.7rem;">20+ Client templates</span>
+            <span class="kicker" style="font-size: 0.7rem;">5x faster delivery</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="inline" style="gap:12px; margin-bottom: 12px;">
+            <span style="font-size: 2rem;">🔬</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Research Scientist</h4>
+              <p class="muted" style="margin: 0; font-size: 0.9rem;">AI/ML Research</p>
+            </div>
+          </div>
+          <p class="muted" style="font-style: italic; border-left: 3px solid theme('colors.brand-accent'); padding-left: 14px;">"I've automated my entire paper review process. The extension chains different models for methodology analysis, results validation, and writing improvement. What used to take days now takes hours."</p>
+          <div class="inline" style="gap:8px; margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.7rem;">Automated pipeline</span>
+            <span class="kicker" style="font-size: 0.7rem;">80% time saved</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+      <div class="container">
+        <h2 class="section-title">Unlimited Customization Possibilities</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>🎯 Prompt Engineering</h3>
+            <ul class="list muted">
+              <li>Variable substitution and templating</li>
+              <li>Conditional logic and branching</li>
+              <li>Context injection from page content</li>
+              <li>Multi-stage prompt chains</li>
+              <li>Dynamic parameter adjustment</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>🔧 Model Management</h3>
+            <ul class="list muted">
+              <li>Multiple provider configurations</li>
+              <li>Model-specific optimization settings</li>
+              <li>Automatic failover and redundancy</li>
+              <li>Cost optimization rules</li>
+              <li>Performance monitoring</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>⚡ Workflow Automation</h3>
+            <ul class="list muted">
+              <li>Sequential AI operation chaining</li>
+              <li>Parallel processing pipelines</li>
+              <li>Conditional workflow branching</li>
+              <li>Result aggregation and synthesis</li>
+              <li>External tool integrations</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>🛠️ Integration Options</h3>
+            <ul class="list muted">
+              <li>Custom keyboard shortcuts</li>
+              <li>Context menu integrations</li>
+              <li>Page-specific automation</li>
+              <li>Export format customization</li>
+              <li>Third-party tool connections</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <section>
+      <div class="container">
+        <h2>Technical Capabilities</h2>
+        <div class="tech-content">
+          <div class="tech-feature">
+            <h3>🏗️ Architecture</h3>
+            <p>Built on modern web technologies with extensible plugin architecture. Direct API connections ensure maximum performance and reliability.</p>
+          </div>
+          <div class="tech-feature">
+            <h3>🔌 API Flexibility</h3>
+            <p>Support for OpenAI, Anthropic, OpenRouter, Azure OpenAI, AWS Bedrock, Google AI, and any OpenAI-compatible API endpoint.</p>
+          </div>
+          <div class="tech-feature">
+            <h3>💾 Local Processing</h3>
+            <p>Full support for local models via Ollama, LM Studio, Text Generation WebUI, and custom inference servers.</p>
+          </div>
+          <div class="tech-feature">
+            <h3>🔐 Security First</h3>
+            <p>Enterprise-grade security with local credential storage, encrypted communication, and zero data retention.</p>
+          </div>
+        </div>
+        <div class="tech-specs">
+          <h3>Supported Configurations</h3>
+          <div class="specs-grid">
+            <div class="spec-item">
+              <strong>AI Providers:</strong> 10+ supported
+            </div>
+            <div class="spec-item">
+              <strong>Local Models:</strong> Unlimited via API
+            </div>
+            <div class="spec-item">
+              <strong>Custom Shortcuts:</strong> No limits
+            </div>
+            <div class="spec-item">
+              <strong>Workflow Complexity:</strong> Multi-stage pipelines
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <section>
+      <div class="container">
+        <h2>Power User Setup</h2>
+        <div class="setup-steps">
+          <div class="setup-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Multiple Provider Setup</h3>
+              <p>Configure multiple AI providers with different API keys. Set up primary, secondary, and local model connections for maximum flexibility.</p>
+            </div>
+          </div>
+          <div class="setup-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Custom Shortcut Creation</h3>
+              <p>Build your first advanced shortcuts with variable substitution, conditional logic, and multi-model workflows.</p>
+            </div>
+          </div>
+          <div class="setup-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Workflow Automation</h3>
+              <p>Chain operations together to create sophisticated AI pipelines that handle complex tasks automatically.</p>
+            </div>
+          </div>
+          <div class="setup-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>Optimization & Scaling</h3>
+              <p>Fine-tune performance, implement cost controls, and scale your workflows to handle increasing complexity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <section>
+      <div class="container">
+        <h2>Power User Economics</h2>
+        <div class="roi-content">
+          <div class="roi-calculator">
+            <h3>Cost Comparison</h3>
+            <div class="calc-scenario">
+              <h4>Typical Power User Setup</h4>
+              <div class="calc-item">
+                <span>ChatGPT Plus:</span>
+                <span>$20/month</span>
+              </div>
+              <div class="calc-item">
+                <span>Claude Pro:</span>
+                <span>$20/month</span>
+              </div>
+              <div class="calc-item">
+                <span>Specialized AI tools (2-3):</span>
+                <span>$60/month</span>
+              </div>
+              <div class="calc-total">
+                <span><strong>Total Monthly Cost:</strong></span>
+                <span><strong>$100/month</strong></span>
+              </div>
+            </div>
+            <div class="calc-scenario">
+              <h4>GPT Breeze Power Setup</h4>
+              <div class="calc-item">
+                <span>GPT Breeze (one-time):</span>
+                <span>$49</span>
+              </div>
+              <div class="calc-item">
+                <span>API costs (heavy usage):</span>
+                <span>$15/month</span>
+              </div>
+              <div class="calc-item">
+                <span>Local models (optional):</span>
+                <span>$0/month</span>
+              </div>
+              <div class="calc-total savings">
+                <span><strong>Total Monthly Cost:</strong></span>
+                <span><strong>$15/month</strong></span>
+              </div>
+            </div>
+          </div>
+          <div class="roi-benefits">
+            <h3>Beyond Cost Savings</h3>
+            <ul class="benefits-list">
+              <li><strong>Productivity Multiplier:</strong> Custom workflows save 10+ hours per week</li>
+              <li><strong>Model Flexibility:</strong> Always use the best AI for each task</li>
+              <li><strong>Future-Proof:</strong> Add new models as they become available</li>
+              <li><strong>No Vendor Lock-in:</strong> Switch providers anytime without losing workflows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="stack">
+        <details>
+          <summary>How complex can my custom workflows get?</summary>
+          <p class="muted">Extremely complex. You can create multi-stage pipelines that process content through different models, apply conditional logic, and integrate with external tools. Some users have workflows with 10+ sequential steps.</p>
+        </details>
+        <details>
+          <summary>Can I use my enterprise AI accounts?</summary>
+          <p class="muted">Yes! GPT Breeze works with enterprise accounts from all major providers. Use your company's Azure OpenAI, AWS Bedrock, or Google Cloud AI accounts for compliance and cost allocation.</p>
+        </details>
+        <details>
+          <summary>What programming knowledge do I need?</summary>
+          <p class="muted">None required for basic usage, but programming concepts help with advanced workflows. The interface is visual, but understanding variables, conditionals, and APIs enables more sophisticated automation.</p>
+        </details>
+        <details>
+          <summary>Can I share my custom workflows?</summary>
+          <p class="muted">Yes! Export your shortcuts and workflows as configuration files. Share them with team members or the community. Import others' workflows to jumpstart your setup.</p>
+        </details>
+        <details>
+          <summary>How does local model integration work?</summary>
+          <p class="muted">GPT Breeze connects to any OpenAI-compatible API endpoint. Install Ollama, LM Studio, or similar tools, and configure GPT Breeze to use your local inference server for complete privacy and control.</p>
+        </details>
+        <details>
+          <summary>What about performance and reliability?</summary>
+          <p class="muted">Direct API connections ensure maximum performance. Automatic failover between providers and smart retry logic handle temporary issues. Local caching and optimization keep workflows fast.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container center">
+      <h2 class="section-title">Unleash Your AI Productivity Potential</h2>
+      <p class="muted">Join power users who've discovered the freedom of unlimited AI customization and workflow automation.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Install Advanced Extension</a>
+        <a class="btn outline" href="/blog/power-user-guide">Power User Guide</a>
+      </div>
+      <div class="inline" style="gap: 12px; margin-top: 20px;">
+        <span class="kicker" style="font-size: 0.75rem;">✓ Unlimited Customization</span>
+        <span class="kicker" style="font-size: 0.75rem;">✓ Multi-Model Support</span>
+        <span class="kicker" style="font-size: 0.75rem;">✓ Advanced Automation</span>
+      </div>
+    </div>
+  </section>
+</Base>

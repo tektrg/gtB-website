@@ -1,0 +1,342 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+
+<Base
+  title="YouTube Video Summarizer for Content Creators | GPT Breeze"
+  description="Analyze competitor content in minutes with GPT Breeze. Summarize YouTube videos, extract trending topics, and accelerate your content research workflow. Perfect for YouTubers, bloggers, and marketers."
+  isLandingPage={true}
+>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link slot="head" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="/media/hero/logo-56.png"
+          srcset="/media/hero/logo-28.png 1x, /media/hero/logo-56.png 2x"
+          alt="GPT Breeze logo"
+          width="28"
+          height="28"
+          loading="eager"
+          decoding="async"
+        />
+        GPT Breeze
+      </div>
+      <nav class="menu" aria-label="Main Navigation">
+        <a href="/#home">Home</a>
+        <a href="/#guide">Guide</a>
+        <a href="/#features">Features</a>
+        <a href="/blog">Blog</a>
+        <a href="/privacy">Privacy policy</a>
+        <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
+        <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="container">
+      <div class="bg"></div>
+      <div class="kicker">For Content Creators & Marketers</div>
+      <h1 class="display">
+        Analyze <span class="em">Competitor Content</span>
+        in Minutes
+      </h1>
+      <p class="lead center" style="max-width: 720px; margin-inline:auto;">
+        Stop spending hours watching competitor videos. GPT Breeze instantly summarizes YouTube content, extracts trending topics, and accelerates your content research workflow.
+      </p>
+      <div class="rating-badge" aria-label="Chrome Web Store rating">
+        <div class="rating-top">
+          <img class="logo" src="https://fonts.gstatic.com/s/i/productlogos/chrome_store/v7/192px.svg" alt="" width="22" height="22" loading="lazy" />
+          <div class="stars" aria-hidden="true">
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          </div>
+        </div>
+        <span class="rating-text"><strong style="color: theme('colors.brand-fg');">4.9 stars</strong> from 500+ creators</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome for free</a>
+        <a class="btn outline" href="#features">See how it works</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Common Creator Challenges</h2>
+      <p class="subtle">Successful creators spend 70% of their time on research and planning, but most tools focus only on the creation phase.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>⏱️ Time-Consuming Research</h3>
+          <p class="muted">Watching dozens of competitor videos manually to understand their strategies and extract insights takes forever.</p>
+        </div>
+        <div class="card">
+          <h3>🎯 Content Ideation Bottlenecks</h3>
+          <p class="muted">Struggling to find trending topics and understand what resonates with your target audience across different platforms.</p>
+        </div>
+        <div class="card">
+          <h3>📈 Missed Opportunities</h3>
+          <p class="muted">By the time you've analyzed competitor content manually, trends have moved on and opportunities have passed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Transform Your Content Research Workflow</h2>
+      <div class="two">
+        <div class="card">
+          <h3>❌ Before GPT Breeze</h3>
+          <ul class="list muted">
+            <li>Watch 20+ videos to understand competitor strategies</li>
+            <li>Manually transcribe key points and timestamps</li>
+            <li>Spend hours identifying trending topics</li>
+            <li>Miss subtle patterns in successful content</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>✅ After GPT Breeze</h3>
+          <ul class="list muted">
+            <li>Get video summaries with key insights in 2 minutes</li>
+            <li>Extract trending topics and themes automatically</li>
+            <li>Analyze 10x more content in the same time</li>
+            <li>Identify content gaps and opportunities instantly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title">Powerful Features Built for Creators</h2>
+      <p class="subtle">Instantly analyze, extract insights, and accelerate your content research workflow.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>🎥 YouTube Video Summarization</h3>
+          <p class="muted">Get comprehensive summaries with timestamps, key topics, and engagement hooks. Perfect for competitor analysis and trend spotting.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Try on any YouTube video →</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>🔍 Trend Analysis & Topic Extraction</h3>
+          <p class="muted">Automatically identify trending topics, hashtags, and themes across multiple videos. Spot content opportunities before they peak.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Discover viral content patterns →</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>📊 Content Gap Identification</h3>
+          <p class="muted">Compare competitor content strategies and identify underserved topics in your niche. Find your unique positioning.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Find your content opportunities →</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>✍️ Script & Description Optimization</h3>
+          <p class="muted">Generate optimized titles, descriptions, and talking points based on successful content analysis. Improve your content performance.</p>
+          <div class="inline" style="margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.75rem;">Optimize your content strategy →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Real Creators, Real Growth</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="inline" style="gap:12px; margin-bottom: 12px;">
+            <span style="font-size: 2rem;">🎬</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Tech YouTuber</h4>
+              <p class="muted" style="margin: 0; font-size: 0.9rem;">50K Subscribers</p>
+            </div>
+          </div>
+          <p class="muted" style="font-style: italic; border-left: 3px solid theme('colors.brand-accent'); padding-left: 14px;">"I used to spend entire weekends watching competitor videos. Now I can analyze 20+ videos in an hour and immediately spot what's working in my niche. My view rates have increased 40%."</p>
+          <div class="inline" style="gap:8px; margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.7rem;">90% time saved</span>
+            <span class="kicker" style="font-size: 0.7rem;">40% more views</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="inline" style="gap:12px; margin-bottom: 12px;">
+            <span style="font-size: 2rem;">✍️</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Marketing Blogger</h4>
+              <p class="muted" style="margin: 0; font-size: 0.9rem;">Content Strategy</p>
+            </div>
+          </div>
+          <p class="muted" style="font-style: italic; border-left: 3px solid theme('colors.brand-accent'); padding-left: 14px;">"Researching trending topics used to take days. GPT Breeze helps me quickly identify what's resonating across platforms and create content that actually gets engagement."</p>
+          <div class="inline" style="gap:8px; margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.7rem;">5x faster research</span>
+            <span class="kicker" style="font-size: 0.7rem;">Better engagement</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="inline" style="gap:12px; margin-bottom: 12px;">
+            <span style="font-size: 2rem;">📱</span>
+            <div>
+              <h4 style="margin: 0; font-size: 1rem;">Social Media Manager</h4>
+              <p class="muted" style="margin: 0; font-size: 0.9rem;">Agency</p>
+            </div>
+          </div>
+          <p class="muted" style="font-style: italic; border-left: 3px solid theme('colors.brand-accent'); padding-left: 14px;">"Managing content for multiple clients means I need to stay on top of trends across different industries. GPT Breeze helps me quickly analyze what's working for each niche."</p>
+          <div class="inline" style="gap:8px; margin-top: 12px;">
+            <span class="kicker" style="font-size: 0.7rem;">3x more clients</span>
+            <span class="kicker" style="font-size: 0.7rem;">Better results</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="cards">
+        <div class="card center">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 16px;">1</div>
+          <h3>Install & Setup</h3>
+          <p class="muted">Add GPT Breeze to Chrome and connect your AI provider. Start with free usage using OpenAI, Anthropic, or local models.</p>
+        </div>
+        <div class="card center">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 16px;">2</div>
+          <h3>Navigate to Content</h3>
+          <p class="muted">Go to any YouTube video, blog post, or article you want to analyze. Click the GPT Breeze icon to activate.</p>
+        </div>
+        <div class="card center">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: theme('colors.brand-accent'); color: theme('colors.brand-accent-fg'); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 16px;">3</div>
+          <h3>Get Instant Insights</h3>
+          <p class="muted">Choose from creator-specific templates or create custom prompts. Get detailed analysis in seconds, not hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Creator-Specific Templates</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>🎯 Competitor Analysis</h3>
+          <p class="muted">Analyze competitor strategies, identify their most successful content, and understand their audience engagement patterns.</p>
+        </div>
+        <div class="card">
+          <h3>📈 Trend Spotter</h3>
+          <p class="muted">Extract trending topics, hashtags, and themes from successful videos in your niche. Stay ahead of the curve.</p>
+        </div>
+        <div class="card">
+          <h3>✍️ Title Generator</h3>
+          <p class="muted">Generate high-performing titles based on successful content analysis. Improve your click-through rates.</p>
+        </div>
+        <div class="card">
+          <h3>📝 Content Planner</h3>
+          <p class="muted">Create content calendars based on trending topics and seasonal patterns identified from competitor analysis.</p>
+        </div>
+        <div class="card">
+          <h3>🎬 Hook Extractor</h3>
+          <p class="muted">Identify powerful opening hooks and engagement techniques used in high-performing content.</p>
+        </div>
+        <div class="card">
+          <h3>📊 Performance Predictor</h3>
+          <p class="muted">Analyze content elements that correlate with high engagement and apply them to your content strategy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Creator-Friendly Pricing</h2>
+      <div class="two">
+        <div class="card">
+          <h3>Why Creators Choose GPT Breeze</h3>
+          <ul class="list">
+            <li><strong>No Monthly Fees:</strong> One-time purchase, use with your own AI models</li>
+            <li><strong>Scale Your Research:</strong> Analyze unlimited content with BYOM approach</li>
+            <li><strong>Creator Templates:</strong> Pre-built prompts for content analysis</li>
+            <li><strong>Privacy First:</strong> Your content ideas stay private</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Calculate Your Time Savings</h3>
+          <div class="stack" style="gap: 12px;">
+            <div class="inline" style="justify-content: space-between; padding: 8px 0; border-bottom: 1px solid theme('colors.ui-border');">
+              <span class="muted">Hours spent on content research per week:</span>
+              <span>15 hours</span>
+            </div>
+            <div class="inline" style="justify-content: space-between; padding: 8px 0; border-bottom: 1px solid theme('colors.ui-border');">
+              <span class="muted">Time saved with GPT Breeze:</span>
+              <span>12 hours (80%)</span>
+            </div>
+            <div class="inline" style="justify-content: space-between; padding: 12px; background: theme('colors.blue-light'); border-radius: 8px; font-weight: 600; color: theme('colors.brand-accent');">
+              <span>Monthly time savings:</span>
+              <span>48 hours</span>
+            </div>
+          </div>
+          <p class="muted center" style="margin-top: 12px; font-style: italic;">That's 2 full days back every month for content creation!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="stack">
+        <details>
+          <summary>Can I analyze private/unlisted videos?</summary>
+          <p class="muted">GPT Breeze works with any content visible in your browser. If you can access a video or webpage, you can analyze it with our extension.</p>
+        </details>
+        <details>
+          <summary>Does it work with platforms other than YouTube?</summary>
+          <p class="muted">Yes! GPT Breeze works with YouTube, TikTok (web), Instagram (web), blog posts, articles, and any text-based content in your browser.</p>
+        </details>
+        <details>
+          <summary>Can I save and organize my research?</summary>
+          <p class="muted">Absolutely. Create custom shortcuts for your research workflows and save frequently used prompts. Export summaries for your content planning tools.</p>
+        </details>
+        <details>
+          <summary>Is my content strategy data secure?</summary>
+          <p class="muted">Your data never passes through our servers. Everything goes directly from your browser to your chosen AI provider, keeping your competitive research private.</p>
+        </details>
+        <details>
+          <summary>Can I analyze content in different languages?</summary>
+          <p class="muted">Yes! GPT Breeze supports content analysis in dozens of languages, depending on your chosen AI model's capabilities.</p>
+        </details>
+        <details>
+          <summary>How does it compare to other creator tools?</summary>
+          <p class="muted">Unlike subscription-based tools, GPT Breeze lets you use cutting-edge AI models directly. You get better analysis quality and complete control over your costs.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container center">
+      <h2 class="section-title">Start Creating Smarter Content Today</h2>
+      <p class="muted">Join hundreds of creators who've accelerated their content research with AI-powered analysis.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome - Free</a>
+        <a class="btn outline" href="/blog">Read Creator Guides</a>
+      </div>
+      <div class="inline" style="gap: 12px; margin-top: 20px;">
+        <span class="kicker" style="font-size: 0.75rem;">✓ No Account Required</span>
+        <span class="kicker" style="font-size: 0.75rem;">✓ Free to Start</span>
+        <span class="kicker" style="font-size: 0.75rem;">✓ Creator Templates</span>
+      </div>
+    </div>
+  </section>
+</Base>
