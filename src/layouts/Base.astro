@@ -245,7 +245,9 @@ if (!breadcrumbs) {
         const mobileBtn = document.getElementById('toc-mobile-btn');
         const mobileOverlay = document.getElementById('toc-mobile-overlay');
         const mobileClose = document.getElementById('toc-mobile-close');
-        const desktopToggle = document.getElementById('toc-desktop-toggle');
+        const desktopBtn = document.getElementById('toc-desktop-btn');
+        const desktopOverlay = document.getElementById('toc-desktop-overlay');
+        const desktopClose = document.getElementById('toc-desktop-close');
 
         if (!tocList || !tocListMobile) return;
 
@@ -254,10 +256,8 @@ if (!breadcrumbs) {
           const headings = document.querySelectorAll('main h1, main h2, main h3, main h4, main h5, main h6');
           if (headings.length === 0) {
             // Hide TOC elements if no headings found
-            const tocSidebar = document.getElementById('toc-sidebar');
-            const tocMobileBtn = document.getElementById('toc-mobile-btn');
-            if (tocSidebar) tocSidebar.style.display = 'none';
-            if (tocMobileBtn) tocMobileBtn.style.display = 'none';
+            if (desktopBtn) desktopBtn.style.display = 'none';
+            if (mobileBtn) mobileBtn.style.display = 'none';
             return;
           }
 
@@ -266,7 +266,28 @@ if (!breadcrumbs) {
           headings.forEach((heading, index) => {
             // Create unique ID if not exists
             if (!heading.id) {
-              heading.id = `heading-${index}`;
+              // Generate ID from heading text, ensuring it's a valid CSS selector
+              let id = heading.textContent.trim()
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, '') // Remove special characters except hyphens
+                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                .replace(/^[\d-]+/, '') // Remove leading numbers and hyphens
+                .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+              
+              // If ID is empty or invalid after cleaning, use fallback
+              if (!id || id.length === 0) {
+                id = `heading-${index}`;
+              }
+              
+              // Ensure uniqueness by checking if ID already exists
+              let finalId = id;
+              let counter = 1;
+              while (document.getElementById(finalId)) {
+                finalId = `${id}-${counter}`;
+                counter++;
+              }
+              
+              heading.id = finalId;
             }
 
             const level = parseInt(heading.tagName.charAt(1));
@@ -290,9 +311,12 @@ if (!breadcrumbs) {
               e.preventDefault();
               heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
               
-              // Close mobile overlay if open
+              // Close overlays if open
               if (mobileOverlay && !mobileOverlay.classList.contains('hidden')) {
-              mobileOverlay.classList.add('hidden');
+                mobileOverlay.classList.add('hidden');
+              }
+              if (desktopOverlay && desktopOverlay.style.display !== 'none') {
+                desktopOverlay.style.display = 'none';
               }
 
               // Update active state
@@ -310,21 +334,70 @@ if (!breadcrumbs) {
             tocListMobile.appendChild(item.element.cloneNode(true));
           });
 
-          // Re-bind click events for mobile TOC
-          tocListMobile.querySelectorAll('a').forEach((link, index) => {
-            const originalLink = tocList.querySelectorAll('a')[index];
+          // Add click handlers for desktop TOC
+          tocList.querySelectorAll('a').forEach((link, index) => {
             link.addEventListener('click', function(e) {
               e.preventDefault();
               const targetId = link.getAttribute('href');
-              const target = document.querySelector(targetId);
+              let target = null;
+              
+              try {
+                target = document.querySelector(targetId);
+              } catch (error) {
+                // If selector is invalid, try to find by ID directly
+                const id = targetId.replace('#', '');
+                target = document.getElementById(id);
+              }
+              
               if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                mobileOverlay.classList.add('hidden');
+                // Close desktop overlay
+                if (desktopOverlay) {
+                  desktopOverlay.style.display = 'none';
+                }
                 
                 // Update active state in both TOCs
                 document.querySelectorAll('.toc-active').forEach(el => el.classList.remove('toc-active', 'bg-accent-blue-light', 'text-accent-blue'));
                 link.classList.add('toc-active', 'bg-accent-blue-light', 'text-accent-blue');
-                originalLink.classList.add('toc-active', 'bg-accent-blue-light', 'text-accent-blue');
+                
+                // Also update corresponding mobile TOC link
+                const mobileLinks = tocListMobile.querySelectorAll('a');
+                if (mobileLinks[index]) {
+                  mobileLinks[index].classList.add('toc-active', 'bg-accent-blue-light', 'text-accent-blue');
+                }
+              }
+            });
+          });
+
+          // Re-bind click events for mobile TOC
+          tocListMobile.querySelectorAll('a').forEach((link, index) => {
+            const desktopLink = tocList.querySelectorAll('a')[index];
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const targetId = link.getAttribute('href');
+              let target = null;
+              
+              try {
+                target = document.querySelector(targetId);
+              } catch (error) {
+                // If selector is invalid, try to find by ID directly
+                const id = targetId.replace('#', '');
+                target = document.getElementById(id);
+              }
+              
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                mobileOverlay.classList.add('hidden');
+                if (desktopOverlay && desktopOverlay.style.display !== 'none') {
+                  desktopOverlay.style.display = 'none';
+                }
+                
+                // Update active state in both TOCs
+                document.querySelectorAll('.toc-active').forEach(el => el.classList.remove('toc-active', 'bg-accent-blue-light', 'text-accent-blue'));
+                link.classList.add('toc-active', 'bg-accent-blue-light', 'text-accent-blue');
+                if (desktopLink) {
+                  desktopLink.classList.add('toc-active', 'bg-accent-blue-light', 'text-accent-blue');
+                }
               }
             });
           });
@@ -348,22 +421,18 @@ if (!breadcrumbs) {
         }
 
         // Desktop toggle functionality
-        if (desktopToggle && tocList) {
-          desktopToggle.addEventListener('click', function() {
-            const expandIcon = document.getElementById('toc-expand-icon');
-            const collapseIcon = document.getElementById('toc-collapse-icon');
-            const isCollapsed = tocList.classList.contains('hidden');
-            
-            if (isCollapsed) {
-              // Expand
-              tocList.classList.remove('hidden');
-              expandIcon.classList.add('hidden');
-              collapseIcon.classList.remove('hidden');
-            } else {
-              // Collapse
-              tocList.classList.add('hidden');
-              expandIcon.classList.remove('hidden');
-              collapseIcon.classList.add('hidden');
+        if (desktopBtn && desktopOverlay && desktopClose) {
+          desktopBtn.addEventListener('click', function() {
+            desktopOverlay.style.display = desktopOverlay.style.display === 'none' ? 'block' : 'none';
+          });
+
+          desktopClose.addEventListener('click', function() {
+            desktopOverlay.style.display = 'none';
+          });
+
+          desktopOverlay.addEventListener('click', function(e) {
+            if (e.target === desktopOverlay) {
+              desktopOverlay.style.display = 'none';
             }
           });
         }
@@ -389,7 +458,17 @@ if (!breadcrumbs) {
 
               if (current) {
                 document.querySelectorAll('.toc-active').forEach(el => el.classList.remove('toc-active', 'bg-accent-blue-light', 'text-accent-blue'));
-                const activeLinks = document.querySelectorAll(`a[href="#${current.id}"]`);
+                
+                // Find active links safely, handling invalid CSS selectors
+                let activeLinks = [];
+                try {
+                  activeLinks = document.querySelectorAll(`a[href="#${current.id}"]`);
+                } catch (error) {
+                  // If selector is invalid, find links by iterating through all TOC links
+                  const allTocLinks = document.querySelectorAll('#toc-list a, #toc-list-mobile a');
+                  activeLinks = Array.from(allTocLinks).filter(link => link.getAttribute('href') === `#${current.id}`);
+                }
+                
                 activeLinks.forEach(link => link.classList.add('toc-active', 'bg-accent-blue-light', 'text-accent-blue'));
               }
 
@@ -708,20 +787,35 @@ if (!breadcrumbs) {
       </header>
     )}
     
-    <!-- Table of Contents - Desktop Sidebar -->
+    <!-- Table of Contents - Desktop Floating Button -->
     {!isLandingPage && (
-      <nav id="toc-sidebar" class="fixed left-4 top-20 w-[20%] h-[calc(100vh-5rem)] overflow-y-auto p-4 z-20 hidden lg:block">
-        <button id="toc-desktop-toggle" class="flex items-center justify-around w-full mb-3 text-left rounded p-2 -m-2 transition-colors" aria-label="Toggle table of contents">
-            <h3 class="text-sm font-semibold text-brand-fg uppercase tracking-wide" style="margin:0;">Table of Contents</h3>
-          <svg id="toc-expand-icon" class="w-4 h-4 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-          <svg id="toc-collapse-icon" class="w-4 h-4 text-brand-muted hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+      <div>
+        <!-- Desktop TOC Button -->
+        <button 
+          id="toc-desktop-btn" 
+          class="fixed bottom-6 left-6 w-12 h-12 bg-ui-surface/70 backdrop-blur-md text-brand-fg rounded-full shadow-lg z-30 flex items-center justify-center transition-transform hover:scale-105 hidden lg:flex"
+          aria-label="Toggle table of contents"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
-        <ul id="toc-list" class="space-y-1 text-sm list-none hidden"></ul>
-      </nav>
+        
+        <!-- Desktop TOC Overlay -->
+        <div id="toc-desktop-overlay" class="fixed inset-0 bg-black-50 z-40 hidden lg:block" style="display: none;">
+          <nav class="fixed left-4 right-4 bottom-20 max-h-96 overflow-y-auto bg-ui-surface rounded-lg p-4 shadow-xl">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-semibold text-brand-fg uppercase tracking-wide">Table of Contents</h3>
+              <button id="toc-desktop-close" class="text-brand-muted hover:text-brand-fg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+            <ul id="toc-list" class="space-y-1 text-sm list-none"></ul>
+          </nav>
+        </div>
+      </div>
     )}
 
     <!-- Table of Contents - Mobile Toggle -->
