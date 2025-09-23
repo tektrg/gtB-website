@@ -1,0 +1,175 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+<Base
+  title="Issue Report — GPT Breeze"
+  description="Report an issue or bug with GPT Breeze extension to help us improve your experience."
+  isLandingPage={true}
+>
+  <meta slot="head" name="theme-color" content="#F6F4F0" />
+  <style slot="head">
+    /* Override container width for feedback pages */
+    .container {
+      max-width: 900px;
+    }
+    
+    /* Main content styles specific to feedback pages */
+    main { 
+      padding: 80px 0; 
+    }
+    
+    .content { 
+      background: theme('colors.ui-surface'); 
+      border: 1px solid theme('colors.ui-border'); 
+      border-radius: 14px; 
+      padding: 40px; 
+      box-shadow: 0 1px 0 theme('colors.shadow-light'); 
+    }
+    
+    h1 { 
+      font-size: clamp(2rem, 4vw, 2.5rem); 
+      line-height: 1.2; 
+      margin: 0 0 24px; 
+      letter-spacing: -0.01em; 
+      text-align: center; 
+    }
+    
+    .intro { 
+      text-align: center; 
+      color: theme('colors.brand-muted'); 
+      margin: 0 0 32px; 
+      font-size: 1.1rem; 
+    }
+    
+    .avatar { 
+      width: 80px; 
+      height: 80px; 
+      border-radius: 50%; 
+      border: 2px solid theme('colors.ui-border'); 
+      margin: 0 auto 20px; 
+      display: block; 
+    }
+    
+    .feedback-form { 
+      margin: 32px 0; 
+    }
+    
+    .feedback-form iframe { 
+      width: 100%; 
+      height: 1200px; 
+      border: 1px solid theme('colors.ui-border'); 
+      border-radius: 14px; 
+    }
+    
+    @media (max-width: 768px) {
+      .content { 
+        padding: 24px; 
+      }
+      
+      .feedback-form iframe { 
+        height: 500px; 
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .content { 
+        padding: 20px; 
+      }
+      
+      main { 
+        padding: 60px 0; 
+      }
+    }
+  </style>
+
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="/media/hero/logo-56.png"
+          srcset="/media/hero/logo-28.png 1x, /media/hero/logo-56.png 2x"
+          alt="GPT Breeze logo"
+          width="28"
+          height="28"
+          loading="eager"
+          decoding="async"
+        />
+        GPT Breeze
+      </div>
+      <nav class="menu" aria-label="Main Navigation">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/privacy">Privacy</a>
+        <a href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog" class="install">Add to Chrome</a>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+    </div>
+    
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu-overlay" aria-hidden="true">
+      <nav class="mobile-menu" aria-label="Mobile Navigation">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/privacy">Privacy</a>
+        <a href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog" class="install">Add to Chrome</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="content">
+        <div class="intro">
+          <img 
+            src="/duythanh.png" 
+            alt="Duy Thanh" 
+            class="avatar"
+            width="80"
+            height="80"
+            style="object-fit: cover;"
+          />
+          <p>Hi, I'm <a href="https://x.com/p_d_d_t" target="_blank" rel="noopener">Duy Thanh</a>, the Product Manager for GPT Breeze. We'd love to hear about any issues or bugs you've encountered with the extension.</p>
+          <p>Your feedback helps us improve GPT Breeze for everyone!</p>
+        </div>
+
+        <div class="feedback-form">
+          <iframe 
+            src="https://gptbreezedocs.notion.site/ebd/1fd731c62105811eba4ae3f7b4851fd6" 
+            width="100%" 
+            height="1200" 
+            style="border: 0;" 
+            allowfullscreen
+            title="Issue Report Form"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <div>
+          <div style="margin-bottom: 12px;">©2025 GPT Breeze — All Rights Reserved</div>
+          <div><a href="/privacy">Privacy Policy</a></div>
+        </div>
+        <div>
+          <div style="font-weight: 600; margin-bottom: 8px; color: theme('colors.brand-fg');">For Different Users</div>
+          <div style="display: flex; flex-direction: column; gap: 4px;">
+            <a href="/for-researchers">For Researchers</a>
+            <a href="/for-creators">For Content Creators</a>
+            <a href="/for-power-users">For Power Users</a>
+            <a href="/for-teams">For Teams</a>
+            <a href="/for-educators">For Educators</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</Base>
