@@ -1,0 +1,559 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+<Base
+  title="YouTube Video Summarizer — GPT Breeze AI Chrome Extension"
+  description="Instantly summarize any YouTube video with AI. Get time-stamped sections, extract transcripts, and create one-click shortcuts for faster learning."
+  isLandingPage={true}
+>
+  <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
+  <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link slot="head" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link slot="head" rel="preload" as="image" href="/media/hero/logo-56.png" />
+  <meta slot="head" name="theme-color" content="#F6F4F0" />
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="/media/hero/logo-56.png"
+          srcset="/media/hero/logo-28.png 1x, /media/hero/logo-56.png 2x"
+          alt="GPT Breeze logo"
+          width="28"
+          height="28"
+          loading="eager"
+          decoding="async"
+        />
+        GPT Breeze
+      </div>
+      <nav class="menu" aria-label="Main Navigation">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/blog">Blog</a>
+        <a href="/privacy">Privacy policy</a>
+        <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
+        <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+    </div>
+    
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu-overlay" aria-hidden="true">
+      <nav class="mobile-menu" aria-label="Mobile Navigation">
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/blog">Blog</a>
+        <a href="/privacy">Privacy policy</a>
+        <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
+        <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Software Application Schema for YouTube Summary -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://gptbreeze.io/youtube-summary",
+    "name": "GPT Breeze YouTube Summarizer",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "description": "Instantly summarize any YouTube video with AI. Get time-stamped sections, extract transcripts, and create one-click shortcuts for faster learning.",
+    "url": "https://gptbreeze.io/youtube-summary",
+    "downloadUrl": "https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog",
+    "author": {
+      "@type": "Organization",
+      "@name": "GPT Breeze",
+      "url": "https://gptbreeze.io"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "featureList": [
+      "YouTube video summarization with time-stamps",
+      "Transcript extraction and processing",
+      "AI-powered video content analysis",
+      "One-click summary shortcuts",
+      "Bring your own API key (BYOM)",
+      "Privacy-focused design"
+    ],
+    "softwareVersion": "1.0",
+    "screenshot": "https://gptbreeze.io/media/hero/logo-56.png"
+  }
+  </script>
+
+  <section id="hero" class="hero">
+    <div class="container">
+      <div class="bg"></div>
+      <h1 class="display">
+        Summarize <span class="em">any YouTube video</span>
+        in seconds with AI
+      </h1>
+      <p class="lead center" style="max-width: 720px; margin-inline:auto;">
+        Skip the fluff and get straight to the insights. GPT Breeze instantly creates time-stamped summaries of YouTube videos, extracts transcripts, and lets you chat with the content.
+      </p>
+      <div class="rating-badge" aria-label="Chrome Web Store rating">
+        <div class="rating-top">
+          <img class="logo" src="https://fonts.gstatic.com/s/i/productlogos/chrome_store/v7/192px.svg" alt="" width="22" height="22" loading="lazy" />
+          <div class="stars" aria-hidden="true">
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.97 6.02 6.65.97-4.81 4.69 1.14 6.63L12 17.77 6.05 20.81l1.14-6.63L2.38 9.49l6.65-.97L12 2.5z"/></svg>
+          </div>
+        </div>
+        <span class="rating-text"><strong style="color: theme('colors.brand-fg');">4.9 stars</strong> on Chrome Web Store</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Get Free YouTube Summarizer</a>
+      </div>
+
+      <div class="hero-media">
+        <div class="device-frame">
+          <div class="ratio">
+            <div
+              class="yt-lite"
+              data-yt-id="pOXdFaqTszU"
+              aria-label="Watch YouTube summarization demo"
+              style="background-image:url('/media/hero/gpt-breeze-hero-video-placeholder-1280x800.jpg')"
+              tabindex="0"
+            >
+              <button class="play" aria-label="Play demo video"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How YouTube Summarization Works</h2>
+      <p class="subtle">Three simple steps to transform any YouTube video into actionable insights.</p>
+
+      <div class="features-sbs">
+        <div class="features-grid">
+          <div class="features-video">
+            <div class="ratio">
+              <div class="placeholder">
+              <iframe
+                title="YouTube summarize demo"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/pOXdFaqTszU?autoplay=1&mute=1&controls=0&loop=1&playlist=pOXdFaqTszU&modestbranding=1&rel=0&playsinline=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="features-text">
+            <h3>Step 1: Click to Summarize</h3>
+            <p>Navigate to any YouTube video and click the GPT Breeze icon. Our AI instantly extracts the video transcript and begins processing.</p>
+            <ul class="features-list">
+              <li>Works with any YouTube video (youtube.com/watch and youtu.be)</li>
+              <li>Automatic transcript extraction and validation</li>
+              <li>Supports videos with closed captions or auto-generated subtitles</li>
+              <li>No manual copying or pasting required</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-sbs">
+        <div class="features-grid rev">
+          <div class="features-text">
+            <h3>Step 2: Get Time-Stamped Sections</h3>
+            <p>Receive a structured summary with clickable timestamps that jump directly to relevant video sections. Perfect for long tutorials, lectures, and documentaries.</p>
+            <ul class="features-list">
+              <li>Intelligent content chunking with time markers</li>
+              <li>Key topic identification and organization</li>
+              <li>Clickable timestamps for easy navigation</li>
+              <li>Extract important quotes and insights</li>
+            </ul>
+          </div>
+          <div class="features-video">
+            <div class="ratio" style="position: relative;">
+              <div class="placeholder">
+                <iframe
+                title="Time-stamped summary demo"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/SeR-G-5l25Q?autoplay=1&mute=1&controls=0&loop=1&playlist=SeR-G-5l25Q&modestbranding=1&rel=0&playsinline=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-sbs">
+        <div class="features-grid">
+          <div class="features-video">
+            <div class="ratio" style="position: relative;">
+              <div class="placeholder">
+                <iframe
+                title="Chat with video content demo"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/2WftJLH3Zoc?autoplay=1&mute=1&controls=0&loop=1&playlist=2WftJLH3Zoc&modestbranding=1&rel=0&playsinline=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="features-text">
+            <h3>Step 3: Chat and Create Shortcuts</h3>
+            <p>Ask follow-up questions about the video content and create custom AI shortcuts for repeated tasks. Turn insights into actionable one-click prompts.</p>
+            <ul class="features-list">
+              <li>Interactive Q&A with video content using &#123;&#123;page&#125;&#125; and &#123;&#123;chunk&#125;&#125; placeholders</li>
+              <li>Create custom shortcuts for repeated video analysis tasks</li>
+              <li>Export transcripts for further processing</li>
+              <li>Share summaries and insights with your team</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="use-cases">
+    <div class="container">
+      <h2 class="section-title">Perfect For Every Type of YouTube Content</h2>
+      <p class="subtle">Whether you're learning, researching, or creating content, GPT Breeze adapts to your workflow.</p>
+      
+      <div class="two" style="margin-top:24px;">
+        <div class="card">
+          <h3>📚 Educational Content</h3>
+          <p class="muted">Summarize lectures, tutorials, and online courses. Get structured notes with timestamps for easy review and reference.</p>
+          <ul class="features-list">
+            <li>University lectures and MOOCs</li>
+            <li>Programming tutorials and coding bootcamps</li>
+            <li>Language learning videos</li>
+            <li>Professional development courses</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <h3>🎥 Content Creation</h3>
+          <p class="muted">Research competitor videos, analyze trends, and extract key talking points for your own content strategy.</p>
+          <ul class="features-list">
+            <li>Competitor analysis and market research</li>
+            <li>Trend identification and topic extraction</li>
+            <li>Quote mining for reaction videos</li>
+            <li>Content planning and ideation</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <h3>🔬 Research & Analysis</h3>
+          <p class="muted">Process conference talks, webinars, and expert interviews. Extract citations, methodologies, and key findings efficiently.</p>
+          <ul class="features-list">
+            <li>Academic conference presentations</li>
+            <li>Industry webinars and expert talks</li>
+            <li>Documentary analysis</li>
+            <li>Market research and consumer insights</li>
+          </ul>
+        </div>
+        
+        <div class="card">
+          <h3>💼 Business & Marketing</h3>
+          <p class="muted">Analyze product demos, customer testimonials, and industry insights. Extract actionable business intelligence from video content.</p>
+          <ul class="features-list">
+            <li>Product launch presentations</li>
+            <li>Customer testimonial analysis</li>
+            <li>Sales training and methodology videos</li>
+            <li>Industry conference sessions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="technical-features">
+    <div class="container">
+      <h2 class="section-title">Advanced Features for Power Users</h2>
+      <p class="subtle">GPT Breeze offers sophisticated AI capabilities while maintaining simplicity and privacy.</p>
+      
+      <div class="features-sbs">
+        <div class="features-grid">
+          <div class="features-text">
+            <h3>Smart Content Processing</h3>
+            <p>Our advanced AI pipeline processes YouTube transcripts with intelligent chunking and context preservation.</p>
+            <ul class="features-list">
+              <li><strong>Automatic transcript extraction</strong> from YouTube's native caption data</li>
+              <li><strong>Content validation</strong> ensures quality summaries (minimum 50 characters)</li>
+              <li><strong>Intelligent chunking</strong> preserves context across long videos</li>
+              <li><strong>Template system</strong> supports custom prompt templates with placeholders</li>
+            </ul>
+          </div>
+          <div class="features-video">
+            <div class="ratio" style="position: relative;">
+              <div class="placeholder">
+                <iframe
+                title="Advanced features demo"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/QS7TU0xuvDk?autoplay=1&mute=1&controls=0&loop=1&playlist=QS7TU0xuvDk&modestbranding=1&rel=0&playsinline=1"
+                frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-sbs">
+        <div class="features-grid rev">
+          <div class="features-video">
+            <div class="ratio" style="position: relative;">
+              <div class="placeholder">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; text-align: center;">
+                  🔐 Privacy-First Architecture
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="features-text">
+            <h3>Privacy-First Architecture</h3>
+            <p>Your data never touches our servers. All processing happens locally or directly with your chosen AI provider.</p>
+            <ul class="features-list">
+              <li><strong>Zero data collection</strong> - conversations stay between you and your AI</li>
+              <li><strong>Bring Your Own Model (BYOM)</strong> - use your API keys with any provider</li>
+              <li><strong>Local processing</strong> where possible for maximum privacy</li>
+              <li><strong>No account required</strong> - start using immediately after installation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-sbs">
+        <div class="features-grid">
+          <div class="features-text">
+            <h3>Multiple AI Models & Providers</h3>
+            <p>Switch between different AI models to match your needs and budget. Fast models for quick summaries, powerful models for deep analysis.</p>
+            <ul class="features-list">
+              <li><strong>OpenAI</strong> (GPT-4, GPT-3.5) for high-quality analysis</li>
+              <li><strong>Anthropic Claude</strong> for nuanced understanding</li>
+              <li><strong>OpenRouter</strong> for access to multiple models</li>
+              <li><strong>Local models</strong> via Ollama for complete privacy</li>
+            </ul>
+          </div>
+          <div class="features-video">
+            <div class="ratio" style="position: relative;">
+              <div class="placeholder">
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #ff9a8b 0%, #ad5389 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; text-align: center;">
+                  🤖 Multiple AI Models
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="container">
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <div class="two" style="margin-top:12px;">
+        <div class="card stack">
+          <h3>Free Forever</h3>
+          <div class="price">$0 <span class="muted" style="font-size:0.9rem; font-weight:600;">USD</span></div>
+          <p class="muted">Perfect for YouTube summarization:</p>
+          <ul class="list">
+            <li>Unlimited YouTube video summaries (BYOM)</li>
+            <li>Time-stamped section extraction</li>
+            <li>Transcript export functionality</li>
+            <li>Chat with video content</li>
+            <li>All AI providers supported</li>
+            <li>Privacy-focused design</li>
+          </ul>
+        </div>
+        <div class="card stack">
+          <h3>Premium Features</h3>
+          <div class="inline" style="gap:8px;">
+            <div class="price">$9.99</div>
+            <div class="strike">$29</div>
+            <div>USD</div>
+          </div>
+          <p class="muted">Everything in Free, plus:</p>
+          <ul class="list">
+            <li>Create custom AI shortcuts for repeated tasks</li>
+            <li>Advanced template system with placeholders</li>
+            <li>Batch processing capabilities</li>
+            <li>Team sharing and collaboration features</li>
+          </ul>
+          <p class="muted">One-time purchase. Early adopter pricing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="stack" style="margin-top:12px;">
+        <details>
+          <summary>How does YouTube video summarization work?</summary>
+          <p class="muted">GPT Breeze extracts the transcript directly from YouTube's caption data, processes it through your chosen AI model, and creates structured summaries with time-stamped sections. It works with any video that has captions or auto-generated subtitles.</p>
+        </details>
+        <details>
+          <summary>What types of YouTube videos can I summarize?</summary>
+          <p class="muted">You can summarize any YouTube video with available captions, including educational content, tutorials, lectures, documentaries, product demos, webinars, and more. Both youtube.com/watch and youtu.be URLs are supported.</p>
+        </details>
+        <details>
+          <summary>Do I need to pay for AI usage?</summary>
+          <p class="muted">GPT Breeze is free, but you'll need your own API key for AI providers (OpenAI, Anthropic, etc.) which operate on pay-as-you-go pricing. Alternatively, you can use free web sessions or local models like Ollama for complete cost control.</p>
+        </details>
+        <details>
+          <summary>How accurate are the time-stamped summaries?</summary>
+          <p class="muted">Our AI creates highly accurate summaries by processing the official video transcript. Time-stamps are derived from YouTube's native caption timing data, ensuring precise correlation between summary points and video content.</p>
+        </details>
+        <details>
+          <summary>Can I export or share the summaries?</summary>
+          <p class="muted">Yes! You can export transcripts, copy summaries, and create shareable custom shortcuts. Premium users get additional collaboration features for team workflows.</p>
+        </details>
+        <details>
+          <summary>Is my data private and secure?</summary>
+          <p class="muted">Absolutely. GPT Breeze processes data locally or sends it directly to your chosen AI provider. We never store your conversations, video content, or personal data on our servers. No account creation required.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="get-started">
+    <div class="container">
+      <div class="card center" style="max-width: 600px; margin: 0 auto;">
+        <h2>Start Summarizing YouTube Videos Today</h2>
+        <p class="muted">Join thousands of learners, researchers, and creators who save hours every week with AI-powered YouTube summaries.</p>
+        <div class="hero-actions" style="margin-top: 24px;">
+          <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome - Free</a>
+        </div>
+        <p class="muted" style="margin-top: 12px; font-size: 0.9rem;">No account required • Works with any AI provider • Privacy-focused</p>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Replace poster with YouTube iframe on click or Enter/Space
+    const initLiteYT = () => {
+      document.querySelectorAll('.yt-lite').forEach((el) => {
+        const id = el.getAttribute('data-yt-id');
+        if (!id) return;
+        const src = (autoplay = true) => `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&autoplay=${autoplay ? 1 : 0}`;
+        const load = () => {
+          if (el.dataset.loaded) return;
+          el.classList.add('loading');
+          const iframe = document.createElement('iframe');
+          iframe.src = src(true);
+          iframe.title = 'YouTube summarization demo';
+          iframe.loading = 'eager';
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.allowFullscreen = true;
+          iframe.style.position = 'absolute';
+          iframe.style.inset = '0';
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.border = '0';
+          el.replaceWith(iframe);
+          el.dataset.loaded = '1';
+        };
+        el.addEventListener('click', load, { once: true });
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            load();
+          }
+        });
+      });
+    };
+    
+    // Mobile menu functionality
+    const initMobileMenu = () => {
+      const toggle = document.querySelector('.mobile-menu-toggle');
+      const overlay = document.querySelector('.mobile-menu-overlay');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      
+      if (!toggle || !overlay || !mobileMenu) return;
+      
+      const openMenu = () => {
+        overlay.classList.add('active');
+        toggle.classList.add('active');
+        toggle.setAttribute('aria-expanded', 'true');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+      
+      const closeMenu = () => {
+        overlay.classList.remove('active');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+      
+      // Toggle menu on button click
+      toggle.addEventListener('click', () => {
+        if (overlay.classList.contains('active')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+      
+      // Close menu when clicking outside
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          closeMenu();
+        }
+      });
+      
+      // Close menu when clicking on a link
+      mobileMenu.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+          closeMenu();
+        }
+      });
+      
+      // Close menu on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    };
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initLiteYT();
+        initMobileMenu();
+      });
+    } else {
+      initLiteYT();
+      initMobileMenu();
+    }
+  </script>
+</Base>

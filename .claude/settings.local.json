@@ -9,7 +9,8 @@
       "WebFetch(domain:localhost)",
       "Bash(npm run lint)",
       "Bash(npm run format:*)",
-      "Read(//Users/trungluong/**)"
+      "Read(//Users/trungluong/**)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

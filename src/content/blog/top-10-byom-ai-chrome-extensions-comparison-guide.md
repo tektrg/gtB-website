@@ -748,15 +748,11 @@ The research is clear, and my experience as an indie hacker confirms it: BYOM ex
 
 ---
 
-*This comparison guide is based on extensive research, including [Incogni's Chrome Extension Privacy Study](https://incogni.com/blog/chrome-extensions-privacy/) [1], official pricing pages [2, 3, 18, 19, 20], and user feedback collected in 2024-2025. All scoring and recommendations are based on publicly available information and documented security assessments. For the latest information about any extension, always check the official documentation and recent user reviews.*
-
 ## Sources and References
 
 ### Primary Research Sources
-1.  [Incogni Chrome Extension Privacy Study](https://incogni.com/blog/chrome-extensions-privacy/) - Comprehensive security and privacy assessment of AI Chrome extensions, primary source for security ratings and privacy violation claims.
 2.  [OpenAI Pricing](https://openai.com/pricing) - Official pricing for GPT models, ChatGPT Plus, and API usage rates.
 3.  [Anthropic Pricing](https://console.anthropic.com/pricing) - Claude API pricing and Pro subscription costs.
-4.  [Gartner AI Trends Report](https://www.gartner.com/en/newsroom/press-releases/2024-ai-trends) - Industry analysis supporting 50% BYOM adoption prediction by 2026.
 5.  [Markets and Markets AI Report](https://www.marketsandmarkets.com/Market-Reports/artificial-intelligence-market-74851580.html) - Market research supporting $2B market size projection for BYOM tools.
 
 ### Chrome Extension Official Listings
