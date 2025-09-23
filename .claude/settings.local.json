@@ -10,7 +10,9 @@
       "Bash(npm run lint)",
       "Bash(npm run format:*)",
       "Read(//Users/trungluong/**)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "mcp__imgflip-server__get_memes",
+      "mcp__imgflip-server__caption_image"
     ],
     "deny": [],
     "ask": []
