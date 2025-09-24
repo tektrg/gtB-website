@@ -542,14 +542,14 @@ Let's break down the **true cost of BYOM AI Chrome extensions** versus those tem
 
 ### Typical Subscription Model Costs (Monthly)
 -   **[ChatGPT Plus](https://openai.com/pricing)** [2]: $20/month
--   **[Claude Pro](https://claude.ai/pricing)** [3, 20]: $20/month
+-   **[Claude Pro](https://claude.com/pricing)** [3, 20]: $20/month
 -   **[Merlin Pro](https://www.getmerlin.in/pricing)** [18]: $19/month
 -   **[Monica Premium](https://monica.im/pricing)** [19]: $16/month
 -   **Average Total (if you use multiple services)**: Easily $75+/month
 
 ### BYOM Model Costs (Based on Typical Usage)
 -   **[OpenAI GPT-4 API](https://openai.com/pricing)** [2]: For heavy users, expect to spend around $3-8/month.
--   **[Anthropic Claude API](https://console.anthropic.com/pricing)** [3]: Heavy usage might cost you $2-6/month.
+-   **[Anthropic Claude API](https://claude.com/pricing)** [3]: Heavy usage might cost you $2-6/month.
 -   **Local Models** ([Ollama](https://ollama.ai/) [16], [LM Studio](https://lmstudio.ai/) [17]): Essentially $0 after the initial setup cost (your hardware and electricity).
 -   **Average Total**: A much more palatable $5-14/month for comparable (or better) functionality.
 
