@@ -508,7 +508,7 @@ footer {
 }
 
 .mobile-menu-overlay {
-  display: none;
+  display: block;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
@@ -519,8 +519,8 @@ footer {
 }
 
 .mobile-menu-overlay.active {
-  opacity: 1;
-  visibility: visible;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .mobile-menu {
@@ -590,6 +590,11 @@ footer {
   
   .mobile-menu-overlay { 
     display: block; 
+  }
+
+  .mobile-menu-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .features-sbs { 

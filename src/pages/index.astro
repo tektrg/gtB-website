@@ -42,20 +42,20 @@ import Base from "@/layouts/Base.astro";
         <span class="hamburger"></span>
       </button>
     </div>
-    
-    <!-- Mobile menu overlay -->
-    <div class="mobile-menu-overlay" aria-hidden="true">
-      <nav class="mobile-menu" aria-label="Mobile Navigation">
-        <a href="#guide">Guide</a>
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="/blog">Blog</a>
-        <a href="/privacy">Privacy policy</a>
-        <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
-        <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
-      </nav>
-    </div>
   </header>
+
+  <!-- Mobile menu overlay - moved outside header -->
+  <div class="mobile-menu-overlay" aria-hidden="true">
+    <nav class="mobile-menu" aria-label="Mobile Navigation">
+      <a href="#guide">Guide</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="/blog">Blog</a>
+      <a href="/privacy">Privacy policy</a>
+      <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
+      <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+    </nav>
+  </div>
 
   <!-- Software Application Schema -->
   <script type="application/ld+json">
@@ -860,14 +860,21 @@ import Base from "@/layouts/Base.astro";
       const overlay = document.querySelector('.mobile-menu-overlay');
       const mobileMenu = document.querySelector('.mobile-menu');
       
-      if (!toggle || !overlay || !mobileMenu) return;
+      console.log('Mobile menu init:', { toggle, overlay, mobileMenu });
+      
+      if (!toggle || !overlay || !mobileMenu) {
+        console.log('Mobile menu elements not found!');
+        return;
+      }
       
       const openMenu = () => {
+        console.log('Adding active class to overlay');
         overlay.classList.add('active');
         toggle.classList.add('active');
         toggle.setAttribute('aria-expanded', 'true');
         overlay.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        console.log('After adding active:', overlay.classList.toString());
       };
       
       const closeMenu = () => {
@@ -879,10 +886,16 @@ import Base from "@/layouts/Base.astro";
       };
       
       // Toggle menu on button click
-      toggle.addEventListener('click', () => {
+      toggle.addEventListener('click', (e) => {
+        console.log('Mobile menu toggle clicked!');
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Current overlay classes:', overlay.classList.toString());
         if (overlay.classList.contains('active')) {
+          console.log('Closing menu');
           closeMenu();
         } else {
+          console.log('Opening menu');
           openMenu();
         }
       });

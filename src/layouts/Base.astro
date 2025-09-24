@@ -197,43 +197,46 @@ if (!breadcrumbs) {
         // Track engagement after 30 seconds
         setTimeout(trackEngagement, 30000);
 
-        // Mobile menu functionality for blog pages
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-        
-        if (mobileMenuToggle && mobileMenuOverlay) {
-          mobileMenuToggle.addEventListener('click', function() {
-            const isActive = mobileMenuOverlay.classList.contains('active');
-            
-            if (isActive) {
-              mobileMenuOverlay.classList.remove('active');
-              mobileMenuToggle.classList.remove('active');
-              mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            } else {
-              mobileMenuOverlay.classList.add('active');
-              mobileMenuToggle.classList.add('active');
-              mobileMenuToggle.setAttribute('aria-expanded', 'true');
-            }
-          });
+        // Mobile menu functionality for non-landing pages (landing pages attach their own handler)
+        const isLandingPage = document.body.dataset.isLandingPage === 'true';
+        if (!isLandingPage) {
+          const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+          const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
 
-          // Close menu when clicking overlay
-          mobileMenuOverlay.addEventListener('click', function(e) {
-            if (e.target === mobileMenuOverlay) {
-              mobileMenuOverlay.classList.remove('active');
-              mobileMenuToggle.classList.remove('active');
-              mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            }
-          });
+          if (mobileMenuToggle && mobileMenuOverlay) {
+            mobileMenuToggle.addEventListener('click', function() {
+              const isActive = mobileMenuOverlay.classList.contains('active');
 
-          // Close menu when clicking links
-          const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('a');
-          mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-              mobileMenuOverlay.classList.remove('active');
-              mobileMenuToggle.classList.remove('active');
-              mobileMenuToggle.setAttribute('aria-expanded', 'false');
+              if (isActive) {
+                mobileMenuOverlay.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+              } else {
+                mobileMenuOverlay.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'true');
+              }
             });
-          });
+
+            // Close menu when clicking overlay
+            mobileMenuOverlay.addEventListener('click', function(e) {
+              if (e.target === mobileMenuOverlay) {
+                mobileMenuOverlay.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+              }
+            });
+
+            // Close menu when clicking links
+            const mobileMenuLinks = mobileMenuOverlay.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+              link.addEventListener('click', function() {
+                mobileMenuOverlay.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+              });
+            });
+          }
         }
       });
     </script>
@@ -740,7 +743,10 @@ if (!breadcrumbs) {
     </style>
     <slot name="head" />
   </head>
-  <body class:list={[{ 'bg-warm-light text-warm-dark': !isLandingPage }]}> 
+  <body
+    class:list={[{ 'bg-warm-light text-warm-dark': !isLandingPage }]}
+    data-is-landing-page={isLandingPage ? 'true' : 'false'}
+  > 
     {!isLandingPage && <div class="site-gradient" aria-hidden="true"></div>}
     
     <!-- Blog pages header - not sticky on mobile -->

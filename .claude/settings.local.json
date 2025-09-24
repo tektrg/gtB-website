@@ -12,7 +12,9 @@
       "Read(//Users/trungluong/**)",
       "Bash(curl:*)",
       "mcp__imgflip-server__get_memes",
-      "mcp__imgflip-server__caption_image"
+      "mcp__imgflip-server__caption_image",
+      "Bash(npm run:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
