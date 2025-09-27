@@ -1,0 +1,147 @@
+---
+import { getCollection } from 'astro:content';
+import Base from "@/layouts/Base.astro";
+const now = new Date();
+const guides = (await getCollection('guide', ({ data }) =>
+  !data.draft && new Date(data.pubDate) <= now
+)).sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+---
+<Base title="Guides" description="Comprehensive guides and tutorials for GPT Breeze.">
+  <style>
+    .guide-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    
+    .guide-card {
+      background: theme('colors.ui-surface');
+      border: 1px solid theme('colors.ui-border');
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .guide-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px theme('colors.shadow-medium');
+      border-color: theme('colors.accent-blue');
+    }
+    
+    .guide-card h2 {
+      margin: 0 0 12px 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: theme('colors.brand-fg');
+    }
+    
+    .guide-card p {
+      margin: 0 0 16px 0;
+      color: theme('colors.brand-muted');
+      line-height: 1.6;
+    }
+    
+    .guide-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.9rem;
+      color: theme('colors.brand-muted');
+      margin-top: auto;
+    }
+    
+    .guide-date {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .guide-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      background: theme('colors.gray-200');
+      color: theme('colors.gray-600');
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .read-time {
+      opacity: 0.7;
+    }
+    
+    .no-guides {
+      text-align: center;
+      padding: 48px 24px;
+      color: theme('colors.brand-muted');
+    }
+    
+    @media (max-width: 768px) {
+      .guide-card {
+        padding: 20px;
+      }
+      
+      .guide-card h2 {
+        font-size: 1.25rem;
+      }
+      
+      .guide-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+  </style>
+
+  <header>
+    <h1>Guides</h1>
+    <p class="subtitle">Step-by-step tutorials and comprehensive guides for maximizing your productivity with GPT Breeze</p>
+  </header>
+
+  {guides.length > 0 ? (
+    <div class="guide-grid">
+      {guides.map((guide) => (
+        <a href={`/guide/${guide.slug ?? guide.id}/`} class="guide-card" style="text-decoration: none; color: inherit; display: block;">
+          <h2>{guide.data.title}</h2>
+          {guide.data.description && (
+            <p>{guide.data.description}</p>
+          )}
+          <div class="guide-meta">
+            {guide.data.pubDate && (
+              <time class="guide-date" datetime={guide.data.pubDate.toISOString()}>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                </svg>
+                {new Intl.DateTimeFormat('en-US', {
+                  year: 'numeric',
+                  month: 'long', 
+                  day: 'numeric'
+                }).format(guide.data.pubDate)}
+              </time>
+            )}
+            {guide.data.tags && guide.data.tags.length > 0 && (
+              <div class="guide-tags">
+                {guide.data.tags.slice(0, 3).map((tag: string) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )}
+            <span class="read-time">~ 10 min read</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  ) : (
+    <div class="no-guides">
+      <p>No guides available yet. Check back soon for comprehensive tutorials and tips!</p>
+    </div>
+  )}
+</Base>
