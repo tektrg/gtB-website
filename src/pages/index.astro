@@ -125,7 +125,11 @@ import Base from "@/layouts/Base.astro";
         <span class="rating-text"><strong style="color: theme('colors.brand-fg');">4.9 stars</strong> on Chrome Web Store</span>
       </div>
       <div class="hero-actions">
-        <a class="btn primary" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome for free</a>
+        <a class="btn primary desktop-cta" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome for free</a>
+        <form class="mobile-email-form" id="mobileEmailForm">
+          <input type="email" id="mobileEmail" placeholder="Enter your email" required aria-label="Email address" />
+          <button type="submit" class="btn primary">Remind me via email</button>
+        </form>
       </div>
 
       <div class="hero-media">
@@ -913,14 +917,67 @@ import Base from "@/layouts/Base.astro";
       });
     };
     
+    // Mobile email form handler
+    const initMobileEmailForm = () => {
+      const form = document.getElementById('mobileEmailForm');
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailInput = document.getElementById('mobileEmail');
+        const email = emailInput.value;
+
+        // Track email submission with Google Analytics
+        if (window.gtag) {
+          window.gtag('event', 'mobile_email_submit', {
+            'event_category': 'engagement',
+            'event_label': email,
+            'value': 1
+          });
+        }
+
+        // Prepare email content
+        const subject = encodeURIComponent('GPT Breeze - Chrome Extension Info');
+        const body = encodeURIComponent(
+          'Hi there!\\n' +
+          '\\n' +
+          'Thank you for your interest in GPT Breeze!\\n' +
+          '\\n' +
+          'GPT Breeze is a powerful Chrome extension that helps you save time with AI summaries, tab management, and one-click shortcuts for YouTube, selected text, and any website.\\n' +
+          '\\n' +
+          'Install GPT Breeze for Chrome:\\n' +
+          'https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog\\n' +
+          '\\n' +
+          'Key Features:\\n' +
+          '• YouTube video summarization\\n' +
+          '• Web page analysis\\n' +
+          '• AI-powered writing assistance\\n' +
+          '• Custom shortcuts\\n' +
+          '• Bring your own API key (BYOK)\\n' +
+          '• Privacy-focused design\\n' +
+          '\\n' +
+          'Best regards,\\n' +
+          'GPT Breeze Team'
+        );
+
+        // Open email app with prefilled content
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+
+        // Clear the input
+        emailInput.value = '';
+      });
+    };
+    
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
         initLiteYT();
         initMobileMenu();
+        initMobileEmailForm();
       });
     } else {
       initLiteYT();
       initMobileMenu();
+      initMobileEmailForm();
     }
   </script>
 </Base>
