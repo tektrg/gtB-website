@@ -855,21 +855,21 @@ import Base from "@/layouts/Base.astro";
       const overlay = document.querySelector('.mobile-menu-overlay');
       const mobileMenu = document.querySelector('.mobile-menu');
       
-      console.log('Mobile menu init:', { toggle, overlay, mobileMenu });
+      // console.log('Mobile menu init:', { toggle, overlay, mobileMenu });
       
       if (!toggle || !overlay || !mobileMenu) {
-        console.log('Mobile menu elements not found!');
+        // console.log('Mobile menu elements not found!');
         return;
       }
       
       const openMenu = () => {
-        console.log('Adding active class to overlay');
+        // console.log('Adding active class to overlay');
         overlay.classList.add('active');
         toggle.classList.add('active');
         toggle.setAttribute('aria-expanded', 'true');
         overlay.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-        console.log('After adding active:', overlay.classList.toString());
+        // console.log('After adding active:', overlay.classList.toString());
       };
       
       const closeMenu = () => {
@@ -882,15 +882,15 @@ import Base from "@/layouts/Base.astro";
       
       // Toggle menu on button click
       toggle.addEventListener('click', (e) => {
-        console.log('Mobile menu toggle clicked!');
+        // console.log('Mobile menu toggle clicked!');
         e.preventDefault();
         e.stopPropagation();
-        console.log('Current overlay classes:', overlay.classList.toString());
+        // console.log('Current overlay classes:', overlay.classList.toString());
         if (overlay.classList.contains('active')) {
-          console.log('Closing menu');
+          // console.log('Closing menu');
           closeMenu();
         } else {
-          console.log('Opening menu');
+          // console.log('Opening menu');
           openMenu();
         }
       });
