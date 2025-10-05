@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
@@ -8,4 +9,12 @@ interface ImportMetaEnv {
 }
 interface ImportMeta {
   readonly env: ImportMetaEnv;
+}
+
+// Google Analytics global declarations
+declare global {
+  interface Window {
+    dataLayer: any[];
+    gtag: (...args: any[]) => void;
+  }
 }
