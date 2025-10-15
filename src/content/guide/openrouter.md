@@ -22,7 +22,7 @@ Think of OpenRouter as your personal AI model concierge. Instead of signing up f
 
 Ready to jump in? Obtaining your **OpenRouter API key** is surprisingly straightforward.
 
-1.  **Head over to OpenRouter:** First things first, visit the OpenRouter website.
+1.  **Head over to OpenRouter:** First things first, visit the OpenRouter website [https://openrouter.ai/](https://openrouter.ai/).
 2.  **Sign Up/Log In:** You'll need an account. A quick sign-up process, and you're in.
 3.  **Navigate to API Keys:** Once logged in, look for a section like "API Keys" or "Settings" in your dashboard.
 4.  **Generate a New Key:** Click on "Generate New Key" or a similar option. Make sure to copy this key immediately and store it securely! You usually won't be able to see it again.
@@ -50,6 +50,15 @@ Here's the lowdown on **OpenRouter privacy settings** and **data retention**:
 *   **OpenRouter's Logging:** By default, OpenRouter *doesn't* store your prompts or responses unless you explicitly opt-in. They do, however, sample a small number of prompts for anonymous categorization to improve their service. This is generally not linked to your personal ID if you haven't opted into full logging.
 *   **Third-Party Providers are Key:** This is the most important part. OpenRouter connects you to *other* AI model providers. Each of these providers has its own data policies. OpenRouter tries to reflect these, and you can actually *filter* providers based on their data policies! Look for options like "Zero retention" (they don't store your prompts after processing) and "Does not train" (they won't use your data to improve their models).
 *   **Your Control:** You have the power! Dive into your OpenRouter account settings. You can set preferences to only use providers with specific privacy policies. This is your best defense against unwanted **data sharing AI models**.
+
+### **Important Privacy Settings for Free OpenRouter Models**
+
+OpenRouter offers free models in exchange for using your data to train their AI systems. To use these free models, you'll need to update your privacy settings in your OpenRouter profile:
+
+![OpenRouter Privacy Settings for Free Models](/media/openrouter/Openrouter%20privacy%20settings%20for%20using%20free%20models.png)
+
+If you don't enable these settings, you'll see an error message like this:
+![OpenRouter Privacy Error](/media/openrouter/Openrouter%20privacy%20error.jpg)
 
 For a deeper dive into keeping your AI interactions private, check out our guide on [Privacy-First AI Tools](/privacy-first). It's all about empowering you to make informed choices.
 
