@@ -18,6 +18,8 @@ But let's be real, "free" often comes with a catch, especially when it comes to 
 
 Think of OpenRouter as your personal AI model concierge. Instead of signing up for each model individually, OpenRouter gives you a single **AI model API access** point to a vast array of large language models (LLMs) from different providers. This means more choice, more flexibility, and often, a much more **cost-effective AI solution**. It's a fantastic way to experiment with different models without committing to expensive subscriptions.
 
+![Juggling API Keys vs. OpenRouter](https://i.imgflip.com/a9ris6.jpg)
+
 ### **Getting Your OpenRouter API Key: Easier Than You Think!**
 
 Ready to jump in? Obtaining your **OpenRouter API key** is surprisingly straightforward.
@@ -41,6 +43,8 @@ To find and use them:
 
 Remember, these **OpenRouter free tier** models are a fantastic resource for learning and light use.
 
+![My project budget vs. Free AI models](https://i.imgflip.com/a9rit0.jpg)
+
 ### **The Privacy Catch: Data Sharing and Your Control**
 
 Now, for the elephant in the room: privacy. When you're using any AI service, especially those that act as intermediaries, **LLM privacy concerns** are totally valid. OpenRouter is pretty transparent about this, but it's crucial to understand the nuances.
@@ -50,6 +54,8 @@ Here's the lowdown on **OpenRouter privacy settings** and **data retention**:
 *   **OpenRouter's Logging:** By default, OpenRouter *doesn't* store your prompts or responses unless you explicitly opt-in. They do, however, sample a small number of prompts for anonymous categorization to improve their service. This is generally not linked to your personal ID if you haven't opted into full logging.
 *   **Third-Party Providers are Key:** This is the most important part. OpenRouter connects you to *other* AI model providers. Each of these providers has its own data policies. OpenRouter tries to reflect these, and you can actually *filter* providers based on their data policies! Look for options like "Zero retention" (they don't store your prompts after processing) and "Does not train" (they won't use your data to improve their models).
 *   **Your Control:** You have the power! Dive into your OpenRouter account settings. You can set preferences to only use providers with specific privacy policies. This is your best defense against unwanted **data sharing AI models**.
+
+![Free AI Models vs. Private Data](https://i.imgflip.com/a9ritw.jpg)
 
 ### **Important Privacy Settings for Free OpenRouter Models**
 
