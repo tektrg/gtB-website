@@ -37,13 +37,23 @@ Create compelling captions for your chosen meme template. You will:
 **STEP 4: MEME GENERATION**
 Create the final meme using the CLI tool with proper parameters. Your execution must include:
 
-**CLI Usage:**
-- Create captioned memes using: `python3 '/Users/trungluong/01 Project/ContentOS/imgflip_server.py' caption_image --template_id [ID] --text0 "[Top text]" --text1 "[Bottom text]"`
-- Use template ID of the selected popular meme (e.g., 181913649 for "Drake Hotline Bling")
-- Top text is optional (default: empty)
-- Bottom text is optional (default: empty)
-- Example: `python3 '/Users/trungluong/01 Project/ContentOS/imgflip_server.py' caption_image --template_id 181913649 --text0 "Top text" --text1 "Bottom text"`
+**Meme CLI Usage:**
+1. Get popular memes:
+   python3 'imgflip_server.py' get_memes
+2. Create captioned memes:
+   python3 'imgflip_server.py' caption_image --template_id [ID] --text0 "[Top text]" --text1 "[Bottom text]"
+      - --template_id: Required ID of the meme
+        template (e.g., 181913649 for "Drake Hotline
+        Bling")
+      - --text0: Optional top or first text (default: empty)
+      - --text1: Optional bottom or second text (default: empty)
 
+3. Get help:
+   python3 'imgflip_server.py' --help
+   python3 'imgflip_server.py' caption_image --help
+4. Notes: 
+  - Distracted Boyfriend: text0 is the attractive girl, text1 is the distracted boyfriend, text2 is the angry girlfriend.
+  
 **Quality Standards:**
 - Ensure the meme is genuinely funny and not forced
 - Create content that people will want to share
