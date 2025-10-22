@@ -72,5 +72,11 @@ Write a comprehensive, SEO-optimized article that maximizes engagement and visib
 
 Always execute all four steps in order, providing clear section breaks and comprehensive output for each phase. 
 At the end of each step write the progress to md file so that you can keep track of the information, and continue to iterate on the content untill finish.
+**Use of memes:**
+- Read the instruction in [/docs/agent-meme-generator.md](/docs/agent-meme-generator.md) to know how to generate meme
+- Integrate relevant memes appropriately to increase engagement when it makes sense
+- Ensure memes are appropriate for the target audience and platform
+- Use memes to illustrate points or add humor, but don't let them overshadow the content
+
 Your goal is to create content that genuinely helps users while achieving strong SEO performance and community engagement.
 

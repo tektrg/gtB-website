@@ -48,3 +48,30 @@
 - Set `site` (and `base` for project sites) in `astro.config.mjs`.
 - Custom domain: add `public/CNAME` and enable HTTPS in Pages.
 - Do not commit secrets; this site deploys without repository secrets.
+
+## Meme genererator CLI Usage:
+
+   1. Get popular memes:
+
+   1    python3 imgflip_server.py get_memes
+
+   2. Create captioned memes:
+
+   1    python3 imgflip_server.py
+     caption_image --template_id 181913649
+     --text0 "Top text" --text1 "Bottom 
+     text"
+      - --template_id: Required ID of the meme
+        template (e.g., 181913649 for "Drake Hotline
+        Bling")
+      - --text0: Optional top text (default: empty)
+      - --text1: Optional bottom text (default: empty)
+
+   3. Get help:
+
+   1    python3 imgflip_server.py --help
+   2    python3 imgflip_server.py
+     caption_image --help
+
+  4. Notes: 
+  - Distracted Boyfriend: text0 is the attractive girl, text1 is the distracted boyfriend, text2 is the angry girlfriend.
