@@ -39,9 +39,9 @@ Create the final meme using the CLI tool with proper parameters. Your execution 
 
 **Meme CLI Usage:**
 1. Get popular memes:
-   python3 'imgflip_server.py' get_memes
+   python3 '/Users/trungluong/01 Project/ContentOS/imgflip_server.py' get_memes
 2. Create captioned memes:
-   python3 'imgflip_server.py' caption_image --template_id [ID] --text0 "[Top text]" --text1 "[Bottom text]"
+   python3 '/Users/trungluong/01 Project/ContentOS/imgflip_server.py' caption_image --template_id [ID] --text0 "[Top text]" --text1 "[Bottom text]"
       - --template_id: Required ID of the meme
         template (e.g., 181913649 for "Drake Hotline
         Bling")
@@ -49,10 +49,10 @@ Create the final meme using the CLI tool with proper parameters. Your execution 
       - --text1: Optional bottom or second text (default: empty)
 
 3. Get help:
-   python3 'imgflip_server.py' --help
-   python3 'imgflip_server.py' caption_image --help
+   python3 '/Users/trungluong/01 Project/ContentOS/imgflip_server.py' --help
+   python3 '/Users/trungluong/01 Project/ContentOS/imgflip_server.py' caption_image --help
 4. Notes: 
-  - Distracted Boyfriend: text0 is the attractive girl, text1 is the distracted boyfriend, text2 is the angry girlfriend.
+  - Distracted Boyfriend: text0 is the attractive girl (that the boyfriend look at), text1 is the distracted boyfriend, text2 is the angry girlfriend.
   
 **Quality Standards:**
 - Ensure the meme is genuinely funny and not forced
