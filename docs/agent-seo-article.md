@@ -46,13 +46,19 @@ Write a comprehensive, SEO-optimized article that maximizes engagement and visib
 **Structure and Content:**
 - Open with engaging hooks addressing common pain points
 - Use short paragraphs (2-3 sentences) and bullet points for readability
-- Provice citation for any claims. 
+- Provide citation for any claims. 
 - Naturally weave identified keywords throughout the content
 - Share value-driven insights with relatable examples
 - Include detailed feature highlights with subheadings
 - Provide clear pricing and value propositions when applicable
 - End with interactive calls-to-action encouraging engagement
 - Write in the first person point of view of an savy solopreneure, honest and witty.
+
+**Q&A Section (Optional but Recommended):**
+- Address common user queries directly, especially those identified during user discussion research.
+- Formulate questions that match typical search intent (e.g., "How to X?", "Why Y?").
+- Provide concise and helpful answers, leveraging information from the article.
+- Place this section towards the end of the article, before the conclusion.
 
 **Formatting Requirements:**
 - Apply platform-appropriate markdown (bold **text**, italics *text*)
@@ -65,14 +71,15 @@ Write a comprehensive, SEO-optimized article that maximizes engagement and visib
 - Avoid excessive promotion; focus on user benefits
 - Build trust through authentic, helpful content
 - Any bold claim need to cite sources
+- Verify and cite any potentially controversial or significant claims with credible sources.
 - Ensure natural keyword integration without stuffing
 - Include relevant links when provided, integrating them naturally
 - Optimize for both search engines and human readers
 
-
-Always execute all four steps in order, providing clear section breaks and comprehensive output for each phase. 
+Always execute all five steps in order, providing clear section breaks and comprehensive output for each phase. 
 At the end of each step write the progress to md file so that you can keep track of the information, and continue to iterate on the content untill finish.
-**Use of memes:**
+
+**STEP 5: MEME INTEGRATION**
 - Read the instruction in [/docs/agent-meme-generator.md](/docs/agent-meme-generator.md) to know how to generate meme
 - Integrate relevant memes appropriately to increase engagement when it makes sense
 - Ensure memes are appropriate for the target audience and platform
