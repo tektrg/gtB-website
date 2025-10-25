@@ -4,13 +4,13 @@ import Base from "@/layouts/Base.astro";
 export async function getStaticPaths() {
   const guides = await getCollection('guide');
   return guides.map((g) => ({
-    params: { slug: g.slug ?? g.id },
+    params: { slug: g.slug },
   }));
 }
 const slugParam = Astro.params.slug;
 const slug = Array.isArray(slugParam) ? slugParam.join('/') : slugParam;
 const guides = await getCollection('guide');
-const guide = guides.find((g) => (g.slug ?? g.id) === slug);
+const guide = guides.find((g) => (g.slug) === slug);
 if (!guide) throw new Error('Not found');
 const { Content } = await guide.render();
 
@@ -20,7 +20,7 @@ const relatedGuides = guides
   .filter((g) => 
     !g.data.draft && 
     new Date(g.data.pubDate) <= now &&
-    (g.slug ?? g.id) !== slug
+    (g.slug) !== slug
   )
   .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
   .slice(0, 3);
@@ -323,7 +323,7 @@ const relatedGuides = guides
         <h3>Related Guides</h3>
         <div class="related-grid">
           {relatedGuides.map((relatedGuide) => (
-            <a href={`/guide/${relatedGuide.slug ?? relatedGuide.id}/`} class="related-card">
+            <a href={`/guide/${relatedGuide.slug}/`} class="related-card">
               <h4>{relatedGuide.data.title}</h4>
               {relatedGuide.data.description && (
                 <p>{relatedGuide.data.description.slice(0, 120)}...</p>

@@ -109,7 +109,7 @@ const guides = (await getCollection('guide', ({ data }) =>
   {guides.length > 0 ? (
     <div class="guide-grid">
       {guides.map((guide) => (
-        <a href={`/guide/${guide.slug ?? guide.id}/`} class="guide-card" style="text-decoration: none; color: inherit; display: block;">
+        <a href={`/guide/${guide.slug}/`} class="guide-card" style="text-decoration: none; color: inherit; display: block;">
           <h2>{guide.data.title}</h2>
           {guide.data.description && (
             <p>{guide.data.description}</p>

@@ -109,7 +109,7 @@ const posts = (await getCollection('blog', ({ data }) =>
   {posts.length > 0 ? (
     <div class="blog-grid">
       {posts.map((post) => (
-        <a href={`/blog/${post.slug ?? post.id}/`} class="blog-card" style="text-decoration: none; color: inherit; display: block;">
+        <a href={`/blog/${post.slug}/`} class="blog-card" style="text-decoration: none; color: inherit; display: block;">
           <h2>{post.data.title}</h2>
           {post.data.description && (
             <p>{post.data.description}</p>

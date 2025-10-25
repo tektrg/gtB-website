@@ -4,13 +4,13 @@ import Base from "@/layouts/Base.astro";
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((p) => ({
-    params: { slug: p.slug ?? p.id },
+    params: { slug: p.slug },
   }));
 }
 const slugParam = Astro.params.slug;
 const slug = Array.isArray(slugParam) ? slugParam.join('/') : slugParam;
 const posts = await getCollection('blog');
-const post = posts.find((p) => (p.slug ?? p.id) === slug);
+const post = posts.find((p) => p.slug === slug);
 if (!post) throw new Error('Not found');
 const { Content } = await post.render();
 
@@ -20,7 +20,7 @@ const relatedPosts = posts
   .filter((p) => 
     !p.data.draft && 
     new Date(p.data.pubDate) <= now &&
-    (p.slug ?? p.id) !== slug
+    p.slug !== slug
   )
   .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
   .slice(0, 3);
@@ -323,7 +323,7 @@ const relatedPosts = posts
         <h3>Related Articles</h3>
         <div class="related-grid">
           {relatedPosts.map((relatedPost) => (
-            <a href={`/blog/${relatedPost.slug ?? relatedPost.id}/`} class="related-card">
+            <a href={`/blog/${relatedPost.slug}/`} class="related-card">
               <h4>{relatedPost.data.title}</h4>
               {relatedPost.data.description && (
                 <p>{relatedPost.data.description.slice(0, 120)}...</p>
