@@ -72,4 +72,4 @@ To ensure your GPT-4o requests are not secretly rerouted to other models, especi
 
 Don't let platform limitations hold you back from the cutting-edge capabilities of GPT-4o. The BYOK approach, powered by GPT Breeze, puts the control, cost-efficiency, and flexibility back in your hands. It's time to experience GPT-4o on your terms.
 
-**Ready to take control of your AI experience?** [Explore GPT Breeze today and unlock GPT-4o with your own key!](https://www.gptbreeze.com)
+**Ready to take control of your AI experience?** [Explore GPT Breeze today and unlock GPT-4o with your own key!](https://gptbreeze.io)
