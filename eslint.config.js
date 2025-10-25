@@ -21,7 +21,7 @@ export default [
     rules: {
       // Add any custom rules here
       'no-console': 'warn',
-      'no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': 'off', // Disable this rule as it's handled by TypeScript
     },
     files: ['**/*.js', '**/*.cjs', '**/*.mjs', '**/*.jsx', '**/*.ts', '**/*.tsx'],
     ignores: ['dist/**', '.astro/**', 'node_modules/**', 'public/**', '**/*.astro', '.vscode/**'],
