@@ -3,14 +3,83 @@ import Base from "@/layouts/Base.astro";
 import modelsData from "@/data/models-api.json";
 import "@/styles/calculator.css";
 
-const title = "LLM Price Calculator - Compare AI Model Costs | GPT Breeze";
-const description = "Compare costs across different AI models and providers. Calculate your expected usage costs with our interactive LLM price calculator.";
+const title = "AI Model Cost Calculator - Compare LLM Pricing & API Costs | GPT Breeze";
+const description = "Calculate and compare AI model costs across OpenAI, Anthropic, and other providers. Find the best AI model for your budget with our interactive calculator. No subscription required - use your own API key.";
 ---
 
 <Base title={title} description={description} isLandingPage={true}>
   <link slot="head" rel="preconnect" href="https://fonts.googleapis.com">
   <link slot="head" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link slot="head" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script slot="head" type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "AI Model Cost Calculator",
+      "description": "Calculate and compare AI model costs across OpenAI, Anthropic, and other providers. Find the best AI model for your budget with our interactive calculator. No subscription required - use your own API key.",
+      "applicationCategory": "CalculatorApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "name": "GPT Breeze",
+        "description": "Chrome extension for using AI models in your browser",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "GPT Breeze"
+      },
+      "featureList": [
+        "Compare AI model costs",
+        "BYOM (Bring Your Own Model) pricing",
+        "Real-time cost calculations",
+        "Multiple provider support"
+      ]
+    }
+  </script>
+  
+  <script slot="head" type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How accurate are these cost calculations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our calculator uses current pricing data from AI providers. Costs are estimates and may vary based on special pricing tiers or promotions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are tokens in AI models?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tokens are chunks of text that AI models process - roughly equivalent to 4 characters or 0.75 words in English. Both input (your prompt) and output (AI response) tokens are counted toward your usage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this calculator for budget planning?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, absolutely. Use the calculator to estimate monthly costs based on your expected usage patterns. This helps you choose the most cost-effective AI model for your needs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is BYOM (Bring Your Own Model)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "BYOM allows you to use your own API keys with various AI providers instead of subscribing to services. You maintain control of your data and only pay for what you use."
+          }
+        }
+      ]
+    }
+  </script>
 
   <header>
     <div class="container nav">
@@ -41,414 +110,186 @@ const description = "Compare costs across different AI models and providers. Cal
     <div class="container">
       <div class="bg"></div>
       <h1 class="display">
-        LLM <span class="em">Price Calculator</span>
+        AI Model <span class="em">Cost Calculator</span>
       </h1>
       <p class="lead center" style="max-width: 720px; margin-inline:auto;">
-        Compare costs across different AI models and providers. Make informed decisions with real-time pricing calculations.
+        Compare costs across different AI models and providers instantly. Calculate your expected usage costs and find the most cost-effective model for your needs with our interactive calculator.
       </p>
     </div>
   </section>
 
   <section>
     <div class="container">
-      <h2 class="section-title">Usage Parameters</h2>
-      <p class="subtle">Adjust token counts to see how pricing changes across different models</p>
-      
-      <div class="calculator-inputs">
-        <div class="input-group">
-          <label for="inputTokens" class="input-label">Input Tokens</label>
-          <input
-            type="number"
-            id="inputTokens"
-            value="10000"
-            min="0"
-            step="1000"
-            class="input-field"
-          />
-          <p class="input-hint">
-            <span id="inputTokensDisplay">10,000</span> tokens
-          </p>
-        </div>
 
-        <div class="input-group">
-          <label for="outputTokens" class="input-label">Output Tokens</label>
-          <input
-            type="number"
-            id="outputTokens"
-            value="2000"
-            min="0"
-            step="1000"
-            class="input-field"
-          />
-          <p class="input-hint">
-            <span id="outputTokensDisplay">2,000</span> tokens
-          </p>
+      <div class="card">
+        <h2 class="section-title">Calculate Your AI Model Costs</h2>
+        <p class="subtitle">Adjust token counts to see how pricing changes across different models. Use the pre-set buttons to estimate costs for common use cases.</p>
+        
+        <h3 class="subtitle" style="margin-top: 24px;">Common Use Cases</h3>
+        <div class="usage-buttons">
+          <button class="usage-btn" data-tokens="1950">🎥 YouTube Summary (10 min)</button>
+          <button class="usage-btn" data-tokens="5200">📄 PDF Analysis (10 pages)</button>
+          <button class="usage-btn" data-tokens="39000">📖 Book Analysis (100 pages)</button>
+          <button class="usage-btn" data-tokens="117000">📚 Long Document (300 pages)</button>
         </div>
+        
+        <div class="calculator-inputs">
+          <div class="input-group">
+            <label for="inputTokens" class="input-label">Input Tokens</label>
+            <input
+              type="number"
+              id="inputTokens"
+              value="10000"
+              min="0"
+              step="1000"
+              class="input-field"
+            />
+            <p class="input-hint">
+              <span id="inputTokensDisplay">10,000</span> tokens
+            </p>
+          </div>
 
-        <div class="input-group">
-          <label for="cacheReadTokens" class="input-label">Cache Read Tokens</label>
-          <input
-            type="number"
-            id="cacheReadTokens"
-            value="0"
-            min="0"
-            step="1000"
-            class="input-field"
-          />
-          <p class="input-hint">
-            <span id="cacheReadTokensDisplay">0</span> tokens
-          </p>
-        </div>
+          <div class="input-group">
+            <label for="outputTokens" class="input-label">Output Tokens</label>
+            <input
+              type="number"
+              id="outputTokens"
+              value="2000"
+              min="0"
+              step="1000"
+              class="input-field"
+            />
+            <p class="input-hint">
+              <span id="outputTokensDisplay">2,000</span> tokens
+            </p>
+          </div>
+
+          <div class="input-group">
+            <label for="cacheReadTokens" class="input-label">Cache Read Tokens</label>
+            <input
+              type="number"
+              id="cacheReadTokens"
+              value="0"
+              min="0"
+              step="1000"
+              class="input-field"
+            />
+            <p class="input-hint">
+              <span id="cacheReadTokensDisplay">0</span> tokens
+            </p>
+          </div>
       </div>
 
-      <div class="info-box">
-        <p>Costs are calculated per million tokens. All pricing data is sourced from official provider documentation.</p>
+        <h2 class="section-title">Compare AI Model Costs</h2>
+        <p class="subtitle">Select models to compare their costs side-by-side. Our calculator includes pricing from OpenAI, Anthropic, OpenRouter, and other providers.</p>
+        
+        <div class="table-wrapper">
+          <table class="data-table comparison-table">
+            <thead>
+              <tr id="comparisonTableHeader">
+                <th class="th-left">Cost Type</th>
+                <!-- Model columns populated by JavaScript -->
+              </tr>
+            </thead>
+            <tbody id="comparisonTableBody">
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top: 16px;">Note: Costs are displayed in USD dollars and based on current provider pricing</p>
       </div>
+
+      <section>
+        <h2 class="section-title">How to Choose the Right AI Model</h2>
+        <div class="two" style="margin-top: 16px;">
+          <div>
+            <h3 class="subtitle">Consider These Factors:</h3>
+            <ul class="list">
+              <li><strong>Cost per million tokens:</strong> Compare input and output costs</li>
+              <li><strong>Model capabilities:</strong> Accuracy, reasoning, and specialized tasks</li>
+              <li><strong>Privacy requirements:</strong> Data handling and security</li>
+              <li><strong>Latency needs:</strong> Response time requirements</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="subtitle">BYOM (Bring Your Own Model) Benefits:</h3>
+            <ul class="list">
+              <li>Control over your data and privacy</li>
+              <li>No recurring subscription costs</li>
+              <li>Pay only for what you use</li>
+              <li>Flexibility to switch providers</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2 class="section-title">Why Use an AI Cost Calculator?</h2>
+        <p class="subtitle">
+          When using AI models like GPT-4, Claude, or open-source alternatives, understanding the real cost of API usage is crucial. 
+          Our calculator helps you make informed decisions about which model fits your budget and usage patterns.
+        </p>
+        <div class="two" style="margin-top: 24px;">
+          <div>
+            <h3 class="subtitle">Budget Planning</h3>
+            <p class="muted">Estimate monthly costs before committing to an AI provider</p>
+          </div>
+          <div>
+            <h3 class="subtitle">Model Comparison</h3>
+            <p class="muted">Compare pricing across multiple AI providers side-by-side</p>
+          </div>
+          <div>
+            <h3 class="subtitle">Usage Optimization</h3>
+            <p class="muted">Understand how input/output ratios affect total costs</p>
+          </div>
+        </div>
+      </section>
+      <div class="card">
+        <h2 class="section-title">Ready to Use These AI Models in Your Browser?</h2>
+        <p class="subtitle">GPT Breeze is a free Chrome extension that lets you use any AI model directly in your browser - no subscription required. Use your own API keys with OpenAI, Anthropic, or other providers.</p>
+        <div class="hero-actions">
+          <a 
+            href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog" 
+            class="btn primary"
+          >
+            Add GPT Breeze to Chrome - Free
+          </a>
+          <a 
+            href="/guide" 
+            class="btn outline"
+          >
+            Learn How to Set Up API Keys
+          </a>
+        </div>
+        <p class="muted" style="margin-top: 16px; text-align: center;">
+          Join thousands of users saving hours on content consumption with AI assistance
+        </p>
+      </div>
+
+      <section>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <details style="margin-bottom: 16px;">
+          <summary>How accurate are these cost calculations?</summary>
+          <p class="muted" style="margin-top: 8px;">Our calculator uses current pricing data from AI providers. Costs are estimates and may vary based on special pricing tiers or promotions.</p>
+        </details>
+        <details style="margin-bottom: 16px;">
+          <summary>What are tokens in AI models?</summary>
+          <p class="muted" style="margin-top: 8px;">Tokens are chunks of text that AI models process - roughly equivalent to 4 characters or 0.75 words in English. Both input (your prompt) and output (AI response) tokens are counted toward your usage.</p>
+        </details>
+        <details style="margin-bottom: 16px;">
+          <summary>Can I use this calculator for budget planning?</summary>
+          <p class="muted" style="margin-top: 8px;">Yes, absolutely. Use the calculator to estimate monthly costs based on your expected usage patterns. This helps you choose the most cost-effective AI model for your needs.</p>
+        </details>
+        <details>
+          <summary>What is BYOM (Bring Your Own Model)?</summary>
+          <p class="muted" style="margin-top: 8px;">BYOM allows you to use your own API keys with various AI providers instead of subscribing to services. You maintain control of your data and only pay for what you use.</p>
+        </details>
+      </section>
     </div>
   </section>
 
-  <section>
-    <div class="container">
-      <h2 class="section-title">Model Cost Comparison</h2>
-      <p class="subtle">Select models to compare their costs side-by-side</p>
-      
-      <div class="table-wrapper">
-        <table class="data-table comparison-table">
-          <thead>
-            <tr id="comparisonTableHeader">
-              <th class="th-left">Cost Type</th>
-              <!-- Model columns populated by JavaScript -->
-            </tr>
-          </thead>
-          <tbody id="comparisonTableBody">
-            <!-- Populated by JavaScript -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    /* Page-specific styles only - reusable styles are in calculator.css */
-    .subtle {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
-    .comparison-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-    }
-
-    .comparison-table th {
-      min-width: 180px;
-      max-width: 200px;
-      padding: 16px 12px;
-      vertical-align: top;
-      position: relative;
-    }
-
-    .comparison-table th:first-child {
-      min-width: 200px;
-      position: sticky;
-      left: 0;
-      background: white;
-      z-index: 10;
-    }
-
-    .comparison-table .model-column-header {
-      position: relative;
-      min-height: 100px;
-    }
-
-    .comparison-table .remove-model-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background: #ef4444;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      width: 24px;
-      height: 24px;
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      line-height: 1;
-    }
-
-    .comparison-table .remove-model-btn:hover {
-      background: #dc2626;
-    }
-
-    .comparison-table .search-column {
-      background: linear-gradient(135deg, #f9fafb 0%, #f0f9ff 100%);
-      border-left: 2px dashed #d1d5db;
-      vertical-align: top;
-      padding: 16px 12px;
-      min-width: 240px;
-      position: relative;
-    }
-
-    .search-wrapper-compact {
-      position: relative;
-    }
-
-    .search-input-compact {
-      width: 100%;
-      padding: 10px 36px 10px 12px;
-      font-size: 0.875rem;
-      border: 2px solid #e5e7eb;
-      border-radius: 8px;
-      transition: all 0.2s ease;
-      background: white;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    }
-
-    .search-input-compact:focus {
-      outline: none;
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    }
-
-    .search-input-compact::placeholder {
-      color: #9ca3af;
-    }
-
-    .search-icon {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #9ca3af;
-      pointer-events: none;
-      font-size: 14px;
-    }
-
-    .search-results-dropdown {
-      position: absolute;
-      top: calc(100% + 4px);
-      left: 0;
-      right: 0;
-      max-height: 320px;
-      overflow-y: auto;
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      margin-top: 4px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 
-                  0 8px 10px -6px rgba(0, 0, 0, 0.1);
-      z-index: 50;
-      animation: slideDown 0.15s ease-out;
-      display: block;
-    }
-
-    .search-results-dropdown:empty {
-      display: none;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .search-results-dropdown::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .search-results-dropdown::-webkit-scrollbar-track {
-      background: #f3f4f6;
-      border-radius: 3px;
-    }
-
-    .search-results-dropdown::-webkit-scrollbar-thumb {
-      background: #d1d5db;
-      border-radius: 3px;
-    }
-
-    .search-results-dropdown::-webkit-scrollbar-thumb:hover {
-      background: #9ca3af;
-    }
-
-    .search-result-item {
-      padding: 12px 14px !important;
-      cursor: pointer !important;
-      border-bottom: 1px solid #f3f4f6 !important;
-      transition: all 0.15s ease !important;
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center !important;
-      gap: 10px !important;
-      background: white !important;
-      position: relative !important;
-    }
-
-    .search-result-item:hover {
-      background: linear-gradient(90deg, #f0f9ff 0%, #e0f2fe 100%) !important;
-    }
-    
-    .search-result-item:hover::before {
-      content: '' !important;
-      position: absolute !important;
-      left: 0 !important;
-      top: 0 !important;
-      bottom: 0 !important;
-      width: 3px !important;
-      background: #6366f1 !important;
-    }
-
-    .search-result-item:last-child {
-      border-bottom: none;
-    }
-
-    .search-result-item:first-child {
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-    }
-
-    .search-result-item:last-child {
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
-    }
-    
-    .search-result-item:hover:first-child {
-      border-top-left-radius: 8px;
-    }
-    
-    .search-result-item:hover:last-child {
-      border-bottom-left-radius: 8px;
-    }
-
-    .search-result-item:active {
-      background: #dbeafe;
-      transform: scale(0.98);
-    }
-
-    .search-result-content {
-      flex: 1 !important;
-      min-width: 0 !important;
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 2px !important;
-    }
-
-    .search-result-name {
-      font-size: 0.875rem !important;
-      font-weight: 600 !important;
-      color: #111827 !important;
-      line-height: 1.3 !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-    }
-
-    .search-result-provider {
-      font-size: 0.75rem !important;
-      color: #6b7280 !important;
-      line-height: 1.2 !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 4px !important;
-    }
-
-    .search-result-provider::before {
-      content: '•' !important;
-      color: #d1d5db !important;
-    }
-
-    .search-result-meta {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      margin-top: 2px;
-    }
-
-    .search-result-badge {
-      display: inline-block !important;
-      padding: 4px 10px !important;
-      background: #f3f4f6 !important;
-      color: #6b7280 !important;
-      border-radius: 12px !important;
-      font-size: 0.688rem !important;
-      font-weight: 500 !important;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      white-space: nowrap !important;
-      flex-shrink: 0 !important;
-    }
-
-    .badge-free {
-      background: #dcfce7 !important;
-      color: #166534 !important;
-    }
-
-    .badge-cost {
-      background: #eff6ff !important;
-      color: #1d4ed8 !important;
-    }
-
-    .search-no-results {
-      padding: 24px 16px;
-      text-align: center;
-      color: #6b7280;
-      font-size: 0.875rem;
-      line-height: 1.5;
-    }
-
-    .search-no-results-icon {
-      font-size: 2rem;
-      margin-bottom: 8px;
-      opacity: 0.5;
-    }
-
-    .search-hint-text {
-      margin-top: 8px;
-      font-size: 0.75rem;
-      color: #9ca3af;
-      text-align: center;
-      font-style: italic;
-    }
-
-    .table-wrapper {
-      overflow-x: auto;
-      margin-top: 24px;
-    }
-
-    .comparison-table tbody tr:first-child td {
-      padding-top: 16px;
-    }
-
-    .model-info {
-      margin-bottom: 12px;
-    }
-
-    .model-name {
-      font-weight: 600;
-      font-size: 0.875rem;
-      color: #111827;
-      margin-bottom: 4px;
-    }
-
-    .model-provider {
-      font-size: 0.75rem;
-      color: #6b7280;
-    }
-  </style>
-
-  <script define:vars={{ modelsData }}>
+  <script define:vars={{ modelsData }} is:inline>
     // Global state
-    let selectedModels = [];
+    let selectedModels = ['openai/gpt-4.1-nano', 'openai/gpt-5-nano'];
     let allModels = [];
     let searchQuery = '';
     let searchResults = [];
@@ -472,6 +313,19 @@ const description = "Compare costs across different AI models and providers. Cal
       document.getElementById('inputTokens').addEventListener('input', updateCalculations);
       document.getElementById('outputTokens').addEventListener('input', updateCalculations);
       document.getElementById('cacheReadTokens').addEventListener('input', updateCalculations);
+
+      // Add event listeners for usage buttons
+      const usageButtons = document.querySelectorAll('.usage-btn');
+      usageButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const tokens = parseInt(this.getAttribute('data-tokens'));
+          // Set input tokens to the clicked button's value
+          document.getElementById('inputTokens').value = tokens;
+          // Set output tokens to 60% of input tokens as specified
+          document.getElementById('outputTokens').value = Math.round(tokens * 0.6);
+          updateCalculations();
+        });
+      });
 
       // Initial render
       updateCalculations();
@@ -561,19 +415,6 @@ const description = "Compare costs across different AI models and providers. Cal
 
     // Make function global
     window.selectModelFromSearch = selectModelFromSearch;
-
-    // Calculate cost for a model
-    function calculateCost(model, inputTokens, outputTokens, cacheReadTokens) {
-      // Handle missing cost data
-      if (!model || !model.cost) {
-        return 0;
-      }
-      
-      const inputCost = (inputTokens / 1000000) * (model.cost.input || 0);
-      const outputCost = (outputTokens / 1000000) * (model.cost.output || 0);
-      const cacheCost = (cacheReadTokens / 1000000) * (model.cost.cache_read || 0);
-      return inputCost + outputCost + cacheCost;
-    }
 
     // Format cost
     function formatCost(cost) {
