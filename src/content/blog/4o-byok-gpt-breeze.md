@@ -2,7 +2,6 @@
 title: "Unlock the Power of GPT-4o: Your BYOK Guide with GPT Breeze"
 pubDate: 2025-01-18T10:00:00+07:00
 description: "Discover how to overcome ChatGPT's restrictions on GPT-4o access by using a Bring Your Own Key (BYOK) approach with GPT Breeze for unparalleled control and cost-efficiency."
-author: "GPT Breeze Team"
 tags: ["GPT-4o", "BYOK", "Bring Your Own Key", "ChatGPT alternatives", "GPT Breeze", "AI models", "AI tools", "unrestricted access", "cost-effective AI"]
 ---
 
