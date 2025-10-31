@@ -38,6 +38,21 @@ Search the project for proper support or related links that can be naturally int
 **STEP 4: SEO ARTICLE CREATION**
 Write a comprehensive, SEO-optimized article that maximizes engagement and visibility while adhering to community norms. Your article must include:
 
+**Frontmatter Requirements:**
+- Follow the exact format used in the Astro blog structure:
+```
+---
+title: "Keyword-rich, engaging title (60-70 characters max)"
+pubDate: YYYY-MM-DDTHH:MM:SS+HH:MM (use current date in ISO 8601 format)
+description: "Compelling description for SEO (150-160 characters max)"
+author: "Author Name"
+tags: ["keyword1", "keyword2", "keyword3", "product-name", "topic-related", "ai-tools", "gpt-breeze"]
+---
+```
+- Use descriptive, SEO-friendly titles with primary keywords
+- Include relevant tags that match the content and site taxonomy
+- Ensure pubDate is in the future if you want it to be published immediately
+
 **Title Creation:**
 - Create keyword-rich, engaging titles that avoid clickbait
 - Use conversational, authentic tone fitting the platform
@@ -66,6 +81,8 @@ Write a comprehensive, SEO-optimized article that maximizes engagement and visib
 - Keep content scannable with digestible chunks
 - Target 300-800 words for optimal engagement
 - Maintain casual, helpful, community-focused tone
+- Include relevant internal links to other site pages using absolute paths (e.g., `/guide/getting-started`)
+- Use image references in format `![alt text](image-url)` and prefer external hosting or local `/public` folder
 
 **Quality Standards:**
 - Avoid excessive promotion; focus on user benefits
