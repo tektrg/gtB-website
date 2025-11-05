@@ -1,0 +1,163 @@
+---
+const { modelsData } = Astro.props;
+---
+
+<div class="table-wrapper">
+  <table class="data-table comparison-table">
+    <thead>
+      <tr id="comparisonTableHeader">
+        <th class="th-left">Cost Type</th>
+        <!-- Model columns will be populated by JavaScript -->
+      </tr>
+    </thead>
+    <tbody id="comparisonTableBody">
+      <!-- Populated by JavaScript -->
+    </tbody>
+  </table>
+</div>
+
+<script is:inline>
+  // Initialize when the component is ready
+  document.addEventListener('DOMContentLoaded', init);
+  if (document.readyState === 'loading') {
+    // Already loaded, call init directly
+    init();
+  }
+
+  // Initialize function
+  function init() {
+    // Function to update the table with token values from parent
+    window.updateTableWithTokens = function(inputTokens, outputTokens, cacheReadTokens) {
+      // Get models data from global scope (passed from parent)
+      const modelsData = window.modelsDataFromParent || {};
+      
+      // Flatten models data
+      const allModels = [];
+      Object.entries(modelsData).forEach(([providerId, provider]) => {
+        Object.entries(provider.models).forEach(([modelId, model]) => {
+          allModels.push({
+            ...model,
+            providerId,
+            providerName: provider.name,
+            fullId: `${providerId}/${modelId}`
+          });
+        });
+      });
+
+      // Selected models for comparison
+      const selectedModels = ['openai/gpt-4.1-nano', 'openai/gpt-5-nano'];
+      
+      // Get selected models data
+      const selectedModelsData = allModels.filter(m => selectedModels.includes(m.fullId));
+
+      // Format number with commas
+      function formatNumber(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      // Format cost
+      function formatCost(cost) {
+        if (cost === 0) return 'FREE';
+        if (cost < 0.01) return cost.toFixed(4);
+        return cost.toFixed(3);
+      }
+
+      // Calculate costs for each model
+      const costs = selectedModelsData.map(model => {
+        const inputCost = (inputTokens / 1000000) * (model.cost?.input || 0);
+        const outputCost = (outputTokens / 1000000) * (model.cost?.output || 0);
+        const cacheCost = (cacheReadTokens / 1000000) * (model.cost?.cache_read || 0);
+        const totalCost = inputCost + outputCost + cacheCost;
+        
+        return {
+          model,
+          inputCost,
+          outputCost,
+          cacheCost,
+          totalCost,
+          inputRate: model.cost?.input || 0,
+          outputRate: model.cost?.output || 0,
+          cacheRate: model.cost?.cache_read || 0
+        };
+      });
+
+      // Update table header
+      const thead = document.getElementById('comparisonTableHeader');
+      thead.innerHTML = '<th class="th-left">Cost Type</th>';
+      
+      // Add columns for selected models
+      selectedModelsData.forEach(model => {
+        thead.innerHTML += `
+          <th class="th-center model-column-header">
+            <div class="model-info">
+              <div class="model-name">${model.name}</div>
+              <div class="model-provider">${model.providerName}</div>
+            </div>
+          </th>
+        `;
+      });
+
+      // Add empty search column
+      thead.innerHTML += '<th class="th-center search-column"></th>';
+
+      // Update table body
+      const tbody = document.getElementById('comparisonTableBody');
+      
+      let rows = '';
+      if (selectedModelsData.length > 0) {
+        rows = `
+          <tr>
+            <td class="text-primary"><strong>Input Cost Rate</strong></td>
+            ${costs.map(c => `<td class="text-center text-secondary">${c.inputRate.toFixed(2)}/1M</td>`).join('')}
+            <td class="search-column"></td>
+          </tr>
+          <tr>
+            <td class="text-primary"><strong>Output Cost Rate</strong></td>
+            ${costs.map(c => `<td class="text-center text-secondary">${c.outputRate.toFixed(2)}/1M</td>`).join('')}
+            <td class="search-column"></td>
+          </tr>
+          <tr class="highlighted">
+            <td class="text-primary"><strong>Input Cost</strong><br/><span style="font-size: 0.875rem; color: #6b7280;">(${formatNumber(inputTokens)} tokens)</span></td>
+            ${costs.map(c => `<td class="text-center"><strong>${formatCost(c.inputCost)}</strong></td>`).join('')}
+            <td class="search-column"></td>
+          </tr>
+          <tr class="highlighted">
+            <td class="text-primary"><strong>Output Cost</strong><br/><span style="font-size: 0.875rem; color: #6b7280;">(${formatNumber(outputTokens)} tokens)</span></td>
+            ${costs.map(c => `<td class="text-center"><strong>${formatCost(c.outputCost)}</strong></td>`).join('')}
+            <td class="search-column"></td>
+          </tr>
+        `;
+
+        if (cacheReadTokens > 0) {
+          rows += `
+            <tr>
+              <td class="text-primary"><strong>Cache Read Cost</strong><br/><span style="font-size: 0.875rem; color: #6b7280;">(${formatNumber(cacheReadTokens)} tokens)</span></td>
+            ${costs.map(c => `<td class="text-center">${formatCost(c.cacheCost)}</td>`).join('')}
+            <td class="search-column"></td>
+          </tr>
+          `;
+        }
+
+        rows += `
+          <tr class="selected" style="background: #f0f9ff;">
+            <td class="text-primary"><strong style="font-size: 1.125rem;">Total Cost</strong></td>
+            ${costs.map(c => `<td class="text-center"><strong style="font-size: 1.25rem; color: #6366f1;">${formatCost(c.totalCost)}</strong></td>`).join('')}
+            <td class="search-column"></td>
+          </tr>
+        `;
+      } else {
+        // Show empty state
+        rows = `
+          <tr>
+            <td class="text-center" style="padding: 40px; color: #6b7280;" colspan="${selectedModels.length + 2}">
+              Select models to compare costs
+            </td>
+          </tr>
+        `;
+      }
+
+      tbody.innerHTML = rows;
+    };
+  }
+</script>
+</content>
