@@ -1,6 +1,7 @@
 ---
 import Base from "@/layouts/Base.astro";
 import modelsData from "@/data/models-api.json";
+import PriceComparisonTable from "@/components/PriceComparisonTable.astro";
 import "@/styles/calculator.css";
 
 const title = "AI Model Cost Calculator - Compare LLM Pricing & API Costs | GPT Breeze";
@@ -183,19 +184,7 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
         <h2 class="section-title">Compare AI Model Costs</h2>
         <p class="subtitle">Select models to compare their costs side-by-side. Our calculator includes pricing from OpenAI, Anthropic, OpenRouter, and other providers.</p>
         
-        <div class="table-wrapper">
-          <table class="data-table comparison-table">
-            <thead>
-              <tr id="comparisonTableHeader">
-                <th class="th-left">Cost Type</th>
-                <!-- Model columns populated by JavaScript -->
-              </tr>
-            </thead>
-            <tbody id="comparisonTableBody">
-              <!-- Populated by JavaScript -->
-            </tbody>
-          </table>
-        </div>
+        <PriceComparisonTable {modelsData} />
         <p class="muted" style="margin-top: 16px;">Note: Costs are displayed in USD dollars and based on current provider pricing</p>
       </div>
 
@@ -415,6 +404,9 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
 
     // Make function global
     window.selectModelFromSearch = selectModelFromSearch;
+
+    // Make modelsData available to the component
+    window.modelsDataFromParent = modelsData;
 
     // Format cost
     function formatCost(cost) {
