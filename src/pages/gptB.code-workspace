@@ -1,13 +1,10 @@
 {
-  "folders": [
-    {
-      "path": "../../../gptB",
-    },
-    {
-      "path": "../..",
-    },
-  ],
-  "settings": {
-    "chatgpt.openOnStartup": false
-  },
+    "folders": [
+        {
+            "path": "../../../gptB"
+        },
+        {
+            "path": "../.."
+        }
+    ]
 }
