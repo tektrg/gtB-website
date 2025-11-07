@@ -65,7 +65,7 @@ API keys are your credentials to access AI services:
 ## Getting Started Steps
 
 ### 1. Install GPT Breeze
-1. Visit the [Chrome Web Store](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog)
+1. Visit the [Chrome Web Store](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)
 2. Click "Add to Chrome"
 3. Pin the extension to your toolbar for easy access
 

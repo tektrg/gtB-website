@@ -17,7 +17,7 @@ We only gather data needed for our internal use to improve and provide our Servi
 
 Welcome to GPT Breeze!
 
-The GPT Breeze website located at <https://www.gptbreeze.io> and our related services (referred to collectively as “Service”) are operated by a passionate team.
+The GPT Breeze website located at <https://gptbreeze.io> and our related services (referred to collectively as “Service”) are operated by a passionate team.
 
 Our Privacy Policy explains how we collect, safeguard, and disclose information resulting from your use of our Service. By using our Service, you agree to the collection and use of information in accordance with this policy.
 
