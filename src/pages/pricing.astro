@@ -1,0 +1,312 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+<Base
+  title="Pricing — GPT Breeze"
+  description="Choose your perfect plan. Free forever with your API key, or unlock advanced features with our premium plans."
+  isLandingPage={true}
+>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img
+          class="brand-logo"
+          src="/media/hero/logo-56.png"
+          srcset="/media/hero/logo-28.png 1x, /media/hero/logo-56.png 2x"
+          alt="GPT Breeze logo"
+          width="28"
+          height="28"
+          loading="eager"
+          decoding="async"
+        />
+        GPT Breeze
+      </div>
+      <nav class="menu" aria-label="Main Navigation">
+        <a href="/guide">Guide</a>
+        <a href="/#features">Features</a>
+        <a href="/#byok">BYOK</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/blog">Blog</a>
+        <a href="/privacy">Privacy policy</a>
+        <a href="/terms-of-use">Terms of use</a>
+        <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+      </nav>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu overlay - moved outside header -->
+  <div class="mobile-menu-overlay" aria-hidden="true">
+    <nav class="mobile-menu" aria-label="Mobile Navigation">
+      <a href="/guide">Guide</a>
+      <a href="/#features">Features</a>
+      <a href="/#byok">BYOK</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/blog">Blog</a>
+      <a href="/privacy">Privacy policy</a>
+      <a href="/terms-of-use">Terms of use</a>
+      <a href="https://gptbreezedocs.notion.site/1fd731c62105811eba4ae3f7b4851fd6">Issue report</a>
+      <a class="install" href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+    </nav>
+  </div>
+
+  <section class="hero">
+    <div class="container">
+      <div class="bg"></div>
+      <h1 class="display">Choose Your Plan</h1>
+      <p class="lead center" style="max-width: 720px; margin-inline: auto;">
+        Start free with unlimited usage using your own API key, or unlock premium features with our affordable plans.
+      </p>
+    </div>
+  </section>
+
+  <section id="pricing-plans">
+    <div class="container">
+      <div class="pricing-grid">
+        <!-- Free Plan -->
+        <div class="pricing-card">
+          <div class="plan-header">
+            <h2>Free</h2>
+            <div class="price">
+              <span class="amount">$0</span>
+              <span class="period">/ forever</span>
+            </div>
+          </div>
+          <ul class="features">
+            <li class="feature-item">✓ Default AI shortcuts</li>
+            <li class="feature-item">✓ Article and YouTube summary</li>
+            <li class="feature-item">✓ Chat with AI on every tab</li>
+            <li class="feature-item">✓ Unlimited usage (with your API Key)</li>
+          </ul>
+          <div class="cta-container">
+            <a href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog" class="btn secondary">Get Started</a>
+          </div>
+        </div>
+
+        <!-- One-time Plan -->
+        <div class="pricing-card">
+          <div class="plan-header">
+            <h2>One-time</h2>
+            <div class="price">
+              <span class="amount">$15</span>
+              <span class="original-price">will be $29</span>
+            </div>
+          </div>
+          <ul class="features">
+            <li class="feature-item">✓ Everything in Free</li>
+            <li class="feature-item">✓ Create and save your custom AI shortcuts (prompts)</li>
+            <li class="feature-item">✓ Create unlimited custom AI models</li>
+            <li class="feature-item">✓ Priority access to new features and improvements</li>
+          </ul>
+          <div class="cta-container">
+            <a href="https://gptbreeze.lemonsqueezy.com/checkout/buy/2b2b7f82-0c5b-4e8b-9b0a-5a5a5a5a5a5a" class="btn secondary">Get your license key here</a>
+          </div>
+        </div>
+
+        <!-- Subscription Plan -->
+        <div class="pricing-card featured">
+          <div class="popular-badge">Most Popular</div>
+          <div class="plan-header">
+            <h2>Subscription</h2>
+            <div class="price">
+              <span class="amount">$4.99</span>
+              <span class="period">/ month</span>
+            </div>
+          </div>
+          <ul class="features">
+            <li class="feature-item">✓ Everything in One-time</li>
+            <li class="feature-item">✓ AI cost included - no need for your own API key</li>
+            <li class="feature-item">✓ Up to 2000 videos/articles summary per month</li>
+            <li class="feature-item">✓ First week is on us - free trial</li>
+            <li class="feature-item">✓ Subject to limited monthly usage and fair use policy</li>
+          </ul>
+          <div class="cta-container">
+            <a href="https://gptbreeze.lemonsqueezy.com/checkout/buy/3c3c8f93-1d6c-5f9c-ac1b-6b6b6b6b6b6b" class="btn primary">Get one week free</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="stack" style="margin-top: 12px;">
+        <details>
+          <summary>What's the difference between Free and Premium plans?</summary>
+          <p class="muted">The Free plan gives you access to all default AI shortcuts with unlimited usage when you use your own API key. Premium plans unlock the ability to create custom AI shortcuts and, with the subscription plan, include AI costs.</p>
+        </details>
+        <details>
+          <summary>Do you offer refunds?</summary>
+          <p class="muted">You can apply for a refund within 24 hours after the purchase by sending the application to yourfriend@gptbreeze.io. Please state the reason for your refund request in your application.</p>
+        </details>
+        <details>
+          <summary>How does the subscription plan work?</summary>
+          <p class="muted">The subscription plan includes AI costs, so you don't need your own API key. You get up to 2000 video/article summaries per month, with the first week completely free as a trial.</p>
+        </details>
+        <details>
+          <summary>Can I switch between plans?</summary>
+          <p class="muted">Yes! You can upgrade or downgrade your plan at any time. If you switch from subscription to one-time, you'll keep access to custom shortcuts but will need to use your own API key.</p>
+        </details>
+        <details>
+          <summary>What about fair use and terms of service?</summary>
+          <p class="muted">Our service is subject to fair use policies to prevent abuse. The subscription plan includes up to 2000 video/article summaries per month. Please read our <a href="/terms-of-use">Terms of Use</a> for complete guidelines on acceptable usage and abuse prevention.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .pricing-card {
+      background: theme('colors.ui-surface');
+      border: 1px solid theme('colors.ui-border');
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .pricing-card.featured {
+      border-color: theme('colors.brand-fg');
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transform: scale(1.02);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: theme('colors.brand-fg');
+      color: white;
+      padding: 4px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .plan-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .plan-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: theme('colors.brand-fg');
+    }
+
+    .price {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .amount {
+      font-size: 3rem;
+      font-weight: 800;
+      color: theme('colors.brand-fg');
+    }
+
+    .period {
+      font-size: 1rem;
+      color: theme('colors.brand-muted');
+      font-weight: 500;
+    }
+
+    .original-price {
+      font-size: 1rem;
+      color: theme('colors.brand-muted');
+      text-decoration: line-through;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+      min-height: 200px;
+    }
+
+    .feature-item {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid theme('colors.ui-border');
+      font-size: 0.95rem;
+      color: theme('colors.brand-fg');
+    }
+
+    .feature-item:last-child {
+      border-bottom: none;
+    }
+
+    .cta-container {
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn.primary {
+      background: theme('colors.brand-fg');
+      color: theme('colors.brand-accent-fg');
+    }
+
+    .btn.primary:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .btn.secondary {
+      background: theme('colors.ui-surface');
+      color: theme('colors.brand-fg');
+      border: 1px solid theme('colors.ui-border');
+    }
+
+    .btn.secondary:hover {
+      background: theme('colors.ui-border');
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .pricing-card.featured {
+        transform: none;
+      }
+
+      .amount {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+
+  </Base>
