@@ -128,7 +128,7 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
         
         <h3 class="subtitle" style="margin-top: 24px;">Common Use Cases</h3>
         <div class="usage-buttons">
-          <button class="usage-btn" data-tokens="1950">🎥 YouTube Summary (10 min)</button>
+          <button class="usage-btn" data-tokens="25231">🎥 YouTube Summary (25 min)</button>
           <button class="usage-btn" data-tokens="5200">📄 PDF Analysis (10 pages)</button>
           <button class="usage-btn" data-tokens="39000">📖 Book Analysis (100 pages)</button>
           <button class="usage-btn" data-tokens="117000">📚 Long Document (300 pages)</button>
@@ -310,8 +310,13 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
           const tokens = parseInt(this.getAttribute('data-tokens'));
           // Set input tokens to the clicked button's value
           document.getElementById('inputTokens').value = tokens;
-          // Set output tokens to 60% of input tokens as specified
-          document.getElementById('outputTokens').value = Math.round(tokens * 0.6);
+
+          // Set specific output tokens for YouTube Summary (25 min), otherwise use 60% of input tokens
+          if (tokens === 25231) {
+            document.getElementById('outputTokens').value = 846; // Specific output tokens for 25min YouTube
+          } else {
+            document.getElementById('outputTokens').value = Math.round(tokens * 0.6);
+          }
           updateCalculations();
         });
       });
