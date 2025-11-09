@@ -36,14 +36,23 @@ const { Content } = await video.render();
   <style is:global>
   main {
     max-width: none !important;
-    padding: 0 !important;
+    padding: 1rem 5rem !important;
   }
 </style>
 
-      <div class="video-page-header text-center mb-8">
+      <div class="video-page-header mb-8">
         <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 text-brand-fg">{title}</h1>
-        <p class="text-lg text-brand-muted max-w-2xl mx-auto leading-relaxed">
-          Interactive video summary with clickable timestamps. Jump to any key moment in the video.
+        <p class="text-lg text-brand-muted mx-auto leading-relaxed">
+          Interactive video summary powered by 
+          <a 
+            href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog"
+            target="_blank"
+            rel="noopener noreferrer" 
+            class="text-brand-accent hover:underline"
+          >
+            Chrome extension
+          </a>
+          . Jump to any key moment in the video.
         </p>
       </div>
 
@@ -59,22 +68,27 @@ const { Content } = await video.render();
     <div class="container">
       <div class="video-info-content max-w-4xl mx-auto py-12">
         <div class="card">
-          <h3 class="text-2xl font-bold mb-4 text-brand-fg">About This Summary</h3>
-          <p class="text-brand-muted leading-relaxed mb-8">
-            This AI-powered summary extracts the key insights from "{title}" and provides clickable timestamps for easy navigation.
-            Click on any timestamp to jump directly to that moment in the video.
-          </p>
-          <div class="video-actions flex flex-wrap gap-4 justify-center">
+            <h3 class="text-2xl font-bold mb-4 text-brand-fg">About This Summary</h3>
+            <p class="text-brand-muted leading-relaxed mb-8">
+            There, we saved you a few minutes! This summary is powered by GPT Breeze Extension - helping you get key insights with clickable timestamps. 
+            Want to save even more time on other videos? Try our extension!
+            </p>
+            <div class="video-actions flex flex-wrap gap-4 justify-center">
             <a
-              href={`https://www.youtube.com/watch?v=${videoData.videoId}`}
+              href="https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog"
               target="_blank"
               rel="noopener noreferrer"
               class="btn primary"
             >
-              Watch on YouTube
+              Get GPT Breeze Extension
             </a>
-            <a href="/youtube-summary" class="btn outline">
-              View All Features
+            <a
+              href={`https://www.youtube.com/watch?v=${videoData.videoId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn outline"
+            >
+              Watch on YouTube
             </a>
           </div>
         </div>

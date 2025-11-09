@@ -1,9 +1,9 @@
 ---
 videoId: "U0QQ_uhvOBw"
 title: "Vietnam's Three Economies: From Street Food to Luxury - GPT Breeze summarization"
-description: "Develop an interest in life as you see it; the people, things, literature, music - the world is so rich, simply throbbing with rich treasures, beautiful souls and interesting people. Forget yourself.” ― Henry Miller"
+description: "Explore Vietnam's remarkable economic transformation from 60% poverty to under 5% in 30 years. Discover how three overlapping economies - street, middle, and luxury - shape this rapidly modernizing nation."
 publishDate: 2024-01-15
-tags: ["marketing", "startup", "user-acquisition", "growth-hacking"]
+tags: ["economics", "vietnam", "social-transformation", "poverty-reduction", "economic-growth"]
 draft: false
 ---
 **TL;DR**
