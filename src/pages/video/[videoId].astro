@@ -1,0 +1,96 @@
+---
+import Base from "@/layouts/Base.astro";
+import YouTubeViewer from "@/components/YouTubeViewer.astro";
+import { getCollection } from "astro:content";
+import { extractVideoMetadata } from "@/utils/video-parser";
+
+export async function getStaticPaths() {
+  const videos = await getCollection("videos");
+
+  return videos
+    .filter((video) => !video.data.draft)
+    .map((video) => {
+      const { title } = extractVideoMetadata(video.body);
+
+      return {
+        params: { videoId: video.data.videoId },
+        props: {
+          video,
+          videoData: video.data,
+          title
+        }
+      };
+    });
+}
+
+const { video, videoData, title } = Astro.props;
+const { Content } = await video.render();
+---
+
+<Base
+  title={`${title} — YouTube Video Summary | GPT Breeze`}
+  description={videoData.description || `Watch and summarize "${title}" with interactive timestamps. Get key insights and jump to specific moments in the video.`}
+  isLandingPage={false}
+  showBreadcrumbs={true}
+>
+  <style is:global>
+  main {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+</style>
+
+      <div class="video-page-header text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 text-brand-fg">{title}</h1>
+        <p class="text-lg text-brand-muted max-w-2xl mx-auto leading-relaxed">
+          Interactive video summary with clickable timestamps. Jump to any key moment in the video.
+        </p>
+      </div>
+
+  <section class="video-content">
+    <div class="container">
+      <YouTubeViewer videoId={videoData.videoId}>
+        <Content />
+      </YouTubeViewer>
+    </div>
+  </section>
+
+  <section class="video-info-section">
+    <div class="container">
+      <div class="video-info-content max-w-4xl mx-auto py-12">
+        <div class="card">
+          <h3 class="text-2xl font-bold mb-4 text-brand-fg">About This Summary</h3>
+          <p class="text-brand-muted leading-relaxed mb-8">
+            This AI-powered summary extracts the key insights from "{title}" and provides clickable timestamps for easy navigation.
+            Click on any timestamp to jump directly to that moment in the video.
+          </p>
+          <div class="video-actions flex flex-wrap gap-4 justify-center">
+            <a
+              href={`https://www.youtube.com/watch?v=${videoData.videoId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn primary"
+            >
+              Watch on YouTube
+            </a>
+            <a href="/youtube-summary" class="btn outline">
+              View All Features
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Add YouTube IFrame API to global scope
+    declare global {
+      interface Window {
+        YT: any;
+        onYouTubeIframeAPIReady: () => void;
+        seekToVideo: (event: Event, videoId: string, seconds: number) => void;
+      }
+    }
+  </script>
+</Base>
+
