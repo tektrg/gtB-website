@@ -1,0 +1,347 @@
+---
+interface Props {
+  videoId: string;
+}
+
+const { videoId } = Astro.props;
+---
+
+<div class="youtube-viewer">
+  <div class="video-container">
+    <iframe
+      id={`youtube-player-${videoId}`}
+      src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&playsinline=1&enablejsapi=1`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      class="youtube-iframe"
+    ></iframe>
+  </div>
+
+  <div class="summary-container" id="youtube-content-container">
+    <div class="summary-content">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ videoId }}>
+  // YouTube IFrame API and timestamp seeking functionality
+  (function() {
+    const videoIdVar = videoId;
+    let player = null;
+
+    // Function to seek video to specific timestamp
+    window.seekToVideo = function(event, targetVideoId, seconds) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      // Try to find the player for this video
+      const iframe = document.getElementById('youtube-player-' + targetVideoId);
+      if (!iframe) {
+        console.error('YouTube iframe not found: ' + targetVideoId);
+        return;
+      }
+
+      // If YouTube API is loaded and player is ready, use it for smoother seeking
+      if (window.YT && window.YT.get) {
+        try {
+          const ytPlayer = window.YT.get('youtube-player-' + targetVideoId);
+          if (ytPlayer && ytPlayer.seekTo) {
+            ytPlayer.seekTo(seconds, true);
+            // Auto-play after seeking for better user experience
+            ytPlayer.playVideo();
+            return;
+          }
+        } catch (error) {
+          console.warn('YouTube API seek failed, falling back to URL method:', error);
+        }
+      }
+
+      // Fallback: Update the iframe URL (less reliable but works without API)
+      try {
+        const currentSrc = iframe.src;
+        let newSrc;
+
+        if (currentSrc.includes('start=')) {
+          // Replace existing start parameter and add autoplay
+          newSrc = currentSrc.replace(/start=\d+/, 'start=' + seconds);
+        } else if (currentSrc.includes('?')) {
+          // Add start parameter to existing query string
+          newSrc = currentSrc + '&start=' + seconds;
+        } else {
+          // Add start parameter as first query parameter
+          newSrc = currentSrc + '?start=' + seconds;
+        }
+
+        // Add autoplay parameter for timestamp seeking
+        if (!newSrc.includes('autoplay=1')) {
+          if (newSrc.includes('?')) {
+            newSrc += '&autoplay=1';
+          } else {
+            newSrc += '?autoplay=1';
+          }
+        }
+
+        iframe.src = newSrc;
+        console.log('Fallback: Updated video URL to ' + newSrc);
+      } catch (error) {
+        console.error('Failed to update video URL:', error);
+      }
+    };
+
+    // Function to enhance YouTube links in markdown content
+    function enhanceYouTubeLinks() {
+      const contentContainer = document.getElementById('youtube-content-container');
+      if (!contentContainer) {
+        console.log('Content container not found, retrying in 500ms...');
+        setTimeout(enhanceYouTubeLinks, 500);
+        return;
+      }
+
+      // Find all YouTube timestamp links in the content
+      const youtubeLinks = contentContainer.querySelectorAll('a[href*="youtube.com/watch"]');
+      console.log('Found ' + youtubeLinks.length + ' YouTube links in content container');
+
+      youtubeLinks.forEach((link, index) => {
+        const href = link.getAttribute('href');
+        console.log('Link ' + index + ': ' + href);
+        if (!href) return;
+
+        // Extract video ID and timestamp from the URL
+        const videoMatch = href.match(/v=([^&]+)/);
+        // Extract all t= parameters and take the last one (actual timestamp)
+        const allTimestamps = href.match(/t=(\d+)s/g) || [];
+        const timestampMatch = allTimestamps.length > 0 ?
+          allTimestamps[allTimestamps.length - 1].match(/t=(\d+)/) : null;
+
+        console.log('Video match: ' + (videoMatch ? videoMatch[1] : null) + ', Timestamp match: ' + (timestampMatch ? timestampMatch[1] : null) + ', Current videoId: ' + videoIdVar);
+
+        if (videoMatch && timestampMatch) {
+          const extractedVideoId = videoMatch[1];
+          const timestamp = parseInt(timestampMatch[1], 10);
+
+          // Only enhance links that match the current video
+          if (extractedVideoId === videoIdVar) {
+            console.log('Enhancing link for video ' + videoIdVar + ' at timestamp ' + timestamp);
+            // Add click event listener for video seeking
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              seekToVideo(e, videoIdVar, timestamp);
+              console.debug('Clicked timestamp link for ' + videoIdVar + ' at ' + timestamp + ' seconds');
+            });
+
+            // Add keyboard support
+            link.addEventListener('keydown', function(e) {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                e.stopPropagation();
+                seekToVideo(e, videoIdVar, timestamp);
+              }
+            });
+
+            // Make it look like a timestamp button
+            link.classList.add('enhanced-timestamp-link');
+            link.setAttribute('role', 'button');
+            link.setAttribute('tabindex', '0');
+
+            // Add data attributes for debugging
+            link.setAttribute('data-seconds', timestamp.toString());
+            link.setAttribute('data-video-id', videoIdVar);
+          }
+        }
+      });
+    }
+
+    // Load YouTube IFrame API if not already loaded
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      if (firstScriptTag.parentNode) {
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
+    }
+
+    // Initialize YouTube player when API is ready
+    window.onYouTubeIframeAPIReady = function() {
+      try {
+        player = new YT.Player('youtube-player-' + videoIdVar, {
+          events: {
+            onReady: function(event) {
+              console.log('YouTube player ready for video ' + videoIdVar);
+              // Enhance YouTube links after player is ready
+              enhanceYouTubeLinks();
+            },
+            onError: function(error) {
+              console.error('YouTube player error for video ' + videoIdVar + ':', error);
+              // Still enhance links even if player fails
+              enhanceYouTubeLinks();
+            }
+          }
+        });
+      } catch (error) {
+        console.error('Failed to initialize YouTube player for ' + videoIdVar + ':', error);
+        // Enhance links even if API initialization fails
+        setTimeout(enhanceYouTubeLinks, 1000);
+      }
+    };
+
+    // Also enhance links when DOM is ready (fallback)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', enhanceYouTubeLinks);
+    } else {
+      setTimeout(enhanceYouTubeLinks, 100);
+    }
+  })();
+</script>
+
+<style>
+  .youtube-viewer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .video-container {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .youtube-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .summary-container {
+    background: theme('colors.ui-surface');
+    border-radius: 0.75rem;
+    padding: 2rem;
+    border: 1px solid theme('colors.ui-border');
+  }
+
+  .summary-content {
+    line-height: 1.7;
+    color: theme('colors.brand-muted');
+  }
+
+  /* Markdown content styling */
+  .summary-content :global(h2),
+  .summary-content :global(h3),
+  .summary-content :global(h4) {
+    margin: 32px 0 16px;
+    color: theme('colors.brand-fg');
+    font-weight: 600;
+  }
+
+  .summary-content :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+  }
+
+  .summary-content :global(h3) {
+    font-size: 1.25rem;
+  }
+
+  .summary-content :global(h4) {
+    font-size: 1.125rem;
+  }
+
+  .summary-content :global(p) {
+    margin: 16px 0;
+    color: theme('colors.brand-muted');
+  }
+
+  .summary-content :global(ul),
+  .summary-content :global(ol) {
+    margin: 16px 0;
+    padding-left: 24px;
+  }
+
+  .summary-content :global(li) {
+    margin: 8px 0;
+    color: theme('colors.brand-muted');
+    line-height: 1.6;
+  }
+
+  .summary-content :global(a) {
+    color: theme('colors.brand-accent');
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+
+  .summary-content :global(a:hover) {
+    opacity: 0.8;
+  }
+
+  /* Enhanced timestamp links */
+  .summary-content :global(.enhanced-timestamp-link) {
+    flex-shrink: 0;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: theme('colors.accent-blue');
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    background: theme('colors.blue-light');
+    border-radius: 0.375rem;
+    border: 1px solid theme('colors.blue-border');
+    transition: all 0.2s ease;
+    min-width: 3.5rem;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .summary-content :global(.enhanced-timestamp-link:hover) {
+    background: theme('colors.accent-blue');
+    color: white;
+    border-color: theme('colors.accent-blue');
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+
+  .summary-content :global(strong) {
+    font-weight: 600;
+    color: theme('colors.brand-fg');
+  }
+
+  /* Desktop layout - side by side */
+  @media (min-width: 1024px) {
+    .youtube-viewer {
+      flex-direction: row;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .video-container {
+      flex: 0 0 60%;
+    }
+
+    .summary-container {
+      flex: 1;
+      position: sticky;
+      top: 2rem;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+    }
+  }
+
+  /* Medium tablets */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .video-container {
+      aspect-ratio: 16/9;
+    }
+
+    .summary-container {
+      padding: 2rem;
+    }
+  }
+</style>
