@@ -41,4 +41,4 @@ Want to dive deeper into how we handle BYOM with API keys versus traditional sub
 
 The future of AI is independent, private, and cost-effective. It's BYOM. Stop letting others dictate your AI experience. Take the leap, explore the power of **Bring Your Own Model AI**, and unlock a new level of productivity and control.
 
-**Call to Action:** Ready to experience true AI independence? [Try GPT Breeze's BYOM approach free today!](https://gptbreeze.com)
+**Call to Action:** Ready to experience true AI independence? [Try GPT Breeze's BYOM approach free today!](https://gptbreeze.io)
