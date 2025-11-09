@@ -38,7 +38,13 @@ const { Content } = await video.render();
     max-width: none !important;
     padding: 1rem 5rem !important;
   }
-</style>
+
+  @media (max-width: 768px) {
+    main {
+      padding: 10px !important;
+    }
+  }
+  </style>
 
       <div class="video-page-header mb-8">
         <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 text-brand-fg">{title}</h1>
