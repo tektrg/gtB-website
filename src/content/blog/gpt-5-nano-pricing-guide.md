@@ -10,6 +10,8 @@ Are you tired of AI models that drain your budget faster than your coffee machin
 
 With **GPT-5 Nano pricing** starting at just **$0.05 per million input tokens**, this ultra-affordable AI model is making advanced artificial intelligence accessible to everyone from indie developers to enterprise teams on tight budgets.
 
+![Surprised Pikachu - GPT-5 Nano Pricing](https://i.imgflip.com/abp6hz.jpg)
+
 ## What Makes GPT-5 Nano So Affordable?
 
 OpenAI's aggressive pricing strategy for GPT-5 Nano represents a seismic shift in the AI landscape. At **$0.05 for input tokens and $0.40 for output tokens per million**, GPT-5 Nano delivers what industry experts are calling "dirt-cheap" AI processing.
@@ -85,6 +87,8 @@ Based on actual pricing data from the official providers, here's a comparison of
 - Output: $10.00 per 1M tokens
 
 **Winner:** GPT-5 Nano delivers **95% savings on input processing** ($0.05 vs $2.50) and **96% savings on output processing** ($0.40 vs $10.00) compared to GPT-4o.
+
+![Drake Hotline Bling - GPT-5 Nano vs GPT-4o Pricing](https://i.imgflip.com/abp4fc.jpg)
 
 ## Real-World Cost Savings Examples
 
