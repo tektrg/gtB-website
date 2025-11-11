@@ -112,6 +112,18 @@ if (!breadcrumbs) {
         position: relative;
       }
 
+      /* Breadcrumb container inside header */
+      .breadcrumb-container {
+        padding: 8px 20px;
+        border-top: 1px solid theme('colors.ui-border');
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .breadcrumb-container nav {
+        max-width: 1120px;
+        margin: 0 auto;
+      }
+
       .nav-container {
         max-width: 1120px;
         margin: 0 auto;
@@ -251,8 +263,14 @@ if (!breadcrumbs) {
         flex-direction: column;
         gap: 16px;
         transform: translateX(100%);
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, top 0.3s ease;
         overflow-y: auto;
+      }
+
+      /* Adjust mobile menu position when breadcrumb is visible */
+      body[data-has-breadcrumb="true"] .mobile-menu {
+        top: 76px;
+        height: calc(100vh - 76px);
       }
 
       .mobile-menu-overlay.active .mobile-menu {
@@ -284,6 +302,10 @@ if (!breadcrumbs) {
 
         .nav-container {
           padding: 0 16px;
+        }
+
+        .breadcrumb-container {
+          padding: 8px 16px;
         }
 
         .brand {
@@ -319,6 +341,10 @@ if (!breadcrumbs) {
           padding: 0 16px;
         }
 
+        .breadcrumb-container {
+          padding: 6px 16px;
+        }
+
         .brand,
         .brand-link {
           font-size: 0.9rem;
@@ -350,6 +376,7 @@ if (!breadcrumbs) {
   <body
     class:list={[{ 'bg-warm-light text-warm-dark': !isLandingPage }]}
     data-is-landing-page={isLandingPage ? 'true' : 'false'}
+    data-has-breadcrumb={(!isLandingPage && showBreadcrumbs && path !== '/') ? 'true' : 'false'}
   > 
     {!isLandingPage && <div class="site-gradient" aria-hidden="true"></div>}
     
@@ -384,7 +411,38 @@ if (!breadcrumbs) {
             <span class="hamburger"></span>
           </button>
         </div>
-        
+
+        <!-- Breadcrumb inside header -->
+        {showBreadcrumbs && path !== '/' && (
+          <div class="breadcrumb-container">
+            <nav aria-label="Breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+              <ol class="flex flex-wrap items-center gap-1 text-sm text-brand-muted">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="inline-flex items-center gap-1">
+                  <a href="/" class="text-brand-muted no-underline hover:underline" itemprop="item"><span itemprop="name">GPT Breeze</span></a>
+                  <meta itemprop="position" content="1" />
+                </li>
+                {computedCrumbs.length > 0 && <li aria-hidden="true" class="text-muted-light" style="list-style: none;">/</li>}
+                {computedCrumbs.map((c, i) => {
+                  const isLast = i === computedCrumbs.length - 1;
+                  return (
+                    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="inline-flex items-center gap-1">
+                      {c.href && !isLast ? (
+                        <a href={c.href} class="text-brand-muted no-underline hover:underline" itemprop="item">
+                          <span itemprop="name">{c.label}</span>
+                        </a>
+                      ) : (
+                        <span class="text-muted-light" itemprop="name">{c.label}</span>
+                      )}
+                      <meta itemprop="position" content={(i + 2).toString()} />
+                      {!isLast && <span aria-hidden="true" class="text-muted-light">/</span>}
+                    </li>
+                  );
+                })}
+              </ol>
+            </nav>
+          </div>
+        )}
+
         <!-- Mobile menu overlay -->
         <div class="mobile-menu-overlay" aria-hidden="true">
           <nav class="mobile-menu" aria-label="Mobile Navigation">
@@ -459,34 +517,7 @@ if (!breadcrumbs) {
       </div>
     )}
 
-    <main class:list={[{ 'max-w-3xl mx-auto px-4 py-8 relative z-10': !isLandingPage }]}> 
-      {!isLandingPage && showBreadcrumbs && path !== '/' && (
-        <nav aria-label="Breadcrumb" class="mb-6" itemscope itemtype="https://schema.org/BreadcrumbList">
-          <ol class="flex flex-wrap items-center gap-1 text-sm text-brand-muted">
-            <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="inline-flex items-center gap-1">
-              <a href="/" class="text-brand-muted no-underline hover:underline" itemprop="item"><span itemprop="name">GPT Breeze</span></a>
-              <meta itemprop="position" content="1" />
-            </li>
-            {computedCrumbs.length > 0 && <li aria-hidden="true" class="text-muted-light" style="list-style: none;">/</li>}
-            {computedCrumbs.map((c, i) => {
-              const isLast = i === computedCrumbs.length - 1;
-              return (
-                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="inline-flex items-center gap-1">
-                  {c.href && !isLast ? (
-                    <a href={c.href} class="text-brand-muted no-underline hover:underline" itemprop="item">
-                      <span itemprop="name">{c.label}</span>
-                    </a>
-                  ) : (
-                    <span class="text-muted-light" itemprop="name">{c.label}</span>
-                  )}
-                  <meta itemprop="position" content={(i + 2).toString()} />
-                  {!isLast && <span aria-hidden="true" class="text-muted-light">/</span>}
-                </li>
-              );
-            })}
-          </ol>
-        </nav>
-      )}
+    <main class:list={[{ 'max-w-3xl mx-auto px-4 py-8 relative z-10': !isLandingPage }]}>
       <slot />
     </main>
     
