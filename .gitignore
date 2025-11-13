@@ -5,3 +5,7 @@ dist
 *.log
 todo-website.md
 generated/
+
+# Agent instruction files
+AGENTS.md
+docs/agent-*.md
