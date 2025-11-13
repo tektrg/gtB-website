@@ -12,7 +12,7 @@ If you're reading this, chances are you've been using Monica AI or considering i
 
 I get it. Monica has been around and it's decent, but in 2025, we have way better options – especially if you care about privacy and want to actually *own* your productivity tools instead of renting them forever.
 
-![Subscription Fatigue Meme](https://i.imgflip.com/9ei4kt.jpg)
+![Subscription Fatigue Meme](https://i.imgflip.com/ac0dez.jpg)
 *Another month, another subscription charge hitting different*
 
 Let me walk you through the **8 best Monica alternatives** that actually respect your privacy, save you money, and give you more control. Spoiler alert: some of these are completely free with BYOM (Bring Your Own Model), and others offer one-time payments instead of endless subscriptions.
@@ -38,7 +38,7 @@ Monica has tried to be everything to everyone, resulting in a bloated interface 
 ### 5. **Account Required** 👤
 You can't even try Monica without creating an account and handing over your email. Some of the alternatives below? Install and start using immediately.
 
-![Searching for Better Tools](https://i.imgflip.com/9ei4oi.jpg)
+![Searching for Better Tools](https://i.imgflip.com/ac0dgz.jpg)
 *Me searching for an AI extension that doesn't want my life story*
 
 ## The 8 Best Monica Alternatives in 2025
@@ -363,7 +363,7 @@ Let's break down what these tools *really* cost over time, because the subscript
 - Year 3: $2,430-4,830
 - **Note**: BYOM gives you full control over spending and can be optimized
 
-![Cost Calculation Meme](https://i.imgflip.com/9ei4u9.jpg)
+![Cost Calculation Meme](https://i.imgflip.com/ac0dik.jpg)
 *When you realize you've paid $1,000+ for a subscription you could've bought once*
 
 ## Privacy Comparison: Who Actually Sees Your Data?
@@ -482,7 +482,7 @@ Still not sure which one to pick? Here's my honest recommendation based on diffe
 - No unique features to justify the price
 - Better options available in every category
 
-![Making The Right Choice](https://i.imgflip.com/9ei50j.jpg)
+![Making The Right Choice](https://i.imgflip.com/ac0dk0.jpg)
 *Choosing an AI extension shouldn't require an AI to help you decide*
 
 ## What About Free Options?
@@ -623,7 +623,7 @@ With BYOM extensions like GPT Breeze, you pay $9.99 once for the tool, then pay 
 
 Five years from now, Monica users will have paid $960. GPT Breeze users will have paid $9.99 + whatever API costs they actually used. Who made the smarter choice?
 
-![Subscription vs Ownership](https://i.imgflip.com/9ei55d.jpg)
+![Subscription vs Ownership](https://i.imgflip.com/ac0dli.jpg)
 *Your wallet after 3 years of AI subscriptions*
 
 ## Ready to Make the Switch?
