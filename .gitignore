@@ -8,4 +8,4 @@ generated/
 
 # Agent instruction files
 AGENTS.md
-docs/agent-*.md
+docs/
