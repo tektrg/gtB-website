@@ -9,3 +9,4 @@ generated/
 # Agent instruction files
 AGENTS.md
 docs/
+GEMINI.md
