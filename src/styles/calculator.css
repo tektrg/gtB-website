@@ -522,7 +522,7 @@
       border-bottom: 1px solid #f3f4f6 !important;
       transition: all 0.15s ease !important;
       display: flex !important;
-      flex-direction: row !important;
+      flex-direction: column !important;
       align-items: center !important;
       gap: 10px !important;
       background: white !important;
