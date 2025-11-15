@@ -54,3 +54,6 @@
 - Set `site` (and `base` for project sites) in `astro.config.mjs`.
 - Custom domain: add `public/CNAME` and enable HTTPS in Pages.
 - Do not commit secrets; this site deploys without repository secrets.
+
+## Search internet tools
+If you have trouble with your web search tool, Use gemini to search content on the internet, how to use: gemini -m gemini-2.5-flash -p "Search google for [query] and summarize  results". Note make sure set timeout long enough for the search, for complex query it could take few minutes
