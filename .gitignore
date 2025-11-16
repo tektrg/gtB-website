@@ -5,6 +5,7 @@ dist
 *.log
 todo-website.md
 generated/
+settings.local.json
 
 # Agent instruction files
 AGENTS.md
