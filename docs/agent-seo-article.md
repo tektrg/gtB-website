@@ -36,7 +36,8 @@ Search the project for proper support or related links that can be naturally int
 - Update the backlink research to the md file
 
 **STEP 4: SEO ARTICLE CREATION**
-Write a comprehensive, SEO-optimized article that maximizes engagement and visibility while adhering to community norms. Your article must include:
+Write a comprehensive, SEO-optimized article that maximizes engagement and visibility while adhering to community norms.  
+Before outlining the article, carefully read the **Appendix: GPT Breeze product videos** and note specific workflows, benefits, and use cases. When the topic is relevant, plan one or more sections that naturally introduce GPT Breeze as a solution to the user problems you uncovered, grounding the narrative in these real usage scenarios instead of generic marketing claims. Your article must include:
 
 **Frontmatter Requirements:**
 - Follow the exact format used in the Astro blog structure:
@@ -63,6 +64,7 @@ tags: ["keyword1", "keyword2", "keyword3", "product-name", "topic-related", "ai-
 - Use short paragraphs (2-3 sentences) and bullet points for readability
 - Provide citation for any claims. 
 - Naturally weave identified keywords throughout the content
+- When relevant, introduce GPT Breeze as a practical, concrete solution to the problems described, using scenarios inspired by the demo videos (e.g., instant explanations, page summaries with citations, YouTube timestamp summaries, model/provider flexibility)
 - Share value-driven insights with relatable examples
 - Include detailed feature highlights with subheadings
 - Provide clear pricing and value propositions when applicable
@@ -104,3 +106,40 @@ At the end of each step write the progress to md file so that you can keep track
 
 Your goal is to create content that genuinely helps users while achieving strong SEO performance and community engagement.
 
+
+# Apendix: GPT Breeze product videos
+
+GPT Breeze text toolbar 30 second demo video. 
+    What in the video: select the text "SOTA" on the page, the GPT Breeze toolbar show up, user select a shortcut "Explain", an AI panel show up with the explaination. User continue to select a paragraph and select icon "Type custom instruction" and type "translate to Japanese", then AI panel start show translated content.
+    Video link: https://youtu.be/2WftJLH3Zoc
+    Video ID: 2WftJLH3Zoc
+    Duration: 30 seconds
+    
+GPT Breeze page (website) toolbar demo. 
+    What in the video: Page toolbar appear on a website (at the bottom) packed with AI shortcut. User click on "Summarize page in bullet points", AI panel show up with the summarized, and clickable-citation content. User click "Ask follow-up question", text box show up, user type "In table format", the content now organized in table format
+    Video link: https://youtu.be/SeR-G-5l25Q
+    Video ID: SeR-G-5l25Q
+    Duration: 10 seconds
+    
+GPT Breeze Youtube summarizer demo. 
+    What in the video: GPT Breeze toolbar show up on the left side of the Youtube watch page. User click "Summarize video with timestamps". AI panel show up with the summarized, and clickable-timestamp content. User click on the timestamp,video start play at that timestamp.
+    Video link: https://youtu.be/pOXdFaqTszU
+    Video ID: pOXdFaqTszU
+    Duration: 14 seconds
+
+GPT Breeze select an AI model and AI provider (BYOK - bring your own key). 
+    What in the video: Demo the option panel where user can change the AI model and add new AI providers. It also show various AI providers supported including OpenAI, Anthropic, Openrouter... with the API url and api key
+    Video link: https://youtu.be/QS7TU0xuvDk
+    Video ID: QS7TU0xuvDk
+    Duration: 10 seconds
+
+Embedded video guide
+- autoplay=1&loop=1&playlist=videoID so that the video auto play and loop
+<iframe
+title="YouTube summarize demo"
+width="100%"
+height="100%"
+src="https://www.youtube.com/embed/pOXdFaqTszU?autoplay=1&mute=1&controls=0&loop=1&playlist=pOXdFaqTszU&modestbranding=1&rel=0&playsinline=1"
+allow="autoplay; encrypted-media; picture-in-picture"
+allowfullscreen
+></iframe>
