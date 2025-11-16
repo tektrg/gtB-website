@@ -10,6 +10,8 @@ Are you tired of AI models that drain your budget faster than your coffee machin
 
 With **GPT-5 Nano pricing** starting at just **$0.05 per million input tokens**, this ultra-affordable AI model is making advanced artificial intelligence accessible to everyone from indie developers to enterprise teams on tight budgets.
 
+![Drake Hotline Bling meme rejecting expensive AI](https://i.imgflip.com/ac9nz8.jpg)
+
 ## What Makes GPT-5 Nano So Affordable?
 
 OpenAI's aggressive pricing strategy for GPT-5 Nano represents a seismic shift in the AI landscape. At **$0.05 for input tokens and $0.40 for output tokens per million**, GPT-5 Nano delivers what industry experts are calling "dirt-cheap" AI processing.
@@ -30,6 +32,8 @@ The model's **cheap AI model** positioning doesn't compromise on capability. Wit
 - **Input tokens**: $0.05 per 1 million tokens
 - **Output tokens**: $0.40 per 1 million tokens
 - **Cached input tokens**: $0.005 per 1 million (90% discount from $0.05)
+
+![Two Buttons meme comparing AI pricing](https://i.imgflip.com/ac9nzp.jpg)
 
 ### Context Limits
 
@@ -130,6 +134,38 @@ Based on actual pricing data from the official providers, here's a comparison of
 - **Mobile app** AI features
 - **IoT device** integration
 
+### See GPT-5 Nano in Action with GPT Breeze
+
+Here's how you can leverage GPT-5 Nano's ultra-cheap pricing for everyday tasks:
+
+**Text Selection & Custom Instructions:**
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px;">
+  <iframe
+    title="GPT Breeze text toolbar demo - Select text and get instant AI explanations"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+    src="https://www.youtube.com/embed/2WftJLH3Zoc?autoplay=1&mute=1&controls=1&loop=1&playlist=2WftJLH3Zoc&modestbranding=1&rel=0&playsinline=1"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+
+*Select any text on a webpage and get instant AI explanations or custom instructions like translations - all at GPT-5 Nano's $0.05 per million tokens rate*
+
+**Web Page Summarization with Citations:**
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px;">
+  <iframe
+    title="GPT Breeze page toolbar demo - Summarize entire pages with clickable citations"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+    src="https://www.youtube.com/embed/SeR-G-5l25Q?autoplay=1&mute=1&controls=1&loop=1&playlist=SeR-G-5l25Q&modestbranding=1&rel=0&playsinline=1"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+
+*Get instant, citable summaries of entire web pages and ask follow-up questions - perfect for research at budget-friendly prices*
+
 ### Cost Optimization Strategies
 
 1. **Leverage cached inputs** for 90% discounts on repeated content
@@ -165,6 +201,8 @@ Despite being the **most affordable GPT-5 variant**, GPT-5 Nano maintains impres
 ## How GPT-5 Nano Pricing Impacts the AI Market
 
 Industry analysts predict GPT-5's aggressive pricing strategy, particularly for the Nano variant, could trigger a **pricing war** among AI providers. The **$0.05 per million tokens** price point represents a new floor for AI model pricing.
+
+![Bernie Sanders meme asking to switch to affordable AI](https://i.imgflip.com/ac9nzt.jpg)
 
 **Market Implications:**
 
@@ -214,7 +252,19 @@ Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-bree
 
 **4. Select GPT-5 Nano Model**
 
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px;">
+  <iframe
+    title="GPT Breeze AI model selection demo - Choose GPT-5 Nano and bring your own API key"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+    src="https://www.youtube.com/embed/QS7TU0xuvDk?autoplay=1&mute=1&controls=1&loop=1&playlist=QS7TU0xuvDk&modestbranding=1&rel=0&playsinline=1"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+
 - In the model settings, select **GPT-5 Nano** for maximum cost savings
+- **Bring Your Own Key (BYOK)**: Connect your OpenAI API key directly
+- Choose from multiple AI providers (OpenAI, Anthropic, OpenRouter, etc.)
 - Enable cost tracking to monitor your ultra-low usage costs
 - Set up usage alerts if desired
 
@@ -223,6 +273,20 @@ Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-bree
 - Summarize YouTube videos at **$0.05 per million input tokens**
 - Get web page insights for **90% less** than premium models
 - Use custom shortcuts for repeated tasks at dirt-cheap rates
+
+**YouTube Video Summarization:**
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px;">
+  <iframe
+    title="GPT Breeze YouTube summarizer demo - Get timestamped summaries of any video"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+    src="https://www.youtube.com/embed/pOXdFaqTszU?autoplay=1&mute=1&controls=1&loop=1&playlist=pOXdFaqTszU&modestbranding=1&rel=0&playsinline=1"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+
+*Summarize YouTube videos with clickable timestamps - jump directly to relevant sections without watching the entire video*
 
 #### Real-World GPT Breeze + GPT-5 Nano Savings:
 
@@ -287,6 +351,8 @@ GPT-5 Nano supports up to **272,000 input tokens and 128,000 output tokens**, wi
 
 GPT-5 Nano's **revolutionary pricing** at $0.05 per million input tokens isn't just making AI more accessible - it's reshaping how we think about artificial intelligence integration. From solo developers building the next breakthrough app to enterprises processing millions of documents, **cheap AI models** are democratizing innovation.
 
+![Disaster Girl meme discovering cheap AI](https://i.imgflip.com/ac9o0n.jpg)
+
 The combination of **premium capabilities** and **budget-friendly pricing** positions GPT-5 Nano as the go-to choice for cost-conscious AI development. With up to 98% cost savings compared to premium alternatives and performance that rivals much more expensive models, GPT-5 Nano proves that **affordable doesn't mean inferior**.
 
 Ready to revolutionize your AI costs? Start experimenting with GPT-5 Nano today and discover how **budget AI pricing** can accelerate your projects without breaking your budget.
@@ -294,5 +360,17 @@ Ready to revolutionize your AI costs? Start experimenting with GPT-5 Nano today 
 ---
 
 **Ready to slash your AI costs by up to 98%?** Get started with GPT-5 Nano and join thousands of developers who've already made the switch to affordable, high-performance AI.
+
+## Why GPT Breeze + GPT-5 Nano is a Game-Changer
+
+The combination of GPT Breeze's browser extension and GPT-5 Nano's ultra-low pricing creates a unique value proposition:
+
+✅ **No Subscription Fees** - Pay only for what you use at OpenAI's direct rates
+✅ **Privacy-First** - Your API key stays in your browser, never on external servers
+✅ **Multi-Provider Support** - Switch between OpenAI, Anthropic, OpenRouter, and more
+✅ **Instant Productivity** - No tab switching, AI works where you work
+✅ **Cost Transparency** - Real-time usage tracking prevents surprise bills
+
+Unlike other AI tools that charge $20-50/month regardless of usage, GPT Breeze with GPT-5 Nano means you could pay less than $1/month for all your AI needs.
 
 **What's your experience with AI model pricing?** Share your cost optimization strategies and let us know how much you're saving with budget-friendly AI alternatives in the comments below.
