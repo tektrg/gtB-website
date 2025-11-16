@@ -15,7 +15,9 @@
       "mcp__imgflip-server__caption_image",
       "Bash(npm run:*)",
       "Bash(git push:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(python3:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
