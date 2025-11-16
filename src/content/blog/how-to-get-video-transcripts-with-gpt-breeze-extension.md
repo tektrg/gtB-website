@@ -1,7 +1,7 @@
 ---
 title: "Get YouTube Video Transcripts Instantly with GPT Breeze Extension"
 description: "Learn how to easily extract full video transcripts from YouTube using GPT Breeze browser extension. Perfect for content creators, researchers, and accessibility needs."
-pubDate: "2024-11-15"
+pubDate: 2024-11-15
 tags: ["video transcription", "YouTube tools", "browser extension", "accessibility", "AI tools"]
 draft: false
 heroImage: "/blog/video-transcript-hero.jpg"
@@ -12,6 +12,30 @@ heroImage: "/blog/video-transcript-hero.jpg"
 As a content creator and researcher, I've spent countless hours struggling with YouTube's built-in transcript feature. Either the captions aren't available, the auto-generated text is riddled with errors, or I'm forced to manually copy-paste from that tiny transcript panel.
 
 But what if I told you there's a **game-changing solution** that puts full video transcripts at your fingertips with just one click?
+
+## Watch How It Works: Complete Video Transcript Demo
+
+<div style="position: relative; width: 100%; max-width: 800px; margin: 2rem auto; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+  <iframe
+    title="GPT Breeze YouTube transcript demo"
+    width="100%"
+    height="450"
+    src="https://www.youtube.com/embed/CEXKlxe7IVE?autoplay=1&mute=1&controls=1&loop=1&playlist=CEXKlxe7IVE&modestbranding=1&rel=0&playsinline=1"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen
+    style="border: none; border-radius: 12px;"
+  ></iframe>
+</div>
+
+[Get Youtube transcript with GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)
+
+**In this 10-second demo, you'll see exactly how GPT Breeze works:**
+- ✅ User clicks the GPT Breeze dropdown on the left side of the YouTube video
+- ✅ Selects "Get full video transcript" from the menu
+- ✅ The complete transcript appears instantly with clickable timestamps
+- ✅ Each timestamp can be clicked to jump directly to that moment in the video
+
+This simple process transforms how you interact with video content, making transcripts accessible and usable in ways YouTube's native features simply can't match.
 
 ## The YouTube Transcript Struggle is Real
 
