@@ -86,7 +86,7 @@ GPT Breeze is a Chrome extension that lets you connect your own API keys (includ
 *   **Direct Communication:** Your data goes straight from your browser to your chosen AI provider (like OpenRouter), with no middleman.
 *   **Cost Savings:** You only pay the AI provider for what you use, often saving a ton compared to subscriptions.
 
-Want to slash your AI costs and boost your privacy? Learn more about the [BYOM advantage and why it beats subscriptions](/blog/byom-api-keys-vs-subscriptions). And when you're ready to take control, you can [install GPT Breeze from the Chrome Web Store](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog).
+Want to slash your AI costs and boost your privacy? Learn more about the [BYOM advantage and why it beats subscriptions](/blog/byom-api-keys-vs-subscriptions). And when you're ready to take control, you can [install GPT Breeze from the Chrome Web Store](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog).
 
 ### **Conclusion: Smart AI Use Starts Here**
 

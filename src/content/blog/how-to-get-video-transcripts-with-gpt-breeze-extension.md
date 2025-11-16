@@ -1,7 +1,7 @@
 ---
 title: "Get YouTube Video Transcripts Instantly with GPT Breeze Extension"
 description: "Learn how to easily extract full video transcripts from YouTube using GPT Breeze browser extension. Perfect for content creators, researchers, and accessibility needs."
-publishDate: "2024-11-15"
+pubDate: "2024-11-15"
 tags: ["video transcription", "YouTube tools", "browser extension", "accessibility", "AI tools"]
 draft: false
 heroImage: "/blog/video-transcript-hero.jpg"
@@ -198,7 +198,7 @@ Whether you're a content creator looking to repurpose your videos, a student nee
 
 The best part? It's completely free and works right in your browser – no subscriptions, no API keys, no complicated setup.
 
-**Ready to transform how you interact with YouTube videos?** [Install GPT Breeze today](https://gptbreeze.com) and experience the difference for yourself.
+**Ready to transform how you interact with YouTube videos?** [Install GPT Breeze today](https://gptbreeze.io) and experience the difference for yourself.
 
 *"I should have done this sooner!"* 🎉 – You, after your first transcript extraction.
 

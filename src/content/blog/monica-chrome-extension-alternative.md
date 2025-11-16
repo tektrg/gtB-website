@@ -49,7 +49,7 @@ I've tested dozens of AI Chrome extensions over the past few months. Here are th
 
 **Best for:** Privacy-conscious power users who want full control and cost savings
 
-[GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog) is what Monica should have been – a clean, privacy-focused AI extension that lets you bring your own AI model from any provider. No account required, no data collection, API keys stored locally in your browser.
+[GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog) is what Monica should have been – a clean, privacy-focused AI extension that lets you bring your own AI model from any provider. No account required, no data collection, API keys stored locally in your browser.
 
 **What Makes It Different:**
 - **True Zero Data Collection**: Your prompts go directly from your browser to your chosen AI provider. GPT Breeze never sees or stores anything.
@@ -83,7 +83,7 @@ I've tested dozens of AI Chrome extensions over the past few months. Here are th
 **Privacy Score: 24/25** ⭐⭐⭐⭐⭐
 API keys stored locally, zero data collection, direct API calls to your provider.
 
-[Try GPT Breeze Free →](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog)
+[Try GPT Breeze Free →](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)
 
 ---
 
@@ -446,7 +446,7 @@ Still not sure which one to pick? Here's my honest recommendation based on diffe
 - Prefer a clean, focused tool over feature bloat
 - Don't mind 2 minutes of API key setup
 
-[Try GPT Breeze Free →](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog)
+[Try GPT Breeze Free →](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)
 
 ### 📧 **Choose ChatGPT Writer if you:**
 - Primarily use AI for email writing
@@ -631,7 +631,7 @@ Five years from now, Monica users will have paid $960. GPT Breeze users will hav
 The best time to switch from Monica was when you started. The second best time is today.
 
 **Quick Action Plan:**
-1. **Try GPT Breeze Free** → [Install from Chrome Store](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog)
+1. **Try GPT Breeze Free** → [Install from Chrome Store](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)
 2. **Set up OpenAI API key** → 2 minutes, [follow this guide](/blog/byom-api-keys-vs-subscriptions)
 3. **Use it for a week** → See if it meets your needs
 4. **Cancel Monica** → Save $192/year

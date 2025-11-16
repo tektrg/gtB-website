@@ -234,7 +234,7 @@ Brave Leo's **bring your own model browser extensions** approach is unique as a 
 ### Getting Started with GPT Breeze (Recommended)
 
 **Step 1: Install Extension (2 minutes)**
-1. Visit [GPT Breeze Chrome Web Store](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog)
+1. Visit [GPT Breeze Chrome Web Store](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)
 2. Click "Add to Chrome"
 3. Pin to toolbar for easy access
 4. **No account creation required**
@@ -509,7 +509,7 @@ The **BYOM AI chrome extensions** landscape in 2025 offers genuine alternatives 
 ✅ **Professional features** - everything you need for productivity  
 ✅ **Transparent costs** - real-time usage tracking  
 
-[**Get GPT Breeze from Chrome Web Store**](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog) and join the thousands of professionals who've already taken control of their AI costs and privacy.
+[**Get GPT Breeze from Chrome Web Store**](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog) and join the thousands of professionals who've already taken control of their AI costs and privacy.
 
 **Want to learn more about BYOM benefits?** Check out our [detailed comparison of API keys vs. subscriptions](/blog/byom-api-keys-vs-subscriptions) and discover why the **bring your own model** approach is revolutionizing AI productivity tools.
 

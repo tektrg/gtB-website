@@ -127,7 +127,7 @@ API keys are your credentials to access AI services:
 
 ## Next Steps
 
-1. **[Install GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog)** if you haven't already
+1. **[Install GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)** if you haven't already
 2. **Try Pollinations.ai** for immediate free access
 3. **Explore our [additional guides](/guide)** for advanced features
 4. **Consider getting an API key** when you're ready for unlimited usage

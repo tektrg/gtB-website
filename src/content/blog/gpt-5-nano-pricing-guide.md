@@ -239,7 +239,7 @@ GPT Breeze's **"Bring Your Own Model" (BYOM)** approach means you pay only for w
 #### Quick Setup Guide:
 
 **1. Install GPT Breeze Extension**
-Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog) from Chrome Web Store (free with 4.9-star rating).
+Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog) from Chrome Web Store (free with 4.9-star rating).
 
 **2. Open Extension Panel**
 
@@ -313,7 +313,7 @@ Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-bree
 3. **Batch similar tasks**: Process multiple items efficiently
 4. **Monitor usage**: Built-in cost tracking prevents surprises
 
-Ready to combine GPT-5 Nano's affordable pricing with GPT Breeze's productivity features? [Install the extension](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog) and start saving immediately.
+Ready to combine GPT-5 Nano's affordable pricing with GPT Breeze's productivity features? [Install the extension](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog) and start saving immediately.
 
 ### Cost Management Tips
 

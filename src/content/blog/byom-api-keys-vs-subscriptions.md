@@ -194,7 +194,7 @@ Ready to take control of your AI costs and privacy? Here's how to get started:
 ### Quick Setup Guide:
 
 **1. Install GPT Breeze Extension**
-- Visit [Chrome Web Store](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog)
+- Visit [Chrome Web Store](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)
 - Add to Chrome (free, 4.9-star rating)
 - Pin to toolbar for easy access
 
@@ -270,7 +270,7 @@ The **BYOM revolution** is here, and smart professionals are already saving hund
 ✅ **Professional features** - summarization, custom shortcuts, writing assistance  
 ✅ **Transparent costs** - real-time usage tracking  
 
-[**Get GPT Breeze Now**](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog) and join thousands of professionals who've already taken control of their AI costs and privacy.
+[**Get GPT Breeze Now**](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog) and join thousands of professionals who've already taken control of their AI costs and privacy.
 
 ---
 
