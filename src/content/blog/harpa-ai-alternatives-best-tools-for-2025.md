@@ -46,8 +46,37 @@ GPT Breeze stands out as the top **HARPA AI alternative** due to its genuine pri
 - **One-time purchase model** - no recurring subscription fees
 - **Custom shortcuts** for repeated workflows
 - **YouTube video summarization** with timestamp navigation
+
+**Experience YouTube video analysis like never before:**
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 20px 0; border-radius: 8px;">
+<iframe
+title="GPT Breeze YouTube summarizer demo - timestamp navigation"
+style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+src="https://www.youtube.com/embed/pOXdFaqTszU?autoplay=1&mute=1&controls=0&loop=1&playlist=pOXdFaqTszU&modestbranding=1&rel=0&playsinline=1"
+allow="autoplay; encrypted-media; picture-in-picture"
+allowfullscreen
+></iframe>
+</div>
+
+*Summarize any YouTube video with clickable timestamps - jump directly to any section mentioned. [Get YouTube summaries with GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)*
+
 - **Web page analysis** with follow-up chat capabilities
 - **Privacy-focused design** that ensures your data remains yours
+
+**Experience instant AI assistance right in your browser:**
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 20px 0; border-radius: 8px;">
+<iframe
+title="GPT Breeze text toolbar demo - instant explanations and custom AI instructions"
+style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+src="https://www.youtube.com/embed/2WftJLH3Zoc?autoplay=1&mute=1&controls=0&loop=1&playlist=2WftJLH3Zoc&modestbranding=1&rel=0&playsinline=1"
+allow="autoplay; encrypted-media; picture-in-picture"
+allowfullscreen
+></iframe>
+</div>
+
+*Select any text and get instant AI explanations or custom instructions - like translating to Japanese in seconds. [Summarize any website with GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)*
 
 **❌ Cons:**
 - Premium features require one-time purchase ($9.99)
@@ -268,11 +297,39 @@ After extensive testing, GPT Breeze emerges as the clear winner among **HARPA AI
 - **Flexible model switching** based on task requirements
 - **True pay-per-use** with transparent cost tracking
 
+**Complete control over your AI providers:**
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 20px 0; border-radius: 8px;">
+<iframe
+title="GPT Breeze AI provider selection demo - bring your own keys"
+style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+src="https://www.youtube.com/embed/QS7TU0xuvDk?autoplay=1&mute=1&controls=0&loop=1&playlist=QS7TU0xuvDk&modestbranding=1&rel=0&playsinline=1"
+allow="autoplay; encrypted-media; picture-in-picture"
+allowfullscreen
+></iframe>
+</div>
+
+*Switch between AI providers seamlessly - use OpenAI, Anthropic, OpenRouter, or your own local models. Take control of your AI costs and privacy. [Start with GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)*
+
 ### 3. Professional-Grade Features
 - **YouTube video summarization** with timestamp navigation
 - **Web page analysis** with follow-up chat capabilities
 - **Custom AI shortcuts** for workflow optimization
 - **Text enhancement** with context-aware improvements
+
+**See how GPT Breeze transforms web page analysis:**
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 20px 0; border-radius: 8px;">
+<iframe
+title="GPT Breeze page analysis demo - summaries with clickable citations"
+style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+src="https://www.youtube.com/embed/SeR-G-5l25Q?autoplay=1&mute=1&controls=0&loop=1&playlist=SeR-G-5l25Q&modestbranding=1&rel=0&playsinline=1"
+allow="autoplay; encrypted-media; picture-in-picture"
+allowfullscreen
+></iframe>
+</div>
+
+*Get instant page summaries with clickable citations and ask follow-up questions in any format. [Try GPT Breeze page summaries](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)*
 
 ### 4. Outstanding Value Proposition
 - **One-time $9.99 purchase** vs. $240-600/year subscriptions
@@ -355,6 +412,20 @@ The **AI browser extension** landscape is rapidly evolving, with several key tre
 - Cross-browser support becoming more common
 - Advanced automation capabilities expanding
 
+**Get full YouTube transcripts with timestamps:**
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 20px 0; border-radius: 8px;">
+<iframe
+title="GPT Breeze YouTube transcript demo - full transcripts with timestamps"
+style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+src="https://www.youtube.com/embed/CEXKlxe7IVE?autoplay=1&mute=1&controls=0&loop=1&playlist=CEXKlxe7IVE&modestbranding=1&rel=0&playsinline=1"
+allow="autoplay; encrypted-media; picture-in-picture"
+allowfullscreen
+></iframe>
+</div>
+
+*Access complete YouTube transcripts with clickable timestamps - perfect for research, content creation, and learning. [Get YouTube transcripts with GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)*
+
 ### Cost Models
 - One-time purchase models gaining popularity
 - More transparent pay-per-use pricing
@@ -373,6 +444,11 @@ While HARPA AI offers valuable features for web automation and AI assistance, th
 The choice of an alternative depends on your specific needs, but any of the solutions in this list will likely provide better privacy and cost control than HARPA AI's subscription model. The BYOM approach, in particular, represents the future of AI productivity tools, offering 80-90% cost savings while maintaining full control over your data.
 
 **Ready to make the switch?** Start with GPT Breeze's free tier to test the BYOM approach, then upgrade to premium features if they match your workflow needs. The $9.99 one-time investment pays for itself within the first month compared to subscription alternatives.
+
+**Install GPT Breeze now and experience the difference:**
+[Summarize any website with GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)
+
+*Join over 1,000 users who've rated GPT Breeze 4.9 stars - privacy-focused AI assistance that respects your data and your budget.*
 
 For power users looking for advanced features, check out our [detailed comparison of API keys vs subscriptions](/blog/byom-api-keys-vs-subscriptions) to understand why the **bring your own model** approach is revolutionizing AI productivity tools.
 

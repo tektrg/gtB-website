@@ -54,7 +54,7 @@ I've tested dozens of AI Chrome extensions over the past few months. Here are th
 **What Makes It Different:**
 - **True Zero Data Collection**: Your prompts go directly from your browser to your chosen AI provider. GPT Breeze never sees or stores anything.
 - **BYOM Support**: Works with OpenAI, Anthropic (Claude), OpenRouter, and even local models via Ollama
-- **One-Time Payment**: $9.99 once vs. endless subscriptions
+- **One-Time Payment**: $15 once vs. endless subscriptions
 - **4.9/5 Stars**: From 1,000+ Chrome Web Store users who actually get it
 
 **✅ Pros:**
@@ -77,8 +77,8 @@ I've tested dozens of AI Chrome extensions over the past few months. Here are th
 
 **Pricing Reality Check:**
 - **Free Plan**: Unlimited BYOM usage (just pay your AI provider directly)
-- **Premium**: $9.99 one-time for advanced features
-- **Annual Cost**: $9.99 once vs. Monica's $192/year = **$182 saved in first year**
+- **Premium**: $15 one-time for advanced features
+- **Annual Cost**: $15 once vs. Monica's $192/year = **$182 saved in first year**
 
 **Privacy Score: 24/25** ⭐⭐⭐⭐⭐
 API keys stored locally, zero data collection, direct API calls to your provider.
@@ -292,7 +292,7 @@ Here's how these Monica alternatives stack up across the metrics that actually m
 
 | Extension | Annual Cost | Privacy Score | BYOM Support | Account Required | Overall Score |
 |-----------|-------------|---------------|--------------|------------------|---------------|
-| **GPT Breeze** | **$9.99** | **24/25** ⭐⭐⭐⭐⭐ | **Yes** ✅ | **No** ✅ | **9.4/10** |
+| **GPT Breeze** | **$15** | **24/25** ⭐⭐⭐⭐⭐ | **Yes** ✅ | **No** ✅ | **9.4/10** |
 | MaxAI.me | $228 | 12/25 ⚠️ | No | Yes | 8.2/10 |
 | Merlin AI | $240 | 14/25 ⚠️ | No | Yes | 8.0/10 |
 | Harpa AI | $228 | 19/25 ⭐⭐⭐⭐ | Yes | No | 7.8/10 |
@@ -316,7 +316,7 @@ Let's break down what these tools *really* cost over time, because the subscript
 - Year 5: $960
 
 **GPT Breeze with BYOM:**
-- Extension: $9.99 one-time
+- Extension: $15 one-time
 - OpenAI API: ~$5-15/month = $60-180/year
 - Year 1: $70-190
 - Year 3: $190-550
@@ -337,7 +337,7 @@ Let's break down what these tools *really* cost over time, because the subscript
 - Year 5: $960
 
 **GPT Breeze with BYOM:**
-- Extension: $9.99 one-time
+- Extension: $15 one-time
 - OpenAI API: ~$20-40/month = $240-480/year
 - Year 1: $250-490
 - Year 3: $490-970
@@ -619,9 +619,9 @@ Look, I'm not saying subscriptions are evil. Spotify makes sense. Netflix makes 
 
 AI extensions are *tools*, not content services. The AI costs are separate (either bundled in subscription or paid via API). You're literally paying $16/month for a fancy text box.
 
-With BYOM extensions like GPT Breeze, you pay $9.99 once for the tool, then pay your AI provider directly at cost. That's the difference between owning and renting.
+With BYOM extensions like GPT Breeze, you pay $15 once for the tool, then pay your AI provider directly at cost. That's the difference between owning and renting.
 
-Five years from now, Monica users will have paid $960. GPT Breeze users will have paid $9.99 + whatever API costs they actually used. Who made the smarter choice?
+Five years from now, Monica users will have paid $960. GPT Breeze users will have paid $15 + whatever API costs they actually used. Who made the smarter choice?
 
 ![Subscription vs Ownership](https://i.imgflip.com/ac0dli.jpg)
 *Your wallet after 3 years of AI subscriptions*
