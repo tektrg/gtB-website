@@ -30,11 +30,13 @@ This document outlines the analytics and conversion tracking implementation for 
 - `landing_page`: Source landing page
 - `button_text`: Actual button text clicked
 - `button_location`: Button placement type (primary, secondary, nav_install, hero_desktop, hero_mobile, other)
-- `click_context`: Section context where click occurred (hero, features, conversation, conversation_feature, pricing, call_to_action, guide, faq, etc.)
+- `click_context`: Section context where click occurred (hero, features, conversation, conversation_feature, pricing, call_to_action, guide, faq, blog_content, guide_content, blog_conversation_feature, guide_conversation_feature, etc.)
+- `content_type`: Type of content (blog, guide) - only set when clicked from within blog posts or guide articles
+- `content_title`: Specific blog post or guide slug - identifies which piece of content drove the conversion
 - `event_category`: Event category (conversion)
 - `event_label`: Combined label for easy filtering (`{landing_page}_{context}`)
 
-**Purpose**: Track the main conversion goal - Chrome extension installations from each landing page with detailed context about user journey and conversation-related interactions.
+**Purpose**: Track the main conversion goal - Chrome extension installations from each landing page, blog post, guide article with detailed context about user journey and conversation-related interactions.
 
 ### 3. Secondary CTA Tracking
 **Event Name**: `secondary_cta_click`
@@ -81,16 +83,25 @@ This document outlines the analytics and conversion tracking implementation for 
 1. **Conversion Rate**: `chrome_extension_click` events / landing page views
 2. **Engagement Rate**: `engaged_session` events / landing page views
 3. **Content Completion**: `scroll_depth` at 75%+ / landing page views
+4. **Content Performance**: Conversion rate by `content_type` and `content_title`
 
 ### Secondary Metrics
 1. **Bounce Rate**: Sessions with no engagement events
 2. **Time on Page**: Average session duration
 3. **CTA Performance**: Click-through rates by button type and position
+4. **Content ROI**: Conversions per blog post / guide article
 
 ### Landing Page Comparison
 - Conversion rate by landing page type
 - Traffic quality by source landing page
 - User journey patterns across different audiences
+
+### Content Marketing Metrics
+- **Top Converting Blog Posts**: Rank blog posts by `content_title` conversion counts
+- **Top Converting Guides**: Rank guides by `content_title` conversion counts
+- **Content Type Effectiveness**: Compare blog vs. guide conversion rates
+- **Conversation Feature Impact**: Measure conversions from conversation-related content sections
+- **Content Attribution**: Track full user journey from blog/guide to conversion
 
 ## Analytics Dashboard Setup
 
@@ -111,6 +122,16 @@ All events are automatically sent to GA4 and can be found in:
 3. **Engagement Analysis**
    - Dimension: `landing_page`
    - Metrics: `engaged_session`, `scroll_depth`, average time on page
+
+4. **Content Marketing Performance**
+   - Dimension: `content_type`, `content_title`
+   - Metrics: `chrome_extension_click` count, conversion rate
+   - Filter: Where `content_type` is not null
+
+5. **Conversation Feature Analysis**
+   - Dimension: `click_context`
+   - Metrics: Conversion rate by context
+   - Filter: Where `click_context` contains "conversation"
 
 ### Goals and Conversions
 Set up the following conversions in GA4:
@@ -186,14 +207,27 @@ Track campaign performance by:
 - **Loaded in**: `/src/layouts/Base.astro`
 - **Load Order**: After GA4 initialization with defer attribute
 
-### Enhanced Conversation Tracking
-The tracking system automatically detects conversation-related contexts by:
-1. Checking the section ID or class name for keywords (conversation, chat, etc.)
-2. Analyzing parent element text for conversation-related terms (chat, ask, follow-up, Q&A, interact)
-3. Assigning specific button locations based on CSS classes and DOM position
-4. Creating combined event labels for easier filtering and analysis
+### Enhanced Content and Conversation Tracking
+The tracking system automatically detects and tracks multiple contexts:
 
-This allows precise tracking of user engagement with conversation features and helps identify which conversation-related content drives the most conversions.
+**Content Source Detection:**
+1. Detects if link is clicked within blog post content (`/blog/` URL path)
+2. Detects if link is clicked within guide article content (`/guide/` URL path)
+3. Extracts specific blog post or guide slug for granular tracking
+4. Tracks content-embedded links separately from landing page CTAs
+
+**Conversation Context Detection:**
+1. Checks section ID or class name for keywords (conversation, chat, etc.)
+2. Analyzes parent element text for conversation-related terms (chat, ask, follow-up, Q&A, interact)
+3. Combines content type with conversation context (e.g., `blog_conversation_feature`)
+4. Assigns specific button locations based on CSS classes and DOM position
+
+**Benefits:**
+- Identify which blog posts drive the most conversions
+- Track which guides are most effective at converting users
+- Understand how conversation-related content influences user decisions
+- Measure the ROI of content marketing efforts
+- Optimize content strategy based on conversion data
 
 ### Browser Compatibility
 - Modern browsers with JavaScript enabled

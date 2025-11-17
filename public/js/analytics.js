@@ -51,17 +51,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Determine context/section based on parent elements
       let context = "general";
-      const section = target.closest("section");
-      if (section) {
-        const sectionId = section.id || section.className;
-        if (sectionId.includes("hero")) context = "hero";
-        else if (sectionId.includes("features")) context = "features";
-        else if (sectionId.includes("conversation") || sectionId.includes("chat")) context = "conversation";
-        else if (sectionId.includes("pricing")) context = "pricing";
-        else if (sectionId.includes("get-started") || sectionId.includes("cta")) context = "call_to_action";
-        else if (sectionId.includes("guide")) context = "guide";
-        else if (sectionId.includes("faq")) context = "faq";
-        else if (sectionId) context = sectionId;
+      let contentType = null;
+      let contentTitle = null;
+
+      // Check if link is within blog or guide content
+      const articleElement = target.closest("article, main");
+      if (articleElement) {
+        // Check for blog post context
+        if (window.location.pathname.includes("/blog/")) {
+          context = "blog_content";
+          contentType = "blog";
+          // Extract blog post slug from URL
+          const pathParts = window.location.pathname.split("/");
+          contentTitle = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+        }
+        // Check for guide content
+        else if (window.location.pathname.includes("/guide/")) {
+          context = "guide_content";
+          contentType = "guide";
+          // Extract guide slug from URL
+          const pathParts = window.location.pathname.split("/");
+          contentTitle = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+        }
+      }
+
+      // If not in blog/guide content, check section context
+      if (!contentType) {
+        const section = target.closest("section");
+        if (section) {
+          const sectionId = section.id || section.className;
+          if (sectionId.includes("hero")) context = "hero";
+          else if (sectionId.includes("features")) context = "features";
+          else if (sectionId.includes("conversation") || sectionId.includes("chat")) context = "conversation";
+          else if (sectionId.includes("pricing")) context = "pricing";
+          else if (sectionId.includes("get-started") || sectionId.includes("cta")) context = "call_to_action";
+          else if (sectionId.includes("guide")) context = "guide";
+          else if (sectionId.includes("faq")) context = "faq";
+          else if (sectionId) context = sectionId;
+        }
       }
 
       // Check for conversation-related context in surrounding text
@@ -69,17 +96,28 @@ document.addEventListener("DOMContentLoaded", function () {
       if (parentText.includes("chat") || parentText.includes("conversation") ||
           parentText.includes("ask") || parentText.includes("follow-up") ||
           parentText.includes("q&a") || parentText.includes("interact")) {
-        context = "conversation_feature";
+        context = contentType ? `${contentType}_conversation_feature` : "conversation_feature";
       }
 
-      gtag("event", "chrome_extension_click", {
+      // Build event parameters
+      const eventParams = {
         landing_page: landingPage,
         button_text: target.textContent.trim(),
         button_location: buttonLocation,
         click_context: context,
         event_category: "conversion",
         event_label: `${landingPage}_${context}`,
-      });
+      };
+
+      // Add content-specific parameters if available
+      if (contentType) {
+        eventParams.content_type = contentType;
+      }
+      if (contentTitle) {
+        eventParams.content_title = contentTitle;
+      }
+
+      gtag("event", "chrome_extension_click", eventParams);
     }
 
     // Track secondary CTA clicks
