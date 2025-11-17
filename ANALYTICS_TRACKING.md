@@ -29,9 +29,12 @@ This document outlines the analytics and conversion tracking implementation for 
 **Parameters**:
 - `landing_page`: Source landing page
 - `button_text`: Actual button text clicked
-- `button_location`: Primary or secondary button placement
+- `button_location`: Button placement type (primary, secondary, nav_install, hero_desktop, hero_mobile, other)
+- `click_context`: Section context where click occurred (hero, features, conversation, conversation_feature, pricing, call_to_action, guide, faq, etc.)
+- `event_category`: Event category (conversion)
+- `event_label`: Combined label for easy filtering (`{landing_page}_{context}`)
 
-**Purpose**: Track the main conversion goal - Chrome extension installations from each landing page.
+**Purpose**: Track the main conversion goal - Chrome extension installations from each landing page with detailed context about user journey and conversation-related interactions.
 
 ### 3. Secondary CTA Tracking
 **Event Name**: `secondary_cta_click`
@@ -179,9 +182,18 @@ Track campaign performance by:
 ## Technical Implementation Notes
 
 ### Event Tracking Code Location
-- **File**: `/src/layouts/Base.astro`
-- **Section**: Enhanced Google Analytics script
-- **Load Order**: After GA4 initialization
+- **File**: `/public/js/analytics.js`
+- **Loaded in**: `/src/layouts/Base.astro`
+- **Load Order**: After GA4 initialization with defer attribute
+
+### Enhanced Conversation Tracking
+The tracking system automatically detects conversation-related contexts by:
+1. Checking the section ID or class name for keywords (conversation, chat, etc.)
+2. Analyzing parent element text for conversation-related terms (chat, ask, follow-up, Q&A, interact)
+3. Assigning specific button locations based on CSS classes and DOM position
+4. Creating combined event labels for easier filtering and analysis
+
+This allows precise tracking of user engagement with conversation features and helps identify which conversation-related content drives the most conversions.
 
 ### Browser Compatibility
 - Modern browsers with JavaScript enabled
