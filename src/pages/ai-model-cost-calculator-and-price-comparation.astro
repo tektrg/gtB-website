@@ -369,6 +369,9 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
         });
       });
 
+      // Parse query parameters for model pre-selection
+      parseQueryParams();
+
       // Setup event listeners
       document.getElementById('inputTokens').addEventListener('input', updateCalculations);
       document.getElementById('outputTokens').addEventListener('input', updateCalculations);
@@ -394,6 +397,47 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
 
       // Initial render
       updateCalculations();
+    }
+
+    // Parse URL parameters for model pre-selection
+    function parseQueryParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const modelsParam = urlParams.get('models');
+
+      if (modelsParam) {
+        // Parse comma-separated model IDs
+        const requestedModels = modelsParam.split(',')
+          .map(id => id.trim())
+          .filter(id => id.length > 0);
+
+        // Validate and filter models
+        const validModels = requestedModels.filter(fullId => {
+          return allModels.some(model => model.fullId === fullId);
+        });
+
+        // Update selected models if valid ones found
+        if (validModels.length > 0) {
+          selectedModels = validModels;
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // Update URL to reflect current model selection
+    function updateURL() {
+      const url = new URL(window.location);
+      if (selectedModels.length > 0) {
+        url.searchParams.set('models', selectedModels.join(','));
+      } else {
+        url.searchParams.delete('models');
+      }
+      window.history.replaceState({}, '', url);
+    }
+
+    // Validate model exists in available models
+    function validateModel(fullId) {
+      return allModels.some(model => model.fullId === fullId);
     }
 
     // Handle search in dropdown
@@ -463,7 +507,7 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
     function selectModelFromSearch(fullId) {
       if (!selectedModels.includes(fullId)) {
         selectedModels.push(fullId);
-        
+
         // Clear search
         const searchInput = document.getElementById('searchInput');
         if (searchInput) {
@@ -473,7 +517,10 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
           showSearchDropdown = false;
           renderSearchDropdown();
         }
-        
+
+        // Update URL to reflect new selection
+        updateURL();
+
         updateCalculations();
       }
     }
@@ -659,6 +706,7 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
     window.handleSearchInput = handleSearchInput;
     window.removeModel = function(fullId) {
       selectedModels = selectedModels.filter(id => id !== fullId);
+      updateURL();
       updateCalculations();
     };
 
