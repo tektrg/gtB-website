@@ -9,4 +9,7 @@ settings.local.json
 
 # Agent instruction files
 AGENTS.md
-docs/
+CLAUDE.md
+GEMINI.md
+
+.claude/*
