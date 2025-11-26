@@ -8,7 +8,7 @@ import Base from "@/layouts/Base.astro";
 >
   <header>
     <div class="container nav">
-      <div class="brand">
+      <a href="/" class="brand">
         <img
           class="brand-logo"
           src="/media/hero/logo-56.png"
@@ -20,7 +20,7 @@ import Base from "@/layouts/Base.astro";
           decoding="async"
         />
         GPT Breeze
-      </div>
+      </a>
       <nav class="menu" aria-label="Main Navigation">
         <a href="/guide">Guide</a>
         <a href="/#features">Features</a>
@@ -39,6 +39,7 @@ import Base from "@/layouts/Base.astro";
     </div>
   </header>
 
+  
   <!-- Mobile menu overlay - moved outside header -->
   <div class="mobile-menu-overlay" aria-hidden="true">
     <nav class="mobile-menu" aria-label="Mobile Navigation">
@@ -92,8 +93,9 @@ import Base from "@/layouts/Base.astro";
           <div class="plan-header">
             <h2>One-time (BYOK)</h2>
             <div class="price">
-              <span class="amount">$15</span>
-              <span class="original-price">will be $29</span>
+              <span class="amount">$7.5</span>
+              <span class="original-price">was $15 - save 50%!</span>
+              <span class="bf-deal">BF25 Deal</span>
             </div>
           </div>
           <ul class="features">
@@ -115,8 +117,9 @@ import Base from "@/layouts/Base.astro";
             <h2>Annual Plan</h2>
             <div class="price">
               <span class="amount">$19</span>
-              <span class="original-price">$49</span>
+              <span class="original-price">was $49 - save 61%!</span>
               <span class="period">One year of AI usage</span>
+              <span class="bf-deal">BF25 Deal</span>
             </div>
           </div>
           <ul class="features">
@@ -307,6 +310,35 @@ import Base from "@/layouts/Base.astro";
 
       .amount {
         font-size: 2.5rem;
+      }
+    }
+  </style>
+
+  <style>
+
+    .bf-deal {
+      display: block;
+      font-size: 0.75rem;
+      color: #ff4757;
+      font-weight: 700;
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(255, 71, 87, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 71, 87, 0.2);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.2);
+      }
+      50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 8px rgba(255, 71, 87, 0);
       }
     }
   </style>
