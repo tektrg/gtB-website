@@ -836,7 +836,7 @@ The research is clear, and my experience as an indie hacker confirms it: BYOM ex
 17. [LM Studio](https://lmstudio.ai/) - User-friendly interface for local AI models.
 18. [Merlin Pricing](https://www.getmerlin.in/pricing) - Official pricing page for Merlin Pro subscription.
 19. [Monica Pricing](https://monica.im/pricing) - Official pricing page for Monica Premium subscription.
-20. [Claude Pro Pricing](https://claude.ai/pricing) - Anthropic's Claude Pro subscription pricing.
+20. [Claude Pro Pricing](https://claude.com/pricing) - Anthropic's Claude Pro subscription pricing.
 
 
 **See why GPT Breeze consistently ranks #1 among privacy-conscious users** → [Try GPT Breeze Free](/)

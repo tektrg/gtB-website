@@ -492,7 +492,7 @@ Look, I get it – not everyone wants to pay for yet another tool. Here's the re
 **Truly Free Options:**
 1. **GPT Breeze Free Tier**: Unlimited BYOM usage (you pay your AI provider directly, typically $5-20/month for personal use)
 2. **Native ChatGPT**: Just use ChatGPT.com directly (requires Plus for GPT-4)
-3. **Claude.ai**: Free tier with Claude Sonnet, no extension needed
+3. **Claude.com**: Free tier with Claude Sonnet, no extension needed
 
 **"Free" Tiers That Aren't Really Free:**
 Most extensions offer "free" plans with 10-30 queries per day, which sounds okay until you realize:
