@@ -1,0 +1,49 @@
+{
+  "$schema": "https://example.com/schemas/gptb-shortcuts.schema.json",
+  "version": 1,
+  "generated_at": "2025-01-01T00:00:00.000Z",
+  "shortcuts": [
+    {
+      "id": "write-email-friendly",
+      "slug": "write-friendly-email",
+      "title": "Write a friendly email",
+      "description": "Turn key points into a concise, friendly email with clear subject and call to action.",
+      "prompt": "You are a helpful assistant that writes concise, friendly emails.\n\nUser notes:\n{{input}}\n\nWrite an email with:\n- Clear subject line\n- Short, friendly tone\n- Clear ask or next step\n- Optional PS if useful.",
+      "category": "email",
+      "tags": ["email", "communication", "productivity"],
+      "model": "gpt-4o-mini",
+      "is_premium": false,
+      "source": "core",
+      "created_at": "2025-01-01T00:00:00.000Z",
+      "updated_at": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "summarize-article-key-points",
+      "slug": "summarize-article",
+      "title": "Summarize article into key points",
+      "description": "Summarize an article into bullet points with key takeaways and action items.",
+      "prompt": "You are an expert summarizer.\n\nSummarize the following content:\n{{input}}\n\nReturn:\n- 3–7 bullet points with key ideas\n- 3 key takeaways\n- Optional action items if relevant.",
+      "category": "reading",
+      "tags": ["summary", "reading", "research"],
+      "model": "gpt-4o-mini",
+      "is_premium": false,
+      "source": "core",
+      "created_at": "2025-01-01T00:00:00.000Z",
+      "updated_at": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "debug-code-explainer",
+      "slug": "debug-code-explainer",
+      "title": "Explain and debug code",
+      "description": "Explain what a piece of code does, identify likely bugs, and suggest improvements.",
+      "prompt": "You are a senior engineer.\n\nHere is some code:\n```{{language}}\n{{input}}\n```\n\nExplain:\n1) What this code is trying to do\n2) Potential bugs or edge cases\n3) Concrete improvement suggestions\n\nKeep it concise and practical.",
+      "category": "coding",
+      "tags": ["code", "debugging", "learning"],
+      "model": "gpt-4o-mini",
+      "is_premium": false,
+      "source": "core",
+      "created_at": "2025-01-01T00:00:00.000Z",
+      "updated_at": "2025-01-01T00:00:00.000Z"
+    }
+  ]
+}

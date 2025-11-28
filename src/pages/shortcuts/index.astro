@@ -1,0 +1,49 @@
+---
+import shortcutsData from '../../data/shortcuts.json'
+
+const shortcuts = Array.isArray(shortcutsData?.shortcuts) ? shortcutsData.shortcuts : []
+
+// Group shortcuts by category for simple browsing
+const groupedByCategory = shortcuts.reduce((acc, item) => {
+  const category = item.category || 'uncategorized'
+  if (!acc[category]) acc[category] = []
+  acc[category].push(item)
+  return acc
+}, {})
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GPT Breeze Shortcut Library</title>
+    <meta
+      name="description"
+      content="Browse the curated GPT Breeze shortcut library: ready‑to‑use AI prompts organized by category."
+    />
+  </head>
+  <body>
+    <main>
+      <h1>GPT Breeze Shortcut Library</h1>
+      <p>
+        Curated AI shortcuts for GPT Breeze. These prompts are stored in a static JSON file and are
+        consumable by both the browser extension and this website.
+      </p>
+
+      {Object.entries(groupedByCategory).map(([category, items]) => (
+        <section>
+          <h2>{category}</h2>
+          <ul>
+            {items.map((shortcut) => (
+              <li>
+                <a href={`/shortcuts/${shortcut.slug}/`}>{shortcut.title}</a>
+                {shortcut.description && <p>{shortcut.description}</p>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </main>
+  </body>
+</html>
+

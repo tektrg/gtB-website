@@ -1,0 +1,79 @@
+---
+import shortcutsData from '../../data/shortcuts.json'
+
+type ShortcutRecord = {
+  id: string
+  slug: string
+  title: string
+  description?: string
+  prompt: string
+  category?: string
+  tags?: string[]
+  model?: string
+  is_premium?: boolean
+  source?: string
+}
+
+const allShortcuts: ShortcutRecord[] = Array.isArray(shortcutsData?.shortcuts)
+  ? shortcutsData.shortcuts
+  : []
+
+export async function getStaticPaths() {
+  return allShortcuts.map((shortcut) => ({
+    params: { slug: shortcut.slug },
+    props: { shortcut },
+  }))
+}
+
+const { shortcut } = Astro.props as { shortcut: ShortcutRecord }
+
+if (!shortcut) {
+  throw new Error('Shortcut not found')
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{shortcut.title} – GPT Breeze Shortcut</title>
+    {shortcut.description && <meta name="description" content={shortcut.description} />}
+  </head>
+  <body>
+    <main>
+      <article>
+        <header>
+          <h1>{shortcut.title}</h1>
+          {shortcut.category && <p>Category: {shortcut.category}</p>}
+          {Array.isArray(shortcut.tags) && shortcut.tags.length > 0 && (
+            <p>
+              Tags:
+              {' '}
+              {shortcut.tags.join(', ')}
+            </p>
+          )}
+        </header>
+
+        {shortcut.description && <p>{shortcut.description}</p>}
+
+        <section>
+          <h2>Prompt</h2>
+          <pre><code>{shortcut.prompt}</code></pre>
+        </section>
+
+        {shortcut.model && (
+          <section>
+            <h2>Suggested Model</h2>
+            <p>{shortcut.model}</p>
+          </section>
+        )}
+
+        <p>
+          This shortcut is part of the GPT Breeze static shortcut library and can be used inside the
+          browser extension.
+        </p>
+      </article>
+    </main>
+  </body>
+</html>
+
