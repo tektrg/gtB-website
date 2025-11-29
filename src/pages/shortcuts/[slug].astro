@@ -14,11 +14,11 @@ type ShortcutRecord = {
   source?: string
 }
 
-const allShortcuts: ShortcutRecord[] = Array.isArray(shortcutsData?.shortcuts)
-  ? shortcutsData.shortcuts
-  : []
-
 export async function getStaticPaths() {
+  const allShortcuts: ShortcutRecord[] = Array.isArray(shortcutsData?.shortcuts)
+    ? shortcutsData.shortcuts
+    : []
+
   return allShortcuts.map((shortcut) => ({
     params: { slug: shortcut.slug },
     props: { shortcut },
