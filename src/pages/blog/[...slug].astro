@@ -39,7 +39,7 @@ const relatedPosts = posts
     "description": post.data.description,
     "author": {
       "@type": "Person",
-      "name": "Duy Thanh",
+      "name": post.data.author || "Duy Thanh",
       "url": "https://gptbreeze.io/author"
     },
     "publisher": {
@@ -290,7 +290,7 @@ const relatedPosts = posts
       <div class="article-meta">
         <a href="/author" class="author-link">
           <div class="author-avatar"></div>
-          <span>Duy Thanh</span>
+          <span>{post.data.author || 'Duy Thanh'}</span>
         </a>
         {post.data.pubDate && (
           <time datetime={post.data.pubDate.toISOString()}>
