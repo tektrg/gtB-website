@@ -7,74 +7,164 @@ tags: ["local llm", "gpt breeze", "ollama", "ai privacy", "browser extension"]
 draft: false
 ---
 
-## Introduction
+Run your own AI models locally while maintaining privacy and reducing costs with GPT Breeze's custom model server support.
 
-In the rapidly evolving landscape of AI, privacy and control are paramount. While cloud-based AI models offer convenience, they often come with privacy trade-offs. This is where local Large Language Models (LLMs) shine. By running an LLM directly on your own machine, you can ensure that your data remains private and you have complete control over your AI experience.
+## Overview
 
-[GPT Breeze](https://chrome.google.com/webstore/detail/gpt-breeze/bceemhpgndldchfglifbldmbgmebhdja) is a powerful browser extension that brings the power of AI to your fingertips. It's a "bring your own model" (BYOM) tool that supports various AI providers, including the ability to connect to local LLMs. This guide will walk you through setting up a local LLM with [Ollama](https://ollama.ai/) and integrating it with GPT Breeze for a truly private and customizable AI workflow.
+GPT Breeze supports any local AI model server that provides an OpenAI-compatible API. This means you can:
 
-## Why Use a Local LLM?
+- **Keep your data private** - All conversations stay on your device
+- **Reduce costs** - No API fees for using your own models
+- **Work offline** - Use AI even without internet connection
+- **Choose any model** - Run specialized models for your specific needs
 
-Before we dive into the setup, let's explore the benefits of using a local LLM:
+### Key Benefits
 
-*   **Privacy:** Your data never leaves your machine. This is crucial for sensitive information or for users who are simply uncomfortable sending their data to third-party servers.
-*   **Control:** You have full control over the model you use. You can switch between different models, fine-tune them for specific tasks, and even create your own.
-*   **Cost-Effective:** While there's an initial hardware investment, using a local LLM can be more cost-effective in the long run compared to paying for API access to cloud-based models.
-*   **Offline Access:** Once you have a model downloaded, you can use it without an internet connection, making it a reliable tool for on-the-go productivity.
+- Complete data privacy and control
+- Zero ongoing API costs after initial setup
+- Offline capability for sensitive work
+- Support for specialized and fine-tuned models
 
-## Setting Up Your Local LLM with Ollama
+## Getting Started
 
-Ollama is a fantastic tool that simplifies the process of running and managing local LLMs. It provides a simple command-line interface and an API server, making it easy to integrate with other applications like GPT Breeze.
+### What You'll Need
 
-### Step 1: Install Ollama
+- A local model server running on your computer
+- Basic understanding of your local server's configuration
+- 5-10 minutes for initial setup
 
-First, you'll need to install Ollama on your machine. Head over to the [Ollama website](https://ollama.ai/) and download the appropriate version for your operating system (macOS, Windows, or Linux). The installation process is straightforward and well-documented.
+### Ollama (Recommended for Beginners)
+
+**Best for**: Easy setup and model management
+
+- **Default URL**: `http://127.0.0.1:11434/v1`
+- **Why choose Ollama**: Simple installation, extensive model library, automatic model management
+- **Getting started**: Visit [ollama.ai](http://ollama.ai) for installation instructions
+
+## Setting Up Your Local Server
+
+### Step 1: Install Your Chosen Server
+
+Follow the installation instructions for your selected local model server. Most servers provide simple installation scripts or packages.
 
 ### Step 2: Download a Model
 
-Once Ollama is installed, you can download a model to run locally. There are many models to choose from, each with its own strengths and weaknesses. For this tutorial, we'll use the `llama2` model, a popular and powerful open-source model from Meta.
+Each server has its own method for downloading models:
 
-Open your terminal and run the following command:
+- **Ollama**: `ollama pull llama2` (or your preferred model)
+- **LocalAI**: Place model files in the models directory
+- **vLLM**: Specify model path in startup command
+- **Text Generation WebUI**: Use the web interface to download models
+
+### Step 3: Start the Server
+
+Start your local server according to its documentation. Ensure it's running and accessible at the expected URL.
+
+**Verification**: Open your browser and visit your server's URL. You should see either an API documentation page or a confirmation that the server is running.
 
 ```bash
-ollama run llama2
+export OLLAMA_ORIGINS="*"
+ollama serve > /dev/null 2>&1 &
 ```
 
-This command will download the `llama2` model and start a chat session in your terminal. You can close this session for now, as we'll be using GPT Breeze to interact with the model.
+> 💡 `OLLAMA_ORIGINS="*"` is needed to prevent a "Forbidden" error when the extension tries to access the server.
 
-### Step 3: Start the Ollama Server
+## Configuring GPT Breeze
 
-For GPT Breeze to communicate with your local LLM, the Ollama server needs to be running. By default, Ollama starts a server on `http://localhost:11434`. You can ensure the server is running by opening a new terminal window and running the following command:
+### Adding Your Local Server
 
-```bash
-ollama serve
+1. **Open GPT Breeze settings**
+    - Click the GPT Breeze extension icon
+    - Navigate to Settings or Credentials section
+2. **Add a new custom provider**
+    - Click "Add Provider" or similar button
+    - Select "Custom" as the provider type
+3. **Enter your server details**:
+    - **Name**: Give your server a recognizable name (e.g., "My Ollama Server")
+    - **Base URL**: Enter your server's URL (e.g., `http://127.0.0.1:11434/v1`)
+    - **API Key**: Leave empty or enter "dummy-key" (most local servers don't require authentication)
+4. **Save and test**
+    - Save your configuration
+    - Try sending a test message to verify the connection
+
+### Configuration Example
+
+```
+Name: Ollama Local
+Base URL: http://127.0.0.1:11434/v1
+API Key: (leave empty)
 ```
 
-Keep this terminal window open while you use GPT Breeze.
+## Troubleshooting
 
-## Integrating Ollama with GPT Breeze
+### Common Issues
 
-Now that you have your local LLM up and running, it's time to connect it to GPT Breeze.
+### Issue: "Forbidden"
 
-### Step 1: Install GPT Breeze
+**Symptoms**: GPT Breeze can't connect to your local server
 
-If you haven't already, install the [GPT Breeze extension](https://chrome.google.com/webstore/detail/gpt-breeze/bceemhpgndldchfglifbldmbgmebhdja) from the Chrome Web Store.
+**Solutions**:
 
-### Step 2: Configure GPT Breeze for Local LLM
+1. `export OLLAMA_ORIGINS="*"` then restart the server
 
-1.  Open the GPT Breeze extension settings. You can usually do this by clicking the extension icon in your browser's toolbar and selecting "Settings" or "Options."
-2.  In the settings, navigate to the "AI Provider" or "Model" section.
-3.  Select "Custom" or "Local LLM" from the list of providers.
-4.  You'll be prompted to enter the API endpoint for your local LLM. For Ollama, this is typically `http://localhost:11434`.
-5.  You may also need to specify the model you want to use. Enter `llama2` in the model name field.
-6.  Save your settings.
+### Issue: "Connection failed" or "Server not responding"
 
-### Step 3: Start Using Your Local LLM in the Browser
+**Symptoms**: GPT Breeze can't connect to your local server
 
-That's it! You can now use GPT Breeze to interact with your local LLM. Highlight text on any webpage, right-click, and select a GPT Breeze action (e.g., "Summarize," "Explain," "Translate"). The request will be sent to your local Ollama server, and the response will be displayed in your browser.
+**Solutions**:
 
-## Conclusion
+1. Verify your local server is running
+2. Check the URL is correct (including the `/v1` path)
+3. Ensure no firewall is blocking the connection
+4. Try accessing the URL directly in your browser
 
-By combining the power of local LLMs with the convenience of a browser extension like GPT Breeze, you can create a private, powerful, and customizable AI workflow. This setup gives you the best of both worlds: the cutting-edge capabilities of large language models and the peace of mind that comes with knowing your data is secure.
+### Issue: "Authentication failed"
 
-Ready to take control of your AI experience? [Install GPT Breeze from the Chrome Web Store](https://chrome.google.com/webstore/detail/gpt-breeze/bceemhpgndldchfglifbldmbgmebhdja) and start exploring the world of local LLMs today!
+**Symptoms**: Server rejects requests due to authentication
+
+**Solutions**:
+
+1. Leave the API Key field empty for most local servers
+2. If your server requires authentication, consult its documentation for the correct key format
+3. Try using "dummy-key" or "local" as a placeholder API key
+
+### Issue: Slow responses or timeouts
+
+**Symptoms**: Long delays or failed responses from local models
+
+**Causes**: Local models can be slower than cloud APIs, especially on older hardware
+
+**Solutions**:
+
+1. Use smaller, faster models for better response times
+2. Ensure sufficient RAM and processing power
+3. Close other resource-intensive applications
+4. Consider using quantized models for better performance
+
+### Issue: Models giving poor quality responses
+
+**Symptoms**: Responses are incoherent or low quality
+
+**Solutions**:
+
+1. Try different models to find one that works well for your use case
+2. Adjust model parameters in your local server if supported
+3. Ensure the model is fully loaded and not partially corrupted
+
+### Getting Help
+
+- Check your local server's documentation for specific configuration issues
+- GPT Breeze treats custom servers as standard OpenAI-compatible endpoints
+- Most connection issues are related to the local server setup rather than GPT Breeze
+
+### Advanced Tips
+
+- **Multiple servers**: You can configure multiple local servers and switch between them
+- **Model switching**: Change models by reconfiguring your local server, not in GPT Breeze
+- **Performance optimization**: Refer to your local server's documentation for performance tuning
+
+**Result**: You should now be able to use local AI models privately and efficiently through GPT Breeze, with full control over your data and conversations.
+
+---
+
+*Stay connected with us on [X (Twitter)](https://x.com/gptBreeze_io) | [Youtube](https://www.youtube.com/@gptBreeze_io) | [Website: GPTBreeze.io](https://www.gptbreeze.io/) | [Chrome web store](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog) | yourfriend@gptbreeze.io*
