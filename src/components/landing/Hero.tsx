@@ -61,10 +61,38 @@ export const Hero = () => {
     return (
         <section id="home" className="hero">
             <div className="container">
-                <div className="bg"></div>
+                {/* Animated Background */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" style={{ zIndex: 0 }}>
+                    <motion.div
+                        animate={{
+                            x: ["-20%", "20%"],
+                            scale: [1, 1.1, 1],
+                        }}
+                        transition={{
+                            duration: 5,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                            ease: "easeInOut",
+                        }}
+                        className="absolute top-[-30%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-accent-blue-light blur-[80px] opacity-60 mix-blend-multiply"
+                    />
+                    <motion.div
+                        animate={{
+                            x: ["20%", "-20%"],
+                            scale: [1, 1.2, 1],
+                        }}
+                        transition={{
+                            duration: 7,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                            ease: "easeInOut",
+                        }}
+                        className="absolute top-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-blue-100 blur-[80px] opacity-60 mix-blend-multiply"
+                    />
+                </div>
 
                 {/* Text Content */}
-                <StaggerContainer className="flex flex-col items-center">
+                <StaggerContainer className="relative z-10 flex flex-col items-center">
                     <motion.h1
                         className="display"
                         variants={headingVariants}
