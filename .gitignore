@@ -13,3 +13,6 @@ CLAUDE.md
 GEMINI.md
 
 .claude/*
+
+# Ignore all dot-folders
+.*/
