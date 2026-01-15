@@ -269,6 +269,24 @@ import { Privacy, Contact } from "@/components/landing/FooterSections";
   <script is:inline>
 
     
+    // Scroll handling for header
+    const initScrollHeader = () => {
+      const header = document.querySelector('header');
+      if (!header) return;
+
+      const handleScroll = () => {
+        if (window.scrollY > 100) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      // Initial check
+      handleScroll();
+    };
+    
     // Mobile menu functionality
     const initMobileMenu = () => {
       const toggle = document.querySelector('.mobile-menu-toggle');
@@ -342,9 +360,11 @@ import { Privacy, Contact } from "@/components/landing/FooterSections";
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
         initMobileMenu();
+        initScrollHeader();
       });
     } else {
       initMobileMenu();
+      initScrollHeader();
     }
   </script>
 

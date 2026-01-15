@@ -34,10 +34,17 @@ header {
   position: sticky;
   top: 0;
   z-index: 20;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom: none;
+  transition: all 0.3s ease;
+}
+
+header.scrolled {
   background: theme('colors.header-backdrop');
   -webkit-backdrop-filter: blur(12px) saturate(160%);
   backdrop-filter: blur(12px) saturate(160%);
-  border-bottom: none;
 }
 
 .nav {
