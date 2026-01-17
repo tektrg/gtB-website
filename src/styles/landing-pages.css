@@ -370,7 +370,8 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 70vh;
+  min-height: 80vh;
+  height: auto;
 }
 
 .features-grid {
