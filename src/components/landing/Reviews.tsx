@@ -128,7 +128,7 @@ export const Reviews = () => {
 
                 <div className="card">
                     <p className="muted">Reviews from Chrome Web Store</p>
-                    <StaggerContainer className="stack" style={{ marginTop: 12, gap: 14 }}>
+                    <StaggerContainer className="stack" style={{ marginTop: 12, gap: 14 }} viewport={{ once: true, margin: "-100px" }}>
                         {reviewsChrome.map((review, i) => (
                             <ReviewCard key={i} review={review} />
                         ))}
@@ -137,7 +137,7 @@ export const Reviews = () => {
 
                 <div className="card" style={{ marginTop: 24 }}>
                     <p className="muted">Reviews from Gumroad</p>
-                    <StaggerContainer className="stack" style={{ marginTop: 12, gap: 14 }}>
+                    <StaggerContainer className="stack" style={{ marginTop: 12, gap: 14 }} viewport={{ once: true, margin: "-100px" }}>
                         {reviewsGumroad.map((review, i) => (
                             <ReviewCard key={i} review={review} />
                         ))}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
 import { StaggerContainer, StaggerItem, ScaleIn, ParallaxScroll } from '../ui/motion';
 import { cn } from '../ui/motion';
+import { AnimatedButton } from '../ui/AnimatedButton';
 
 declare global {
     interface Window {
@@ -94,19 +95,18 @@ export const Hero = () => {
                 {/* Text Content */}
                 <StaggerContainer className="relative z-10 flex flex-col items-center">
                     <motion.h1
-                        className="display"
+                        className="display text-balance"
                         variants={headingVariants}
                     >
                         <motion.span variants={wordVariants} className="inline-block mr-[0.2em]">Save</motion.span>
                         <motion.span variants={wordVariants} className="em inline-block mr-[0.2em]">hours</motion.span>
-                        <br className="hidden sm:inline" />
                         {["consuming", "long", "content", "on", "the", "web"].map((word, i) => (
                             <motion.span key={i} variants={wordVariants} className="inline-block mr-[0.25em] last:mr-0">{word}</motion.span>
                         ))}
                     </motion.h1>
 
                     <StaggerItem delay={0.1}>
-                        <p className="lead center" style={{ maxWidth: '720px', marginInline: 'auto' }}>
+                        <p className="lead center text-pretty" style={{ maxWidth: '720px', marginInline: 'auto' }}>
                             GPT Breeze Extension summarizes YouTube videos and articles, accelerates your writing, by saving your prompts as one-click shortcuts.
                         </p>
                     </StaggerItem>
@@ -126,9 +126,12 @@ export const Hero = () => {
                     </StaggerItem>
 
                     <StaggerItem delay={0.3} className="hero-actions w-full flex justify-center">
-                        <a className="btn primary desktop-cta" href="https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog">
+                        <AnimatedButton
+                            className="btn primary desktop-cta"
+                            href="https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog"
+                        >
                             Add to Chrome for free
-                        </a>
+                        </AnimatedButton>
                         <form className="mobile-email-form" onSubmit={handleEmailSubmit}>
                             <input
                                 type="email"
@@ -138,7 +141,9 @@ export const Hero = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                            <button type="submit" className="btn primary">Remind me via email</button>
+                            <AnimatedButton type="submit" className="btn primary">
+                                Remind me via email
+                            </AnimatedButton>
                         </form>
                     </StaggerItem>
                 </StaggerContainer>
@@ -149,17 +154,14 @@ export const Hero = () => {
                         <div className="device-frame">
                             <div className="ratio">
                                 {!showVideo ? (
-                                    <div
+                                    <button
                                         className="yt-lite"
-                                        role="button"
                                         aria-label="Play product overview video"
                                         style={{ backgroundImage: "url('/media/hero/gpt-breeze-hero-video-placeholder-1280x800.jpg')" }}
-                                        tabIndex={0}
                                         onClick={() => setShowVideo(true)}
-                                        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setShowVideo(true)}
                                     >
-                                        <button className="play" aria-label="Play video"></button>
-                                    </div>
+                                        <span className="play" aria-hidden="true"></span>
+                                    </button>
                                 ) : (
                                     <iframe
                                         src="https://www.youtube-nocookie.com/embed/y4LZe_S0H-0?rel=0&modestbranding=1&autoplay=1"

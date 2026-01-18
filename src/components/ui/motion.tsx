@@ -1,11 +1,16 @@
 import React from 'react';
-import { motion, type HTMLMotionProps, type Variants, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, type HTMLMotionProps, type Variants, useScroll, useTransform, useSpring, useReducedMotion as useFramerReducedMotion } from 'framer-motion';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 // --- Utils ---
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+// Hook to detect reduced motion preference
+export function useReducedMotion() {
+  return useFramerReducedMotion();
 }
 
 type MotionComponentProps = HTMLMotionProps<"div"> & {
@@ -18,27 +23,27 @@ type MotionComponentProps = HTMLMotionProps<"div"> & {
 // --- Variants ---
 const fadeInVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: (custom: { delay: number; duration: number }) => ({
+  visible: (custom: { delay: number; duration: number; shouldReduce: boolean }) => ({
     opacity: 1,
-    transition: { delay: custom.delay, duration: custom.duration, ease: "easeOut" },
+    transition: { delay: custom.shouldReduce ? 0 : custom.delay, duration: custom.shouldReduce ? 0 : custom.duration, ease: "easeOut" },
   }),
 };
 
 const slideUpVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: (custom: { delay: number; duration: number }) => ({
+  visible: (custom: { delay: number; duration: number; shouldReduce: boolean }) => ({
     opacity: 1,
-    y: 0,
-    transition: { delay: custom.delay, duration: custom.duration, ease: "easeOut" },
+    y: custom.shouldReduce ? 0 : 0,
+    transition: { delay: custom.shouldReduce ? 0 : custom.delay, duration: custom.shouldReduce ? 0 : custom.duration, ease: "easeOut" },
   }),
 };
 
 const scaleInVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
-  visible: (custom: { delay: number; duration: number }) => ({
+  visible: (custom: { delay: number; duration: number; shouldReduce: boolean }) => ({
     opacity: 1,
     scale: 1,
-    transition: { delay: custom.delay, duration: custom.duration, ease: "easeOut" },
+    transition: { delay: custom.shouldReduce ? 0 : custom.delay, duration: custom.shouldReduce ? 0 : custom.duration, ease: "easeOut" },
   }),
 };
 
@@ -52,13 +57,14 @@ export const FadeIn: React.FC<MotionComponentProps> = ({
   viewport = { once: true, margin: "-50px" },
   ...props
 }) => {
+  const shouldReduce = useReducedMotion();
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
       variants={fadeInVariants}
-      custom={{ delay, duration }}
+      custom={{ delay, duration, shouldReduce }}
       className={cn(className)}
       {...props}
     >
@@ -75,13 +81,14 @@ export const SlideUp: React.FC<MotionComponentProps> = ({
   viewport = { once: true, margin: "-50px" },
   ...props
 }) => {
+  const shouldReduce = useReducedMotion();
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
       variants={slideUpVariants}
-      custom={{ delay, duration }}
+      custom={{ delay, duration, shouldReduce }}
       className={cn(className)}
       {...props}
     >
@@ -98,13 +105,14 @@ export const ScaleIn: React.FC<MotionComponentProps> = ({
   viewport = { once: true, margin: "-50px" },
   ...props
 }) => {
+  const shouldReduce = useReducedMotion();
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
       variants={scaleInVariants}
-      custom={{ delay, duration }}
+      custom={{ delay, duration, shouldReduce }}
       className={cn(className)}
       {...props}
     >
