@@ -148,14 +148,14 @@ Nanobrowser is the only completely **AI chrome extension with API key** support 
 - Smaller user community
 - Documentation could be more comprehensive
 
-### 4. SnapMind - The BYOK Screenshot Analyzer (Score: 8.2/10)
+### 4. SnapMind - The BYOM Screenshot Analyzer (Score: 8.2/10)
 
 **Best for:** Students and professionals analyzing visual content
 
-SnapMind excels at **AI-powered screen capture analysis** with strong BYOK implementation, making it ideal for users who work with visual content.
+SnapMind excels at **AI-powered screen capture analysis** with strong BYOM implementation, making it ideal for users who work with visual content.
 
 **✅ Pros:**
-- **BYOK (Bring Your Own Key)** model with OpenAI integration
+- **BYOM (Bring Your Own Key)** model with OpenAI integration
 - **Real-time cost tracking** for API usage
 - **GPT-4 integration** for advanced analysis
 - **Screenshot analysis** capabilities
@@ -372,7 +372,7 @@ allowfullscreen
 - Your primary use case is visual content analysis
 - You're a student or researcher
 - You prefer specialized tools over general solutions
-- You want simple BYOK implementation
+- You want simple BYOM implementation
 
 ### Choose Elephas if:
 - Your primary need is content writing and creation

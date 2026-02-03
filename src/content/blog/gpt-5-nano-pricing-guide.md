@@ -265,7 +265,7 @@ Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-bree
 </div>
 
 - In the model settings, select **GPT-5 Nano** for maximum cost savings
-- **Bring Your Own Key (BYOK)**: Connect your OpenAI API key directly
+- **Bring Your Own Key (BYOM)**: Connect your OpenAI API key directly
 - Choose from multiple AI providers (OpenAI, Anthropic, OpenRouter, etc.)
 - Enable cost tracking to monitor your ultra-low usage costs
 - Set up usage alerts if desired

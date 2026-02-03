@@ -28,7 +28,7 @@ const relatedPosts = posts
 <Base
   title={post.data.title}
   description={post.data.description}
-  canonical={post.data.canonicalURL}
+  canonical={post.data.canonicalURL ?? `https://gptbreeze.io/blog/${slug}/`}
   ogType="article"
 >
   <!-- Article Schema -->
@@ -230,6 +230,74 @@ const relatedPosts = posts
       }
     }
     
+    .conversion-block {
+      margin: 24px 0 32px;
+      border: 1px solid theme('colors.ui-border');
+      border-radius: 12px;
+      background: theme('colors.ui-surface');
+      padding: 18px;
+    }
+
+    .conversion-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .conversion-block h2 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      color: theme('colors.brand-fg');
+    }
+
+    .conversion-block ol {
+      margin: 0;
+      padding-left: 18px;
+      color: theme('colors.brand-muted');
+    }
+
+    .conversion-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 180px;
+    }
+
+    .cta {
+      display: inline-flex;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      background: theme('colors.accent-blue');
+      color: white;
+    }
+
+    .cta.secondary {
+      background: theme('colors.gray-200');
+      color: theme('colors.brand-fg');
+    }
+
+    .faq {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid theme('colors.ui-border');
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 650;
+      color: theme('colors.brand-fg');
+      margin: 12px 0;
+    }
+
+    .faq p {
+      margin: 0 0 16px;
+      color: theme('colors.brand-muted');
+    }
+
     .related-posts {
       margin-top: 64px;
       padding-top: 32px;
@@ -314,13 +382,59 @@ const relatedPosts = posts
         </div>
       )}
     </header>
+    <!-- Conversion blocks (always-on) -->
+    <section class="conversion-block" aria-label="Try GPT Breeze">
+      <div class="conversion-inner">
+        <div>
+          <h2>Try this in GPT Breeze (2 minutes)</h2>
+          <ol>
+            <li><a href="https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog">Add GPT Breeze to Chrome</a></li>
+            <li>Open the page / YouTube video you’re working on</li>
+            <li>Run a shortcut like <a href="/shortcuts/summarize-article/">Summarize article</a> and iterate</li>
+          </ol>
+        </div>
+        <div class="conversion-cta">
+          <a class="cta" href="https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog">Add to Chrome</a>
+          <a class="cta secondary" href="/guide/getting-started/">Getting started</a>
+        </div>
+      </div>
+    </section>
+
     <div class="article-content">
       <Content />
     </div>
-    
+
+    {post.data.faq && post.data.faq.length > 0 && (
+      <section class="faq" aria-label="FAQ">
+        <h2>FAQ</h2>
+        <div class="faq-grid">
+          {post.data.faq.map((item) => (
+            <details>
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json" is:inline set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": post.data.faq.map((item) => ({
+            "@type": "Question",
+            "name": item.q,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": item.a,
+            }
+          }))
+        })}></script>
+      </section>
+    )}
+
     {relatedPosts.length > 0 && (
       <section class="related-posts">
-        <h3>Related Articles</h3>
+        <h3>New & Related Articles</h3>
         <div class="related-grid">
           {relatedPosts.map((relatedPost) => (
             <a href={`/blog/${relatedPost.slug}/`} class="related-card">
