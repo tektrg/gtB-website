@@ -12,7 +12,7 @@ tags:
 draft: false
 ---
 
-BYOM (Bring Your Own Model) is powerful because it puts you in control: you choose the model, you bring the key, and you decide what data gets sent.
+BYOM (Bring Your Own Model) is powerful because it puts you in control: you choose the model, you bring the key, and you decide what data gets sent. If you’re new to the concept, start with [What is BYOM AI?](/blog/what-is-byom-ai).
 That control comes with responsibility. If you use a browser extension with BYOM, you now need a basic security playbook for API keys, sensitive text, and extension permissions.
 
 ## What BYOM changes (and what it doesn't)
@@ -65,7 +65,7 @@ Practical redaction rules:
 - Keep structure, drop sensitive values: "Customer complained about billing. Invoice ID redacted."
 - Share just enough examples: one representative paragraph is usually better than pasting an entire doc.
 
-If you're optimizing for privacy, see `/privacy-first` for a stricter workflow.
+If you're optimizing for privacy, see [Privacy-first workflow](/privacy-first) for a stricter workflow.
 
 ## Checklist: vendor & permissions
 
@@ -85,7 +85,7 @@ A simple routine that works for most teams:
 1. Create a dedicated provider key for your BYOM tool.
 2. Use a redaction checklist for any pasted content.
 
-If you're deciding between BYOM and subscriptions, start with `/pricing` and pick based on your risk tolerance and budget predictability.
+If you're deciding between BYOM and subscriptions, start with [Pricing](/pricing) and pick based on your risk tolerance and budget predictability. You may also want to read [BYOM vs subscription AI tools](/blog/byom-vs-subscription-ai-tools).
 
 ---
 
