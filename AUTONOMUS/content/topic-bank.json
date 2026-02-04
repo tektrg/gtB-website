@@ -1,0 +1,42 @@
+{
+  "topics": [
+    {
+      "id": "byom-security-checklist",
+      "title": "BYOM AI Security Checklist for Browser Extensions",
+      "description": "A practical checklist to use BYOM (Bring Your Own Model) safely: protect API keys, reduce data exposure, and avoid common extension pitfalls.",
+      "tags": ["BYOM", "security", "API keys", "Chrome extension", "privacy"],
+      "sections": [
+        "What BYOM changes (and what it doesn't)",
+        "Threat model: where your key and data can leak",
+        "Checklist: key handling",
+        "Checklist: data handling",
+        "Checklist: vendor & permissions",
+        "A simple workflow for safer BYOM"
+      ]
+    },
+    {
+      "id": "prompt-privacy-basics",
+      "title": "Prompt Privacy 101: What to Share (and What to Never Paste)",
+      "description": "Rules of thumb for keeping sensitive data out of prompts while still getting great outputs.",
+      "tags": ["privacy", "prompts", "security", "AI"],
+      "sections": [
+        "The 3 categories of sensitive data",
+        "Redaction patterns that work",
+        "Using placeholders without losing context",
+        "Team workflows: docs, tickets, and logs"
+      ]
+    },
+    {
+      "id": "internal-linking-playbook",
+      "title": "Internal Linking Playbook for AI Tool Blogs",
+      "description": "A lightweight internal-linking system to improve crawlability and conversions without bloating your content.",
+      "tags": ["SEO", "internal linking", "content", "AI tools"],
+      "sections": [
+        "Pick 3 money pages",
+        "Define 5 recurring anchors",
+        "Where links belong in a post",
+        "How to keep it consistent"
+      ]
+    }
+  ]
+}

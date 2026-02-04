@@ -3,14 +3,21 @@
 This folder is Iris’ autonomous co-founder workspace for **gptbreeze.io**.
 
 ## Goal
+
 Ship 1–2 growth improvements per day (SEO + content ops + automation), with **verifiable** outputs.
 
-## Structure
-- `plans/` — roadmap + schedule
-- `data/` — task DB (pillars/posts/landing pages)
-- `scripts/` — generators + verifiers
-- `reports/` — daily shipped reports (evidence included)
+## What lives here
+
+- `tools/` — scripts to verify content quality/quantity and surface SEO gaps
+- `content/` — topic bank and content ops data
+- `scripts/` — generators/prompts used for drafting
+- `plan.md` — rolling backlog and daily execution log
+
+## Quick start
+
+- Verify SEO/content: `npm run seo:verify`
+- Publish a daily post (and verify): `npm run seo:publish:daily`
 
 ## Rules
-- Every task produces a report under `reports/YYYY-MM-DD.md`.
+
 - No “trust me”: include checks (sitemap, internal links, frontmatter, build output).
