@@ -7,6 +7,10 @@ todo-website.md
 generated/
 settings.local.json
 
+# AUTONOMUS runtime state
+AUTONOMUS/state/
+AUTONOMUS/logs/
+
 # Agent instruction files
 AGENTS.md
 CLAUDE.md

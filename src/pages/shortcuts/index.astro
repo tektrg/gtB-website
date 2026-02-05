@@ -1,15 +1,32 @@
 ---
 import shortcutsData from '../../data/shortcuts.json'
 
-const shortcuts = Array.isArray(shortcutsData?.shortcuts) ? shortcutsData.shortcuts : []
+type Shortcut = {
+  id: string;
+  slug: string;
+  title: string;
+  description?: string;
+  prompt?: string;
+  category?: string;
+  tags?: string[];
+  model?: string;
+  is_premium?: boolean;
+  source?: string;
+  created_at?: string;
+  updated_at?: string;
+};
+
+const shortcuts: Shortcut[] = Array.isArray((shortcutsData as any)?.shortcuts)
+  ? ((shortcutsData as any).shortcuts as Shortcut[])
+  : [];
 
 // Group shortcuts by category for simple browsing
-const groupedByCategory = shortcuts.reduce((acc, item) => {
-  const category = item.category || 'uncategorized'
-  if (!acc[category]) acc[category] = []
-  acc[category].push(item)
-  return acc
-}, {})
+const groupedByCategory = shortcuts.reduce<Record<string, Shortcut[]>>((acc, item) => {
+  const category = item.category || 'uncategorized';
+  if (!acc[category]) acc[category] = [];
+  acc[category].push(item);
+  return acc;
+}, {});
 ---
 
 <!DOCTYPE html>
@@ -46,4 +63,3 @@ const groupedByCategory = shortcuts.reduce((acc, item) => {
     </main>
   </body>
 </html>
-

@@ -104,3 +104,9 @@ Ready to take control of your AI experience? [Install GPT Breeze from the Chrome
 ---
 
 *Stay connected with us on [X (Twitter)](https://x.com/gptBreeze_io) | [Youtube](https://www.youtube.com/@gptBreeze_io) | [Website: GPTBreeze.io](https://www.gptbreeze.io/) | [Chrome web store](https://chromewebstore.google.com/detail/gpt-breeze-chatgpt-ai-sho/plchckmceefljjjphgfcadhlfnlindog) | yourfriend@gptbreeze.io*
+
+## Continue reading
+- [What is BYOM (Bring Your Own Model)?](/blog/what-is-byom-ai)
+- [Privacy-first AI browsing](/privacy-first)
+- [BYOM vs subscription AI tools](/blog/byom-vs-subscription-ai-tools)
+

@@ -130,14 +130,14 @@ Nanobrowser's open-source nature allows full auditing. Code review shows genuine
 - API costs: $3-12/month depending on usage
 - **Annual savings vs. subscriptions**: $180-540
 
-### 3. SnapMind - The BYOK Screenshot Analyzer (Score: 8.2/10)
+### 3. SnapMind - The BYOM Screenshot Analyzer (Score: 8.2/10)
 
 **Best for: Students and professionals analyzing visual content**
 
-SnapMind excels at **AI-powered screen capture analysis** with strong BYOK implementation.
+SnapMind excels at **AI-powered screen capture analysis** with strong BYOM implementation.
 
 **✅ Pros:**
-- **BYOK (Bring Your Own Key)** model with OpenAI integration
+- **BYOM (Bring Your Own Key)** model with OpenAI integration
 - **Real-time cost tracking** for API usage
 - **GPT-4 integration** for advanced analysis
 - **Screenshot analysis** capabilities
@@ -233,7 +233,7 @@ Brave Leo's **bring your own model browser extensions** approach is unique as a 
 **Winner: SnapMind**
 - **Visual content analysis** perfect for research
 - **Cost transparency** with usage tracking
-- **Educational pricing** through BYOK model
+- **Educational pricing** through BYOM model
 - **Screenshot-based workflows**
 
 ### For General Productivity Users
@@ -323,7 +323,7 @@ Based on my testing and available security research:
 - Brave Leo: Browser-native with verified direct API calls
 
 **Moderate Security (7.0-8.9 Privacy Score):**
-- SnapMind: BYOK model but limited provider options
+- SnapMind: BYOM model but limited provider options
 - HARPA AI: Mixed model with some transparency gaps
 
 **Lower Security (Below 7.0):**
@@ -418,11 +418,11 @@ You're probably paying way too much for AI extensions. Here's the reality check:
 - **OpenRouter**: Access to latest models at competitive rates
 - **Local Ollama**: Privacy-critical tasks with zero cloud dependency
 
-**Live Demo: BYOK Provider Flexibility**
-GPT Breeze's BYOK (Bring Your Own Key) approach gives you complete control over AI providers. The clean options panel lets you seamlessly switch between OpenAI, Anthropic, OpenRouter, and custom endpoints. Add your API keys, set different models for different tasks, and enjoy true flexibility without being locked into a single provider. This is the future of AI browser extensions - your choice, your keys, your control.
+**Live Demo: BYOM Provider Flexibility**
+GPT Breeze's BYOM (Bring Your Own Key) approach gives you complete control over AI providers. The clean options panel lets you seamlessly switch between OpenAI, Anthropic, OpenRouter, and custom endpoints. Add your API keys, set different models for different tasks, and enjoy true flexibility without being locked into a single provider. This is the future of AI browser extensions - your choice, your keys, your control.
 
 <iframe
-title="GPT Breeze BYOK provider selection demo"
+title="GPT Breeze BYOM provider selection demo"
 width="100%"
 height="315"
 src="https://www.youtube.com/embed/QS7TU0xuvDk?autoplay=1&mute=1&controls=1&loop=1&playlist=QS7TU0xuvDk&modestbranding=1&rel=0&playsinline=1"
@@ -536,7 +536,7 @@ allowfullscreen
 - Your primary use case is visual content analysis
 - You're a student or researcher
 - You prefer specialized tools over general solutions
-- You want simple BYOK implementation
+- You want simple BYOM implementation
 
 **Choose Brave Leo if:**
 - You're already a Brave browser user

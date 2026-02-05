@@ -265,7 +265,7 @@ Add the [GPT Breeze extension](https://chromewebstore.google.com/detail/gpt-bree
 </div>
 
 - In the model settings, select **GPT-5 Nano** for maximum cost savings
-- **Bring Your Own Key (BYOK)**: Connect your OpenAI API key directly
+- **Bring Your Own Key (BYOM)**: Connect your OpenAI API key directly
 - Choose from multiple AI providers (OpenAI, Anthropic, OpenRouter, etc.)
 - Enable cost tracking to monitor your ultra-low usage costs
 - Set up usage alerts if desired
@@ -376,3 +376,9 @@ The combination of GPT Breeze's browser extension and GPT-5 Nano's ultra-low pri
 Unlike other AI tools that charge $20-50/month regardless of usage, GPT Breeze with GPT-5 Nano means you could pay less than $1/month for all your AI needs.
 
 **What's your experience with AI model pricing?** Share your cost optimization strategies and let us know how much you're saving with budget-friendly AI alternatives in the comments below.
+
+## Continue reading
+- [What is BYOM (Bring Your Own Model)?](/blog/what-is-byom-ai)
+- [BYOM vs subscriptions (API keys)](/blog/byom-api-keys-vs-subscriptions)
+- [GPT-4o pricing guide](/blog/gpt-4o-pricing-guide)
+

@@ -255,3 +255,9 @@ No, GPT Breeze is optimized for performance and only activates when you specific
 ---
 
 *This article was written based on hands-on experience with GPT Breeze's video transcript feature. The extension continues to evolve with new features and improvements based on user feedback.*
+
+## Continue reading
+- [YouTube summary feature](/youtube-summary)
+- [What is BYOM (Bring Your Own Model)?](/blog/what-is-byom-ai)
+- [GPT Breeze for power users](/for-power-users)
+

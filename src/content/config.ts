@@ -1,7 +1,7 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
 const videos = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     videoId: z.string(),
     title: z.string(),
@@ -14,13 +14,28 @@ const videos = defineCollection({
 });
 
 const blog = defineCollection({
-  type: 'content',
+  type: "content",
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
     pubDate: z.date(),
+    // Optional: use when you update a post significantly
+    updatedDate: z.date().optional(),
     author: z.string().optional(),
     tags: z.array(z.string()).optional(),
+
+    // Optional: override canonical when republishing / cross-posting
+    canonicalURL: z.string().url().optional(),
+
+    // Optional: conversion-focused FAQ at the end of each post
+    faq: z
+      .array(
+        z.object({
+          q: z.string(),
+          a: z.string(),
+        })
+      )
+      .optional(),
     draft: z.boolean().default(false),
   }),
 });
