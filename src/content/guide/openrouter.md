@@ -88,6 +88,11 @@ GPT Breeze is a Chrome extension that lets you connect your own API keys (includ
 
 Want to slash your AI costs and boost your privacy? Learn more about the [BYOM advantage and why it beats subscriptions](/blog/byom-api-keys-vs-subscriptions). And when you're ready to take control, you can [install GPT Breeze from the Chrome Web Store](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog).
 
+**Related (quick next clicks):**
+- Start here: [Getting started with GPT Breeze](/guide/getting-started)
+- BYOM basics: [What is BYOM (Bring Your Own Model)?](/blog/what-is-byom-ai)
+- Practical workflow: [BYOM AI extension power-user guide](/blog/byom-ai-extension-power-user-guide)
+
 ### **Conclusion: Smart AI Use Starts Here**
 
 OpenRouter offers an incredible opportunity to explore the world of AI models, including many **free AI models**, without the usual financial barriers. By understanding how to get your **OpenRouter API key**, leveraging the **OpenRouter free tier**, and being smart about **OpenRouter privacy settings** and **data sharing AI models**, you can harness powerful AI tools on your terms. Combine this with a BYOM solution like GPT Breeze, and you're not just using AI; you're mastering it – efficiently, cost-effectively, and privately.
