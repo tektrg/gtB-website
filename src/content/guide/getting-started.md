@@ -129,7 +129,10 @@ API keys are your credentials to access AI services:
 
 1. **[Install GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog)** if you haven't already
 2. **Try Pollinations.ai** for immediate free access
-3. **Explore our [additional guides](/guide)** for advanced features
-4. **Consider getting an API key** when you're ready for unlimited usage
+3. Learn what BYOM means: [What is BYOM (Bring Your Own Model)?](/blog/what-is-byom-ai)
+4. Decide if BYOM beats subscriptions for your workflow: [BYOM vs subscriptions (API keys)](/blog/byom-api-keys-vs-subscriptions)
+5. If you use a router, set it up once: [OpenRouter guide](/guide/openrouter)
+6. Level up workflows: [BYOM AI extension power-user guide](/blog/byom-ai-extension-power-user-guide)
+7. Explore our [additional guides](/guide) for advanced features
 
 Ready to boost your productivity? Start with Pollinations.ai today and upgrade to API keys when you need more power!
