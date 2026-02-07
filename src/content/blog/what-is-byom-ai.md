@@ -35,7 +35,11 @@ Now, I'm not going to sugarcoat it. While BYOM is fantastic, it's not without it
 
 This is where GPT Breeze comes in. We're built from the ground up to embrace the **Bring Your Own Model AI** philosophy. We empower you to connect your preferred AI providers, whether it's OpenAI, Anthropic, or even **local AI models** like those running via Ollama or LM Studio. We believe in giving you the tools to achieve true **AI independence** without compromising on privacy or breaking the bank.
 
-Want to dive deeper into how we handle BYOM with API keys versus traditional subscriptions? Check out our detailed comparison: [BYOM: API Keys vs. Subscriptions](/blog/byom-api-keys-vs-subscriptions/). And if you're ready to get started, our [Getting Started Guide](/guide/getting-started/) will walk you through the process.
+Want to dive deeper into how we handle BYOM with API keys versus traditional subscriptions? Check out our detailed comparison: [BYOM: API Keys vs. Subscriptions](/blog/byom-api-keys-vs-subscriptions/).
+
+For a practical workflow you can copy in 2 minutes, see: [BYOM AI Extension: Power-User Setup (No Subscriptions)](/blog/byom-ai-extension-power-user-guide/).
+
+And if you're ready to get started, our [Getting Started Guide](/guide/getting-started/) will walk you through the process.
 
 ## Ready to Take Control?
 
