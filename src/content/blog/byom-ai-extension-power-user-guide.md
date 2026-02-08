@@ -6,8 +6,8 @@ tags: ["BYOM", "BYOM AI extension", "Chrome extension", "power users", "API keys
 faq:
   - q: "What is a BYOM AI extension?"
     a: "A BYOM (Bring Your Own Model) AI extension lets you connect your own model provider (via API key) to a browser extension so you control model choice, costs, and privacy tradeoffs instead of being locked into a subscription."
-  - q: "Is BYOM the same as BYOK?"
-    a: "They’re closely related. BYOK (Bring Your Own Key) emphasizes supplying your own API key; BYOM emphasizes model/provider choice. In practice people often mean the same workflow—this article uses BYOM for consistency."
+  - q: "Is BYOM the same as Bring Your Own Key?"
+    a: "They’re closely related: ‘Bring Your Own Key’ emphasizes supplying your own API key; BYOM emphasizes model/provider choice. In practice people often mean the same workflow—this article uses BYOM for consistency."
   - q: "Why do power users prefer BYOM over subscriptions?"
     a: "Power users want fast model switching, predictable costs, fewer product limits, and a workflow that works across tabs/sites without being locked to one vendor’s UI."
   - q: "What’s the fastest setup for a BYOM workflow in the browser?"
