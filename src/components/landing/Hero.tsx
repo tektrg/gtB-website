@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
 import { StaggerContainer, StaggerItem, ScaleIn, ParallaxScroll } from '../ui/motion';
-import { cn } from '../ui/motion';
 import { AnimatedButton } from '../ui/AnimatedButton';
 
 declare global {

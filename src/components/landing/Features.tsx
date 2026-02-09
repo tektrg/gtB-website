@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { FadeIn, SlideUp, StaggerContainer, StaggerItem, ScaleIn } from '../ui/motion';
+import { useRef } from 'react';
+import { motion, useScroll } from 'framer-motion';
+import { SlideUp, StaggerContainer, StaggerItem, ScaleIn } from '../ui/motion';
 import { cn } from '../ui/motion';
 
 type FeatureItem = {
@@ -11,14 +11,6 @@ type FeatureItem = {
     videoSrc: string;
     reverse?: boolean;
 };
-
-// Colors matching the design system but ensuring opacity covers the previous card
-const CARD_COLORS = [
-    "var(--brand-bg)",
-    "var(--brand-bg)",
-    "var(--brand-bg)",
-    "var(--brand-bg)",
-];
 
 const features: FeatureItem[] = [
     {
@@ -69,15 +61,12 @@ const features: FeatureItem[] = [
     },
 ];
 
-const FeatureCard = ({ feature, index, total }: { feature: FeatureItem; index: number; total: number }) => {
+const FeatureCard = ({ feature, index }: { feature: FeatureItem; index: number }) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
+    useScroll({
         target: containerRef,
         offset: ['start end', 'start start']
     });
-
-    const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-    const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.5, 1]);
 
     return (
         <div
@@ -158,7 +147,7 @@ export const Features = () => {
 
                 <div className="features-wrapper" style={{ position: 'relative' }}>
                     {features.map((feature, i) => (
-                        <FeatureCard key={i} feature={feature} index={i} total={features.length} />
+                        <FeatureCard key={i} feature={feature} index={i} />
                     ))}
                 </div>
             </div>

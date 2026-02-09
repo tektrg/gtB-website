@@ -1,5 +1,4 @@
-import React from 'react';
-import { SlideUp, StaggerContainer, StaggerItem } from '../ui/motion';
+import { SlideUp } from '../ui/motion';
 
 export const Privacy = () => {
     return (

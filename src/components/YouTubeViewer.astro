@@ -24,11 +24,10 @@ const { videoId } = Astro.props;
   </div>
 </div>
 
-<script define:vars={{ videoId }}>
+<script is:inline define:vars={{ videoId }}>
   // YouTube IFrame API and timestamp seeking functionality
   (function() {
     const videoIdVar = videoId;
-    let player = null;
 
     // Function to seek video to specific timestamp
     window.seekToVideo = function(event, targetVideoId, seconds) {
@@ -166,9 +165,9 @@ const { videoId } = Astro.props;
     // Initialize YouTube player when API is ready
     window.onYouTubeIframeAPIReady = function() {
       try {
-        player = new YT.Player('youtube-player-' + videoIdVar, {
+        new YT.Player('youtube-player-' + videoIdVar, {
           events: {
-            onReady: function(event) {
+            onReady: function() {
               console.log('YouTube player ready for video ' + videoIdVar);
               // Enhance YouTube links after player is ready
               enhanceYouTubeLinks();

@@ -1,4 +1,3 @@
-import React from 'react';
 import { SlideUp, StaggerContainer, StaggerItem } from '../ui/motion';
 
 const useCases = [
