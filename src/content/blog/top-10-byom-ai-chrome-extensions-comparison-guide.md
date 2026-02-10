@@ -29,6 +29,10 @@ Here's what I discovered during my research that'll shock you: **41% of AI Chrom
 
 That's exactly why **secure AI chrome extensions** with true BYOM support matter more than ever. [Summarize any website with GPT Breeze](https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog) and take control of your AI privacy today.
 
+**Want the BYOM setup path (no fluff)?**
+- Start here: [Getting Started with GPT Breeze](/guide/getting-started/)
+- If you want “one key, many models”: [OpenRouter setup guide](/guide/openrouter/)
+
 ## Complete Comparison Matrix
 
 Here's my comprehensive scoring of the **best BYOM chrome extensions** available in 2025:

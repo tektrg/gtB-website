@@ -151,3 +151,8 @@ The choice between BYOM and subscription AI tools boils down to your priorities:
 Don't let your AI tools dictate your workflow or drain your budget. Take control, explore the power of BYOM, and build an AI ecosystem that truly works for you.
 
 **Call to Action:** Ready to calculate your potential savings and experience the freedom of BYOM? [Calculate your potential savings with BYOM today!](/ai-model-cost-calculator-and-price-comparation)
+
+**Next steps (2-minute setup):**
+- [Getting Started with GPT Breeze](/guide/getting-started/)
+- [OpenRouter setup guide](/guide/openrouter/)
+- For a practical tool shortlist: [Top BYOM AI Chrome extensions comparison](/blog/top-10-byom-ai-chrome-extensions-comparison-guide)
