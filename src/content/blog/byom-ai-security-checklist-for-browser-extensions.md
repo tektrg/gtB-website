@@ -90,3 +90,9 @@ If you're deciding between BYOM and subscriptions, start with [Pricing](/pricing
 ---
 
 Want faster workflows without sacrificing control? GPT Breeze is built for BYOM-style flexibility with a privacy-first mindset.
+
+**Next steps (2-minute setup):**
+- [Getting Started with GPT Breeze](/guide/getting-started/)
+- [OpenRouter setup guide](/guide/openrouter/)
+- [BYOM AI Extension: Power-User Setup (No Subscriptions)](/blog/byom-ai-extension-power-user-guide/)
+- Tool shortlist: [Top BYOM AI Chrome extensions comparison](/blog/top-10-byom-ai-chrome-extensions-comparison-guide)

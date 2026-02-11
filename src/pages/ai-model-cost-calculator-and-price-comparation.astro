@@ -435,10 +435,7 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
       window.history.replaceState({}, '', url);
     }
 
-    // Validate model exists in available models
-    function validateModel(fullId) {
-      return allModels.some(model => model.fullId === fullId);
-    }
+    // (validateModel removed; it was unused)
 
     // Handle search in dropdown
     function handleSearchInput(e) {
