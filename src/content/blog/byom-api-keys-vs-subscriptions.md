@@ -281,5 +281,6 @@ The **BYOM revolution** is here, and smart professionals are already saving hund
 ## Continue reading
 - [What is BYOM (Bring Your Own Model)?](/blog/what-is-byom-ai)
 - [Best BYOM AI Chrome extensions (comparison)](/blog/top-10-byom-ai-chrome-extensions-comparison-guide)
+- [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
 - [GPT Breeze for power users](/for-power-users)
 

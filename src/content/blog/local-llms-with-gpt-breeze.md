@@ -109,4 +109,5 @@ Ready to take control of your AI experience? [Install GPT Breeze from the Chrome
 - [What is BYOM (Bring Your Own Model)?](/blog/what-is-byom-ai)
 - [Privacy-first AI browsing](/privacy-first)
 - [BYOM vs subscription AI tools](/blog/byom-vs-subscription-ai-tools)
+- [GPT Breeze for power users](/for-power-users)
 
