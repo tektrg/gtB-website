@@ -31,6 +31,21 @@ Now, I'm not going to sugarcoat it. While BYOM is fantastic, it's not without it
 - **Integration Headaches:** Getting your custom models to play nice with existing AI frameworks can sometimes be tricky. It requires careful planning and execution.
 - **Management Overhead:** You're responsible for updates, patching, and the overall lifecycle of your models. It's more work, but it's also more control.
 
+## Try this in GPT Breeze (2 minutes)
+
+If you want a practical BYOM workflow you can copy/paste today:
+
+1. **Add GPT Breeze to Chrome**: https://chromewebstore.google.com/detail/gpt-breeze/
+2. Open the extension → **Settings** → connect your preferred provider (OpenAI / Anthropic / etc.) by pasting an API key.
+3. Create a shortcut prompt like: “summarize this page + extract action items + write a reply”.
+
+This is the whole point of BYOM: you keep the interface and workflow you like, while swapping models under the hood.
+
+## Add to Chrome (CTA)
+
+- Install: https://chromewebstore.google.com/detail/gpt-breeze/
+- Then follow: [Getting Started](/guide/getting-started/)
+
 ## GPT Breeze: Your Gateway to BYOM Freedom
 
 This is where GPT Breeze comes in. We're built from the ground up to embrace the **Bring Your Own Model AI** philosophy. We empower you to connect your preferred AI providers, whether it's OpenAI, Anthropic, or even **local AI models** like those running via Ollama or LM Studio. We believe in giving you the tools to achieve true **AI independence** without compromising on privacy or breaking the bank.
@@ -40,6 +55,20 @@ Want to dive deeper into how we handle BYOM with API keys versus traditional sub
 For a practical workflow you can copy in 2 minutes, see: [BYOM AI Extension: Power-User Setup (No Subscriptions)](/blog/byom-ai-extension-power-user-guide/).
 
 And if you're ready to get started, our [Getting Started Guide](/guide/getting-started/) will walk you through the process.
+
+## Mini FAQ (BYOM)
+
+### Is BYOM the same as BYOK?
+
+They’re closely related: **BYOM** (Bring Your Own Model) is usually about choosing a model/provider (and swapping anytime). **BYOK** (Bring Your Own Key) is about bringing your own API key. In practice, BYOM tools often support BYOK.
+
+### Do I need to be an engineer to use BYOM?
+
+No — but you do need to be comfortable pasting an API key and making basic settings choices. The “hard part” is mostly picking a model and building a workflow you’ll repeat.
+
+### Is BYOM always cheaper than subscriptions?
+
+Often, yes — especially for power users — but it depends on your usage patterns. If you run a lot of tokens, BYOM + a usage-based provider can be dramatically cheaper. If you barely use AI, a flat subscription might still feel simpler.
 
 ## Ready to Take Control?
 
