@@ -7,24 +7,41 @@ cd "$ROOT_DIR"
 TARGET_FILE="src/data/models-api.json"
 SOURCE_URL="https://models.dev/api.json"
 TARGET_BRANCH="main"
+STASH_CREATED=0
+STASH_NAME="models-sync-auto-stash-$(date +%s)"
+
+restore_stash() {
+  if [[ "$STASH_CREATED" -eq 1 ]]; then
+    echo "Restoring stashed changes"
+    git stash pop --index
+  fi
+}
+
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo "Working tree not clean; stashing local changes first"
+  git stash push -u -m "$STASH_NAME" >/dev/null
+  STASH_CREATED=1
+fi
 
 CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 if [[ "$CURRENT_BRANCH" != "$TARGET_BRANCH" ]]; then
   echo "Switching branch: ${CURRENT_BRANCH} -> ${TARGET_BRANCH}"
   git checkout "$TARGET_BRANCH"
 fi
-git pull --rebase --autostash origin "$TARGET_BRANCH"
+git pull --rebase origin "$TARGET_BRANCH"
 
 echo "Fetching ${SOURCE_URL} -> ${TARGET_FILE}"
 curl -fsSL "$SOURCE_URL" -o "$TARGET_FILE"
 
 if git diff --quiet -- "$TARGET_FILE"; then
   echo "No models-api.json changes; skipping commit/push"
+  restore_stash
   exit 0
 fi
 
 git add "$TARGET_FILE"
 git commit -m "chore(models): sync models.dev data ($(date +%F))"
 git push origin "$TARGET_BRANCH"
+restore_stash
 
 echo "Committed and pushed ${TARGET_FILE} to ${TARGET_BRANCH}"
