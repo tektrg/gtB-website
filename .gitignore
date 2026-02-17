@@ -11,6 +11,10 @@ settings.local.json
 AUTONOMUS/state/
 AUTONOMUS/logs/
 
+# Keep publish ledger in git (rotation + audit trail)
+!AUTONOMUS/state/
+!AUTONOMUS/state/published.jsonl
+
 # Agent instruction files
 AGENTS.md
 CLAUDE.md

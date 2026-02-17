@@ -2,6 +2,7 @@
 title: "BYOM AI Security Checklist for Browser Extensions"
 description: "A practical checklist to use BYOM (Bring Your Own Model) safely: protect API keys, reduce data exposure, and avoid common extension pitfalls."
 pubDate: 2026-02-04T00:00:00.000Z
+topicId: "byom-security-checklist"
 author: "GPT Breeze"
 tags:
   - "BYOM"
@@ -84,6 +85,16 @@ A simple routine that works for most teams:
 
 1. Create a dedicated provider key for your BYOM tool.
 2. Use a redaction checklist for any pasted content.
+3. Keep relevant “money pages” linked in your docs/posts (e.g. [Pricing](/pricing), [Privacy-first workflow](/privacy-first)).
+4. Re-run an SEO hygiene check before you publish.
+
+Copy/paste checklist:
+
+- Key stored? (where, how, who has access)
+- Page access limited? (only needed sites)
+- Sensitive data redacted? (PII, tokens, internal links)
+- Export/share safe? (no keys, no raw dumps)
+- Logs reviewed? (no prompt dumps in logs)
 
 If you're deciding between BYOM and subscriptions, start with [Pricing](/pricing) and pick based on your risk tolerance and budget predictability. You may also want to read [BYOM vs subscription AI tools](/blog/byom-vs-subscription-ai-tools).
 
