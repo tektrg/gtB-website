@@ -14,7 +14,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  publish:
+  generate_blog:
+    name: Generate daily blog post (isolated)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,16 +29,98 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Run baseline verifiers
-        run: |
-          node AUTONOMUS/scripts/verify_site_basics.mjs
-          node AUTONOMUS/scripts/check_internal_links.mjs
-
-      - name: Publish daily blog post + provider guide (Asia/Saigon date)
+      - name: Generate blog post (Asia/Saigon date)
         run: |
           DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)
           node AUTONOMUS/tools/publish-daily-post.mjs --date "$DATE"
+
+      - name: Create patch artifact
+        run: |
+          : > blog.patch
+          git add -A
+          if [ -n "$(git diff --cached --name-only)" ]; then
+            git diff --cached --binary > blog.patch
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blog-patch
+          path: blog.patch
+
+  generate_provider:
+    name: Generate daily provider guide (isolated)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Generate provider guide (Asia/Saigon date)
+        run: |
+          DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)
           node AUTONOMUS/tools/publish-provider-guide.mjs --date "$DATE"
+
+      - name: Create patch artifact
+        run: |
+          : > provider.patch
+          git add -A
+          if [ -n "$(git diff --cached --name-only)" ]; then
+            git diff --cached --binary > provider.patch
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: provider-patch
+          path: provider.patch
+
+  merge_and_ship:
+    name: Merge + verify + ship (main)
+    runs-on: ubuntu-latest
+    needs: [generate_blog, generate_provider]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: blog-patch
+          path: .autonomus_artifacts
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: provider-patch
+          path: .autonomus_artifacts
+
+      - name: Apply patches
+        run: |
+          ls -la .autonomus_artifacts
+          if [ -s .autonomus_artifacts/blog.patch ]; then
+            git apply --binary .autonomus_artifacts/blog.patch
+          fi
+          if [ -s .autonomus_artifacts/provider.patch ]; then
+            git apply --binary .autonomus_artifacts/provider.patch
+          fi
+
+      - name: Run baseline verifiers + internal link chores
+        run: |
+          node AUTONOMUS/scripts/verify_site_basics.mjs
+          node AUTONOMUS/scripts/check_internal_links.mjs
+          node AUTONOMUS/scripts/add_continue_reading.mjs || true
 
       - name: SEO hygiene gates
         run: |
@@ -55,14 +138,15 @@ jobs:
 # AUTONOMUS Daily Report — ${DATE}
 
 ## Shipped
-- Published daily blog post (see git diff)
+- Published daily blog post
+- Published provider setup guide
 
 ## Evidence / Verification
 - npm run seo:verify (pass)
 - npm run check (pass)
 
 ## Next
-- Review Search Console queries: find 1 new post topic + 1 internal link opportunity.
+- Review Search Console queries: pick 1 new topic + 1 internal-link upgrade.
 EOF
           else
             cat >> "$REPORT" <<EOF
@@ -70,7 +154,7 @@ EOF
 ---
 
 ## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
-- Published daily blog post
+- Published daily blog post + provider guide
 - Verified: seo:verify + check
 EOF
           fi
