@@ -135,28 +135,28 @@ jobs:
 
           if [ ! -f "$REPORT" ]; then
             cat > "$REPORT" <<EOF
-# AUTONOMUS Daily Report — ${DATE}
+          # AUTONOMUS Daily Report — ${DATE}
 
-## Shipped
-- Published daily blog post
-- Published provider setup guide
+          ## Shipped
+          - Published daily blog post
+          - Published provider setup guide
 
-## Evidence / Verification
-- npm run seo:verify (pass)
-- npm run check (pass)
+          ## Evidence / Verification
+          - npm run seo:verify (pass)
+          - npm run check (pass)
 
-## Next
-- Review Search Console queries: pick 1 new topic + 1 internal-link upgrade.
-EOF
+          ## Next
+          - Review Search Console queries: pick 1 new topic + 1 internal-link upgrade.
+          EOF
           else
             cat >> "$REPORT" <<EOF
 
----
+          ---
 
-## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
-- Published daily blog post + provider guide
-- Verified: seo:verify + check
-EOF
+          ## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
+          - Published daily blog post + provider guide
+          - Verified: seo:verify + check
+          EOF
           fi
 
       - name: Commit and push (main)
