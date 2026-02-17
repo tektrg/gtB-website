@@ -16,18 +16,27 @@ interface Props {
 }
 
 const envNoIndex = import.meta.env.PUBLIC_NOINDEX === '1' || import.meta.env.PUBLIC_NOINDEX === 'true';
+
+// Canonicals:
+// - In production, Astro.site should be https://gptbreeze.io
+// - In beta/staging, set PUBLIC_CANONICAL_SITE=https://gptbreeze.io and PUBLIC_NOINDEX=1
+const canonicalSiteEnv = import.meta.env.PUBLIC_CANONICAL_SITE;
+const canonicalBase = canonicalSiteEnv ? new URL(canonicalSiteEnv) : Astro.site;
+const inferredNoIndex = Boolean(canonicalBase && canonicalBase.hostname.startsWith('beta.'));
+
 const {
   title = 'GPTB Website',
   description = 'Static site powered by Astro. Content lives in Git.',
   canonical,
   ogType = 'website',
-  noIndex = envNoIndex,
+  noIndex = envNoIndex || inferredNoIndex,
   isLandingPage = false,
   showBreadcrumbs = true,
   breadcrumbs,
 } = Astro.props as Props;
 
-const computedCanonical = canonical ?? (Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined);
+const computedCanonical = canonical ?? (canonicalBase ? new URL(Astro.url.pathname, canonicalBase).toString() : undefined);
+const ogImageUrl = canonicalBase ? new URL('/media/og-x.png', canonicalBase).toString() : '/media/og-x.png';
 
 // Build default breadcrumbs from the current URL if none provided
 const path = Astro.url.pathname;
@@ -69,12 +78,12 @@ if (!breadcrumbs) {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
-    <meta name="og:image" content="/media/og-x.png" />
+    <meta property="og:image" content={ogImageUrl} />
     {computedCanonical && <meta property="og:url" content={computedCanonical} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/media/og-x.png" />
+    <meta name="twitter:image" content={ogImageUrl} />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

@@ -18,5 +18,10 @@ GEMINI.md
 
 .claude/*
 
-# Ignore all dot-folders
+# Ignore all dot-folders (except ones we intentionally commit)
 .*/
+
+# Allow GitHub Actions workflows
+!.github/
+!.github/workflows/
+!.github/workflows/*.yml

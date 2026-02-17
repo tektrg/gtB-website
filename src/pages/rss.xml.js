@@ -4,8 +4,8 @@ import { getCollection } from "astro:content";
 export async function GET({ site }) {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
   return rss({
-    title: "Your Blog",
-    description: "Fresh takes, no fluff",
+    title: "GPT Breeze Blog",
+    description: "AI productivity, BYOM workflows, and privacy-first browser automation.",
     site,
     items: posts
       .filter((p) => new Date(p.data.pubDate) <= new Date())

@@ -1,0 +1,90 @@
+name: AUTONOMUS Daily Publish
+
+on:
+  schedule:
+    # 01:00 Asia/Saigon (UTC+7)
+    - cron: "0 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: autonomus-daily-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run baseline verifiers
+        run: |
+          node AUTONOMUS/scripts/verify_site_basics.mjs
+          node AUTONOMUS/scripts/check_internal_links.mjs
+
+      - name: Publish daily post (Asia/Saigon date)
+        run: |
+          DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)
+          node AUTONOMUS/tools/publish-daily-post.mjs --date "$DATE"
+
+      - name: SEO hygiene gates
+        run: |
+          npm run -s seo:verify
+          npm run -s check
+
+      - name: Update daily report
+        run: |
+          DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)
+          REPORT="AUTONOMUS/reports/${DATE}.md"
+          mkdir -p AUTONOMUS/reports
+
+          if [ ! -f "$REPORT" ]; then
+            cat > "$REPORT" <<EOF
+# AUTONOMUS Daily Report — ${DATE}
+
+## Shipped
+- Published daily blog post (see git diff)
+
+## Evidence / Verification
+- npm run seo:verify (pass)
+- npm run check (pass)
+
+## Next
+- Review Search Console queries: find 1 new post topic + 1 internal link opportunity.
+EOF
+          else
+            cat >> "$REPORT" <<EOF
+
+---
+
+## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
+- Published daily blog post
+- Verified: seo:verify + check
+EOF
+          fi
+
+      - name: Commit and push (main)
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "autonomus-bot"
+          git config user.email "autonomus-bot@users.noreply.github.com"
+
+          git add -A
+          DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)
+          git commit -m "AUTONOMUS: daily publish ${DATE}"
+          git push origin main
