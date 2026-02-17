@@ -119,8 +119,8 @@ jobs:
       - name: Run baseline verifiers + internal link chores
         run: |
           node AUTONOMUS/scripts/verify_site_basics.mjs
-          node AUTONOMUS/scripts/check_internal_links.mjs
           node AUTONOMUS/scripts/add_continue_reading.mjs || true
+          node AUTONOMUS/scripts/check_internal_links.mjs
 
       - name: SEO hygiene gates
         run: |
