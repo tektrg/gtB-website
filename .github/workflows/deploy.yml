@@ -6,6 +6,9 @@ on:
   schedule:
     - cron: "10 0 * * *" # 00:10 UTC
   workflow_dispatch:
+  workflow_run:
+    workflows: ["AUTONOMUS Daily Publish"]
+    types: [completed]
 
 permissions:
   contents: read
@@ -14,9 +17,12 @@ permissions:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         # with:
@@ -34,9 +40,12 @@ jobs:
         uses: actions/deploy-pages@v4
 
   linkcheck:
+    if: github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: lycheeverse/lychee-action@v2
         with:
           # '--exclude-mail' was removed in lychee v0.20; emails are excluded by default.
