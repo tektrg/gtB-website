@@ -36,8 +36,8 @@ jobs:
 
       - name: Create patch artifact
         run: |
-          : > blog.patch
           git add -A
+          : > blog.patch
           if [ -n "$(git diff --cached --name-only)" ]; then
             git diff --cached --binary > blog.patch
           fi
@@ -69,8 +69,8 @@ jobs:
 
       - name: Create patch artifact
         run: |
-          : > provider.patch
           git add -A
+          : > provider.patch
           if [ -n "$(git diff --cached --name-only)" ]; then
             git diff --cached --binary > provider.patch
           fi
