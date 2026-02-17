@@ -57,30 +57,81 @@ function loadLedger() {
   return items;
 }
 
-function pickTopic(topics, ledger, forcedId) {
+function listMarkdown(dir) {
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => path.join(dir, f));
+}
+
+function parseFrontmatter(content) {
+  if (!content.startsWith('---')) return { data: {}, body: content };
+  const end = content.indexOf('\n---', 3);
+  if (end === -1) return { data: {}, body: content };
+  const fmRaw = content.slice(3, end).trim();
+  const body = content.slice(end + 4);
+  const data = {};
+  const lines = fmRaw.split(/\r?\n/);
+  let currentKey = null;
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    if (/^\s*-\s+/.test(line) && currentKey) {
+      const val = line.replace(/^\s*-\s+/, '').trim();
+      if (!Array.isArray(data[currentKey])) data[currentKey] = [];
+      data[currentKey].push(val.replace(/^"|"$/g, '').replace(/^'|'$/g, ''));
+      continue;
+    }
+    const match = line.match(/^([^:]+):\s*(.*)$/);
+    if (!match) continue;
+    const key = match[1].trim();
+    let value = match[2].trim();
+    currentKey = key;
+    if (!value) {
+      data[key] = data[key] ?? [];
+      continue;
+    }
+    data[key] = value.replace(/^"|"$/g, '').replace(/^'|'$/g, '');
+  }
+  return { data, body };
+}
+
+function computeUsedTopicIds() {
+  const used = new Set();
+
+  // Prefer the committed ledger when present.
+  const ledger = loadLedger();
+  for (const x of ledger) if (x?.topicId) used.add(x.topicId);
+
+  // Also scan existing content; this makes rotation robust even if the ledger is missing.
+  for (const file of listMarkdown(blogDir)) {
+    try {
+      const content = fs.readFileSync(file, 'utf8');
+      const { data } = parseFrontmatter(content);
+      if (data.topicId) used.add(String(data.topicId));
+    } catch {
+      // ignore
+    }
+  }
+
+  return used;
+}
+
+function pickTopicStrict(topics, forcedId) {
   if (forcedId) {
     const t = topics.find((x) => x.id === forcedId);
     if (!t) throw new Error(`Unknown topic id: ${forcedId}`);
     return t;
   }
 
-  const used = new Set(ledger.map((x) => x.topicId));
+  const used = computeUsedTopicIds();
   const unused = topics.filter((t) => !used.has(t.id));
   if (unused.length === 0) {
-    // If everything was used, restart the rotation.
-    return topics[0];
+    throw new Error(
+      `Topic bank exhausted (strict mode). Add more topics in AUTONOMUS/content/topic-bank.json before publishing again.`,
+    );
   }
   return unused[0];
-}
-
-function uniquePathForSlug(baseSlug) {
-  let slug = baseSlug;
-  let n = 2;
-  while (fs.existsSync(path.join(blogDir, `${slug}.md`))) {
-    slug = `${baseSlug}-${n}`;
-    n++;
-  }
-  return path.join(blogDir, `${slug}.md`);
 }
 
 function mdEscapeInline(text) {
@@ -99,6 +150,7 @@ function renderPost({ topic, pubDate }) {
     `description: "${mdEscapeInline(description).replace(/"/g, '\\"')}"`,
   );
   lines.push(`pubDate: ${pubDate}T00:00:00.000Z`);
+  lines.push(`topicId: "${topic.id}"`);
   lines.push('author: "GPT Breeze"');
   lines.push("tags:");
   for (const t of tags)
@@ -460,14 +512,19 @@ const bank = JSON.parse(fs.readFileSync(topicBankPath, "utf8"));
 const topics = bank.topics || [];
 if (topics.length === 0) throw new Error("Topic bank is empty");
 
-const ledger = loadLedger();
-const topic = pickTopic(topics, ledger, args.topicId);
+const topic = pickTopicStrict(topics, args.topicId);
 
 const now = new Date();
 const pubDate = args.date ?? toISODate(now);
 
 const baseSlug = slugify(topic.title);
-const outPath = uniquePathForSlug(baseSlug);
+const outPath = path.join(blogDir, `${baseSlug}.md`);
+if (fs.existsSync(outPath)) {
+  // Strict de-dup: never create new URLs for the same topic. If this exists, it must already be the canonical.
+  throw new Error(
+    `Refusing to publish duplicate slug in strict mode: ${path.relative(root, outPath)}. Update the existing post instead.`,
+  );
+}
 
 const markdown = renderPost({ topic, pubDate });
 

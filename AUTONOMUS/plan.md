@@ -7,9 +7,10 @@
 
 ## Backlog (initial)
 
+- Define holistic SEO strategy + communication contract (see `AUTONOMUS/strategy.md`).
 - Baseline SEO audit and publish a report.
 - Identify 5 new blog pillar opportunities from existing content gaps.
-- Add automated checks for missing descriptions/tags/draft content.
+- Expand topic bank to 30–100 topics (mapped to pillars + intent).
 - Add internal linking map from blog to product pages.
 - Create content brief templates for new posts.
 
@@ -20,6 +21,6 @@
 - Add a daily chore stream: internal link maintenance + safe year rollover updates.
 
 ## Daily log
-- 2026-02-17: published src/content/blog/byom-ai-security-checklist-for-browser-extensions-4.md (topic: byom-security-checklist); published src/content/blog/byom-ai-security-checklist-for-browser-extensions-3.md (topic: byom-security-checklist); published src/content/blog/byom-ai-security-checklist-for-browser-extensions-2.md (topic: byom-security-checklist).
+- 2026-02-17: strict de-dup policy: kept canonical `src/content/blog/byom-ai-security-checklist-for-browser-extensions.md` and replaced `-2/-3/-4` duplicates with 301 redirects; added publish ledger `AUTONOMUS/state/published.jsonl`; added `AUTONOMUS/strategy.md`.
 
 - 2026-02-04: Initialized AUTONOMUS folder + SEO verification tool; added daily publish script + published test post; tightened verification (word count + headings) and fixed legacy posts to satisfy checks.

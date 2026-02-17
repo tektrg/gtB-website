@@ -10,6 +10,9 @@ export const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     canonicalURL: z.string().url().optional(),
+
+    // AUTONOMUS metadata (used for strict de-dup + rotation)
+    topicId: z.string().optional(),
   }),
 });
 
@@ -23,6 +26,9 @@ export const guide = defineCollection({
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
     canonicalURL: z.string().url().optional(),
+
+    // AUTONOMUS metadata
+    topicId: z.string().optional(),
   }),
 });
 
