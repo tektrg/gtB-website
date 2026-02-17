@@ -21,6 +21,7 @@
 - Add a daily chore stream: internal link maintenance + safe year rollover updates.
 
 ## Daily log
+- 2026-02-18: published src/content/blog/prompt-privacy-101-what-to-share-and-what-to-never-paste.md (topic: prompt-privacy-basics).
 - 2026-02-17: strict de-dup policy: kept canonical `src/content/blog/byom-ai-security-checklist-for-browser-extensions.md` and replaced `-2/-3/-4` duplicates with 301 redirects; added publish ledger `AUTONOMUS/state/published.jsonl`; added `AUTONOMUS/strategy.md`.
 
 - 2026-02-04: Initialized AUTONOMUS folder + SEO verification tool; added daily publish script + published test post; tightened verification (word count + headings) and fixed legacy posts to satisfy checks.
