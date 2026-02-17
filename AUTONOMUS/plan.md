@@ -20,6 +20,6 @@
 - Add a daily chore stream: internal link maintenance + safe year rollover updates.
 
 ## Daily log
-- 2026-02-17: published src/content/blog/byom-ai-security-checklist-for-browser-extensions-2.md (topic: byom-security-checklist).
+- 2026-02-17: published src/content/blog/byom-ai-security-checklist-for-browser-extensions-3.md (topic: byom-security-checklist); published src/content/blog/byom-ai-security-checklist-for-browser-extensions-2.md (topic: byom-security-checklist).
 
 - 2026-02-04: Initialized AUTONOMUS folder + SEO verification tool; added daily publish script + published test post; tightened verification (word count + headings) and fixed legacy posts to satisfy checks.
