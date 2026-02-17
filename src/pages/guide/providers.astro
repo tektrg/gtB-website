@@ -1,0 +1,52 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection } from 'astro:content';
+
+const now = new Date();
+const guides = await getCollection('guide', ({ data }) => !data.draft && new Date(data.pubDate) <= now);
+
+const providerGuides = guides
+  .filter((g) => (g.slug ?? '').startsWith('providers/'))
+  .sort((a, b) => +b.data.pubDate - +a.data.pubDate);
+---
+
+<Base
+  title="Supported AI Providers in GPT Breeze (Setup Guides)"
+  description="Step-by-step setup guides for AI providers in GPT Breeze: add API credentials, create custom models, and troubleshoot common errors."
+  canonical="https://gptbreeze.io/guide/providers/"
+  ogType="article"
+>
+  <header>
+    <h1>AI Providers</h1>
+    <p class="subtitle">Setup guides for connecting GPT Breeze to different AI providers (BYOM / BYOK).</p>
+  </header>
+
+  <section class="mt-6">
+    <p>
+      Most providers fall into two buckets:
+    </p>
+    <ul>
+      <li><strong>Built-in providers</strong> (OpenAI, Anthropic, Gemini, OpenRouter)</li>
+      <li><strong>OpenAI-compatible providers</strong> (use Custom credentials + base URL)</li>
+    </ul>
+  </section>
+
+  <section class="mt-8">
+    <h2>Provider setup guides</h2>
+    {providerGuides.length > 0 ? (
+      <div class="guide-grid" style="display:grid; gap:16px; margin-top:16px;">
+        {providerGuides.map((g) => (
+          <a class="guide-card" href={`/guide/${g.slug}/`} style="border:1px solid var(--border); border-radius:12px; padding:16px; text-decoration:none; color:inherit; background: var(--bg, transparent);">
+            <h3 style="margin:0 0 8px;">{g.data.title}</h3>
+            {g.data.description && <p style="margin:0; opacity:0.8;">{g.data.description}</p>}
+            {g.data.pubDate && (
+              <p style="margin:10px 0 0; font-size:0.9rem; opacity:0.7;">{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(g.data.pubDate)}</p>
+            )}
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p style="opacity:0.8;">No provider guides published yet. Check back soon.</p>
+    )}
+  </section>
+</Base>

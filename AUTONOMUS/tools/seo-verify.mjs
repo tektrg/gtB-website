@@ -58,7 +58,7 @@ function parseFrontmatter(content) {
   return { data, body };
 }
 
-function summarizeBlog(files) {
+function summarizeMarkdown(files, { minWords, minH2 }) {
   const issues = {
     missingTitle: [],
     missingPubDate: [],
@@ -92,13 +92,13 @@ function summarizeBlog(files) {
       .split(/\s+/)
       .filter(Boolean);
     const wordCount = words.length;
-    const MIN_WORDS = 650;
-    if (wordCount < MIN_WORDS)
+    if (wordCount < minWords)
       issues.lowWordCount.push(`${rel} (${wordCount} words)`);
 
-    const h2Count = (bodyOnly.match(/^##\s+/gm) || []).length;
-    const MIN_H2 = 4;
-    if (h2Count < MIN_H2) issues.lowHeadings.push(`${rel} (${h2Count} h2)`);
+    // Count structure headings. We accept H2/H3 because some legacy content uses ###.
+    const headingCount = (bodyOnly.match(/^#{2,3}\s+/gm) || []).length;
+    if (headingCount < minH2)
+      issues.lowHeadings.push(`${rel} (${headingCount} headings)`);
 
     const placeholders = [
       "TODO",
@@ -123,7 +123,14 @@ const counts = collections.map((col) => ({
 }));
 
 const blog = counts.find((c) => c.name === "blog");
-const blogIssues = blog ? summarizeBlog(blog.files) : null;
+const guide = counts.find((c) => c.name === "guide");
+
+const blogIssues = blog
+  ? summarizeMarkdown(blog.files, { minWords: 650, minH2: 4 })
+  : null;
+const guideIssues = guide
+  ? summarizeMarkdown(guide.files, { minWords: 450, minH2: 3 })
+  : null;
 
 console.log("AUTONOMUS SEO Verify");
 console.log("=====================");
@@ -131,8 +138,9 @@ for (const col of counts) {
   console.log(`${col.name}: ${col.files.length}`);
 }
 
-if (blogIssues) {
-  console.log("\nBlog checks (SEO hygiene):");
+function printIssues(label, issues, { minWords, minH2 }) {
+  if (!issues) return;
+  console.log(`\n${label} checks (SEO hygiene):`);
   const order = [
     ["missingTitle", "Missing title"],
     ["missingPubDate", "Missing pubDate"],
@@ -140,18 +148,21 @@ if (blogIssues) {
     ["weakDescription", "Weak description (<80 chars)"],
     ["missingTags", "Missing tags"],
     ["draft", "Draft content"],
-    ["lowWordCount", "Low word count (<650)"],
-    ["lowHeadings", "Too few H2 headings (<4)"],
+    ["lowWordCount", `Low word count (<${minWords})`],
+    ["lowHeadings", `Too few headings (H2/H3) (<${minH2})`],
     ["placeholderText", "Placeholder text"],
   ];
-  for (const [key, label] of order) {
-    const list = blogIssues[key];
-    console.log(`- ${label}: ${list.length}`);
+  for (const [key, l] of order) {
+    const list = issues[key];
+    console.log(`- ${l}: ${list.length}`);
     if (list.length > 0) {
       for (const item of list) console.log(`  - ${item}`);
     }
   }
 }
+
+printIssues('Blog', blogIssues, { minWords: 650, minH2: 4 });
+printIssues('Guide', guideIssues, { minWords: 450, minH2: 3 });
 
 const total = counts.reduce((sum, col) => sum + col.files.length, 0);
 console.log(`\nTotal markdown content: ${total}`);

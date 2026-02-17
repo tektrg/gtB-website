@@ -33,10 +33,11 @@ jobs:
           node AUTONOMUS/scripts/verify_site_basics.mjs
           node AUTONOMUS/scripts/check_internal_links.mjs
 
-      - name: Publish daily post (Asia/Saigon date)
+      - name: Publish daily blog post + provider guide (Asia/Saigon date)
         run: |
           DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)
           node AUTONOMUS/tools/publish-daily-post.mjs --date "$DATE"
+          node AUTONOMUS/tools/publish-provider-guide.mjs --date "$DATE"
 
       - name: SEO hygiene gates
         run: |
