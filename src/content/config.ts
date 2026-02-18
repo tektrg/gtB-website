@@ -21,6 +21,10 @@ const blog = defineCollection({
     pubDate: z.date(),
     // Optional: use when you update a post significantly
     updatedDate: z.date().optional(),
+
+    // AUTONOMUS metadata (used for strict de-dup + rotation)
+    topicId: z.string().optional(),
+
     author: z.string().optional(),
     tags: z.array(z.string()).optional(),
 
@@ -49,6 +53,10 @@ const guide = defineCollection({
     description: z.string().optional(),
     pubDate: z.date(),
     updatedDate: z.date().optional(),
+
+    // AUTONOMUS metadata
+    topicId: z.string().optional(),
+
     tags: z.array(z.string()).optional(),
     canonicalURL: z.string().url().optional(),
     draft: z.boolean().default(false),

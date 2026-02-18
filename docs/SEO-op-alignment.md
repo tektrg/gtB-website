@@ -2,6 +2,8 @@
 
 This document defines the **holistic SEO operation requirements** for the **GPT Breeze website** ([gptbreeze.io](http://gptbreeze.io)). It consolidates all decisions, workstreams, automation pipelines, and technical specifications agreed upon between **Trung** and **Yeh** on **17 Feb 2026**.
 
+**How to run it (step-by-step):** see `docs/SEO-OPS-RUNBOOK.md`.
+
 **Product:** GPT Breeze — AI productivity Chrome extension (YouTube summarizer, web page chat, custom shortcuts, BYOK)
 
 **Domain:** [gptbreeze.io](http://gptbreeze.io)
@@ -154,6 +156,18 @@ All content must prioritize linking to these pages:
 ---
 
 ## 5. Daily Automation Pipeline (AUTONOMUS)
+
+### 5.0 Strict de-dup policy (canonical URLs)
+
+**Decision:** One topic → one canonical URL. Avoid near-duplicate posts fighting each other.
+
+**Implementation ✅**
+- Publisher runs in strict mode: `AUTONOMUS/tools/publish-daily-post.mjs`
+  - refuses duplicate slugs (no `-2/-3/-4` copies)
+  - refuses publishing when topic bank is exhausted (forces backlog expansion)
+- Rotation state is committed: `AUTONOMUS/state/published.jsonl`
+- When a duplicate URL previously existed, it is replaced by a 301 redirect page under `src/pages/blog/*`.
+
 
 ### 5.1 Architecture Overview
 

@@ -59,6 +59,43 @@ A lightweight policy that actually sticks:
 
 If you want predictable costs while keeping control, compare approaches on `/pricing`.
 
+## A quick prompt-hygiene checklist (copy/paste)
+
+Before you hit send, do a 10-second scan:
+
+- Remove anything that authenticates: keys, tokens, cookies, `Authorization:` headers.
+- Remove identifiers: full names, emails, phone numbers, addresses, customer IDs.
+- Remove private URLs: internal dashboards, Notion links, admin panels, staging domains.
+- Reduce raw dumps: prefer a short excerpt + a summary over pasting a full document.
+- Keep structure: replace sensitive values with placeholders so the model can still reason.
+
+Tip: if you’re unsure whether something is sensitive, don’t paste it. Describe what it is, and ask the model to suggest a **safe redaction template** you can fill in (placeholders + a short glossary). That usually preserves 90% of the usefulness without leaking the 10% you’ll regret.
+
+If you routinely work with sensitive material, keep a stricter version of this checklist on the [privacy-first workflow](/privacy-first) page so your team can follow one standard.
+
+## Sanitizing logs without losing debugging value
+
+Logs are where accidents happen because they contain secrets *and* context.
+
+A safe approach:
+
+1. Paste only the **relevant window** (e.g. 20–50 lines around the error), not the entire file.
+2. Replace known secret fields with placeholders:
+   - `api_key` → `{{API_KEY}}`
+   - `Authorization: Bearer …` → `Authorization: Bearer {{TOKEN}}`
+   - cookies/session headers → `{{COOKIE_REDACTED}}`
+3. Keep request shapes intact (method, path, status code, timing). The model can still help.
+
+## Team rules that prevent “oops” moments
+
+If more than one person uses AI tools daily, write down three rules and enforce them:
+
+- **Dedicated keys:** use a separate key for browser tools (don’t reuse backend/server keys).
+- **Least privilege:** avoid broad extension permissions unless a feature truly needs them.
+- **Default to summarize-first:** summarize sensitive docs into non-sensitive bullets, then do rewrites from the bullets.
+
+If your workflow is BYOM-heavy, you’ll probably also want the BYOM basics primer: [What is BYOM AI?](/blog/what-is-byom-ai).
+
 ---
 
 Want a safer workflow that still feels fast? GPT Breeze is built around BYOM flexibility and privacy-first habits.
