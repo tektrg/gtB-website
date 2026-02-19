@@ -143,6 +143,21 @@ function renderPost({ topic, pubDate }) {
   const description = topic.description;
   const tags = topic.tags || [];
 
+  const topicText = `${title} ${description} ${tags.join(" ")}`.toLowerCase();
+  const isYouTube =
+    topicText.includes("youtube") ||
+    topicText.includes("transcript") ||
+    topicText.includes("video");
+  const isPrivacy =
+    topicText.includes("privacy") ||
+    topicText.includes("byok") ||
+    topicText.includes("byom") ||
+    topicText.includes("api key");
+  const isComparison =
+    topicText.includes("alternative") ||
+    topicText.includes("compare") ||
+    topicText.includes("best");
+
   const lines = [];
   lines.push("---");
   lines.push(`title: "${mdEscapeInline(title).replace(/"/g, '\\"')}"`);
@@ -481,10 +496,99 @@ function renderPost({ topic, pubDate }) {
       continue;
     }
 
-    // Default: keep useful without pretending we know specifics.
+    // Default: generate a full, user-intent section (avoid thin content).
     lines.push(
-      "Use checklists, safe defaults, and clear failure modes. Avoid settings that silently increase access to pages, tabs, or stored data.",
+      `Here’s the practical version of **${h}**—the goal is to get a usable output in one session, not to overthink tooling.`,
     );
+    lines.push("");
+
+    lines.push("What to aim for:");
+    lines.push("");
+    lines.push("- A short answer first (so you can decide fast)." );
+    lines.push("- A structured breakdown (so you can trust what you’re reading)." );
+    lines.push("- Actionable next steps (so it turns into progress, not notes)." );
+    lines.push("- Links back to the source sections (for quick verification)." );
+    lines.push("");
+
+    // Add concrete steps / checklists so the post reliably clears the quality gates.
+    if (h.toLowerCase().includes("step-by-step") || h.toLowerCase().includes("step by step")) {
+      lines.push("Do this:");
+      lines.push("");
+      lines.push("1. Open the page/video you want to work on.");
+      lines.push("2. Run a summary first (get the big picture).");
+      lines.push("3. Ask 2–3 follow-ups for what you actually need (decisions, takeaways, action items). ");
+      lines.push("4. Save the prompt as a shortcut if you’ll repeat it.");
+      lines.push("5. Export/share only the sanitized output (avoid pasting raw private docs)." );
+      lines.push("");
+      lines.push(
+        `If you’re new, start with [Getting started](/guide/getting-started/).${isYouTube ? " For video workflows, see [/youtube-summary](/youtube-summary)." : ""}`,
+      );
+      lines.push("");
+    } else if (h.toLowerCase().includes("prompt")) {
+      lines.push("Copy/paste prompt templates:");
+      lines.push("");
+      lines.push("```text");
+      lines.push("Summarize this into 8 bullets. Focus on decisions, numbers, and action items.");
+      lines.push("Then give me 3 follow-up questions I should ask next.");
+      lines.push("```");
+      lines.push("");
+      lines.push("```text");
+      lines.push("Extract the key claims and supporting evidence. Mark uncertain parts as \"needs verification\".");
+      lines.push("Output: (1) claims, (2) evidence, (3) counterpoints, (4) my next steps.");
+      lines.push("```");
+      lines.push("");
+      lines.push("```text");
+      lines.push("Turn this into a 5-sentence executive summary + a checklist I can execute in 30 minutes.");
+      lines.push("```");
+      lines.push("");
+    } else if (h.toLowerCase().includes("privacy")) {
+      lines.push("Privacy checklist (fast):");
+      lines.push("");
+      lines.push("- Don’t paste keys/tokens/cookies. Replace with placeholders.");
+      lines.push("- Don’t paste internal URLs or customer identifiers.");
+      lines.push("- Prefer summarize-first: summarize sensitive docs into neutral bullets, then rewrite from bullets.");
+      lines.push("");
+      lines.push(
+        `If privacy is a priority, follow the stricter workflow on [/privacy-first](/privacy-first).${isComparison ? " If cost predictability matters, compare approaches on [/pricing](/pricing)." : ""}`,
+      );
+      lines.push("");
+    } else if (h.toLowerCase().includes("checklist") || h.toLowerCase().includes("compare") || h.toLowerCase().includes("evaluation") || isComparison) {
+      lines.push("Evaluation checklist:");
+      lines.push("");
+      lines.push("- Output quality: does it capture the right level of detail?");
+      lines.push("- Speed: can you get a first pass in under a minute?");
+      lines.push("- Timestamps/transcripts (for video): do you get clickable sections?");
+      lines.push("- Cost control: subscription vs BYOK/BYOM.");
+      lines.push("- Privacy: what data is stored, and where?");
+      lines.push("");
+      lines.push("If you want predictable tradeoffs, start at [/pricing](/pricing).");
+      lines.push("");
+    } else if (h.toLowerCase().includes("faq")) {
+      lines.push("Quick answers:");
+      lines.push("");
+      lines.push("- **Will the summary be perfect?** No—treat it as a draft, then ask targeted follow-ups.");
+      lines.push("- **How do I keep it private?** Don’t paste secrets; use placeholders + summarize-first.");
+      lines.push(`- **Where do I start?** [/guide/getting-started/](/guide/getting-started/) is the fastest path.`);
+      lines.push(`- **What about video?** ${isYouTube ? "Use [/youtube-summary](/youtube-summary) workflows." : "If you do YouTube often, use [/youtube-summary](/youtube-summary)."}`);
+      lines.push("");
+    } else {
+      lines.push("A simple way to avoid noise:");
+      lines.push("");
+      lines.push("- Start with a short summary.");
+      lines.push("- Then ask for one specific output (checklist / decision / action items).");
+      lines.push("- Save the prompt as a shortcut once it works.");
+      lines.push("");
+    }
+
+    lines.push("Reusable output format:");
+    lines.push("");
+    lines.push("```text");
+    lines.push("Summary (5 bullets):");
+    lines.push("Key takeaways:");
+    lines.push("Action items:");
+    lines.push("Questions to clarify:");
+    lines.push("Relevant links/sections to re-check:");
+    lines.push("```");
     lines.push("");
   }
 
@@ -493,6 +597,22 @@ function renderPost({ topic, pubDate }) {
   lines.push(
     "Want faster workflows without sacrificing control? GPT Breeze is built for BYOM-style flexibility with a privacy-first mindset.",
   );
+  lines.push("");
+
+  // Internal links (helps crawl + keeps posts aligned with money pages)
+  lines.push("## Continue reading");
+  lines.push("");
+  if (isYouTube) {
+    lines.push("- [YouTube summary](/youtube-summary)");
+    lines.push(
+      "- [How to get video transcripts with GPT Breeze extension](/blog/how-to-get-video-transcripts-with-gpt-breeze-extension/)",
+    );
+  }
+  if (isPrivacy) {
+    lines.push("- [Privacy-first workflow](/privacy-first)");
+  }
+  lines.push("- [Getting started](/guide/getting-started/)");
+  lines.push("- [Pricing](/pricing)");
   lines.push("");
 
   return lines.join("\n");

@@ -4,6 +4,8 @@
       "id": "byom-security-checklist",
       "title": "BYOM AI Security Checklist for Browser Extensions",
       "description": "A practical checklist to use BYOM (Bring Your Own Model) safely: protect API keys, reduce data exposure, and avoid common extension pitfalls.",
+      "pillar": "BYOK / Privacy",
+      "intent": "trust",
       "tags": ["BYOM", "security", "API keys", "Chrome extension", "privacy"],
       "sections": [
         "What BYOM changes (and what it doesn't)",
@@ -18,12 +20,178 @@
       "id": "prompt-privacy-basics",
       "title": "Prompt Privacy 101: What to Share (and What to Never Paste)",
       "description": "Rules of thumb for keeping sensitive data out of prompts while still getting great outputs.",
+      "pillar": "BYOK / Privacy",
+      "intent": "how-to",
       "tags": ["privacy", "prompts", "security", "AI"],
       "sections": [
         "The 3 categories of sensitive data",
         "Redaction patterns that work",
         "Using placeholders without losing context",
         "Team workflows: docs, tickets, and logs"
+      ]
+    },
+
+    {
+      "id": "youtube-summary-with-timestamps",
+      "title": "How to Summarize YouTube Videos with Timestamps (Chapters You Can Click)",
+      "description": "A step-by-step workflow to turn long YouTube videos into clickable, time-stamped notes you can scan and revisit.",
+      "pillar": "YouTube summarizer",
+      "intent": "how-to",
+      "tags": ["YouTube", "summarizer", "timestamps", "notes", "Chrome extension"],
+      "sections": [
+        "When timestamp summaries beat plain bullet summaries",
+        "Step-by-step: timestamp summary workflow in GPT Breeze",
+        "Prompt templates for timestamped summaries",
+        "Common mistakes (and how to fix them)",
+        "Turn summaries into action items",
+        "FAQ"
+      ]
+    },
+    {
+      "id": "youtube-transcript-vs-summary",
+      "title": "YouTube Transcript vs Summary: Which One Should You Use?",
+      "description": "Transcripts are exhaustive. Summaries are useful. Here’s when to use each, and how to combine them into a faster workflow.",
+      "pillar": "YouTube summarizer",
+      "intent": "comparison",
+      "tags": ["YouTube", "transcript", "summary", "productivity"],
+      "sections": [
+        "The difference: raw text vs compressed meaning",
+        "Best use cases for transcripts",
+        "Best use cases for summaries",
+        "The hybrid workflow (recommended)",
+        "Privacy notes",
+        "FAQ"
+      ]
+    },
+    {
+      "id": "best-youtube-summarizer-chrome-extension",
+      "title": "Best YouTube Summarizer Chrome Extension (What to Look For)",
+      "description": "A buyer’s guide for picking a YouTube summarizer extension: timestamps, transcript access, privacy/BYOK, and cost control.",
+      "pillar": "YouTube summarizer",
+      "intent": "commercial",
+      "tags": ["YouTube summarizer", "Chrome extension", "BYOK", "privacy", "comparison"],
+      "sections": [
+        "The 6 features that actually matter",
+        "Privacy & BYOK: what good looks like",
+        "Cost control: subscriptions vs BYOK",
+        "A simple evaluation checklist",
+        "Common traps",
+        "FAQ"
+      ]
+    },
+    {
+      "id": "summarize-long-youtube-videos",
+      "title": "How to Summarize Long YouTube Videos (2–3 Hours) Without Losing the Good Stuff",
+      "description": "A practical method to summarize very long videos: chunking, section titles, and extraction into a reusable knowledge base.",
+      "pillar": "YouTube summarizer",
+      "intent": "how-to",
+      "tags": ["YouTube", "summarizer", "long videos", "learning"],
+      "sections": [
+        "Why long videos are hard to summarize",
+        "Step-by-step: chunk and summarize",
+        "Prompt templates for long-form video",
+        "How to validate summary accuracy",
+        "Turn it into notes you can reuse",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "summarize-web-articles-in-chrome",
+      "title": "How to Summarize Web Articles in Chrome (Without Copy-Pasting Everything)",
+      "description": "A workflow for summarizing articles directly in your browser, then asking follow-up questions to extract what you need.",
+      "pillar": "Web/article summary",
+      "intent": "how-to",
+      "tags": ["article summarizer", "Chrome", "research", "productivity"],
+      "sections": [
+        "When article summaries help (and when they don’t)",
+        "Step-by-step: summarize an article in GPT Breeze",
+        "Ask better follow-up questions",
+        "Common mistakes",
+        "Privacy notes",
+        "FAQ"
+      ]
+    },
+    {
+      "id": "save-prompts-as-one-click-shortcuts",
+      "title": "Save Prompts as One-Click Shortcuts: Build Your Personal AI Workflow",
+      "description": "How to turn repeated prompts into shortcuts so you can run the same workflow on any page or video in seconds.",
+      "pillar": "Chrome extension AI",
+      "intent": "how-to",
+      "tags": ["shortcuts", "prompts", "workflow", "productivity", "Chrome extension"],
+      "sections": [
+        "What a shortcut is (and why it saves time)",
+        "Step-by-step: create your first shortcut",
+        "5 high-leverage shortcuts to start with",
+        "How to iterate safely (prompt hygiene)",
+        "Team sharing tips",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "eightify-alternative",
+      "title": "Eightify Alternative: Better YouTube Summaries (with BYOK + Timestamps)",
+      "description": "A comparison-focused guide for people looking for an Eightify alternative: what features matter and how to evaluate options.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": ["Eightify alternative", "YouTube summarizer", "Chrome extension", "BYOK"],
+      "sections": [
+        "Why people look for Eightify alternatives",
+        "The comparison checklist (features that matter)",
+        "BYOK vs subscription cost differences",
+        "Privacy & data handling",
+        "Migration tips",
+        "FAQ"
+      ]
+    },
+    {
+      "id": "merlin-ai-alternative",
+      "title": "Merlin AI Alternative: Faster Page + YouTube Summaries with More Control",
+      "description": "If you use Merlin AI but want more control over models, cost, and privacy, this guide shows what to compare.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": ["Merlin AI alternative", "Chrome extension", "summarizer", "BYOK"],
+      "sections": [
+        "Where Merlin works well (and where it doesn’t)",
+        "What to compare: speed, quality, cost, privacy",
+        "BYOK model routing (why it matters)",
+        "A quick evaluation checklist",
+        "Common gotchas",
+        "FAQ"
+      ]
+    },
+    {
+      "id": "maxai-alternative",
+      "title": "MaxAI Alternative: A Cleaner BYOK Workflow for Research and Writing",
+      "description": "A practical comparison guide for switching from MaxAI: what to keep, what to improve, and how to avoid rework.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": ["MaxAI alternative", "BYOK", "writing", "research"],
+      "sections": [
+        "Why people switch",
+        "The feature checklist",
+        "Privacy-first workflow",
+        "Cost control tips",
+        "Migration steps",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "ai-meeting-notes-from-video",
+      "title": "Turn Video into Meeting Notes: A Workflow for Action Items and Follow-Ups",
+      "description": "A use-case playbook: summarizing recordings into structured notes, decisions, and action items you can share.",
+      "pillar": "Meeting/video notes",
+      "intent": "use-case",
+      "tags": ["meeting notes", "video notes", "action items", "productivity"],
+      "sections": [
+        "What good meeting notes look like",
+        "Step-by-step: from video to notes",
+        "Prompt templates for action items",
+        "How to handle long recordings",
+        "Privacy notes",
+        "FAQ"
       ]
     }
   ]
