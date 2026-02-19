@@ -330,8 +330,8 @@ Build **topical authority** around "AI provider setup" by publishing a setup gui
 
 | Script | Purpose |
 | --- | --- |
-| `AUTONOMUS/tools/providers-index.mjs` | Parse `models-api.json` → inventory + priority queue |
-| `AUTONOMUS/tools/publish-provider-guide.mjs` | Pop next provider → generate markdown → write to `src/content/guide/providers/` |
+| `AUTONOMUS/tools/providers-index.mjs` | Parse `models-api.json` → inventory snapshot (debug/audit; optional) |
+| `AUTONOMUS/tools/publish-provider-guide.mjs` | Pick next provider (priority → fallback by model count) → generate markdown → write to `src/content/guide/providers/` |
 | `src/pages/guide/providers.astro` | Hub page listing all published provider guides |
 
 ---

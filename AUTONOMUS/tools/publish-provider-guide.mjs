@@ -113,6 +113,7 @@ function renderGuide({ providerKey, provider, pubDate }) {
   lines.push(`title: "${escapeQuotes(title)}"`);
   lines.push(`description: "${escapeQuotes(description)}"`);
   lines.push(`pubDate: ${pubDate}`);
+  lines.push(`topicId: "provider-${escapeQuotes(providerKey)}"`);
   lines.push(`tags: ["providers", "${escapeQuotes(providerKey)}", "byom", "api-keys"]`);
   lines.push('draft: false');
   lines.push('---');
@@ -180,10 +181,10 @@ function renderGuide({ providerKey, provider, pubDate }) {
 
   lines.push('## Next steps');
   lines.push('');
-  lines.push('- Compare approaches: `/pricing`');
-  lines.push('- If you care about data boundaries: `/privacy-first`');
-  lines.push('- New here: `/guide/getting-started/`');
-  lines.push('- Estimate costs: `/ai-model-cost-calculator-and-price-comparation`');
+  lines.push('- Compare approaches: [Pricing](/pricing)');
+  lines.push('- If you care about data boundaries: [Privacy-first workflow](/privacy-first)');
+  lines.push('- New here: [Getting started](/guide/getting-started/)');
+  lines.push('- Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)');
   lines.push('');
 
   return lines.join('\n');

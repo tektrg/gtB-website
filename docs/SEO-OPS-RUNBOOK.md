@@ -84,7 +84,7 @@ Troubleshooting:
 
 ## 3) Daily run (provider guide publish)
 
-If provider automation is enabled/desired:
+### 3.1 Publish the next provider guide
 
 ```bash
 node AUTONOMUS/tools/publish-provider-guide.mjs
@@ -92,7 +92,23 @@ npm run seo:verify
 npm run check
 ```
 
-(If `publish-provider-guide.mjs` depends on a queue, update `AUTONOMUS/tools/providers-index.mjs` + its inputs first.)
+How it chooses the provider:
+- Skips providers that already have a file in `src/content/guide/providers/*.md`.
+- Uses a Phase-1 priority list first (OpenAI, Anthropic, Google, OpenRouter, Groq, Mistral, Together, Ollama, LM Studio, gateways, Azure), then falls back to “highest model count”.
+
+To force a specific provider:
+
+```bash
+node AUTONOMUS/tools/publish-provider-guide.mjs --provider groq
+```
+
+### 3.2 (Optional) refresh provider inventory snapshot
+
+This is for debugging/auditing the provider catalog (not required for daily publish):
+
+```bash
+node AUTONOMUS/tools/providers-index.mjs
+```
 
 ---
 
