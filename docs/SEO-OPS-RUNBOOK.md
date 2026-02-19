@@ -38,6 +38,11 @@ A complete SEO ops run ships **one improvement** and reports it clearly.
 
 ## 2) Daily run (content publish)
 
+Before publishing, confirm the topic is aligned:
+- Audience: GPT Breeze users (not “SEO for bloggers/builders”)
+- Pillar: YouTube summary / web summary / shortcuts / BYOM privacy+security / pricing+comparisons / provider setup
+- Has at least 1–2 natural internal links to money pages (`/pricing`, `/privacy-first`, `/guide/getting-started/`, feature pages)
+
 ### 2.1 Publish the daily post (AUTONOMUS)
 
 ```bash

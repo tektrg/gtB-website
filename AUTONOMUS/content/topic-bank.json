@@ -25,18 +25,6 @@
         "Using placeholders without losing context",
         "Team workflows: docs, tickets, and logs"
       ]
-    },
-    {
-      "id": "internal-linking-playbook",
-      "title": "Internal Linking Playbook for AI Tool Blogs",
-      "description": "A lightweight internal-linking system to improve crawlability and conversions without bloating your content.",
-      "tags": ["SEO", "internal linking", "content", "AI tools"],
-      "sections": [
-        "Pick 3 money pages",
-        "Define 5 recurring anchors",
-        "Where links belong in a post",
-        "How to keep it consistent"
-      ]
     }
   ]
 }

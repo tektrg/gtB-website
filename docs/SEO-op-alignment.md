@@ -24,6 +24,8 @@ This document defines the **holistic SEO operation requirements** for the **GPT 
 
 ## 1. SEO Targets & KPIs
 
+> Guardrail: AUTONOMUS should only publish **user-intent content for GPT Breeze** (workflows, comparisons, provider setup, feature use-cases). Avoid “SEO-meta” posts that target other builders (e.g. generic internal-linking playbooks) unless explicitly requested.
+
 ### 1.1 Primary Conversion
 
 | Priority | Conversion Event | Tracking |
