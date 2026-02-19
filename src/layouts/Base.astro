@@ -100,10 +100,10 @@ if (!breadcrumbs) {
     <style>
       /* Decorative light blue glow near top-right, similar to index.astro */
       .site-gradient {
-        position: absolute;
+        position: fixed;
         top: 0px;
         left: 0px;
-        width: min(720px, 400px);
+        width: min(100vw, 400px);
         height: min(520px, 220px);
         background: radial-gradient(100% 80% at 0% 0%, theme('colors.accent-blue-light') 0%, rgba(75, 183, 215, 0) 60%);
         filter: blur(20px);
