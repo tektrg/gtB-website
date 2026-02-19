@@ -8,6 +8,11 @@ const posts = (await getCollection('blog', ({ data }) =>
 ---
 <Base title="Blog" description="Latest posts and updates from GPT Breeze.">
   <style>
+    :global(main > header) {
+      position: static !important;
+      top: auto !important;
+    }
+
     .blog-grid {
       display: grid;
       gap: 24px;
