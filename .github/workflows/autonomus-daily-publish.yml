@@ -133,13 +133,26 @@ jobs:
           REPORT="AUTONOMUS/reports/${DATE}.md"
           mkdir -p AUTONOMUS/reports
 
+          BLOG_CHANGED=$(git status --porcelain | awk '{print $2}' | grep '^src/content/blog/' | wc -l | tr -d ' ')
+          PROVIDER_CHANGED=$(git status --porcelain | awk '{print $2}' | grep '^src/content/guide/providers/' | wc -l | tr -d ' ')
+
+          BLOG_LINE="- Blog post: skipped (missing/incomplete research or no available topic)"
+          if [ "$BLOG_CHANGED" != "0" ]; then
+            BLOG_LINE="- Published daily blog post"
+          fi
+
+          PROVIDER_LINE="- Provider guide: none"
+          if [ "$PROVIDER_CHANGED" != "0" ]; then
+            PROVIDER_LINE="- Published provider setup guide"
+          fi
+
           if [ ! -f "$REPORT" ]; then
             cat > "$REPORT" <<EOF
           # AUTONOMUS Daily Report — ${DATE}
 
           ## Shipped
-          - Published daily blog post
-          - Published provider setup guide
+          ${BLOG_LINE}
+          ${PROVIDER_LINE}
 
           ## Evidence / Verification
           - npm run seo:verify (pass)
@@ -154,7 +167,8 @@ jobs:
           ---
 
           ## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
-          - Published daily blog post + provider guide
+          ${BLOG_LINE}
+          ${PROVIDER_LINE}
           - Verified: seo:verify + check
           EOF
           fi

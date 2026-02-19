@@ -75,14 +75,39 @@ Before publishing, confirm the topic is aligned:
 - Pillar: YouTube summary / web summary / shortcuts / BYOM privacy+security / pricing+comparisons / provider setup
 - Has at least 1–2 natural internal links to money pages (`/pricing`, `/privacy-first`, `/guide/getting-started/`, feature pages)
 
-### 2.1 Publish the daily post (AUTONOMUS)
+### 2.1 Research requirement (before publishing)
+
+AUTONOMUS will **refuse to publish** a blog topic unless there is a research artifact at:
+
+- `AUTONOMUS/research/blog/<topicId>.md`
+
+Seed a template:
+
+```bash
+node AUTONOMUS/tools/research-seed.mjs --topic <topicId>
+```
+
+Minimum required in research:
+- ≥2 Reddit links
+- exactly 10 keywords under `## Keywords (10)`
+- ≥3 internal links under `## Backlinks`
+- ≥4 H2 items under `## Outline`
+
+Verify a research file:
+
+```bash
+node AUTONOMUS/tools/research-verify.mjs --topic <topicId>
+```
+
+### 2.2 Publish the daily post (AUTONOMUS)
 
 ```bash
 npm run seo:publish:daily
 ```
 
 This runs:
-- `AUTONOMUS/tools/publish-daily-post.mjs` (generates a blog post from `AUTONOMUS/content/topic-bank.json`)
+- `AUTONOMUS/tools/publish-daily-post.mjs` (picks next unused topic from `AUTONOMUS/content/topic-bank.json`)
+- research gate (must exist + be complete)
 - `npm run seo:verify`
 
 ### 2.2 STRICT de-dup policy (important)

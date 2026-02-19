@@ -139,23 +139,29 @@ function mdEscapeInline(text) {
   return String(text).replace(/\n/g, " ").trim();
 }
 
-function loadResearchOrThrow(topicId) {
-  const p = path.join(researchDir, `${topicId}.md`);
-  if (!fs.existsSync(p)) {
-    throw new Error(
-      `Missing research for topic '${topicId}'. Create it first: node AUTONOMUS/tools/init-topic-research.mjs --topic ${topicId} (then fill it with sources/keywords/backlinks).`,
-    );
+function loadResearchOrSkip(topicId) {
+  const res = loadResearch(topicId);
+  if (!res.ok) {
+    return { ok: false, reason: res.reason };
   }
-  const txt = fs.readFileSync(p, 'utf8');
-  // Minimal checks: at least one URL + a 10-item keyword list marker.
-  const urls = txt.match(/https?:\/\/\S+/g) || [];
-  const hasKeywordsSection = /##\s+Keywords\s*\(10\)/i.test(txt) || /##\s+Keywords\b/i.test(txt);
-  if (urls.length === 0 || !hasKeywordsSection) {
-    throw new Error(
-      `Research file exists but looks incomplete: ${path.relative(root, p)}. Need at least 1 source URL and a '## Keywords (10)' section.`,
-    );
+
+  const problems = validateResearch(res.content);
+  if (problems.length > 0) {
+    return {
+      ok: false,
+      reason: `Research not ready: ${path.relative(root, res.file)}\n- ${problems.join('\n- ')}`,
+    };
   }
-  return { path: p, text: txt, urls };
+
+  const urls = res.content.match(/https?:\/\/\S+/g) || [];
+  return {
+    ok: true,
+    research: {
+      path: res.file,
+      text: res.content,
+      urls,
+    },
+  };
 }
 
 function extractSectionBullets(md, headingRegex) {
@@ -680,6 +686,56 @@ function renderPost({ topic, pubDate, research }) {
 function ensureDirs() {
   fs.mkdirSync(stateDir, { recursive: true });
   fs.mkdirSync(blogDir, { recursive: true });
+  fs.mkdirSync(researchDir, { recursive: true });
+}
+
+function loadResearch(topicId) {
+  const file = path.join(researchDir, `${topicId}.md`);
+  if (!fs.existsSync(file)) return { ok: false, reason: `Missing research file: ${path.relative(root, file)}` };
+  const content = fs.readFileSync(file, 'utf8');
+  return { ok: true, content, file };
+}
+
+function section(content, headingRegex) {
+  const m = content.match(headingRegex);
+  if (!m) return null;
+  const start = m.index ?? 0;
+  const rest = content.slice(start + m[0].length);
+  const next = rest.match(/^##\s+/m);
+  return next ? rest.slice(0, next.index) : rest;
+}
+
+function validateResearch(content) {
+  const problems = [];
+
+  if (!content.toLowerCase().includes('## user discussion research'))
+    problems.push('Missing section: ## User discussion research');
+
+  const redditLinks = content.match(/https:\/\/www\.reddit\.com\//g) || [];
+  if (redditLinks.length < 2) problems.push('Need >=2 reddit links');
+
+  const kwSec = section(content, /^##\s+Keywords \(10\)\s*$/m);
+  if (!kwSec) problems.push('Missing section: ## Keywords (10)');
+  else {
+    const kws = kwSec
+      .split(/\r?\n/)
+      .map((l) => l.trim())
+      .filter((l) => /^\d+\./.test(l));
+    if (kws.length !== 10) problems.push(`Need exactly 10 keywords (found ${kws.length})`);
+  }
+
+  if (!content.toLowerCase().includes('## backlinks'))
+    problems.push('Missing section: ## Backlinks');
+
+  const internalLinks = content.match(/\n-\s+\/[a-z0-9\-\/]+/gi) || [];
+  if (internalLinks.length < 3) problems.push('Need >=3 internal links (e.g. /pricing)');
+
+  if (!content.toLowerCase().includes('## outline'))
+    problems.push('Missing section: ## Outline');
+  const h2s = content.match(/\n-\s+H2:/g) || [];
+  if (h2s.length < 4) problems.push('Need >=4 H2 items in outline');
+
+  return problems;
 }
 
 const args = parseArgs(process.argv);
@@ -694,7 +750,13 @@ if (topics.length === 0) throw new Error("Topic bank is empty");
 const topic = pickTopicStrict(topics, args.topicId);
 
 // Enforce research-driven publishing: no research => no publish.
-const research = loadResearchOrThrow(topic.id);
+const rg = loadResearchOrSkip(topic.id);
+if (!rg.ok) {
+  console.log(`[skip] ${rg.reason}`);
+  console.log(`[skip] Refusing to publish topicId="${topic.id}" without complete research.`);
+  process.exit(0);
+}
+const research = rg.research;
 
 const now = new Date();
 const pubDate = args.date ?? toISODate(now);

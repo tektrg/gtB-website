@@ -253,6 +253,14 @@ Publisher enforcement: `AUTONOMUS/tools/publish-daily-post.mjs` refuses to publi
 
 ### 6.4 Quality Gates
 
+✅ Enforced by automation:
+
+A) **Research gate (before publishing)**
+- ✅ Research artifacts live in: `AUTONOMUS/research/blog/<topicId>.md`
+- ✅ Blog publisher refuses to publish without complete research (sources + keywords + backlinks + outline)
+
+B) **SEO hygiene gate (after generation)**
+
 ✅ Enforced by `AUTONOMUS/tools/seo-verify.mjs` via `npm run seo:verify`:
 
 - ✅ Title present
