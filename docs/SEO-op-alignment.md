@@ -237,6 +237,20 @@ Publish **1 blog post per day** targeting long-tail + high-intent keywords.
 | Publisher | `AUTONOMUS/tools/publish-daily-post.mjs` | Generates markdown blog post |
 | Verifier | `AUTONOMUS/tools/seo-verify.mjs` | Checks: title, pubDate, description, tags, word count, H2 count, placeholder text |
 
+### 6.3.1 Research artifacts (required)
+
+Before a topic can be published by AUTONOMUS, it must have a research artifact:
+
+- `AUTONOMUS/research/blog/<topicId>.md`
+
+Minimum contents:
+- 3–8 user discussion links (Reddit/X)
+- pain points summary
+- 10 keywords
+- backlink plan (must include Money Pages)
+
+Publisher enforcement: `AUTONOMUS/tools/publish-daily-post.mjs` refuses to publish if research is missing/incomplete.
+
 ### 6.4 Quality Gates
 
 ✅ Enforced by `AUTONOMUS/tools/seo-verify.mjs` via `npm run seo:verify`:

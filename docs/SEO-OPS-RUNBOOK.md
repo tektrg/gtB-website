@@ -51,6 +51,25 @@ Rules:
 Cadence:
 - Minimum: add **5–10 new topics/week** after reviewing Search Console.
 
+### 2.1 Research requirement (must exist before publish)
+
+Before a topic is allowed to publish, it must have a research artifact:
+- `AUTONOMUS/research/blog/<topicId>.md`
+
+Create the research file template:
+
+```bash
+node AUTONOMUS/tools/init-topic-research.mjs --topic <topicId>
+```
+
+Then fill it with:
+- 3–8 user discussion links (Reddit/X)
+- pain points
+- **10 keywords**
+- backlink plan (internal money pages + related pages)
+
+If the research file is missing or incomplete, the publisher will refuse to publish.
+
 Before publishing, confirm the topic is aligned:
 - Audience: GPT Breeze users (not “SEO for bloggers/builders”)
 - Pillar: YouTube summary / web summary / shortcuts / BYOM privacy+security / pricing+comparisons / provider setup

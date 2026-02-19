@@ -12,6 +12,7 @@ const stateDir = path.join(root, "AUTONOMUS", "state");
 const ledgerPath = path.join(stateDir, "published.jsonl");
 const blogDir = path.join(root, "src", "content", "blog");
 const planPath = path.join(root, "AUTONOMUS", "plan.md");
+const researchDir = path.join(root, "AUTONOMUS", "research", "blog");
 
 function parseArgs(argv) {
   const args = { dryRun: false, date: null, topicId: null };
@@ -138,10 +139,52 @@ function mdEscapeInline(text) {
   return String(text).replace(/\n/g, " ").trim();
 }
 
-function renderPost({ topic, pubDate }) {
+function loadResearchOrThrow(topicId) {
+  const p = path.join(researchDir, `${topicId}.md`);
+  if (!fs.existsSync(p)) {
+    throw new Error(
+      `Missing research for topic '${topicId}'. Create it first: node AUTONOMUS/tools/init-topic-research.mjs --topic ${topicId} (then fill it with sources/keywords/backlinks).`,
+    );
+  }
+  const txt = fs.readFileSync(p, 'utf8');
+  // Minimal checks: at least one URL + a 10-item keyword list marker.
+  const urls = txt.match(/https?:\/\/\S+/g) || [];
+  const hasKeywordsSection = /##\s+Keywords\s*\(10\)/i.test(txt) || /##\s+Keywords\b/i.test(txt);
+  if (urls.length === 0 || !hasKeywordsSection) {
+    throw new Error(
+      `Research file exists but looks incomplete: ${path.relative(root, p)}. Need at least 1 source URL and a '## Keywords (10)' section.`,
+    );
+  }
+  return { path: p, text: txt, urls };
+}
+
+function extractSectionBullets(md, headingRegex) {
+  const lines = md.split(/\r?\n/);
+  let start = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (headingRegex.test(lines[i])) {
+      start = i + 1;
+      break;
+    }
+  }
+  if (start === -1) return [];
+  const out = [];
+  for (let i = start; i < lines.length; i++) {
+    const l = lines[i];
+    if (/^#{1,6}\s+/.test(l)) break;
+    const m = l.match(/^\s*[-*]\s+(.*)$/);
+    if (m) out.push(m[1].trim());
+  }
+  return out.filter(Boolean);
+}
+
+function renderPost({ topic, pubDate, research }) {
   const title = topic.title;
   const description = topic.description;
   const tags = topic.tags || [];
+
+  const painPoints = extractSectionBullets(research?.text ?? '', /###\s+Pain points/i);
+  const sourceLinks = extractSectionBullets(research?.text ?? '', /###\s+Source links/i).slice(0, 8);
 
   const topicText = `${title} ${description} ${tags.join(" ")}`.toLowerCase();
   const isYouTube =
@@ -185,6 +228,14 @@ function renderPost({ topic, pubDate }) {
     lines.push("");
   } else {
     lines.push(mdEscapeInline(description));
+    lines.push("");
+  }
+
+  // Research-driven section: ground the article in real user pain.
+  if (painPoints.length > 0) {
+    lines.push("## What people actually struggle with");
+    lines.push("");
+    for (const p of painPoints.slice(0, 8)) lines.push(`- ${p}`);
     lines.push("");
   }
 
@@ -615,6 +666,14 @@ function renderPost({ topic, pubDate }) {
   lines.push("- [Pricing](/pricing)");
   lines.push("");
 
+  // Sources (research citations)
+  if (sourceLinks.length > 0) {
+    lines.push("## Sources");
+    lines.push("");
+    for (const u of sourceLinks) lines.push(`- ${u}`);
+    lines.push("");
+  }
+
   return lines.join("\n");
 }
 
@@ -634,6 +693,9 @@ if (topics.length === 0) throw new Error("Topic bank is empty");
 
 const topic = pickTopicStrict(topics, args.topicId);
 
+// Enforce research-driven publishing: no research => no publish.
+const research = loadResearchOrThrow(topic.id);
+
 const now = new Date();
 const pubDate = args.date ?? toISODate(now);
 
@@ -646,7 +708,7 @@ if (fs.existsSync(outPath)) {
   );
 }
 
-const markdown = renderPost({ topic, pubDate });
+const markdown = renderPost({ topic, pubDate, research });
 
 if (args.dryRun) {
   console.log(`[dry-run] Would write: ${path.relative(root, outPath)}`);
