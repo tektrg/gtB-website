@@ -2,6 +2,8 @@
 title: "How to set up OpenRouter in GPT Breeze (API key + custom model)"
 description: "Step-by-step: add your OpenRouter API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
 pubDate: 2026-02-19
+updatedDate: 2026-02-19
+topicId: "provider-openrouter"
 tags: ["providers", "openrouter", "byom", "api-keys"]
 draft: false
 ---
@@ -12,9 +14,19 @@ This guide shows how to use **OpenRouter** with **GPT Breeze** by adding a crede
 
 ## What this provider is
 
-OpenRouter is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
+OpenRouter is a router/provider you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
 - Provider docs: https://openrouter.ai/models
 - API base URL (from catalog): `https://openrouter.ai/api/v1`
+
+## When to use OpenRouter
+
+Use OpenRouter if you want:
+
+- One key + one endpoint that can access many different models.
+- A practical way to **test and switch models** without reconfiguring multiple providers.
+- A BYOK workflow where you control the key.
+
+It’s also a good fit if you frequently compare outputs (summaries, writing, research) across models. For cost tradeoffs, see [Pricing](/pricing) and the [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation).
 
 ## Step 1 — Add credentials (provider / API key)
 
@@ -60,7 +72,7 @@ Use these as **examples** (model availability can change):
 
 ## Next steps
 
-- Compare approaches: `/pricing`
-- If you care about data boundaries: `/privacy-first`
-- New here: `/guide/getting-started/`
-- Estimate costs: `/ai-model-cost-calculator-and-price-comparation`
+- Compare approaches: [Pricing](/pricing)
+- If you care about data boundaries: [Privacy-first workflow](/privacy-first)
+- New here: [Getting started](/guide/getting-started/)
+- Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)

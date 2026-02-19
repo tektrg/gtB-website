@@ -2,6 +2,8 @@
 title: "How to set up Anthropic in GPT Breeze (API key + custom model)"
 description: "Step-by-step: add your Anthropic API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
 pubDate: 2026-02-17
+updatedDate: 2026-02-19
+topicId: "provider-anthropic"
 tags: ["providers", "anthropic", "byom", "api-keys"]
 draft: false
 ---
@@ -14,6 +16,16 @@ This guide shows how to use **Anthropic** with **GPT Breeze** by adding a creden
 
 Anthropic is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
 - Provider docs: https://docs.anthropic.com/en/docs/about-claude/models
+
+## When to use Anthropic
+
+Use Anthropic if you want:
+
+- A provider that’s popular for careful writing, summarization, and “assistant” style workflows.
+- A clean built-in setup in GPT Breeze (credential type: `anthropic`).
+- A BYOK workflow where you control the key you use.
+
+If you’re comparing subscription tools vs BYOK across providers, start with [Pricing](/pricing).
 
 ## Step 1 — Add credentials (provider / API key)
 
@@ -59,7 +71,7 @@ Use these as **examples** (model availability can change):
 
 ## Next steps
 
-- Compare approaches: `/pricing`
-- If you care about data boundaries: `/privacy-first`
-- New here: `/guide/getting-started/`
-- Estimate costs: `/ai-model-cost-calculator-and-price-comparation`
+- Compare approaches: [Pricing](/pricing)
+- If you care about data boundaries: [Privacy-first workflow](/privacy-first)
+- New here: [Getting started](/guide/getting-started/)
+- Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)

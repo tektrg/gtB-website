@@ -2,6 +2,8 @@
 title: "How to set up Google in GPT Breeze (API key + custom model)"
 description: "Step-by-step: add your Google API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
 pubDate: 2026-02-18
+updatedDate: 2026-02-19
+topicId: "provider-google"
 tags: ["providers", "google", "byom", "api-keys"]
 draft: false
 ---
@@ -12,8 +14,18 @@ This guide shows how to use **Google** with **GPT Breeze** by adding a credentia
 
 ## What this provider is
 
-Google is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
+Google (Gemini) is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
 - Provider docs: https://ai.google.dev/gemini-api/docs/pricing
+
+## When to use Google (Gemini)
+
+Use Google (Gemini) if you want:
+
+- A Gemini-based model option in your BYOK setup.
+- A built-in provider type in GPT Breeze (credential type: `google`).
+- A good fit for general summarization + writing workflows.
+
+If you’re unsure which provider/model to pick, start with [Getting started](/guide/getting-started/) and compare cost tradeoffs on [Pricing](/pricing).
 
 ## Step 1 — Add credentials (provider / API key)
 
@@ -60,7 +72,7 @@ Use these as **examples** (model availability can change):
 
 ## Next steps
 
-- Compare approaches: `/pricing`
-- If you care about data boundaries: `/privacy-first`
-- New here: `/guide/getting-started/`
-- Estimate costs: `/ai-model-cost-calculator-and-price-comparation`
+- Compare approaches: [Pricing](/pricing)
+- If you care about data boundaries: [Privacy-first workflow](/privacy-first)
+- New here: [Getting started](/guide/getting-started/)
+- Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
