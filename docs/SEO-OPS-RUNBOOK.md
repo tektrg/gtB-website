@@ -38,6 +38,19 @@ A complete SEO ops run ships **one improvement** and reports it clearly.
 
 ## 2) Daily run (content publish)
 
+### 2.0 Maintain the topic bank (this is part of the job)
+
+`AUTONOMUS/content/topic-bank.json` is the **publish allowlist**. If it’s stale, AUTONOMUS will publish stale ideas.
+
+Rules:
+- Every topic must map to a cluster in `docs/SEO-op-alignment.md` (YouTube summarizer / web summary / shortcuts / BYOK+privacy / comparisons / provider setup / use-cases).
+- Prefer **user-intent** titles (how-to, alternative, comparison, checklist).
+- Add lightweight metadata to each topic (used for review): `pillar`, `intent`, `tags`, `sections`.
+- Remove anything that’s “SEO meta for builders” unless Trung explicitly asks.
+
+Cadence:
+- Minimum: add **5–10 new topics/week** after reviewing Search Console.
+
 Before publishing, confirm the topic is aligned:
 - Audience: GPT Breeze users (not “SEO for bloggers/builders”)
 - Pillar: YouTube summary / web summary / shortcuts / BYOM privacy+security / pricing+comparisons / provider setup

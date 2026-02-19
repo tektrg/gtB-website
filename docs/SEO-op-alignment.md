@@ -208,6 +208,15 @@ graph TD
 
 ## 6. Workstream 1 — Daily Blog Content Engine
 
+### 6.0 Topic bank maintenance (required)
+
+**Source:** `AUTONOMUS/content/topic-bank.json`
+
+Requirements:
+- Must stay aligned with **Keyword Cluster Map** (Section 4.2) and **Money Pages** (Section 4.3).
+- Topic titles should target user search intent (how-to / alternative / comparison / checklist), not generic SEO advice.
+- Topics should include review metadata (`pillar`, `intent`) so we can audit alignment quickly.
+
 ### 6.1 Objective
 
 Publish **1 blog post per day** targeting long-tail + high-intent keywords.
