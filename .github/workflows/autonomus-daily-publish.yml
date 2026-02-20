@@ -2,8 +2,11 @@ name: AUTONOMUS Daily Publish
 
 on:
   schedule:
-    # 01:00 Asia/Saigon (UTC+7)
+    # Twice daily:
+    # - 01:00 Asia/Saigon (UTC+7) = 18:00 UTC (prev day)
+    # - 13:00 Asia/Saigon (UTC+7) = 06:00 UTC
     - cron: "0 18 * * *"
+    - cron: "0 6 * * *"
   workflow_dispatch:
 
 permissions:
