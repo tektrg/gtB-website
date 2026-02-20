@@ -2,7 +2,7 @@
 title: "How to set up Anthropic in GPT Breeze (API key + custom model)"
 description: "Step-by-step: add your Anthropic API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
 pubDate: 2026-02-17
-updatedDate: 2026-02-19
+updatedDate: 2026-02-20
 topicId: "provider-anthropic"
 tags: ["providers", "anthropic", "byom", "api-keys"]
 draft: false
@@ -10,64 +10,94 @@ draft: false
 
 # How to set up Anthropic in GPT Breeze (API key + custom model)
 
-This guide shows how to use **Anthropic** with **GPT Breeze** by adding a credential (API key + base URL) and then creating a custom model.
+This guide shows how to connect **Anthropic (Claude)** to **GPT Breeze** using a **BYOK/BYOM** workflow: add your API key as a credential, then create a custom model for summaries and writing.
+
+## TL;DR (2-minute setup)
+
+1) Create an Anthropic API key.
+
+2) In **GPT Breeze → Settings → Credentials (Providers)**, add:
+- **Provider type:** `anthropic` (built-in)
+- **Base URL:** leave default
+- **API key:** paste your Anthropic key
+
+3) In **Custom Models → Add model**, add:
+- **Model ID:** pick one from the examples below
+- **Display name:** what you want to see in the picker
+- **Credential:** select the Anthropic credential you created
+
+Provider/model selector demo: https://youtu.be/QS7TU0xuvDk
 
 ## What this provider is
 
-Anthropic is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
+Anthropic makes the Claude family of models. GPT Breeze supports it as a built-in provider type.
+
 - Provider docs: https://docs.anthropic.com/en/docs/about-claude/models
 
 ## When to use Anthropic
 
 Use Anthropic if you want:
 
-- A provider that’s popular for careful writing, summarization, and “assistant” style workflows.
-- A clean built-in setup in GPT Breeze (credential type: `anthropic`).
-- A BYOK workflow where you control the key you use.
+- A provider that’s popular for careful writing and high-quality summarization.
+- A clean, built-in setup in GPT Breeze.
+- A BYOK workflow where you control the key and can switch providers later.
 
-If you’re comparing subscription tools vs BYOK across providers, start with [Pricing](/pricing).
+If you’re comparing subscription tools vs BYOK, start at [Pricing](/pricing).
+
+## Step 0 — Create an API key
+
+Create a key in the Anthropic dashboard. Treat it like a password.
+
+If you handle sensitive text, follow [Privacy-first workflow](/privacy-first).
 
 ## Step 1 — Add credentials (provider / API key)
 
 Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential.
 
-- Provider type: **anthropic** (built-in)
-- Base URL: leave default unless you know you need a custom endpoint
-- API key: paste your **Anthropic** API key
+Fill these fields:
 
-**Notes:** this provider typically expects environment variables like:
-- `ANTHROPIC_API_KEY`
+- **Name:** “Anthropic” (or “Anthropic – work”)
+- **Provider type:** **anthropic** (built-in)
+- **Base URL:** leave default unless you know you need a custom endpoint
+- **API key:** paste your Anthropic key
 
 ## Step 2 — Add a custom model
 
-Then go to **Custom Models → Add model** and fill:
+Go to **Custom Models → Add model** and fill:
 
-- **Model ID**: the exact model identifier the API expects
-- **Display name**: a human-friendly name (this is what you’ll pick in the model selector)
-- **Credential**: select the credential you created in Step 1
+- **Model ID**: exact model identifier
+- **Display name**: human-friendly label
+- **Credential**: select your Anthropic credential
 
-If you’re on the free plan, you can create **up to 2 custom models**.
+Free plan note: you can create **up to 2 custom models**.
 
 ## Example model IDs (from the model catalog)
 
-Use these as **examples** (model availability can change):
+Use these as **examples** (availability can change):
 
-- `claude-opus-4-5-20251101`
 - `claude-3-5-haiku-latest`
-- `claude-opus-4-1`
 - `claude-3-5-sonnet-20241022`
-- `claude-3-sonnet-20240229`
-- `claude-opus-4-6`
-- `claude-sonnet-4-0`
-- `claude-opus-4-20250514`
-- `claude-sonnet-4-5-20250929`
-- `claude-opus-4-0`
+- `claude-opus-4-1`
+
+## Recommended starter model
+
+If you want a good default for daily writing + summaries:
+
+- `claude-3-5-haiku-latest`
 
 ## Troubleshooting
 
-- **401/403**: API key is missing/invalid, or your account has no access. Re-check the key and plan.
-- **404**: model ID is wrong, or base URL is wrong. Copy model ID exactly from the provider dashboard.
-- **429**: rate limit. Try a smaller model, wait, or upgrade the provider plan.
+- **401/403**: key invalid/missing, or account access issue.
+- **404**: model ID is wrong. Copy it exactly.
+- **429**: rate limit. Retry later or switch model.
+
+## FAQ
+
+**Do I need a base URL?**
+Usually no—Anthropic is built-in, so default settings are fine.
+
+**Can I use multiple providers at once?**
+Yes. Many users keep multiple credentials so they can switch models/providers for different workflows.
 
 ## Next steps
 
@@ -75,3 +105,4 @@ Use these as **examples** (model availability can change):
 - If you care about data boundaries: [Privacy-first workflow](/privacy-first)
 - New here: [Getting started](/guide/getting-started/)
 - Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
+- Browse all providers: [/guide/providers/](/guide/providers/)

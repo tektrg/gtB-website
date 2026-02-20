@@ -2,7 +2,7 @@
 title: "How to set up OpenRouter in GPT Breeze (API key + custom model)"
 description: "Step-by-step: add your OpenRouter API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
 pubDate: 2026-02-19
-updatedDate: 2026-02-19
+updatedDate: 2026-02-20
 topicId: "provider-openrouter"
 tags: ["providers", "openrouter", "byom", "api-keys"]
 draft: false
@@ -10,11 +10,28 @@ draft: false
 
 # How to set up OpenRouter in GPT Breeze (API key + custom model)
 
-This guide shows how to use **OpenRouter** with **GPT Breeze** by adding a credential (API key + base URL) and then creating a custom model.
+This guide shows how to connect **OpenRouter** to **GPT Breeze**. OpenRouter is useful because it gives you **one endpoint** that can route to many different models.
+
+## TL;DR (2-minute setup)
+
+1) Create an OpenRouter API key.
+
+2) In **GPT Breeze → Settings → Credentials (Providers)**, add:
+- **Provider type:** `openrouter` (built-in)
+- **Base URL:** `https://openrouter.ai/api/v1`
+- **API key:** paste your OpenRouter key
+
+3) In **Custom Models → Add model**, add:
+- **Model ID:** pick one from examples below
+- **Display name:** label you’ll recognize
+- **Credential:** select your OpenRouter credential
+
+Provider/model selector demo: https://youtu.be/QS7TU0xuvDk
 
 ## What this provider is
 
-OpenRouter is a router/provider you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
+OpenRouter is a router/provider you can connect to GPT Breeze as part of a BYOK workflow.
+
 - Provider docs: https://openrouter.ai/models
 - API base URL (from catalog): `https://openrouter.ai/api/v1`
 
@@ -22,57 +39,59 @@ OpenRouter is a router/provider you can connect to GPT Breeze as part of a **BYO
 
 Use OpenRouter if you want:
 
-- One key + one endpoint that can access many different models.
-- A practical way to **test and switch models** without reconfiguring multiple providers.
-- A BYOK workflow where you control the key.
+- One key + one endpoint to access many models.
+- A practical way to test models without setting up 5 different providers.
+- An easy “switch models often” workflow.
 
-It’s also a good fit if you frequently compare outputs (summaries, writing, research) across models. For cost tradeoffs, see [Pricing](/pricing) and the [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation).
+If you care about cost tradeoffs across models/providers, see [Pricing](/pricing) and the [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation).
 
-## Step 1 — Add credentials (provider / API key)
+## Step 0 — Create an API key
 
-Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential.
+Create a key in your OpenRouter dashboard. Keep it private.
 
-- Provider type: **openrouter** (built-in)
-- Base URL: leave default unless you know you need a custom endpoint
-- API key: paste your **OpenRouter** API key
+## Step 1 — Add credentials
 
-**Notes:** this provider typically expects environment variables like:
-- `OPENROUTER_API_KEY`
+Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential:
+
+- **Name:** “OpenRouter”
+- **Provider type:** **openrouter**
+- **Base URL:** `https://openrouter.ai/api/v1`
+- **API key:** paste your key
 
 ## Step 2 — Add a custom model
 
-Then go to **Custom Models → Add model** and fill:
+Go to **Custom Models → Add model**:
 
-- **Model ID**: the exact model identifier the API expects
-- **Display name**: a human-friendly name (this is what you’ll pick in the model selector)
-- **Credential**: select the credential you created in Step 1
+- **Model ID**: exact model identifier
+- **Display name**: label you want to see
+- **Credential**: select your OpenRouter credential
 
-If you’re on the free plan, you can create **up to 2 custom models**.
+Free plan note: you can create **up to 2 custom models**.
 
 ## Example model IDs (from the model catalog)
 
-Use these as **examples** (model availability can change):
+Use these as **examples** (availability can change):
 
-- `featherless/qwerky-72b`
 - `allenai/molmo-2-8b:free`
 - `nvidia/nemotron-nano-9b-v2:free`
-- `nvidia/nemotron-nano-12b-v2-vl:free`
-- `nvidia/nemotron-3-nano-30b-a3b:free`
-- `nvidia/nemotron-nano-9b-v2`
-- `arcee-ai/trinity-large-preview:free`
-- `arcee-ai/trinity-mini:free`
-- `xiaomi/mimo-v2-flash`
 - `microsoft/mai-ds-r1:free`
+- `featherless/qwerky-72b`
+
+## Recommended starter model
+
+If you want a cheap/default test model to validate your setup:
+
+- `nvidia/nemotron-nano-9b-v2:free`
 
 ## Troubleshooting
 
-- **401/403**: API key is missing/invalid, or your account has no access. Re-check the key and plan.
-- **404**: model ID is wrong, or base URL is wrong. Copy model ID exactly from the provider dashboard.
-- **429**: rate limit. Try a smaller model, wait, or upgrade the provider plan.
+- **401/403**: key invalid/missing, or account access issue.
+- **404**: model ID wrong (copy exactly) or base URL wrong.
+- **429**: rate limit. Retry later or pick a smaller model.
 
 ## Next steps
 
 - Compare approaches: [Pricing](/pricing)
-- If you care about data boundaries: [Privacy-first workflow](/privacy-first)
 - New here: [Getting started](/guide/getting-started/)
 - Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
+- Browse all providers: [/guide/providers/](/guide/providers/)
