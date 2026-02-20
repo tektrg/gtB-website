@@ -1,7 +1,7 @@
 ---
 title: "How to set up Together AI in GPT Breeze (API key + custom model)"
 description: "Step-by-step: add your Together AI API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
-pubDate: 2026-02-20
+pubDate: 2026-02-20T00:00:00+07:00
 topicId: "provider-togetherai"
 tags: ["providers", "togetherai", "byom", "api-keys"]
 draft: false
@@ -14,7 +14,13 @@ This guide shows how to use **Together AI** with **GPT Breeze** by adding a cred
 ## What this provider is
 
 Together AI is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
-- Provider docs: https://docs.together.ai/docs/serverless-models
+- Provider docs: [https://docs.together.ai/docs/serverless-models](https://docs.together.ai/docs/serverless-models)
+
+## When to use it
+
+- You want a big catalog of open models under one provider (good for experimentation).
+- You want cheaper/faster models for everyday summaries, drafting, and rewriting.
+- If you need a single “default” provider that’s maximally compatible across everything, start with OpenAI/Anthropic/Google or use OpenRouter.
 
 ## Step 1 — Add credentials (provider / API key)
 

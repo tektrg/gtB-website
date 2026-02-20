@@ -95,6 +95,54 @@ function escapeQuotes(s) {
   return String(s ?? '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
 
+function normalizePubDate(dateStr) {
+  // Our content collections use z.date(), so any ISO-8601 string is fine.
+  // Prefer full ISO with timezone to avoid UTC ambiguity.
+  if (!dateStr) return toISODate(new Date()) + 'T00:00:00+07:00';
+  if (String(dateStr).includes('T')) return dateStr;
+  return `${dateStr}T00:00:00+07:00`;
+}
+
+function whenToUse(providerKey, name) {
+  const map = {
+    openai: [
+      'You want the widest compatibility (tools, vision) and strong overall quality.',
+      'You want a “default” provider that works well across most shortcuts and workflows.',
+    ],
+    anthropic: [
+      'You care about writing quality and strong reasoning for longer prompts.',
+      'You want high quality outputs for drafting, rewriting, and analysis workflows.',
+    ],
+    google: [
+      'You want very large context windows and strong multimodal support.',
+      'You use Gemini models and want to keep everything under a single provider key.',
+    ],
+    openrouter: [
+      'You want access to many models behind one API key.',
+      'You like experimenting with different models without changing providers each time.',
+    ],
+    groq: [
+      'You prioritize speed/low latency for “instant” summaries and quick edits.',
+      'You want a cost-effective way to run popular open models fast.',
+    ],
+    mistral: [
+      'You want solid quality for general tasks with a straightforward API setup.',
+      'You prefer Mistral-hosted models for EU/region or vendor preference reasons.',
+    ],
+    togetherai: [
+      'You want a big catalog of open models under one provider (good for experimentation).',
+      'You want to run cheaper/faster models for everyday summaries and writing tasks.',
+    ],
+  };
+
+  return (
+    map[providerKey] ?? [
+      `You already use ${name} and want to keep your GPT Breeze setup consistent.`,
+      'You want more control over cost and model choice via BYOM/BYOK.',
+    ]
+  );
+}
+
 function renderGuide({ providerKey, provider, pubDate }) {
   const name = provider?.name || providerKey;
   const doc = provider?.doc;
@@ -108,11 +156,13 @@ function renderGuide({ providerKey, provider, pubDate }) {
   const title = `How to set up ${name} in GPT Breeze (API key + custom model)`;
   const description = `Step-by-step: add your ${name} API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows.`;
 
+  const normalizedPubDate = normalizePubDate(pubDate);
+
   const lines = [];
   lines.push('---');
   lines.push(`title: "${escapeQuotes(title)}"`);
   lines.push(`description: "${escapeQuotes(description)}"`);
-  lines.push(`pubDate: ${pubDate}`);
+  lines.push(`pubDate: ${normalizedPubDate}`);
   lines.push(`topicId: "provider-${escapeQuotes(providerKey)}"`);
   lines.push(`tags: ["providers", "${escapeQuotes(providerKey)}", "byom", "api-keys"]`);
   lines.push('draft: false');
@@ -126,8 +176,14 @@ function renderGuide({ providerKey, provider, pubDate }) {
   lines.push('## What this provider is');
   lines.push('');
   lines.push(`${name} is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).`);
-  if (doc) lines.push(`- Provider docs: ${doc}`);
+  if (doc) lines.push(`- Provider docs: [${doc}](${doc})`);
   if (api) lines.push('- API base URL (from catalog): ' + '`' + api + '`');
+  lines.push('');
+
+  lines.push('## When to use it');
+  lines.push('');
+  const bullets = whenToUse(providerKey, name);
+  for (const b of bullets) lines.push(`- ${b}`);
   lines.push('');
 
   lines.push('## Step 1 — Add credentials (provider / API key)');
@@ -140,7 +196,11 @@ function renderGuide({ providerKey, provider, pubDate }) {
     lines.push(`- API key: paste your **${name}** API key`);
   } else {
     lines.push('- Provider type: **Custom (OpenAI-compatible)**');
-    lines.push('- Base URL: use the OpenAI-compatible endpoint provided by the vendor (see docs link above)');
+    if (api) {
+      lines.push(`- Base URL: \`${api}\` (from our catalog; verify in the vendor docs if it changes)`);
+    } else {
+      lines.push('- Base URL: use the OpenAI-compatible endpoint provided by the vendor (see docs link above)');
+    }
     lines.push(`- API key: paste your **${name}** API key`);
   }
   lines.push('');
