@@ -271,6 +271,10 @@ const { videoId } = Astro.props;
     line-height: 1.6;
   }
 
+  .summary-content :global(li > p) {
+    margin: 0;
+  }
+
   .summary-content :global(a) {
     color: theme('colors.brand-accent');
     text-decoration: underline;
