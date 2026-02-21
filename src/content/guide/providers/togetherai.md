@@ -1,7 +1,8 @@
 ---
 title: "How to set up Together AI in GPT Breeze (API key + custom model)"
-description: "Step-by-step: add your Together AI API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
-pubDate: 2026-02-20T00:00:00+07:00
+description: "Step-by-step: add your Together AI API credentials in GPT Breeze, create a custom model, and troubleshoot common BYOK errors."
+pubDate: 2026-02-20T00:00:00.000Z
+updatedDate: 2026-02-21
 topicId: "provider-togetherai"
 tags: ["providers", "togetherai", "byom", "api-keys"]
 draft: false
@@ -9,60 +10,85 @@ draft: false
 
 # How to set up Together AI in GPT Breeze (API key + custom model)
 
-This guide shows how to use **Together AI** with **GPT Breeze** by adding a credential (API key + base URL) and then creating a custom model.
+This guide shows how to connect **Together AI** to **GPT Breeze** using a **BYOK/BYOM** workflow: add your API key as a credential, then create a custom model.
+
+## TL;DR (2-minute setup)
+
+1) Create a **Together AI API key**.
+
+2) In **GPT Breeze → Settings → Credentials (Providers)**, add:
+- **Provider type:** Custom (OpenAI-compatible)
+- **Base URL:** `https://api.together.xyz/v1`
+- **API key:** paste your Together key
+
+3) In **Custom Models → Add model**, add:
+- **Model ID:** pick one from the examples below
+- **Display name:** label you’ll recognize
+- **Credential:** select the Together credential you created
+
+Provider/model selector demo: https://youtu.be/QS7TU0xuvDk
 
 ## What this provider is
 
-Together AI is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
-- Provider docs: [https://docs.together.ai/docs/serverless-models](https://docs.together.ai/docs/serverless-models)
+Together AI is a provider with a large catalog of open models.
 
-## When to use it
+- Provider docs: https://docs.together.ai/docs/serverless-models
 
-- You want a big catalog of open models under one provider (good for experimentation).
-- You want cheaper/faster models for everyday summaries, drafting, and rewriting.
-- If you need a single “default” provider that’s maximally compatible across everything, start with OpenAI/Anthropic/Google or use OpenRouter.
+## When to use Together AI
 
-## Step 1 — Add credentials (provider / API key)
+Use Together AI if you want:
 
-Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential.
+- A broad catalog to experiment quickly (many open models).
+- A practical “cheap/fast” provider for everyday summaries and rewriting.
 
-- Provider type: **Custom (OpenAI-compatible)**
-- Base URL: use the OpenAI-compatible endpoint provided by the vendor (see docs link above)
-- API key: paste your **Together AI** API key
+If your main goal is “one endpoint for many models,” OpenRouter is often the simplest: [/guide/providers/openrouter/](/guide/providers/openrouter/).
 
-**Notes:** this provider typically expects environment variables like:
-- `TOGETHER_API_KEY`
+## Step 0 — Create an API key
+
+Create a key in the Together dashboard. Treat it like a password.
+
+If you work with sensitive content, follow [Privacy-first workflow](/privacy-first).
+
+## Step 1 — Add credentials (Custom / OpenAI-compatible)
+
+Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential:
+
+- **Name:** “Together AI”
+- **Provider type:** **Custom (OpenAI-compatible)**
+- **Base URL:** `https://api.together.xyz/v1`
+- **API key:** paste your Together key
 
 ## Step 2 — Add a custom model
 
-Then go to **Custom Models → Add model** and fill:
+Go to **Custom Models → Add model** and fill:
 
-- **Model ID**: the exact model identifier the API expects
-- **Display name**: a human-friendly name (this is what you’ll pick in the model selector)
-- **Credential**: select the credential you created in Step 1
+- **Model ID**: exact model identifier
+- **Display name**: human-friendly label
+- **Credential**: select your Together credential
 
-If you’re on the free plan, you can create **up to 2 custom models**.
+Free plan note: you can create **up to 2 custom models**.
 
-## Example model IDs (from the model catalog)
+## Example model IDs
 
-Use these as **examples** (model availability can change):
+Use these as examples (availability changes):
 
-- `zai-org/GLM-4.6`
-- `zai-org/GLM-4.7`
-- `zai-org/GLM-5`
-- `essentialai/Rnj-1-Instruct`
-- `MiniMaxAI/MiniMax-M2.5`
-- `deepseek-ai/DeepSeek-V3-1`
-- `deepseek-ai/DeepSeek-R1`
 - `deepseek-ai/DeepSeek-V3`
+- `deepseek-ai/DeepSeek-R1`
 - `moonshotai/Kimi-K2-Instruct`
-- `moonshotai/Kimi-K2-Instruct-0905`
+- `Qwen/Qwen2.5-72B-Instruct-Turbo`
+- `meta-llama/Llama-3.1-8B-Instruct-Turbo`
+
+## Recommended starter model
+
+If you want a dependable default for summaries and drafting:
+
+- `meta-llama/Llama-3.1-8B-Instruct-Turbo`
 
 ## Troubleshooting
 
-- **401/403**: API key is missing/invalid, or your account has no access. Re-check the key and plan.
-- **404**: model ID is wrong, or base URL is wrong. Copy model ID exactly from the provider dashboard.
-- **429**: rate limit. Try a smaller model, wait, or upgrade the provider plan.
+- **401/403**: key invalid/missing or account access issue.
+- **404**: model ID wrong (copy exactly) or base URL wrong.
+- **429**: rate limit — retry later or pick a smaller model.
 
 ## Next steps
 
@@ -70,3 +96,4 @@ Use these as **examples** (model availability can change):
 - If you care about data boundaries: [Privacy-first workflow](/privacy-first)
 - New here: [Getting started](/guide/getting-started/)
 - Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
+- Browse all providers: [/guide/providers/](/guide/providers/)

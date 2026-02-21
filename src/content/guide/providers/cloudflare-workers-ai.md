@@ -1,73 +1,89 @@
 ---
-title: "How to set up Cloudflare Workers AI in GPT Breeze (API key + custom model)"
-description: "Step-by-step: add your Cloudflare Workers AI API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
-pubDate: 2026-02-21T00:00:00+07:00
+title: "How to set up Cloudflare Workers AI in GPT Breeze (API key + base URL)"
+description: "Step-by-step: connect Cloudflare Workers AI to GPT Breeze using a Custom (OpenAI-compatible) credential, then add a model ID from the @cf catalog."
+pubDate: 2026-02-21T00:00:00.000Z
+updatedDate: 2026-02-21
 topicId: "provider-cloudflare-workers-ai"
 tags: ["providers", "cloudflare-workers-ai", "byom", "api-keys"]
 draft: false
 ---
 
-# How to set up Cloudflare Workers AI in GPT Breeze (API key + custom model)
+# How to set up Cloudflare Workers AI in GPT Breeze (API key + base URL)
 
-This guide shows how to use **Cloudflare Workers AI** with **GPT Breeze** by adding a credential (API key + base URL) and then creating a custom model.
+This guide shows how to connect **Cloudflare Workers AI** to **GPT Breeze** using a **BYOK/BYOM** workflow: add your Cloudflare credential (account + key), then add a model ID from the `@cf/...` catalog.
+
+## TL;DR (2-minute setup)
+
+1) Get your **Cloudflare Account ID** and an API key/token that can call Workers AI.
+
+2) In **GPT Breeze → Settings → Credentials (Providers)**, add:
+- **Provider type:** Custom (OpenAI-compatible)
+- **Base URL:** `https://api.cloudflare.com/client/v4/accounts/YOUR_ACCOUNT_ID/ai/v1`
+- **API key:** your Cloudflare API key/token
+
+3) In **Custom Models → Add model**, add:
+- **Model ID:** an `@cf/...` model (examples below)
+- **Display name:** label you’ll recognize
+- **Credential:** select the Cloudflare credential
+
+Provider/model selector demo: https://youtu.be/QS7TU0xuvDk
 
 ## What this provider is
 
-Cloudflare Workers AI is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).
-- Provider docs: [https://developers.cloudflare.com/workers-ai/models/](https://developers.cloudflare.com/workers-ai/models/)
-- API base URL (from catalog): `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/v1`
+Cloudflare Workers AI lets you run models on Cloudflare’s edge infrastructure.
 
-## When to use it
+- Provider docs: https://developers.cloudflare.com/workers-ai/models/
+- Base URL pattern: `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/v1`
 
-- You already use Cloudflare Workers AI and want to keep your GPT Breeze setup consistent.
-- You want more control over cost and model choice via BYOM/BYOK.
+## When to use Cloudflare Workers AI
 
-## Step 1 — Add credentials (provider / API key)
+Use it if:
 
-Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential.
+- You already use Cloudflare and want to keep everything in one platform.
+- You want a catalog of smaller models that are easy to call.
 
-- Provider type: **Custom (OpenAI-compatible)**
-- Base URL: `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai/v1` (from our catalog; verify in the vendor docs if it changes)
-- API key: paste your **Cloudflare Workers AI** API key
+## Step 0 — Get Account ID + API key/token
 
-**Notes:** this provider typically expects environment variables like:
+You’ll need:
+
 - `CLOUDFLARE_ACCOUNT_ID`
-- `CLOUDFLARE_API_KEY`
+- an API key/token
+
+Treat the token like a password.
+
+## Step 1 — Add credentials (Custom / OpenAI-compatible)
+
+Open **GPT Breeze → Settings → Credentials (Providers)** and add:
+
+- **Name:** “Cloudflare Workers AI”
+- **Provider type:** **Custom (OpenAI-compatible)**
+- **Base URL:** `https://api.cloudflare.com/client/v4/accounts/YOUR_ACCOUNT_ID/ai/v1`
+- **API key:** paste your Cloudflare key/token
 
 ## Step 2 — Add a custom model
 
-Then go to **Custom Models → Add model** and fill:
+Go to **Custom Models → Add model**:
 
-- **Model ID**: the exact model identifier the API expects
-- **Display name**: a human-friendly name (this is what you’ll pick in the model selector)
-- **Credential**: select the credential you created in Step 1
+- **Model ID**: exact model identifier (from Cloudflare catalog)
+- **Display name**: human-friendly label
+- **Credential**: select your Cloudflare credential
 
-If you’re on the free plan, you can create **up to 2 custom models**.
+## Example model IDs
 
-## Example model IDs (from the model catalog)
-
-Use these as **examples** (model availability can change):
-
-- `@cf/ibm-granite/granite-4.0-h-micro`
-- `@cf/baai/bge-small-en-v1.5`
-- `@cf/baai/bge-large-en-v1.5`
-- `@cf/baai/bge-reranker-base`
-- `@cf/baai/bge-m3`
-- `@cf/baai/bge-base-en-v1.5`
-- `@cf/pfnet/plamo-embedding-1b`
-- `@cf/deepseek-ai/deepseek-r1-distill-qwen-32b`
 - `@cf/facebook/bart-large-cnn`
 - `@cf/mistral/mistral-7b-instruct-v0.1`
+- `@cf/deepseek-ai/deepseek-r1-distill-qwen-32b`
+- `@cf/baai/bge-large-en-v1.5`
 
 ## Troubleshooting
 
-- **401/403**: API key is missing/invalid, or your account has no access. Re-check the key and plan.
-- **404**: model ID is wrong, or base URL is wrong. Copy model ID exactly from the provider dashboard.
-- **429**: rate limit. Try a smaller model, wait, or upgrade the provider plan.
+- **401/403**: token invalid/missing or wrong permissions.
+- **404**: model ID wrong or base URL wrong (wrong account id).
+- **429**: rate limited.
 
 ## Next steps
 
 - Compare approaches: [Pricing](/pricing)
 - If you care about data boundaries: [Privacy-first workflow](/privacy-first)
 - New here: [Getting started](/guide/getting-started/)
-- Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
+- Browse all providers: [/guide/providers/](/guide/providers/)

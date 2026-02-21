@@ -2,7 +2,7 @@
 title: "How to set up Google in GPT Breeze (API key + custom model)"
 description: "Step-by-step: add your Google API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
 pubDate: 2026-02-18
-updatedDate: 2026-02-20
+updatedDate: 2026-02-21
 topicId: "provider-google"
 tags: ["providers", "google", "byom", "api-keys"]
 draft: false

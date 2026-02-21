@@ -2,7 +2,7 @@
 title: "How to set up OpenRouter in GPT Breeze (API key + custom model)"
 description: "Step-by-step: add your OpenRouter API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
 pubDate: 2026-02-19
-updatedDate: 2026-02-20
+updatedDate: 2026-02-21
 topicId: "provider-openrouter"
 tags: ["providers", "openrouter", "byom", "api-keys"]
 draft: false
