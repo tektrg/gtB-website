@@ -1,6 +1,6 @@
 ---
 title: "How to set up Azure OpenAI in GPT Breeze (endpoint + deployment)"
-description: "Step-by-step: connect Azure OpenAI to GPT Breeze using a Custom (OpenAI-compatible) credential, including the endpoint format and deployment/model mapping."
+description: "Step-by-step: connect Azure OpenAI to GPT Breeze using a Custom (OpenAI-compatible) credential, including endpoint format and deployment/model mapping."
 pubDate: 2026-02-20T00:00:00.000Z
 updatedDate: 2026-02-21
 topicId: "provider-azure"
@@ -10,82 +10,117 @@ draft: false
 
 # How to set up Azure OpenAI in GPT Breeze (endpoint + deployment)
 
-Azure OpenAI is “OpenAI models on Azure,” but the setup has one big difference:
+Azure OpenAI setup trips people up because the “model” you call is usually your **deployment name**, not the vendor model id. This page gives you the fast path (and the failure modes) so you don’t burn an hour on 404s.
 
-- On Azure, you typically call a **deployment** you created in your Azure resource.
+## What people actually struggle with
 
-So the credential looks like “endpoint + key,” and the model you add in GPT Breeze is usually your **deployment name**.
+- “I pasted my key but it still says 401/403.”
+- “I get 404 — I’m sure the model exists.”
+- “I don’t know what base URL to use.”
+- “Azure wants a deployment name — where do I put that?”
 
 ## TL;DR (2-minute setup)
 
-1) Create an **Azure OpenAI** resource + deploy a model.
+1) Create an API key (treat it like a password).
 
-2) In **GPT Breeze → Settings → Credentials (Providers)**, add:
-- **Provider type:** Custom (OpenAI-compatible)
-- **Base URL:** your Azure endpoint **up to** `/openai/deployments`
-  - Example: `https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments`
-- **API key:** your Azure API key
+2) In **GPT Breeze → Settings → Credentials (Providers)**, add a credential.
 
-3) In **Custom Models → Add model**, use:
-- **Model ID:** your **deployment name** (not “gpt-4o-mini” unless that’s literally your deployment name)
-- **Display name:** whatever you want
-- **Credential:** your Azure credential
+   - **Provider type:** Custom (OpenAI-compatible)
+   - **Base URL:** `https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments`
+   - **API key:** your Azure API key
+
+3) In **Custom Models → Add model**, add a model you can actually pick in the UI.
+   - **Model ID:** your Azure **deployment name**
 
 Provider/model selector demo: https://youtu.be/QS7TU0xuvDk
 
 ## What this provider is
 
-Azure OpenAI lets you run OpenAI-family models through Azure infrastructure and Azure billing.
+Azure OpenAI is OpenAI-family models served through Azure infrastructure and Azure billing/governance.
 
 - Provider docs: https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models
+- Common env vars (from our catalog): `AZURE_RESOURCE_NAME`, `AZURE_API_KEY`
 
-## When to use Azure OpenAI
+## When to use it
 
-Use Azure OpenAI if:
+- You need Azure governance/billing and your org standardized on Azure.
+- You already have Azure OpenAI deployments and want to use them in GPT Breeze.
 
-- Your company already standardized on Azure.
-- You need Azure governance/compliance controls.
-- You want to keep billing and infra in Azure.
+## Do it in GPT Breeze (30 seconds)
 
-## Step 0 — Create a deployment
+1) Add the credential (provider + key).
+2) Add a custom model (so it appears in the model picker).
+3) Use it in a shortcut (YouTube toolbar / page toolbar / text selection toolbar).
 
-In Azure Portal:
+## Credentials: what to enter
 
-1) Create an Azure OpenAI resource.
-2) Deploy a model.
-3) Copy:
-   - the **endpoint**
-   - the **API key**
-   - your **deployment name**
+Open **Settings → Credentials (Providers)** and fill:
 
-## Step 1 — Add credentials (Custom / OpenAI-compatible)
-
-Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential:
-
-- **Name:** “Azure OpenAI”
-- **Provider type:** **Custom (OpenAI-compatible)**
+- **Provider type:** Custom (OpenAI-compatible)
 - **Base URL:** `https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments`
-- **API key:** paste your Azure key
+- **API key:** your Azure key
 
-Important note: Azure uses an `api-version` parameter under the hood. If your requests fail with version errors, you may need to use a gateway/proxy that injects the required `api-version`, or use the specific Azure-compatible configuration if/when GPT Breeze adds it.
+## Custom model: what to enter
 
-## Step 2 — Add a custom model (deployment name)
+Open **Custom Models → Add model**:
 
-Go to **Custom Models → Add model**:
+- **Model ID:** your Azure **deployment name**
+- **Why:** Azure routes requests by deployment, not by raw vendor model id.
+- **Display name:** whatever you want to see in the picker
+- **Credential:** select the credential you created
 
-- **Model ID**: your Azure **deployment name**
-- **Display name**: human-friendly label
-- **Credential**: select your Azure credential
+## Example model IDs
 
-## Troubleshooting
+Use these as examples (availability changes):
 
-- **401/403**: wrong key or wrong resource.
-- **404**: deployment name wrong, or base URL missing `/openai/deployments`.
-- **api-version error**: your Azure configuration requires a specific API version.
+- `gpt-4.1-nano`
+- `text-embedding-3-small`
+- `grok-4-fast-non-reasoning`
+- `deepseek-r1-0528`
+- `grok-4-fast-reasoning`
+- `phi-3-medium-128k-instruct`
+- `gpt-4`
+- `claude-opus-4-1`
+- `gpt-5.2-chat`
+- `llama-3.2-11b-vision-instruct`
+
+## Recommended starter model
+
+If you just want to validate your setup quickly, start with: `gpt-4.1-nano`
+
+## Prompt templates (copy/paste)
+
+```text
+Summarize this into:
+- TL;DR (5 bullets)
+- Key takeaways
+- Action items
+- Questions to verify
+Keep it skimmable.
+```
+
+```text
+Rewrite this for clarity.
+Constraints:
+- keep facts the same
+- remove fluff
+- output as a numbered checklist
+```
+
+## Common errors (and the real fix)
+
+- **401/403**: key invalid/missing, or your account/project doesn’t have access. Create a new key and ensure billing/access is enabled.
+- **404**: usually wrong deployment name or base URL missing `/openai/deployments`.
+- **429**: rate limit — retry later, or use a smaller model.
 
 ## Next steps
 
-- Compare approaches: [Pricing](/pricing)
-- New here: [Getting started](/guide/getting-started/)
-- If you care about data boundaries: [Privacy-first workflow](/privacy-first)
 - Browse all providers: [/guide/providers/](/guide/providers/)
+- New here: [Getting started](/guide/getting-started/)
+- Compare approaches: [Pricing](/pricing)
+- If you care about data boundaries: [Privacy-first workflow](/privacy-first)
+- Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
+
+## Sources
+
+- https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models

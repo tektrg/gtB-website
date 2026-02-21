@@ -1,7 +1,7 @@
 ---
 title: "How to set up OpenAI in GPT Breeze (API key + custom model)"
-description: "Step-by-step: add your OpenAI API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
-pubDate: 2026-02-17
+description: "A practical setup guide to connect OpenAI to GPT Breeze: add credentials, create a custom model, and avoid the common BYOK mistakes."
+pubDate: 2026-02-17T00:00:00.000Z
 updatedDate: 2026-02-21
 topicId: "provider-openai"
 tags: ["providers", "openai", "byom", "api-keys"]
@@ -10,102 +10,114 @@ draft: false
 
 # How to set up OpenAI in GPT Breeze (API key + custom model)
 
-This guide shows how to connect **OpenAI** to **GPT Breeze** in a **BYOK/BYOM** workflow (Bring Your Own Key / Model): add your API key as a credential, then create a custom model you can actually use on YouTube and web pages.
+Connecting **OpenAI** to GPT Breeze is simple in theory: paste a key, pick a model, done. In practice, most failures come from one of three things: the wrong base URL, the wrong model id, or a key that doesn’t have access. This guide is the “do this, not that” version.
+
+## What people actually struggle with
+
+- “I pasted my key but it still says 401/403.”
+- “I get 404 — I’m sure the model exists.”
 
 ## TL;DR (2-minute setup)
 
-1) Get an OpenAI API key (keep it private).
+1) Create an API key (treat it like a password).
 
-2) In **GPT Breeze → Settings → Credentials (Providers)**, add:
-- **Provider type:** `openai` (built-in)
-- **Base URL:** leave default
-- **API key:** paste your OpenAI key
+2) In **GPT Breeze → Settings → Credentials (Providers)**, add a credential.
 
-3) In **Custom Models → Add model**, add:
-- **Model ID:** pick one from the examples below
-- **Display name:** whatever you want to see in the model picker
-- **Credential:** select the OpenAI credential you created
+   - **Provider type:** `openai` (built-in)
+   - **Base URL:** leave default
+   - **API key:** your OpenAI key
 
-If you want to see the provider/model selector UX: https://youtu.be/QS7TU0xuvDk
+3) In **Custom Models → Add model**, add a model you can actually pick in the UI.
+   - **Model ID:** a valid model id (examples below)
+
+Provider/model selector demo: https://youtu.be/QS7TU0xuvDk
 
 ## What this provider is
 
-OpenAI is a major AI provider with a large model lineup. GPT Breeze supports it as a **built-in** provider type.
+OpenAI is a provider you can connect to GPT Breeze as part of a BYOK/BYOM workflow.
 
 - Provider docs: https://platform.openai.com/docs/models
+- Common env vars (from our catalog): `OPENAI_API_KEY`
 
-## When to use OpenAI
+## When to use it
 
-Use OpenAI if you want:
+- You want the widest compatibility and a “default” provider that just works.
+- You’re optimizing for strong general performance across summaries + writing.
 
-- A straightforward “default” provider with lots of model choices.
-- Strong general-purpose performance for summarizing + writing.
-- The simplest setup path (built-in credential type in GPT Breeze).
+## Do it in GPT Breeze (30 seconds)
 
-If you’re optimizing for **cost predictability** and like comparing providers, see [Pricing](/pricing) and the [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation).
+1) Add the credential (provider + key).
+2) Add a custom model (so it appears in the model picker).
+3) Use it in a shortcut (YouTube toolbar / page toolbar / text selection toolbar).
 
-## Step 0 — Create an API key (and treat it like a password)
+## Credentials: what to enter
 
-Create an OpenAI API key in your OpenAI dashboard. Don’t paste it into screenshots, docs, or public issues.
+Open **Settings → Credentials (Providers)** and fill:
 
-If you want a stricter workflow for sensitive content, use [Privacy-first workflow](/privacy-first).
+- **Provider type:** openai (built-in)
+- **Base URL:** default
+- **API key:** your OpenAI key
 
-## Step 1 — Add credentials (provider / API key)
+## Custom model: what to enter
 
-Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential.
+Open **Custom Models → Add model**:
 
-Fill these fields:
+- **Model ID:** exact model id the API expects
+- **Display name:** whatever you want to see in the picker
+- **Credential:** select the credential you created
 
-- **Name:** “OpenAI” (or “OpenAI – personal”)
-- **Provider type:** **openai** (built-in)
-- **Base URL:** leave default unless you know you need a custom endpoint
-- **API key:** paste your OpenAI key
+## Example model IDs
 
-## Step 2 — Add a custom model
+Use these as examples (availability changes):
 
-Then go to **Custom Models → Add model** and fill:
-
-- **Model ID**: the exact model identifier the API expects
-- **Display name**: a human-friendly name
-- **Credential**: select the OpenAI credential from Step 1
-
-Note: on the free plan, you can create **up to 2 custom models**.
-
-## Example model IDs (from the model catalog)
-
-Use these as **examples** (availability can change):
-
-- `gpt-4o-mini`
-- `gpt-4o-2024-11-20`
-- `gpt-5-chat-latest`
-- `codex-mini-latest`
+- `gpt-4.1-nano`
+- `text-embedding-3-small`
+- `gpt-5.3-codex-spark`
+- `gpt-4`
+- `o1-pro`
+- `gpt-4o-2024-05-13`
+- `gpt-5.2-codex`
+- `gpt-5.1-codex`
+- `gpt-4o-2024-08-06`
+- `gpt-4.1-mini`
 
 ## Recommended starter model
 
-If you just want something that works for summaries + everyday writing, start with:
+If you just want to validate your setup quickly, start with: `gpt-4o-mini`
 
-- `gpt-4o-mini`
+## Prompt templates (copy/paste)
 
-## Troubleshooting
+```text
+Summarize this into:
+- TL;DR (5 bullets)
+- Key takeaways
+- Action items
+- Questions to verify
+Keep it skimmable.
+```
 
-- **401/403**: your key is missing/invalid, or your account doesn’t have access. Re-check the key and plan.
-- **404**: model ID is wrong. Copy the model ID exactly.
-- **429**: rate limit. Try again later or switch to a smaller/faster model.
+```text
+Rewrite this for clarity.
+Constraints:
+- keep facts the same
+- remove fluff
+- output as a numbered checklist
+```
 
-## FAQ
+## Common errors (and the real fix)
 
-**Do I need a base URL for OpenAI?**
-No—OpenAI is built-in, so the default base URL is fine for most users.
-
-**Can I add multiple OpenAI keys?**
-Yes. Many people separate “work” and “personal” keys so billing and usage are easier to track.
-
-**Is BYOK safe?**
-It can be—if you treat keys like passwords and follow a summarize-first + redaction habit. Start with [Privacy-first workflow](/privacy-first).
+- **401/403**: key invalid/missing, or your account/project doesn’t have access. Create a new key and ensure billing/access is enabled.
+- **404**: model ID is wrong, or base URL is wrong. Copy the model ID exactly.
+- **429**: rate limit — retry later, or use a smaller model.
 
 ## Next steps
 
-- Compare approaches: [Pricing](/pricing)
-- New here: [Getting started](/guide/getting-started/)
-- Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
 - Browse all providers: [/guide/providers/](/guide/providers/)
+- New here: [Getting started](/guide/getting-started/)
+- Compare approaches: [Pricing](/pricing)
+- If you care about data boundaries: [Privacy-first workflow](/privacy-first)
+- Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
+
+## Sources
+
+- https://platform.openai.com/docs/models

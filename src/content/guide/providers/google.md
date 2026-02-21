@@ -1,7 +1,7 @@
 ---
 title: "How to set up Google in GPT Breeze (API key + custom model)"
-description: "Step-by-step: add your Google API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows."
-pubDate: 2026-02-18
+description: "A practical setup guide to connect Google to GPT Breeze: add credentials, create a custom model, and avoid the common BYOK mistakes."
+pubDate: 2026-02-18T00:00:00.000Z
 updatedDate: 2026-02-21
 topicId: "provider-google"
 tags: ["providers", "google", "byom", "api-keys"]
@@ -10,91 +10,114 @@ draft: false
 
 # How to set up Google in GPT Breeze (API key + custom model)
 
-This guide shows how to connect **Google (Gemini)** to **GPT Breeze** with a BYOK workflow: add your API key as a credential, then create a custom model.
+Connecting **Google** to GPT Breeze is simple in theory: paste a key, pick a model, done. In practice, most failures come from one of three things: the wrong base URL, the wrong model id, or a key that doesn’t have access. This guide is the “do this, not that” version.
+
+## What people actually struggle with
+
+- “I pasted my key but it still says 401/403.”
+- “I get 404 — I’m sure the model exists.”
 
 ## TL;DR (2-minute setup)
 
-1) Create a Google Gemini API key.
+1) Create an API key (treat it like a password).
 
-2) In **GPT Breeze → Settings → Credentials (Providers)**, add:
-- **Provider type:** `google` (built-in)
-- **Base URL:** leave default
-- **API key:** paste your Gemini key
+2) In **GPT Breeze → Settings → Credentials (Providers)**, add a credential.
 
-3) In **Custom Models → Add model**, add:
-- **Model ID:** pick one from examples below
-- **Display name:** label you’ll recognize
-- **Credential:** select your Google credential
+   - **Provider type:** `google` (built-in)
+   - **Base URL:** leave default
+   - **API key:** your Google key
+
+3) In **Custom Models → Add model**, add a model you can actually pick in the UI.
+   - **Model ID:** a valid model id (examples below)
 
 Provider/model selector demo: https://youtu.be/QS7TU0xuvDk
 
 ## What this provider is
 
-Google (Gemini) is one of the providers you can connect to GPT Breeze in a **BYOM/BYOK** workflow.
+Google is a provider you can connect to GPT Breeze as part of a BYOK/BYOM workflow.
 
 - Provider docs: https://ai.google.dev/gemini-api/docs/pricing
+- Common env vars (from our catalog): `GOOGLE_GENERATIVE_AI_API_KEY`, `GEMINI_API_KEY`
 
-## When to use Google (Gemini)
+## When to use it
 
-Use Google (Gemini) if you want:
+- You want Gemini models and strong multimodal + long-context workflows.
+- You want a built-in setup that’s easy to maintain.
 
-- Gemini-family models in your toolbelt.
-- A built-in provider type in GPT Breeze (simpler setup).
-- A good fit for general summarization + writing workflows.
+## Do it in GPT Breeze (30 seconds)
 
-If you’re comparing cost tradeoffs across providers/models, start with [Pricing](/pricing) and the [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation).
+1) Add the credential (provider + key).
+2) Add a custom model (so it appears in the model picker).
+3) Use it in a shortcut (YouTube toolbar / page toolbar / text selection toolbar).
 
-## Step 0 — Create an API key
+## Credentials: what to enter
 
-Create a key in Google’s Gemini dashboard. Keep it private.
+Open **Settings → Credentials (Providers)** and fill:
 
-If you work with sensitive content, use [Privacy-first workflow](/privacy-first).
+- **Provider type:** google (built-in)
+- **Base URL:** default
+- **API key:** your Google key
 
-## Step 1 — Add credentials (provider / API key)
+## Custom model: what to enter
 
-Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential.
+Open **Custom Models → Add model**:
 
-Fill these fields:
+- **Model ID:** exact model id the API expects
+- **Display name:** whatever you want to see in the picker
+- **Credential:** select the credential you created
 
-- **Name:** “Google Gemini”
-- **Provider type:** **google** (built-in)
-- **Base URL:** leave default
-- **API key:** paste your Gemini key
+## Example model IDs
 
-## Step 2 — Add a custom model
+Use these as examples (availability changes):
 
-Go to **Custom Models → Add model** and fill:
-
-- **Model ID**: exact model identifier
-- **Display name**: label you want to see
-- **Credential**: select your Google credential
-
-Free plan note: you can create **up to 2 custom models**.
-
-## Example model IDs (from the model catalog)
-
-Use these as **examples** (availability can change):
-
-- `gemini-2.5-flash`
-- `gemini-2.5-pro-preview-06-05`
 - `gemini-embedding-001`
+- `gemini-3-flash-preview`
+- `gemini-2.5-flash-image`
+- `gemini-2.5-flash-preview-05-20`
+- `gemini-flash-lite-latest`
+- `gemini-3-pro-preview`
+- `gemini-2.5-flash`
+- `gemini-flash-latest`
+- `gemini-2.5-pro-preview-05-06`
+- `gemini-2.5-flash-preview-tts`
 
 ## Recommended starter model
 
-For a fast everyday default:
+If you just want to validate your setup quickly, start with: `gemini-2.5-flash`
 
-- `gemini-2.5-flash`
+## Prompt templates (copy/paste)
 
-## Troubleshooting
+```text
+Summarize this into:
+- TL;DR (5 bullets)
+- Key takeaways
+- Action items
+- Questions to verify
+Keep it skimmable.
+```
 
-- **401/403**: key invalid/missing, billing/access not enabled.
-- **404**: model ID wrong. Copy exactly.
-- **429**: rate limit. Retry later.
+```text
+Rewrite this for clarity.
+Constraints:
+- keep facts the same
+- remove fluff
+- output as a numbered checklist
+```
+
+## Common errors (and the real fix)
+
+- **401/403**: key invalid/missing, or your account/project doesn’t have access. Create a new key and ensure billing/access is enabled.
+- **404**: model ID is wrong, or base URL is wrong. Copy the model ID exactly.
+- **429**: rate limit — retry later, or use a smaller model.
 
 ## Next steps
 
+- Browse all providers: [/guide/providers/](/guide/providers/)
+- New here: [Getting started](/guide/getting-started/)
 - Compare approaches: [Pricing](/pricing)
 - If you care about data boundaries: [Privacy-first workflow](/privacy-first)
-- New here: [Getting started](/guide/getting-started/)
 - Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)
-- Browse all providers: [/guide/providers/](/guide/providers/)
+
+## Sources
+
+- https://ai.google.dev/gemini-api/docs/pricing

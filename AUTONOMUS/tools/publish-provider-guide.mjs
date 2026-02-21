@@ -13,12 +13,14 @@ function toISODate(d) {
 }
 
 function parseArgs(argv) {
-  const args = { dryRun: false, date: null, provider: null };
+  const args = { dryRun: false, date: null, provider: null, update: false, all: false };
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--dry-run') args.dryRun = true;
     else if (a === '--date') args.date = argv[++i];
     else if (a === '--provider') args.provider = argv[++i];
+    else if (a === '--update') args.update = true;
+    else if (a === '--all') args.all = true;
     else throw new Error(`Unknown arg: ${a}`);
   }
   return args;
@@ -45,11 +47,11 @@ function listPublishedProviderKeys() {
   return new Set(files);
 }
 
-function pickNextProviderKey(data, published, forcedKey) {
+function pickNextProviderKey(data, published, forcedKey, { update = false } = {}) {
   const keys = Object.keys(data);
   if (forcedKey) {
     if (!keys.includes(forcedKey)) throw new Error(`Unknown provider key: ${forcedKey}`);
-    if (published.has(forcedKey)) throw new Error(`Provider already published: ${forcedKey}`);
+    if (published.has(forcedKey) && !update) throw new Error(`Provider already published: ${forcedKey} (pass --update to overwrite)`);
     return forcedKey;
   }
 
@@ -97,41 +99,53 @@ function escapeQuotes(s) {
 
 function normalizePubDate(dateStr) {
   // Our content collections use z.date(), so any ISO-8601 string is fine.
-  // Prefer full ISO with timezone to avoid UTC ambiguity.
-  if (!dateStr) return toISODate(new Date()) + 'T00:00:00+07:00';
+  // Standardize on UTC Z to match the blog posts.
+  if (!dateStr) return toISODate(new Date()) + 'T00:00:00.000Z';
   if (String(dateStr).includes('T')) return dateStr;
-  return `${dateStr}T00:00:00+07:00`;
+  return `${dateStr}T00:00:00.000Z`;
 }
 
 function whenToUse(providerKey, name) {
   const map = {
     openai: [
-      'You want the widest compatibility (tools, vision) and strong overall quality.',
-      'You want a “default” provider that works well across most shortcuts and workflows.',
+      'You want the widest compatibility and a “default” provider that just works.',
+      'You’re optimizing for strong general performance across summaries + writing.',
     ],
     anthropic: [
-      'You care about writing quality and strong reasoning for longer prompts.',
-      'You want high quality outputs for drafting, rewriting, and analysis workflows.',
+      'You care about careful writing and high-quality summarization for longer prompts.',
+      'You want a provider you can trust for “thinky” drafts and rewrites.',
     ],
     google: [
-      'You want very large context windows and strong multimodal support.',
-      'You use Gemini models and want to keep everything under a single provider key.',
+      'You want Gemini models and strong multimodal + long-context workflows.',
+      'You want a built-in setup that’s easy to maintain.',
     ],
     openrouter: [
-      'You want access to many models behind one API key.',
-      'You like experimenting with different models without changing providers each time.',
+      'You want one endpoint to try lots of models (switch often, keep setup simple).',
+      'You want to compare models without setting up 5 different providers.',
     ],
     groq: [
-      'You prioritize speed/low latency for “instant” summaries and quick edits.',
-      'You want a cost-effective way to run popular open models fast.',
+      'You want speed/low latency for high-volume summarization.',
+      'You want a fast OpenAI-compatible endpoint for popular open models.',
     ],
     mistral: [
-      'You want solid quality for general tasks with a straightforward API setup.',
-      'You prefer Mistral-hosted models for EU/region or vendor preference reasons.',
+      'You want a clean provider option for everyday work (summaries + drafts).',
+      'You prefer Mistral-hosted models for vendor/region reasons.',
     ],
     togetherai: [
-      'You want a big catalog of open models under one provider (good for experimentation).',
-      'You want to run cheaper/faster models for everyday summaries and writing tasks.',
+      'You want a large catalog of open models under one provider.',
+      'You want cheaper/faster models for everyday workflows.',
+    ],
+    azure: [
+      'You need Azure governance/billing and your org standardized on Azure.',
+      'You already have Azure OpenAI deployments and want to use them in GPT Breeze.',
+    ],
+    'amazon-bedrock': [
+      'You’re already deep in AWS and want AWS governance/billing for models.',
+      'You want Bedrock-only availability or regional model access.',
+    ],
+    'cloudflare-workers-ai': [
+      'You already use Cloudflare and want to call models from the Cloudflare platform.',
+      'You want a catalog of smaller models you can run with a simple key + account.',
     ],
   };
 
@@ -143,108 +157,269 @@ function whenToUse(providerKey, name) {
   );
 }
 
-function renderGuide({ providerKey, provider, pubDate }) {
+function providerBaseUrl(providerKey, provider) {
+  // models-api.json contains `api` for some providers (OpenRouter/Cloudflare Workers AI).
+  // For other OpenAI-compatible providers, we maintain a small hardcoded map.
+  if (provider?.api) return provider.api;
+
+  const map = {
+    groq: 'https://api.groq.com/openai/v1',
+    mistral: 'https://api.mistral.ai/v1',
+    togetherai: 'https://api.together.xyz/v1',
+  };
+
+  return map[providerKey] ?? null;
+}
+
+function recommendedStarterModel(providerKey, examples) {
+  const pref = {
+    openai: 'gpt-4o-mini',
+    anthropic: 'claude-3-5-haiku-latest',
+    google: 'gemini-2.5-flash',
+    openrouter: 'nvidia/nemotron-nano-9b-v2:free',
+    groq: 'llama-3.1-8b-instant',
+    mistral: 'mistral-small-2506',
+    togetherai: 'meta-llama/Llama-3.1-8B-Instruct-Turbo',
+    'cloudflare-workers-ai': '@cf/mistral/mistral-7b-instruct-v0.1',
+  };
+
+  const wanted = pref[providerKey];
+  if (wanted && examples.includes(wanted)) return wanted;
+  if (wanted) return wanted;
+  return examples[0] ?? null;
+}
+
+function renderGuide({ providerKey, provider, pubDate, updatedDate }) {
   const name = provider?.name || providerKey;
   const doc = provider?.doc;
-  const api = provider?.api;
   const env = provider?.env;
+
   const isNative = new Set(['openai', 'anthropic', 'google', 'openrouter']).has(providerKey);
+  const isAzure = providerKey === 'azure';
+  const isBedrock = providerKey === 'amazon-bedrock';
+
+  const api = providerBaseUrl(providerKey, provider);
 
   const modelIds = provider?.models && typeof provider.models === 'object' ? Object.keys(provider.models) : [];
   const examples = modelIds.slice(0, 10);
 
-  const title = `How to set up ${name} in GPT Breeze (API key + custom model)`;
-  const description = `Step-by-step: add your ${name} API credentials in GPT Breeze and create a custom model you can use for summaries, writing, and workflows.`;
+  const title = isAzure
+    ? `How to set up Azure OpenAI in GPT Breeze (endpoint + deployment)`
+    : `How to set up ${name} in GPT Breeze (API key + custom model)`;
+
+  const description = isAzure
+    ? `Step-by-step: connect Azure OpenAI to GPT Breeze using a Custom (OpenAI-compatible) credential, including endpoint format and deployment/model mapping.`
+    : `A practical setup guide to connect ${name} to GPT Breeze: add credentials, create a custom model, and avoid the common BYOK mistakes.`;
 
   const normalizedPubDate = normalizePubDate(pubDate);
+
+  const starter = recommendedStarterModel(providerKey, examples);
 
   const lines = [];
   lines.push('---');
   lines.push(`title: "${escapeQuotes(title)}"`);
   lines.push(`description: "${escapeQuotes(description)}"`);
   lines.push(`pubDate: ${normalizedPubDate}`);
+  if (updatedDate) lines.push(`updatedDate: ${updatedDate}`);
   lines.push(`topicId: "provider-${escapeQuotes(providerKey)}"`);
   lines.push(`tags: ["providers", "${escapeQuotes(providerKey)}", "byom", "api-keys"]`);
   lines.push('draft: false');
   lines.push('---');
   lines.push('');
-  lines.push(`# ${title}`);
-  lines.push('');
-  lines.push(`This guide shows how to use **${name}** with **GPT Breeze** by adding a credential (API key + base URL) and then creating a custom model.`);
+
+  // Hook (blog-like)
+  if (isAzure) {
+    lines.push(`# ${title}`);
+    lines.push('');
+    lines.push(
+      `Azure OpenAI setup trips people up because the “model” you call is usually your **deployment name**, not the vendor model id. This page gives you the fast path (and the failure modes) so you don’t burn an hour on 404s.`,
+    );
+  } else {
+    lines.push(`# ${title}`);
+    lines.push('');
+    lines.push(
+      `Connecting **${name}** to GPT Breeze is simple in theory: paste a key, pick a model, done. In practice, most failures come from one of three things: the wrong base URL, the wrong model id, or a key that doesn’t have access. This guide is the “do this, not that” version.`,
+    );
+  }
   lines.push('');
 
+  // Pain points (blog pattern)
+  lines.push('## What people actually struggle with');
+  lines.push('');
+  const pains = [];
+  pains.push('“I pasted my key but it still says 401/403.”');
+  pains.push('“I get 404 — I’m sure the model exists.”');
+  if (!isNative) pains.push('“I don’t know what base URL to use.”');
+  if (isAzure) pains.push('“Azure wants a deployment name — where do I put that?”');
+  if (isBedrock) pains.push('“Bedrock isn’t just an API key — why is everything failing?”');
+  for (const p of pains) lines.push(`- ${p}`);
+  lines.push('');
+
+  // TL;DR (operational)
+  lines.push('## TL;DR (2-minute setup)');
+  lines.push('');
+  lines.push('1) Create an API key (treat it like a password).');
+  lines.push('');
+  lines.push('2) In **GPT Breeze → Settings → Credentials (Providers)**, add a credential.');
+  lines.push('');
+  if (isBedrock) {
+    lines.push('   - Bedrock usually needs AWS SigV4 signing. The practical setup is to use an OpenAI-compatible **gateway/proxy** that handles signing, then point GPT Breeze to that gateway.');
+  } else if (isNative) {
+    lines.push('   - **Provider type:** `' + providerKey + '` (built-in)');
+    lines.push('   - **Base URL:** leave default');
+    lines.push(`   - **API key:** your ${name} key`);
+  } else if (isAzure) {
+    lines.push('   - **Provider type:** Custom (OpenAI-compatible)');
+    lines.push('   - **Base URL:** `https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments`');
+    lines.push('   - **API key:** your Azure API key');
+  } else {
+    lines.push('   - **Provider type:** Custom (OpenAI-compatible)');
+    lines.push(`   - **Base URL:** ${api ? '`' + api + '`' : '(see provider docs)'}`);
+    lines.push(`   - **API key:** your ${name} key`);
+  }
+  lines.push('');
+  lines.push('3) In **Custom Models → Add model**, add a model you can actually pick in the UI.');
+  if (isAzure) {
+    lines.push('   - **Model ID:** your Azure **deployment name**');
+  } else {
+    lines.push('   - **Model ID:** a valid model id (examples below)');
+  }
+  lines.push('');
+  lines.push('Provider/model selector demo: https://youtu.be/QS7TU0xuvDk');
+  lines.push('');
+
+  // What it is / sources
   lines.push('## What this provider is');
   lines.push('');
-  lines.push(`${name} is one of the providers you can connect to GPT Breeze as part of a **BYOM/BYOK** workflow (Bring Your Own Model / Bring Your Own Key).`);
-  if (doc) lines.push(`- Provider docs: [${doc}](${doc})`);
-  if (api) lines.push('- API base URL (from catalog): ' + '`' + api + '`');
+  if (isAzure) {
+    lines.push('Azure OpenAI is OpenAI-family models served through Azure infrastructure and Azure billing/governance.');
+  } else if (isBedrock) {
+    lines.push('Amazon Bedrock is AWS’s managed model platform (Anthropic, Meta, Amazon Titan, Cohere, etc.).');
+  } else {
+    lines.push(`${name} is a provider you can connect to GPT Breeze as part of a BYOK/BYOM workflow.`);
+  }
+  lines.push('');
+  if (doc) lines.push(`- Provider docs: ${doc}`);
+  if (Array.isArray(env) && env.length > 0) {
+    lines.push('- Common env vars (from our catalog): ' + env.map((e) => '`' + e + '`').slice(0, 6).join(', '));
+  }
   lines.push('');
 
   lines.push('## When to use it');
   lines.push('');
-  const bullets = whenToUse(providerKey, name);
-  for (const b of bullets) lines.push(`- ${b}`);
+  for (const b of whenToUse(providerKey, name)) lines.push(`- ${b}`);
   lines.push('');
 
-  lines.push('## Step 1 — Add credentials (provider / API key)');
+  // Do it in GPT Breeze (blog’s “concrete usage” requirement)
+  lines.push('## Do it in GPT Breeze (30 seconds)');
   lines.push('');
-  lines.push('Open **GPT Breeze → Settings → Credentials (Providers)** and add a credential.');
+  lines.push('1) Add the credential (provider + key).');
+  lines.push('2) Add a custom model (so it appears in the model picker).');
+  lines.push('3) Use it in a shortcut (YouTube toolbar / page toolbar / text selection toolbar).');
   lines.push('');
-  if (isNative) {
-    lines.push(`- Provider type: **${providerKey}** (built-in)`);
-    lines.push('- Base URL: leave default unless you know you need a custom endpoint');
-    lines.push(`- API key: paste your **${name}** API key`);
+
+  // Operational details
+  lines.push('## Credentials: what to enter');
+  lines.push('');
+  lines.push('Open **Settings → Credentials (Providers)** and fill:');
+  lines.push('');
+  if (isBedrock) {
+    lines.push('- **Recommended:** use a gateway/proxy and put the gateway URL in **Base URL**.');
+    lines.push('- Bedrock auth is not “paste a key”; it’s usually AWS credentials + SigV4 signing.');
+  } else if (isNative) {
+    lines.push(`- **Provider type:** ${providerKey} (built-in)`);
+    lines.push('- **Base URL:** default');
+    lines.push(`- **API key:** your ${name} key`);
+  } else if (isAzure) {
+    lines.push('- **Provider type:** Custom (OpenAI-compatible)');
+    lines.push('- **Base URL:** `https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments`');
+    lines.push('- **API key:** your Azure key');
   } else {
-    lines.push('- Provider type: **Custom (OpenAI-compatible)**');
-    if (api) {
-      lines.push(`- Base URL: \`${api}\` (from our catalog; verify in the vendor docs if it changes)`);
-    } else {
-      lines.push('- Base URL: use the OpenAI-compatible endpoint provided by the vendor (see docs link above)');
-    }
-    lines.push(`- API key: paste your **${name}** API key`);
+    lines.push('- **Provider type:** Custom (OpenAI-compatible)');
+    lines.push(`- **Base URL:** ${api ? '`' + api + '`' : 'from the provider docs'}`);
+    lines.push(`- **API key:** your ${name} key`);
   }
   lines.push('');
-  if (Array.isArray(env) && env.length > 0) {
-    lines.push('**Notes:** this provider typically expects environment variables like:');
-    for (const k of env.slice(0, 8)) lines.push('- ' + '`' + k + '`');
-    lines.push('');
+
+  lines.push('## Custom model: what to enter');
+  lines.push('');
+  lines.push('Open **Custom Models → Add model**:');
+  lines.push('');
+  if (isAzure) {
+    lines.push('- **Model ID:** your Azure **deployment name**');
+    lines.push('- **Why:** Azure routes requests by deployment, not by raw vendor model id.');
+  } else {
+    lines.push('- **Model ID:** exact model id the API expects');
   }
-
-  lines.push('## Step 2 — Add a custom model');
-  lines.push('');
-  lines.push('Then go to **Custom Models → Add model** and fill:');
-  lines.push('');
-  lines.push('- **Model ID**: the exact model identifier the API expects');
-  lines.push('- **Display name**: a human-friendly name (this is what you’ll pick in the model selector)');
-  lines.push('- **Credential**: select the credential you created in Step 1');
-  lines.push('');
-  lines.push('If you’re on the free plan, you can create **up to 2 custom models**.');
+  lines.push('- **Display name:** whatever you want to see in the picker');
+  lines.push('- **Credential:** select the credential you created');
   lines.push('');
 
-  lines.push('## Example model IDs (from the model catalog)');
+  // Examples + starter model
+  lines.push('## Example model IDs');
   lines.push('');
   if (examples.length === 0) {
-    lines.push('This provider entry does not list model IDs in our catalog yet. Use the model name from the provider’s dashboard/docs.');
+    lines.push('Use model IDs from the provider dashboard/docs (our catalog does not list examples here yet).');
   } else {
-    lines.push('Use these as **examples** (model availability can change):');
+    lines.push('Use these as examples (availability changes):');
     lines.push('');
     for (const id of examples) lines.push('- ' + '`' + id + '`');
   }
   lines.push('');
 
-  lines.push('## Troubleshooting');
+  if (starter) {
+    lines.push('## Recommended starter model');
+    lines.push('');
+    lines.push('If you just want to validate your setup quickly, start with: `' + starter + '`');
+    lines.push('');
+  }
+
+  // Prompts (blog-like: give runnable templates)
+  lines.push('## Prompt templates (copy/paste)');
   lines.push('');
-  lines.push('- **401/403**: API key is missing/invalid, or your account has no access. Re-check the key and plan.');
-  lines.push('- **404**: model ID is wrong, or base URL is wrong. Copy model ID exactly from the provider dashboard.');
-  lines.push('- **429**: rate limit. Try a smaller model, wait, or upgrade the provider plan.');
+  lines.push('```text');
+  lines.push('Summarize this into:');
+  lines.push('- TL;DR (5 bullets)');
+  lines.push('- Key takeaways');
+  lines.push('- Action items');
+  lines.push('- Questions to verify');
+  lines.push('Keep it skimmable.');
+  lines.push('```');
+  lines.push('');
+  lines.push('```text');
+  lines.push('Rewrite this for clarity.');
+  lines.push('Constraints:');
+  lines.push('- keep facts the same');
+  lines.push('- remove fluff');
+  lines.push('- output as a numbered checklist');
+  lines.push('```');
   lines.push('');
 
+  // Troubleshooting (operational)
+  lines.push('## Common errors (and the real fix)');
+  lines.push('');
+  lines.push('- **401/403**: key invalid/missing, or your account/project doesn’t have access. Create a new key and ensure billing/access is enabled.');
+  if (isAzure) lines.push('- **404**: usually wrong deployment name or base URL missing `/openai/deployments`.');
+  else lines.push('- **404**: model ID is wrong, or base URL is wrong. Copy the model ID exactly.');
+  lines.push('- **429**: rate limit — retry later, or use a smaller model.');
+  if (isBedrock) lines.push('- **Signature / AccessDenied**: you are hitting Bedrock without SigV4 signing or without Bedrock permissions.');
+  lines.push('');
+
+  // Internal links like blog posts
   lines.push('## Next steps');
   lines.push('');
+  lines.push('- Browse all providers: [/guide/providers/](/guide/providers/)');
+  lines.push('- New here: [Getting started](/guide/getting-started/)');
   lines.push('- Compare approaches: [Pricing](/pricing)');
   lines.push('- If you care about data boundaries: [Privacy-first workflow](/privacy-first)');
-  lines.push('- New here: [Getting started](/guide/getting-started/)');
   lines.push('- Estimate costs: [AI model cost calculator](/ai-model-cost-calculator-and-price-comparation)');
+  lines.push('');
+
+  // Sources section
+  lines.push('## Sources');
+  lines.push('');
+  if (doc) lines.push(`- ${doc}`);
+  else lines.push(`- Provider docs (see ${name} website/dashboard)`);
   lines.push('');
 
   return lines.join('\n');
@@ -255,24 +430,58 @@ const data = loadModelsApi();
 fs.mkdirSync(guideProvidersDir, { recursive: true });
 
 const published = listPublishedProviderKeys();
-const providerKey = pickNextProviderKey(data, published, args.provider);
 
-if (!providerKey) {
-  console.log('No provider left to publish.');
+function readExistingPubDate(providerKey) {
+  const p = path.join(guideProvidersDir, `${providerKey}.md`);
+  if (!fs.existsSync(p)) return null;
+  const raw = fs.readFileSync(p, 'utf8');
+  const m = raw.match(/\n?---\n([\s\S]*?)\n---\n/);
+  if (!m) return null;
+  const fm = m[1];
+  const pub = fm.match(/^pubDate:\s*(.+)\s*$/m);
+  return pub ? String(pub[1]).trim() : null;
+}
+
+function dateOnly(d) {
+  if (!d) return toISODate(new Date());
+  return String(d).slice(0, 10);
+}
+
+const keysToWrite = (() => {
+  if (args.all) {
+    const existing = Array.from(published);
+    return existing.length > 0 ? existing : Object.keys(data);
+  }
+
+  const k = pickNextProviderKey(data, published, args.provider, { update: args.update });
+  return k ? [k] : [];
+})();
+
+if (keysToWrite.length === 0) {
+  console.log('[skip] No providers selected.');
   process.exit(0);
 }
 
-const now = new Date();
-const pubDate = args.date ?? toISODate(now);
+for (const providerKey of keysToWrite) {
+  const outPath = path.join(guideProvidersDir, `${providerKey}.md`);
 
-const outPath = path.join(guideProvidersDir, `${providerKey}.md`);
-const markdown = renderGuide({ providerKey, provider: data[providerKey], pubDate });
+  const existingPubDate = readExistingPubDate(providerKey);
+  const pubDate = existingPubDate || args.date || toISODate(new Date());
+  const updatedDate = dateOnly(args.date || toISODate(new Date()));
 
-if (args.dryRun) {
-  console.log(`[dry-run] Would write: ${path.relative(root, outPath)}`);
-  console.log(markdown.slice(0, 1200));
-  process.exit(0);
+  const markdown = renderGuide({
+    providerKey,
+    provider: data[providerKey],
+    pubDate,
+    updatedDate,
+  });
+
+  if (args.dryRun) {
+    console.log(`[dry-run] Would write: ${path.relative(root, outPath)}`);
+    console.log(markdown.slice(0, 1200));
+    continue;
+  }
+
+  fs.writeFileSync(outPath, markdown, 'utf8');
+  console.log(`[ok] Wrote provider guide: ${path.relative(root, outPath)}`);
 }
-
-fs.writeFileSync(outPath, markdown, 'utf8');
-console.log(`Published provider guide: ${path.relative(root, outPath)}`);
