@@ -7,6 +7,9 @@ todo-website.md
 generated/
 settings.local.json
 
+# AUTONOMUS temp files (should never be committed)
+.autonomus_*.md
+
 # AUTONOMUS runtime state
 AUTONOMUS/state/
 AUTONOMUS/logs/

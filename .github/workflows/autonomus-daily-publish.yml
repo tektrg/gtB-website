@@ -143,20 +143,13 @@ jobs:
           BLOG_SKIP_REASON="skipped (missing/incomplete research or no available topic)"
           PROVIDER_SKIP_REASON="none"
 
-          if [ "$BLOG_CHANGED" != "0" ]; then
-            BLOG_SKIP_REASON="published"
-          fi
-
-          if [ "$PROVIDER_CHANGED" != "0" ]; then
-            PROVIDER_SKIP_REASON="published"
-          fi
-
           # Build a detailed shipped section with counts + links for each changed item.
+          DETAILS_FILE=$(mktemp)
           node AUTONOMUS/tools/report-run-details.mjs \
             --site "https://gptbreeze.io" \
             --blog-skip-reason "$BLOG_SKIP_REASON" \
             --provider-skip-reason "$PROVIDER_SKIP_REASON" \
-            > .autonomus_report_details.md
+            > "$DETAILS_FILE"
 
           if [ ! -f "$REPORT" ]; then
             cat > "$REPORT" <<EOF
@@ -173,9 +166,15 @@ jobs:
 
           ## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
           EOF
-            cat .autonomus_report_details.md >> "$REPORT"
+            cat "$DETAILS_FILE" >> "$REPORT"
             cat >> "$REPORT" <<EOF
-          - Verified: seo:verify + check
+          
+          **Checks:**
+          - seo:verify ✅
+          - check ✅
+
+          **Next:**
+          - Review Search Console queries: pick 1 new topic + 1 internal-link upgrade.
           EOF
           else
             cat >> "$REPORT" <<EOF
@@ -184,11 +183,19 @@ jobs:
 
           ## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
           EOF
-            cat .autonomus_report_details.md >> "$REPORT"
+            cat "$DETAILS_FILE" >> "$REPORT"
             cat >> "$REPORT" <<EOF
-          - Verified: seo:verify + check
+
+          **Checks:**
+          - seo:verify ✅
+          - check ✅
+
+          **Next:**
+          - Review Search Console queries: pick 1 new topic + 1 internal-link upgrade.
           EOF
           fi
+
+          rm -f "$DETAILS_FILE"
 
       - name: Commit and push (main)
         run: |

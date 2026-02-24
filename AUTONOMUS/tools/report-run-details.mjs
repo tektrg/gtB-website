@@ -132,10 +132,25 @@ function countByChangeType(entries) {
   return counts;
 }
 
-function renderSection(title, { skipReason, items }) {
-  if (items.length === 0) {
-    return `### ${title}\n- Status: ${skipReason}\n`;
+function loadTopicBank() {
+  const topicBankPath = path.join(root, 'AUTONOMUS', 'content', 'topic-bank.json');
+  if (!fs.existsSync(topicBankPath)) return new Map();
+  try {
+    const raw = fs.readFileSync(topicBankPath, 'utf8');
+    const json = JSON.parse(raw);
+    const topics = Array.isArray(json.topics) ? json.topics : Array.isArray(json) ? json : [];
+    const map = new Map();
+    for (const t of topics) {
+      if (t && t.id) map.set(String(t.id), t);
+    }
+    return map;
+  } catch {
+    return new Map();
   }
+}
+
+function summarizePublished(label, items, skipReason) {
+  if (items.length === 0) return `- ${label}: ${skipReason}`;
 
   const counts = countByChangeType(items);
   const summaryParts = [];
@@ -144,23 +159,47 @@ function renderSection(title, { skipReason, items }) {
   if (counts.deleted) summaryParts.push(`deleted: ${counts.deleted}`);
   if (counts.changed && summaryParts.length === 0) summaryParts.push(`changed: ${counts.changed}`);
 
-  const lines = [];
-  lines.push(`### ${title}`);
-  lines.push(`- Status: published (${summaryParts.join(', ')})`);
-  lines.push('');
-
-  for (const it of items) {
-    const suffix = it.label ? ` (${it.label})` : '';
-    const desc = it.desc ? ` — ${it.desc}` : '';
-    lines.push(`- [${it.title}](${it.url})${desc}${suffix}`);
-  }
-  lines.push('');
-  return lines.join('\n');
+  return `- ${label}: published (${summaryParts.join(', ')})`;
 }
 
+function renderItems(items) {
+  if (items.length === 0) return [];
+  const lines = [];
+  for (const it of items) {
+    const change = it.label ? ` (${it.label})` : '';
+    const desc = it.desc ? ` — ${it.desc}` : '';
+    lines.push(`  - [${it.title}](${it.url})${desc}${change}`);
+  }
+  return lines;
+}
+
+function computeWhyForBlog(items, topicBank) {
+  if (items.length === 0) return null;
+
+  const topicIds = items
+    .map((it) => it.topicId)
+    .filter(Boolean)
+    .map(String);
+
+  const pillars = new Set();
+  const intents = new Set();
+  for (const id of topicIds) {
+    const t = topicBank.get(id);
+    if (t?.pillar) pillars.add(String(t.pillar));
+    if (t?.intent) intents.add(String(t.intent));
+  }
+
+  const pillarStr = pillars.size ? Array.from(pillars).join(', ') : 'unknown pillar';
+  const intentStr = intents.size ? Array.from(intents).join(', ') : 'unknown intent';
+  return `${pillarStr} / ${intentStr}`;
+}
+
+// --- main
 const args = parseArgs(process.argv);
-const lines = getStatusLines();
-const entries = lines.map(parsePorcelainLine);
+const topicBank = loadTopicBank();
+
+const statusLines = getStatusLines();
+const entries = statusLines.map(parsePorcelainLine);
 
 const blogEntriesRaw = entries
   .filter((e) => e.file.startsWith('src/content/blog/') && e.file.endsWith('.md'))
@@ -170,15 +209,33 @@ const providerEntriesRaw = entries
   .filter((e) => e.file.startsWith('src/content/guide/providers/') && e.file.endsWith('.md'))
   .map((e) => ({ ...e, changeType: classify(e.code) }));
 
-const blogItems = buildItems({ site: args.site, kind: 'blog', entries: blogEntriesRaw });
+const blogItems = buildItems({ site: args.site, kind: 'blog', entries: blogEntriesRaw }).map((it) => {
+  try {
+    const abs = path.join(root, it.file);
+    const { data } = parseFrontmatter(readText(abs));
+    return { ...it, topicId: data.topicId };
+  } catch {
+    return it;
+  }
+});
+
 const providerItems = buildItems({ site: args.site, kind: 'provider', entries: providerEntriesRaw });
 
 const out = [];
-out.push('## Shipped (details)');
+
+// Runbook-friendly block
+out.push('**Shipped:**');
+out.push(summarizePublished('Blog', blogItems, args.blogSkipReason));
+out.push(...renderItems(blogItems));
+out.push(summarizePublished('Providers', providerItems, args.providerSkipReason));
+out.push(...renderItems(providerItems));
 out.push('');
-out.push(renderSection('Blog post(s)', { skipReason: args.blogSkipReason, items: blogItems }).trimEnd());
-out.push('');
-out.push(renderSection('Provider guide(s)', { skipReason: args.providerSkipReason, items: providerItems }).trimEnd());
-out.push('');
+
+const blogWhy = computeWhyForBlog(blogItems, topicBank);
+const providerWhy = providerItems.length > 0 ? 'Provider setup / how-to' : null;
+
+out.push('**Why:**');
+out.push(`- Blog: ${blogWhy ?? args.blogSkipReason}`);
+out.push(`- Providers: ${providerWhy ?? args.providerSkipReason}`);
 
 process.stdout.write(out.join('\n') + '\n');
