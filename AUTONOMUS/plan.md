@@ -21,7 +21,7 @@
 - Add a daily chore stream: internal link maintenance + safe year rollover updates.
 
 ## Daily log
-- 2026-03-03: published src/content/blog/save-prompts-as-one-click-shortcuts-build-your-personal-ai-workflow.md (topic: save-prompts-as-one-click-shortcuts).
+- 2026-03-03: published src/content/blog/eightify-alternative-better-youtube-summaries-with-byok-timestamps.md (topic: eightify-alternative); published src/content/blog/save-prompts-as-one-click-shortcuts-build-your-personal-ai-workflow.md (topic: save-prompts-as-one-click-shortcuts).
 - 2026-03-02: published src/content/blog/how-to-summarize-web-articles-in-chrome-without-copy-pasting-everything.md (topic: summarize-web-articles-in-chrome); published src/content/blog/how-to-summarize-long-youtube-videos-2-3-hours-without-losing-the-good-stuff.md (topic: summarize-long-youtube-videos).
 - 2026-02-20: published src/content/blog/best-youtube-summarizer-chrome-extension-what-to-look-for.md (topic: best-youtube-summarizer-chrome-extension); published src/content/blog/youtube-transcript-vs-summary-which-one-should-you-use.md (topic: youtube-transcript-vs-summary); published src/content/blog/how-to-summarize-youtube-videos-with-timestamps-chapters-you-can-click.md (topic: youtube-summary-with-timestamps).
 - 2026-02-19: published src/content/blog/internal-linking-playbook-for-ai-tool-blogs.md (topic: internal-linking-playbook).
