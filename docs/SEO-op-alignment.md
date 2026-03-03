@@ -520,9 +520,14 @@ npm run seo:verify     # Blog + Guide hygiene
 **Daily report:** `AUTONOMUS/reports/YYYY-MM-DD.md`
 
 - ✅ Daily report file is created/appended by the workflow: `.github/workflows/autonomus-daily-publish.yml`
-- 🟨 Planned: include detailed shipped URLs, internal-link diffs, and warnings (current report content is minimal)
+- ✅ Format: append-only run log. Each run adds a block:
+  - `## Run @ HH:MM`
+  - `**Shipped:**` (blog/provider with URLs)
+  - `**Why:**` (pillar/intent or skip reason)
+  - `**Checks:**` (seo:verify, check)
+  - `**Next:**` (1–2 immediate actions)
 
-**Summary posted to:** 🟨 Planned (Telegram integration not implemented)
+**Summary posted to:** 🟨 Planned (Telegram integration not implemented yet; copy/paste the latest Run block)
 
 ---
 

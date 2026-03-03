@@ -151,42 +151,55 @@ jobs:
             --provider-skip-reason "$PROVIDER_SKIP_REASON" \
             > "$DETAILS_FILE"
 
+          # Normalize legacy report headers so the file is just an append-only log of runs.
+          # Desired structure:
+          #   # AUTONOMUS Daily Report — YYYY-MM-DD
+          #
+          #   ---
+          #   ## Run @ HH:MM
+          #   **Shipped:** ...
+          #   **Why:** ...
+          #   **Checks:** ...
+          #   **Next:** ...
+          if [ -f "$REPORT" ]; then
+            if grep -q '^---$' "$REPORT"; then
+              TMP_REPORT=$(mktemp)
+              echo "# AUTONOMUS Daily Report — ${DATE}" > "$TMP_REPORT"
+              echo "" >> "$TMP_REPORT"
+              awk 'BEGIN{p=0} /^---$/{p=1} p{print}' "$REPORT" >> "$TMP_REPORT"
+              mv "$TMP_REPORT" "$REPORT"
+            else
+              # Old format without run blocks: rewrite header only; we will append the run below.
+              cat > "$REPORT" <<EOF
+          # AUTONOMUS Daily Report — ${DATE}
+
+          EOF
+            fi
+          fi
+
           if [ ! -f "$REPORT" ]; then
             cat > "$REPORT" <<EOF
           # AUTONOMUS Daily Report — ${DATE}
 
-          ---
-
-          ## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
-          EOF
-            cat "$DETAILS_FILE" >> "$REPORT"
-            cat >> "$REPORT" <<EOF
-          
-          **Checks:**
-          - seo:verify ✅
-          - check ✅
-
-          **Next:**
-          - Review Search Console queries: pick 1 new topic + 1 internal-link upgrade.
-          EOF
-          else
-            cat >> "$REPORT" <<EOF
-
-          ---
-
-          ## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
-          EOF
-            cat "$DETAILS_FILE" >> "$REPORT"
-            cat >> "$REPORT" <<EOF
-
-          **Checks:**
-          - seo:verify ✅
-          - check ✅
-
-          **Next:**
-          - Review Search Console queries: pick 1 new topic + 1 internal-link upgrade.
           EOF
           fi
+
+          cat >> "$REPORT" <<EOF
+
+          ---
+
+          ## Run @ $(TZ=Asia/Ho_Chi_Minh date '+%H:%M')
+          EOF
+          cat "$DETAILS_FILE" >> "$REPORT"
+          cat >> "$REPORT" <<EOF
+
+          **Checks:**
+          - seo:verify ✅
+          - check ✅
+
+          **Next:**
+          - Review Search Console queries: pick 1 new topic + 1 internal-link upgrade.
+          EOF
 
           rm -f "$DETAILS_FILE"
 

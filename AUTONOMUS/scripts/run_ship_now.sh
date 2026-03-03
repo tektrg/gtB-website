@@ -33,34 +33,51 @@ log "(2) Auto-fix internal links if needed"
 # Only run generator; it will no-op if nothing to change
 node AUTONOMUS/scripts/add_continue_reading.mjs || true
 
-log "(3) Quality gate: npm run check"
+log "(3) Quality gates: npm run seo:verify + npm run check"
+npm run -s seo:verify
 npm run -s check
 
 log "(4) Write/update report: $REPORT"
-if [[ ! -f "$REPORT" ]]; then
+DETAILS_FILE="$(mktemp)"
+node AUTONOMUS/tools/report-run-details.mjs   --site "https://gptbreeze.io"   --blog-skip-reason "skipped (ship-now run)"   --provider-skip-reason "skipped (ship-now run)"   > "$DETAILS_FILE"
+
+# Normalize legacy headers (keep only append-only run blocks if present)
+if [[ -f "$REPORT" ]]; then
+  if grep -q '^---$' "$REPORT"; then
+    TMP_REPORT="$(mktemp)"
+    echo "# AUTONOMUS Daily Report — ${DATE}" > "$TMP_REPORT"
+    echo "" >> "$TMP_REPORT"
+    awk 'BEGIN{p=0} /^---$/{p=1} p{print}' "$REPORT" >> "$TMP_REPORT"
+    mv "$TMP_REPORT" "$REPORT"
+  else
+    cat > "$REPORT" <<MD
+# AUTONOMUS Daily Report — ${DATE}
+MD
+  fi
+else
   cat > "$REPORT" <<MD
 # AUTONOMUS Daily Report — ${DATE}
-
-## Shipped
-- (fill)
-
-## Evidence / Verification
-- 
-
-## Next
-- 
 MD
 fi
 
-# Append a run footer (idempotent-ish: adds timestamped entry)
 cat >> "$REPORT" <<MD
 
 ---
 
-## Ship-now run @ $(date '+%H:%M')
-- Ran: verify_site_basics, check_internal_links, npm run check
-- Internal link autofix: add_continue_reading (may be no-op)
+## Run @ $(date '+%H:%M')
 MD
+cat "$DETAILS_FILE" >> "$REPORT"
+cat >> "$REPORT" <<MD
+
+**Checks:**
+- seo:verify ✅
+- check ✅
+
+**Next:**
+- Review Search Console queries: pick 1 new topic + 1 internal-link upgrade.
+MD
+
+rm -f "$DETAILS_FILE"
 
 log "(5) Commit + push if changes exist"
 if [[ -n "$(git status --porcelain)" ]]; then
