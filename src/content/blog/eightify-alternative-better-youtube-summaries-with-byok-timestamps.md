@@ -9,6 +9,17 @@ tags:
   - "YouTube summarizer"
   - "Chrome extension"
   - "BYOK"
+faq:
+  - q: "What is Eightify?"
+    a: "Eightify is a YouTube summarizer tool/extension people use to get quick summaries of videos. This guide focuses on how to evaluate alternatives based on outputs (timestamps, workflow, verification), not brand hype."
+  - q: "What should I look for in an Eightify alternative?"
+    a: "For learning videos, prioritize timestamped sections (clickable navigation), a workflow that supports follow-up questions (action items, notes), and a way to verify important claims quickly."
+  - q: "Is BYOK/BYOM better than a subscription?"
+    a: "It depends. Subscriptions are simple and predictable. BYOK/BYOM gives more control over cost, model choice, and provider/privacy tradeoffs, especially if you already have API keys."
+  - q: "How do I reduce hallucinations in YouTube summaries?"
+    a: "Treat the summary as navigation, then verify the 2–3 claims you’ll act on by jumping to timestamps and (if needed) checking the transcript around those sections."
+  - q: "Can I summarize long videos (2–3 hours) reliably?"
+    a: "Yes, but avoid a single-paragraph summary. Use a map-first workflow (10–14 timestamped sections), then extract takeaways/action items from only the sections that matter."
 draft: false
 ---
 
@@ -49,6 +60,20 @@ In practice, people switch when they hit one (or more) of these issues:
 When evaluating alternatives, don’t compare marketing pages. Compare outputs.
 
 Here’s a checklist that maps to real “learning video” needs:
+
+### Eightify vs GPT Breeze (quick comparison)
+
+This isn’t a “who’s best” claim — it’s a way to evaluate what matters for *your* workflow.
+
+| What you care about | What to check | Why it matters |
+|---|---|---|
+| Clickable timestamps/chapters | Does the summary include timestamps per section? | Verification + fast navigation.
+| Long-video handling | Can it produce 10–14 sections for 60–180 min videos? | Long videos need a map, not a paragraph.
+| Follow-up Q&A workflows | Can you ask for action items, decision memos, and quotes? | You want outputs you can use.
+| Reusable prompts/shortcuts | Can you save prompts as repeatable workflows? | Consistency and speed.
+| BYOK/BYOM control | Can you choose provider/model and manage costs? | Cost + privacy tradeoffs.
+
+If you want to see GPT Breeze’s workflow focus: [/youtube-summary](/youtube-summary) and [/pricing](/pricing).
 
 ### Output quality
 - Does it produce **8–14 sections** for long videos (not 3)?
@@ -163,6 +188,11 @@ Start with:
 ---
 
 Want to try it fast?
+- See how YouTube summaries work: [/youtube-summary](/youtube-summary)
 - Add GPT Breeze to Chrome: https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog
+
+Related reading:
+- [How to Summarize Long YouTube Videos (2–3 Hours) Without Losing the Good Stuff](/blog/how-to-summarize-long-youtube-videos-2-3-hours-without-losing-the-good-stuff/)
+- [How to Summarize YouTube Videos with Timestamps (Chapters You Can Click)](/blog/how-to-summarize-youtube-videos-with-timestamps-chapters-you-can-click/)
 
 <!-- Keywords (editorial): eightify alternative; eightify competitor; youtube summarizer chrome extension; youtube summary with timestamps; youtube video summarizer with chapters; byok youtube summarizer; privacy first youtube summarizer; summarize youtube videos to notes; best ai youtube summarizer; eightify vs alternative -->

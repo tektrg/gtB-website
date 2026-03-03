@@ -31,7 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!target) return;
 
     // Track Chrome extension install clicks
-    if (target.href && target.href.includes("chrome.google.com/webstore")) {
+    // Note: Chrome Web Store links may be on either domain:
+    // - chrome.google.com/webstore (legacy)
+    // - chromewebstore.google.com (current)
+    if (
+      target.href &&
+      (target.href.includes("chrome.google.com/webstore") ||
+        target.href.includes("chromewebstore.google.com"))
+    ) {
       const landingPage =
         window.location.pathname.replace("/", "") || "homepage";
       gtag("event", "chrome_extension_click", {
