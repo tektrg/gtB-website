@@ -1,8 +1,9 @@
 ---
-title: "GPT-5 Nano Pricing: The Most Affordable AI Model That's Revolutionizing Budget-Friendly Development in 2025"
-description: "Discover GPT-5 Nano's dirt-cheap pricing at $0.05 per million input tokens ($0.40 for output). Complete cost comparison with Claude, Gemini & other AI models. Save up to 98% on AI costs."
+title: "GPT-5 Nano Pricing (2026): Cost per 1M Tokens + Calculator"
+description: "GPT-5 Nano pricing (input/output per 1M tokens), context limits, and practical cost comparisons. Use the GPT Breeze cost calculator to estimate your real monthly spend."
 pubDate: 2025-09-15T10:00:00+07:00
-tags: ["ai", "pricing", "gpt-5", "development", "budget", "openai"]
+updatedDate: 2026-03-04T00:00:00+07:00
+tags: ["gpt-5 nano pricing", "ai model pricing", "openai", "cost", "byok", "gpt breeze"]
 draft: false
 ---
 

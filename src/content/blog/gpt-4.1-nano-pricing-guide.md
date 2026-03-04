@@ -1,9 +1,10 @@
 ---
-title: "GPT-4.1 Nano Pricing: The Ultra-Affordable AI Model for Budget-Conscious Developers in 2025"
+title: "GPT-4.1 Nano Pricing (2026): Cost per 1M Tokens + Calculator"
 pubDate: 2025-11-19T10:00:00+07:00
-description: "Explore GPT-4.1 Nano's incredibly low pricing at $0.02 per million input tokens ($0.15 for output). Compare costs with other AI models and discover how to save up to 99% on your AI expenses."
-author: "Your Name"
-tags: ["ai", "pricing", "gpt-4.1-nano", "development", "budget", "openai", "ai-tools", "gpt-breeze", "byom"]
+updatedDate: 2026-03-04T00:00:00+07:00
+description: "GPT-4.1 Nano pricing (input/output per 1M tokens), context limits, and how to estimate costs for your workflow using the GPT Breeze cost calculator."
+author: "GPT Breeze"
+tags: ["gpt-4.1 nano pricing", "ai model pricing", "openai", "cost", "byok", "gpt breeze"]
 ---
 
 Are you constantly battling with AI model costs that feel like they're designed for enterprise budgets, not yours? Say hello to **GPT-4.1 Nano**, the revolutionary AI model that's making advanced artificial intelligence genuinely accessible and affordable for everyone.

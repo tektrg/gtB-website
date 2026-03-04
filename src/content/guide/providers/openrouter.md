@@ -44,6 +44,9 @@ OpenRouter is a provider you can connect to GPT Breeze as part of a BYOK/BYOM wo
 - You want one endpoint to try lots of models (switch often, keep setup simple).
 - You want to compare models without setting up 5 different providers.
 
+If you’re still deciding whether OpenRouter is right for you (API keys, free models, privacy settings), start here:
+- [OpenRouter API key + free models guide](/guide/openrouter/)
+
 ## Do it in GPT Breeze (30 seconds)
 
 1) Add the credential (provider + key).

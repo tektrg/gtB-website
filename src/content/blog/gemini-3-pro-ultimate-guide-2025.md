@@ -1,9 +1,10 @@
 ---
-title: "Gemini 3 Pro Review 2025: Beats GPT-4 & Claude - Real User Analysis"
+title: "Gemini 3 Pro Pricing (Per 1M Tokens) + How to Use It in GPT Breeze"
 pubDate: 2025-11-20T14:00:00+07:00
-description: "Gemini 3 Pro dominates with 1501 LMSYS Elo score, $2-4/1M tokens pricing, superior multimodal AI, and real-time search. See browser integration demos and vs GPT-4 comparison."
-author: "AI Enthusiast"
-tags: ["gemini-3-pro", "google-gemini", "ai-model-comparison", "multimodal-ai", "generative-ui", "gemini-3-pricing", "ai-reasoning-capabilities", "agentic-coding", "google-search-ai", "ai-performance-benchmarks", "ai-tools", "gpt-breeze", "browser-ai", "byom-ai"]
+updatedDate: 2026-03-04T00:00:00+07:00
+description: "Gemini 3 Pro pricing breakdown (input/output per 1M tokens), context limits, and how to run it in GPT Breeze with BYOK. Includes a quick cost-compare workflow."
+author: "GPT Breeze"
+tags: ["gemini", "gemini pricing", "ai model pricing", "google gemini", "byok", "gpt breeze", "cost calculator"]
 ---
 
 On November 18, 2025, Google dropped what many are calling the AI equivalent of a mic drop. **Gemini 3 Pro** isn't just another incremental update – it's a "punch in the face" of competitors that has left even Sam Altman publicly congratulating Google on X (formerly Twitter).
