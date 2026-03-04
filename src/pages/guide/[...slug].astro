@@ -24,6 +24,84 @@ const relatedGuides = guides
   )
   .sort((a, b) => +b.data.pubDate - +a.data.pubDate)
   .slice(0, 3);
+
+const isProviderGuide = slug.startsWith('providers/');
+const canonicalUrl = guide.data.canonicalURL ?? `https://gptbreeze.io/guide/${slug}/`;
+
+const structuredData = isProviderGuide
+  ? {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": guide.data.title,
+      "description": guide.data.description,
+      "publisher": {
+        "@type": "Organization",
+        "name": "GPT Breeze",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://gptbreeze.io/media/hero/logo-56.png",
+        },
+        "url": "https://gptbreeze.io",
+      },
+      "datePublished": guide.data.pubDate.toISOString(),
+      "dateModified": (guide.data.updatedDate || guide.data.pubDate).toISOString(),
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": canonicalUrl,
+      },
+      "image": "https://gptbreeze.io/media/hero/logo-56.png",
+      "keywords": guide.data.tags
+        ? guide.data.tags.join(", ")
+        : "AI providers, BYOK, API keys, Chrome extension",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Add provider credentials",
+          "text": "Open GPT Breeze → Settings → Credentials (Providers). Add the provider/API key (and base URL if needed).",
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Create a custom model",
+          "text": "Go to Custom Models → Add model. Set Model ID + Display name, then attach the credential you created.",
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Test and troubleshoot",
+          "text": "Run a simple summary/shortcut. If you see 401/403/404/429 errors, verify API key, base URL, and model ID.",
+        },
+      ],
+    }
+  : {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": guide.data.title,
+      "description": guide.data.description,
+      "author": {
+        "@type": "Person",
+        "name": "Duy Thanh",
+        "url": "https://gptbreeze.io/author",
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "GPT Breeze",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://gptbreeze.io/media/hero/logo-56.png",
+        },
+        "url": "https://gptbreeze.io",
+      },
+      "datePublished": guide.data.pubDate.toISOString(),
+      "dateModified": (guide.data.updatedDate || guide.data.pubDate).toISOString(),
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": canonicalUrl,
+      },
+      "image": "https://gptbreeze.io/media/hero/logo-56.png",
+      "articleSection": "Guide",
+      "keywords": guide.data.tags
+        ? guide.data.tags.join(", ")
+        : "AI tools, Chrome extension, tutorial, guide",
+    };
 ---
 <Base
   title={guide.data.title}
@@ -31,36 +109,8 @@ const relatedGuides = guides
   canonical={guide.data.canonicalURL}
   ogType="article"
 >
-  <!-- Article Schema -->
-  <script type="application/ld+json" is:inline set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": guide.data.title,
-    "description": guide.data.description,
-    "author": {
-      "@type": "Person",
-      "name": "Duy Thanh",
-      "url": "https://gptbreeze.io/author"
-    },
-    "publisher": {
-      "@type": "Organization", 
-      "name": "GPT Breeze",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://gptbreeze.io/media/hero/logo-56.png"
-      },
-      "url": "https://gptbreeze.io"
-    },
-    "datePublished": guide.data.pubDate.toISOString(),
-    "dateModified": (guide.data.updatedDate || guide.data.pubDate).toISOString(),
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://gptbreeze.io/guide/${slug}/`
-    },
-    "image": "https://gptbreeze.io/media/hero/logo-56.png",
-    "articleSection": "Guide", 
-    "keywords": guide.data.tags ? guide.data.tags.join(', ') : 'AI tools, Chrome extension, tutorial, guide'
-  })}></script>
+  <!-- Structured data -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)}></script>
 
   <style>
     article {

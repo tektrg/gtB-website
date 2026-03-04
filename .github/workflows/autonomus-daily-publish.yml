@@ -119,6 +119,16 @@ jobs:
             git apply --binary .autonomus_artifacts/provider.patch
           fi
 
+      - name: Refresh 1 blog post (when daily blog publish was skipped)
+        run: |
+          BLOG_CHANGED=$(git status --porcelain | awk '{print $2}' | grep '^src/content/blog/' | wc -l | tr -d ' ')
+          if [ "$BLOG_CHANGED" = "0" ]; then
+            DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)
+            node AUTONOMUS/tools/refresh-blog-money-links.mjs --date "$DATE" || true
+          else
+            echo "Blog already changed in this run; skipping refresh."
+          fi
+
       - name: Run baseline verifiers + internal link chores
         run: |
           node AUTONOMUS/scripts/verify_site_basics.mjs
