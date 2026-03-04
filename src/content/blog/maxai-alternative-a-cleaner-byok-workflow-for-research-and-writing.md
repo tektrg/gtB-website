@@ -153,3 +153,9 @@ If you want a clean BYOK workflow today:
 - /privacy-first
 - /guide/getting-started
 - /ai-model-cost-calculator-and-price-comparation
+
+## Continue reading
+- [GPT-4o mini pricing (input/output per 1M tokens)](/blog/gpt-4o-mini-pricing-guide/)
+- [GPT-5 Mini pricing (input/output per 1M tokens)](/blog/gpt-5-mini-pricing-guide/)
+- [GPT-5 pricing (input/output per 1M tokens)](/blog/gpt-5-pricing-guide/)
+
