@@ -12,62 +12,157 @@ tags:
 draft: false
 ---
 
-If you watch YouTube to *learn* (podcasts, lectures, tutorials), a plain summary is fine. But a **Merlin AI alternative** is way more useful because it gives you a map: what matters, where it happens, and how to jump there fast.
+Merlin AI is popular because it’s fast to try: you install it, click a button, and you get “AI on the web.”
 
-## What Merlin AI is (and what it’s good at)
+But if you’re reading a lot (docs, long articles, newsletters) or you use YouTube to learn (podcasts, lectures, tutorials), the real bottleneck isn’t “can it summarize?” — it’s:
 
-Keep this section practical: aim for a skimmable output, verify the parts you’ll rely on, and save the workflow as a shortcut once it works.
+- Can I **control the model** (quality vs cost vs speed)?
+- Can I **trust the output** (timestamps, quotes, citations)?
+- Will it respect my **settings** (language, prompts, defaults) consistently?
 
-## Why people look for a Merlin AI alternative (speed, limits, trust)
+This guide helps you evaluate a **Merlin AI alternative** without wasting a week installing random extensions.
 
-Keep this section practical: aim for a skimmable output, verify the parts you’ll rely on, and save the workflow as a shortcut once it works.
+## Where Merlin works well (and where it gets annoying)
 
-## What to look for in an alternative (BYOK, privacy, control, workflow)
+Most “AI assistant” extensions are decent at short tasks:
 
-Here’s a workflow that works for short videos *and* long podcasts:
+- quick rewrite
+- simple summary
+- one-off Q&A
 
-1) Open the YouTube video you’re working on.
-2) Run **Summarize video with timestamps** in GPT Breeze’s YouTube toolbar.
-   - Demo: https://youtu.be/pOXdFaqTszU
-3) Scan the sections first, then click timestamps to verify the few parts you’ll rely on.
-4) Ask a follow-up like: *Put this into a table with topic / timestamp / takeaway / action item.*
-5) Save the prompt as a shortcut if you’ll repeat it.
+What tends to break (for Merlin or any similar tool) is the *repeatable workflow layer*:
 
-Start here if you’re new: [/guide/getting-started/](/guide/getting-started/)
+- you want the **same prompt** to work reliably across sessions
+- you want a **specific output format** (table, bullets, action items)
+- you want **sources** (quotes/timestamps) so you can verify quickly
+- you want **provider flexibility** (OpenAI, Claude, Gemini, OpenRouter, local models)
 
-## A faster workflow: summarize YouTube + webpages without switching tools
+If those are your pain points, your “alternative” should be judged on control + trust, not on marketing claims.
 
-Here’s a workflow that works for short videos *and* long podcasts:
+## The comparison checklist (features that actually matter)
 
-1) Open the YouTube video you’re working on.
-2) Run **Summarize video with timestamps** in GPT Breeze’s YouTube toolbar.
-   - Demo: https://youtu.be/pOXdFaqTszU
-3) Scan the sections first, then click timestamps to verify the few parts you’ll rely on.
-4) Ask a follow-up like: *Put this into a table with topic / timestamp / takeaway / action item.*
-5) Save the prompt as a shortcut if you’ll repeat it.
+When you compare a Merlin AI alternative, look for these (in order):
 
-Start here if you’re new: [/guide/getting-started/](/guide/getting-started/)
+### 1) Output you can verify (timestamps, quotes, citations)
 
-## Pricing & cost transparency: subscription vs bring-your-own-key
+Summaries are only useful if you can *trust them fast*.
 
-Keep this section practical: aim for a skimmable output, verify the parts you’ll rely on, and save the workflow as a shortcut once it works.
+- For YouTube: look for **timestamped summaries** you can click to jump to the moment.
+- For articles: look for **quote extraction** and (ideally) citations / source context.
 
-## Privacy checklist before you paste sensitive content into any extension
+If your tool can’t help you verify, you’ll end up re-watching/re-reading anyway.
 
-Keep this section practical: aim for a skimmable output, verify the parts you’ll rely on, and save the workflow as a shortcut once it works.
+### 2) BYOK/BYOM and provider choice (control quality + cost)
+
+A lot of extensions lock you into one model and one pricing plan. A better pattern is **BYOK/BYOM**:
+
+- you bring your own API key
+- you pick the provider/model that matches the task
+
+That unlocks practical control:
+
+- fast/cheap models for daily “good enough” summaries
+- premium models for important writing or deep analysis
+
+If you want a quick baseline: start with the **AI model cost calculator** to sanity-check what your workflow costs.
+
+- Cost calculator: [/ai-model-cost-calculator-and-price-comparation](/ai-model-cost-calculator-and-price-comparation)
+
+### 3) Saved prompts + shortcuts (repeatable workflow)
+
+The best “AI on the web” experience is not typing the same instruction 50 times.
+
+A strong alternative should let you:
+
+- save prompts
+- trigger them from a toolbar / context menu
+- keep them stable across updates
+
+### 4) Language + formatting preferences that actually stick
+
+If you set:
+
+- summary language
+- style/tone
+- output format
+
+…and it resets later, you don’t just lose a setting — you lose trust.
+
+## A practical workflow: summarize YouTube + webpages without switching tools
+
+Here’s a workflow many Merlin users want, but don’t consistently get:
+
+1) Open a YouTube video.
+2) Run **Summarize video with timestamps**.
+3) Skim sections first, then click timestamps to verify the 2–3 parts you’ll repeat.
+4) Ask a follow-up:
+   - “Put this into a table: topic / timestamp / takeaway / action item.”
+   - “Extract 5 direct quotes and what claim each supports.”
+5) Save the prompt as a shortcut so it’s repeatable.
+
+GPT Breeze is built around this style of workflow (shortcuts + YouTube toolbar + BYOK/BYOM).
+
+- Getting started: [/guide/getting-started/](/guide/getting-started/)
+- YouTube workflow overview: [/youtube-summary](/youtube-summary)
+
+## BYOK vs subscription: what’s actually cheaper?
+
+Subscriptions *feel* cheaper because the number is fixed. BYOK often *is* cheaper if you:
+
+- summarize a moderate number of pages/videos
+- pick the right model per task
+- avoid expensive models for “daily reading”
+
+The honest answer depends on your volume.
+
+Two practical tips:
+
+- If you summarize **a lot**, start with a faster/cheaper model for first-pass triage, then “upgrade” only the content that matters.
+- Use a cost calculator to estimate your typical week.
+
+- Pricing: [/pricing](/pricing)
+- Cost calculator: [/ai-model-cost-calculator-and-price-comparation](/ai-model-cost-calculator-and-price-comparation)
+
+## Privacy & data handling (don’t skip this)
+
+If you’re switching from Merlin because of trust/privacy concerns, evaluate your alternative on:
+
+- what gets sent to a model (page text, selections, transcripts)
+- whether your prompts/settings are stored locally
+- whether you can use **local models** (when content is sensitive)
+
+Start here:
+
+- Privacy-first workflow: [/privacy-first](/privacy-first)
+
+If you want local-only workflows:
+
+- Using local models: [/blog/local-llms-with-gpt-breeze](/blog/local-llms-with-gpt-breeze)
+
+## Migration tips (so switching is painless)
+
+If you’re already productive with Merlin, don’t “switch tools” — switch *workflows*.
+
+1) List your top 5 repeated prompts (summaries, rewrites, extraction, tables).
+2) Convert them into shortcuts (keep output formats strict).
+3) Define a default model for quick work + a “deep” model for important work.
+4) Add one reliability rule: always request timestamps/quotes when accuracy matters.
+
+## FAQ
+
+### What should I pick if I only want YouTube summaries?
+Choose a tool that supports **timestamped summaries** so you can verify quickly and jump around without rewinding.
+
+### Is BYOK worth the setup?
+If you care about cost control and model choice, yes. If you just want the fastest “one click and done,” a subscription tool can be simpler.
+
+### What if I need multiple providers?
+A good alternative supports multiple providers (or a router like OpenRouter) so you can swap models without changing your workflow.
 
 ---
 
-Want to try the workflow in under 2 minutes?
+Want to try a BYOK + shortcut workflow quickly?
 
 - Add GPT Breeze to Chrome: https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog
-
-## Continue reading
-
-- /pricing
-- /youtube-summary
-- /privacy-first
-- /guide/getting-started
-- /ai-model-cost-calculator-and-price-comparation
 
 <!-- Keywords (editorial): Merlin AI alternative; Merlin AI Chrome extension alternative; alternative to Merlin AI for YouTube summaries; web page summarizer Chrome extension; YouTube summarizer Chrome extension; summarize any webpage with AI; AI copilot browser extension; BYOK AI Chrome extension; privacy first AI summarizer; faster alternative to Merlin AI -->
