@@ -83,10 +83,43 @@ jobs:
           name: provider-patch
           path: provider.patch
 
+  generate_model_pricing:
+    name: Generate model pricing post (isolated)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Generate model pricing post (Asia/Saigon date)
+        run: |
+          DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)
+          node AUTONOMUS/tools/publish-model-pricing-guide.mjs --date "$DATE"
+
+      - name: Create patch artifact
+        run: |
+          git add -A
+          : > model-pricing.patch
+          if [ -n "$(git diff --cached --name-only)" ]; then
+            git diff --cached --binary > model-pricing.patch
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: model-pricing-patch
+          path: model-pricing.patch
+
   merge_and_ship:
     name: Merge + verify + ship (main)
     runs-on: ubuntu-latest
-    needs: [generate_blog, generate_provider]
+    needs: [generate_blog, generate_provider, generate_model_pricing]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -109,6 +142,11 @@ jobs:
           name: provider-patch
           path: .autonomus_artifacts
 
+      - uses: actions/download-artifact@v4
+        with:
+          name: model-pricing-patch
+          path: .autonomus_artifacts
+
       - name: Apply patches
         run: |
           ls -la .autonomus_artifacts
@@ -117,6 +155,9 @@ jobs:
           fi
           if [ -s .autonomus_artifacts/provider.patch ]; then
             git apply --binary .autonomus_artifacts/provider.patch
+          fi
+          if [ -s .autonomus_artifacts/model-pricing.patch ]; then
+            git apply --binary .autonomus_artifacts/model-pricing.patch
           fi
 
       - name: Refresh 1 blog post (when daily blog publish was skipped)
@@ -151,6 +192,7 @@ jobs:
           PROVIDER_CHANGED=$(git status --porcelain | awk '{print $2}' | grep '^src/content/guide/providers/' | wc -l | tr -d ' ')
 
           BLOG_SKIP_REASON="skipped (missing/incomplete research or no available topic)"
+          MODEL_PRICING_SKIP_REASON="skipped (no eligible model pricing page)"
           PROVIDER_SKIP_REASON="none"
 
           # Build a detailed shipped section with counts + links for each changed item.
@@ -158,6 +200,7 @@ jobs:
           node AUTONOMUS/tools/report-run-details.mjs \
             --site "https://gptbreeze.io" \
             --blog-skip-reason "$BLOG_SKIP_REASON" \
+            --model-pricing-skip-reason "$MODEL_PRICING_SKIP_REASON" \
             --provider-skip-reason "$PROVIDER_SKIP_REASON" \
             > "$DETAILS_FILE"
 

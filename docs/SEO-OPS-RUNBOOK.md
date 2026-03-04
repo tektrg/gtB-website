@@ -43,7 +43,7 @@ A complete SEO ops run ships **one improvement** and reports it clearly.
 `AUTONOMUS/content/topic-bank.json` is the **publish allowlist**. If it’s stale, AUTONOMUS will publish stale ideas.
 
 Rules:
-- Every topic must map to a cluster in `docs/SEO-op-alignment.md` (YouTube summarizer / web summary / shortcuts / BYOK+privacy / comparisons / provider setup / use-cases).
+- Every topic must map to a cluster in `docs/SEO-op-alignment.md` (YouTube summarizer / web summary / shortcuts / BYOK+privacy / comparisons / provider setup / **model pricing** / use-cases).
 - Prefer **user-intent** titles (how-to, alternative, comparison, checklist).
 - Add lightweight metadata to each topic (used for review): `pillar`, `intent`, `tags`, `sections`.
 - Remove anything that’s “SEO meta for builders” unless Trung explicitly asks.
@@ -72,7 +72,7 @@ If the research file is missing or incomplete, the publisher will refuse to publ
 
 Before publishing, confirm the topic is aligned:
 - Audience: GPT Breeze users (not “SEO for bloggers/builders”)
-- Pillar: YouTube summary / web summary / shortcuts / BYOM privacy+security / pricing+comparisons / provider setup
+- Pillar: YouTube summary / web summary / shortcuts / BYOM privacy+security / pricing+comparisons / provider setup / **model pricing**
 - Has at least 1–2 natural internal links to money pages (`/pricing`, `/privacy-first`, `/guide/getting-started/`, feature pages)
 
 ### 2.1 Research requirement (before publishing)
@@ -153,6 +153,27 @@ This is for debugging/auditing the provider catalog (not required for daily publ
 ```bash
 node AUTONOMUS/tools/providers-index.mjs
 ```
+
+---
+
+## 3.3 Daily run (model pricing post)
+
+This publishes one **model pricing guide** (only when pricing data is complete in `src/data/models-api.json`).
+
+```bash
+node AUTONOMUS/tools/publish-model-pricing-guide.mjs
+npm run seo:verify
+npm run check
+```
+
+Rules:
+- Only publish when `cost.input` + `cost.output` are present and non-zero.
+- Focus on major providers/labs first (OpenAI, Anthropic, xAI, Groq, DeepSeek, Kimi/Moonshot, Z.ai/GLM).
+- Always include internal links to:
+  - `/ai-model-cost-calculator-and-price-comparation`
+  - `/pricing`
+  - `/guide/getting-started/`
+  - `/privacy-first`
 
 ---
 

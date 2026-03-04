@@ -8,12 +8,14 @@ function parseArgs(argv) {
   const args = {
     site: 'https://gptbreeze.io',
     blogSkipReason: 'skipped (missing/incomplete research or no available topic)',
+    modelPricingSkipReason: 'skipped (no eligible model pricing page)',
     providerSkipReason: 'none',
   };
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--site') args.site = argv[++i];
     else if (a === '--blog-skip-reason') args.blogSkipReason = argv[++i];
+    else if (a === '--model-pricing-skip-reason') args.modelPricingSkipReason = argv[++i];
     else if (a === '--provider-skip-reason') args.providerSkipReason = argv[++i];
     else throw new Error(`Unknown arg: ${a}`);
   }
@@ -209,7 +211,7 @@ const providerEntriesRaw = entries
   .filter((e) => e.file.startsWith('src/content/guide/providers/') && e.file.endsWith('.md'))
   .map((e) => ({ ...e, changeType: classify(e.code) }));
 
-const blogItems = buildItems({ site: args.site, kind: 'blog', entries: blogEntriesRaw }).map((it) => {
+const allBlogItems = buildItems({ site: args.site, kind: 'blog', entries: blogEntriesRaw }).map((it) => {
   try {
     const abs = path.join(root, it.file);
     const { data } = parseFrontmatter(readText(abs));
@@ -219,6 +221,9 @@ const blogItems = buildItems({ site: args.site, kind: 'blog', entries: blogEntri
   }
 });
 
+const modelPricingItems = allBlogItems.filter((it) => String(it.topicId || '').startsWith('model-pricing-'));
+const blogItems = allBlogItems.filter((it) => !String(it.topicId || '').startsWith('model-pricing-'));
+
 const providerItems = buildItems({ site: args.site, kind: 'provider', entries: providerEntriesRaw });
 
 const out = [];
@@ -227,15 +232,19 @@ const out = [];
 out.push('**Shipped:**');
 out.push(summarizePublished('Blog', blogItems, args.blogSkipReason));
 out.push(...renderItems(blogItems));
+out.push(summarizePublished('Model pricing', modelPricingItems, args.modelPricingSkipReason));
+out.push(...renderItems(modelPricingItems));
 out.push(summarizePublished('Providers', providerItems, args.providerSkipReason));
 out.push(...renderItems(providerItems));
 out.push('');
 
 const blogWhy = computeWhyForBlog(blogItems, topicBank);
+const modelPricingWhy = modelPricingItems.length > 0 ? 'Model pricing / commercial' : null;
 const providerWhy = providerItems.length > 0 ? 'Provider setup / how-to' : null;
 
 out.push('**Why:**');
 out.push(`- Blog: ${blogWhy ?? args.blogSkipReason}`);
+out.push(`- Model pricing: ${modelPricingWhy ?? args.modelPricingSkipReason}`);
 out.push(`- Providers: ${providerWhy ?? args.providerSkipReason}`);
 
 process.stdout.write(out.join('\n') + '\n');

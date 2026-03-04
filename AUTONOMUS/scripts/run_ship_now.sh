@@ -39,7 +39,12 @@ npm run -s check
 
 log "(4) Write/update report: $REPORT"
 DETAILS_FILE="$(mktemp)"
-node AUTONOMUS/tools/report-run-details.mjs   --site "https://gptbreeze.io"   --blog-skip-reason "skipped (ship-now run)"   --provider-skip-reason "skipped (ship-now run)"   > "$DETAILS_FILE"
+node AUTONOMUS/tools/report-run-details.mjs \
+  --site "https://gptbreeze.io" \
+  --blog-skip-reason "skipped (ship-now run)" \
+  --model-pricing-skip-reason "skipped (ship-now run)" \
+  --provider-skip-reason "skipped (ship-now run)" \
+  > "$DETAILS_FILE"
 
 # Normalize legacy headers (keep only append-only run blocks if present)
 if [[ -f "$REPORT" ]]; then

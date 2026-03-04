@@ -34,7 +34,7 @@ This document defines the **holistic SEO operation requirements** for the **GPT 
 | 🥈 Secondary | **Engagement (scroll / time)** | ✅ GA4 events: `scroll_depth`, `engaged_session` (`public/js/analytics.js`) |
 | 🥉 Optional (later) | Guide completion / newsletter signup | 🟨 Not implemented |
 
-Note: `chrome_extension_click` currently triggers only for links matching `chrome.google.com/webstore` in `public/js/analytics.js` (some pages link to `chromewebstore.google.com`, which will not be counted until updated).
+Note: `chrome_extension_click` tracks Chrome Web Store links on both domains (`chrome.google.com/webstore` and `chromewebstore.google.com`) in `public/js/analytics.js`.
 
 ### 1.2 SEO KPIs
 
@@ -143,6 +143,7 @@ Note: `chrome_extension_click` currently triggers only for links matching `chrom
 | **BYOK / Privacy** | "bring your own API key", "privacy-first AI" | `/privacy-first` (🟨 `/features/*` planned) |
 | **Competitor comparisons** | "Eightify alternative", "HARPA AI alternative" | 🟨 `/compare/*` planned |
 | **Provider setup** | "how to use Groq with GPT Breeze", "Ollama Chrome extension" | `/guide/providers/*` |
+| **Model pricing** | "gpt-4o pricing", "grok 4 pricing", "claude opus pricing", "deepseek reasoner pricing" | `/ai-model-cost-calculator-and-price-comparation`, `/blog/*pricing-guide` |
 | **Meeting/video notes** | "AI meeting notes", "video notes Chrome" | 🟨 `/use-cases/*` planned, `/blog/*` |
 
 ### 4.3 SEO Money Pages (Internal Linking Targets)
@@ -355,6 +356,48 @@ Build **topical authority** around "AI provider setup" by publishing a setup gui
 | `AUTONOMUS/tools/providers-index.mjs` | Parse `models-api.json` → inventory snapshot (debug/audit; optional) |
 | `AUTONOMUS/tools/publish-provider-guide.mjs` | Pick next provider (priority → fallback by model count) → generate markdown → write to `src/content/guide/providers/` |
 | `src/pages/guide/providers.astro` | Hub page listing all published provider guides |
+
+---
+
+## 7.9 Workstream 2B — Model Pricing Pillar Content
+
+### 7.9.1 Objective
+
+Build topical authority around **model pricing** ("<model> pricing", "<model> cost per 1M tokens") and funnel users into:
+- the **cost calculator** (`/ai-model-cost-calculator-and-price-comparation`)
+- GPT Breeze’s BYOK/BYOM workflow (pricing + setup pages)
+
+### 7.9.2 Scope guardrails (data completeness)
+
+Pricing data is **incomplete** for many smaller providers in `src/data/models-api.json`. For the pricing pillar we only publish for:
+- **major providers / labs** where `cost.input` + `cost.output` are present and non-zero
+- **popular + new models** (prefer newest release_date / last_updated)
+
+Initial provider focus:
+- OpenAI (`openai`)
+- Anthropic (`anthropic`)
+- xAI (`xai`)
+- Groq (`groq`)
+- DeepSeek (`deepseek`)
+- Moonshot/Kimi (`moonshotai`)
+- Z.ai / GLM (`zai`)
+- OpenRouter (`openrouter`) **only when pricing fields are present** (skip cost=0 entries)
+
+### 7.9.3 Content architecture
+
+- Spoke pages: `/blog/<model>-pricing-guide/`
+- Hub page: (optional later) a pricing hub that links to top model pricing guides and the calculator
+
+Each pricing guide must:
+- show **input/output price per 1M tokens** (and cache read/write if available)
+- include at least 1–2 internal links to money pages: `/ai-model-cost-calculator-and-price-comparation`, `/pricing`, `/guide/getting-started/`, `/privacy-first`
+- clearly state **data source + freshness date**
+
+### 7.9.4 Automation scripts
+
+| Script | Purpose |
+| --- | --- |
+| `AUTONOMUS/tools/publish-model-pricing-guide.mjs` | Pick next eligible model (major providers + complete pricing) → generate pricing guide markdown under `src/content/blog/` → update `AUTONOMUS/state/published-model-pricing.jsonl` |
 
 ---
 
