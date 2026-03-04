@@ -176,11 +176,11 @@ All content must prioritize linking to these pages:
 
 ✅ Implemented in `.github/workflows/autonomus-daily-publish.yml`.
 
-The GitHub Actions workflow runs **daily at 01:00 Asia/Saigon** with **3 parallel-then-merge jobs**:
+The GitHub Actions workflow runs **twice daily at 01:00 and 13:00 Asia/Saigon** with **3 parallel-then-merge jobs**:
 
 ```mermaid
 graph TD
-    A["⏰ Daily Trigger (01:00 ICT)"] --> B["Job 1: Blog Post"]
+    A["⏰ Trigger (01:00 & 13:00 ICT)"] --> B["Job 1: Blog Post"]
     A --> C["Job 2: Provider Guide"]
     B --> D["blog.patch artifact"]
     C --> E["provider.patch artifact"]
