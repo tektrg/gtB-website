@@ -21,6 +21,7 @@
 - Add a daily chore stream: internal link maintenance + safe year rollover updates.
 
 ## Daily log
+- 2026-03-05: published src/content/blog/turn-video-into-meeting-notes-a-workflow-for-action-items-and-follow-ups.md (topic: ai-meeting-notes-from-video).
 - 2026-03-04: published src/content/blog/maxai-alternative-a-cleaner-byok-workflow-for-research-and-writing.md (topic: maxai-alternative); published src/content/blog/merlin-ai-alternative-faster-page-youtube-summaries-with-more-control.md (topic: merlin-ai-alternative).
 - 2026-03-03: published src/content/blog/eightify-alternative-better-youtube-summaries-with-byok-timestamps.md (topic: eightify-alternative); published src/content/blog/save-prompts-as-one-click-shortcuts-build-your-personal-ai-workflow.md (topic: save-prompts-as-one-click-shortcuts).
 - 2026-03-02: published src/content/blog/how-to-summarize-web-articles-in-chrome-without-copy-pasting-everything.md (topic: summarize-web-articles-in-chrome); published src/content/blog/how-to-summarize-long-youtube-videos-2-3-hours-without-losing-the-good-stuff.md (topic: summarize-long-youtube-videos).
