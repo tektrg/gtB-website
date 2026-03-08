@@ -587,36 +587,6 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
         `;
       });
 
-      // Add search column
-      thead.innerHTML += `
-        <th class="th-center search-column">
-          <div class="search-wrapper-compact">
-            <input
-              type="text"
-              id="searchInput"
-              class="search-input-compact"
-              placeholder="Search to add model..."
-              oninput="handleSearchInput(event)"
-            />
-            <span class="search-icon">🔍</span>
-            <div id="searchDropdown" class="search-results-dropdown" style="
-              position: absolute;
-              top: calc(100% + 8px);
-              left: 0;
-              right: 0;
-              max-height: 320px;
-              overflow-y: auto;
-              background: white;
-              border: 1px solid #e5e7eb;
-              border-radius: 8px;
-              box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-              z-index: 999;
-            "></div>
-          </div>
-          <div class="search-hint-text">Type to find models</div>
-        </th>
-      `;
-
       // Calculate costs for each model
       const costs = selectedModelsData.map(model => {
         const inputCost = (inputTokens / 1000000) * (model.cost?.input || 0);
@@ -645,50 +615,43 @@ const description = "Calculate and compare AI model costs across OpenAI, Anthrop
           <tr>
             <td class="text-primary"><strong>Input Cost Rate</strong></td>
             ${costs.map(c => `<td class="text-center text-secondary">${c.inputRate.toFixed(2)}/1M</td>`).join('')}
-            <td class="search-column"></td>
           </tr>
           <tr>
             <td class="text-primary"><strong>Output Cost Rate</strong></td>
             ${costs.map(c => `<td class="text-center text-secondary">${c.outputRate.toFixed(2)}/1M</td>`).join('')}
-            <td class="search-column"></td>
           </tr>
           <tr class="highlighted">
-            <td class="text-primary"><strong>Input Cost</strong><br/><span style="font-size: 0.875rem; color: #6b7280;">(${formatNumber(inputTokens)} tokens)</span></td>
+            <td class="text-primary"><strong>Input Cost</strong><br/><span class="table-row-meta">(${formatNumber(inputTokens)} tokens)</span></td>
             ${costs.map(c => `<td class="text-center"><strong>${formatCost(c.inputCost)}</strong></td>`).join('')}
-            <td class="search-column"></td>
           </tr>
           <tr class="highlighted">
-            <td class="text-primary"><strong>Output Cost</strong><br/><span style="font-size: 0.875rem; color: #6b7280;">(${formatNumber(outputTokens)} tokens)</span></td>
+            <td class="text-primary"><strong>Output Cost</strong><br/><span class="table-row-meta">(${formatNumber(outputTokens)} tokens)</span></td>
             ${costs.map(c => `<td class="text-center"><strong>${formatCost(c.outputCost)}</strong></td>`).join('')}
-            <td class="search-column"></td>
           </tr>
         `;
 
         if (cacheReadTokens > 0) {
           rows += `
             <tr>
-              <td class="text-primary"><strong>Cache Read Cost</strong><br/><span style="font-size: 0.875rem; color: #6b7280;">(${formatNumber(cacheReadTokens)} tokens)</span></td>
+              <td class="text-primary"><strong>Cache Read Cost</strong><br/><span class="table-row-meta">(${formatNumber(cacheReadTokens)} tokens)</span></td>
               ${costs.map(c => `<td class="text-center">${formatCost(c.cacheCost)}</td>`).join('')}
-              <td class="search-column"></td>
             </tr>
           `;
         }
 
         rows += `
           <tr class="selected" style="background: #f0f9ff;">
-            <td class="text-primary"><strong style="font-size: 1.125rem;">Total Cost</strong></td>
-            ${costs.map(c => `<td class="text-center"><strong style="font-size: 1.25rem; color: #6366f1;">${formatCost(c.totalCost)}</strong></td>`).join('')}
-            <td class="search-column"></td>
+            <td class="text-primary"><strong class="table-total-label">Total Cost</strong></td>
+            ${costs.map(c => `<td class="text-center"><strong class="table-total-value">${formatCost(c.totalCost)}</strong></td>`).join('')}
           </tr>
         `;
       } else {
         // Show empty state
         rows = `
           <tr>
-            <td class="text-center" style="padding: 40px; color: #6b7280;">
+            <td class="text-center" style="padding: 40px; color: #6b7280;" colspan="2">
               Select models using the search box to compare costs
             </td>
-            <td class="search-column"></td>
           </tr>
         `;
       }
