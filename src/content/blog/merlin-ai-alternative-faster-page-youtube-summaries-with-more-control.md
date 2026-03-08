@@ -1,8 +1,10 @@
 ---
+
 title: "Merlin AI Alternative: Faster Page + YouTube Summaries with More Control"
 description: "If you use Merlin AI but want more control over models, cost, and privacy, this guide shows what to compare."
 pubDate: 2026-03-04T00:00:00.000Z
-topicId: "merlin-ai-alternative"
+updatedDate: 2026-03-09T00:00:00.000Z
+topicId: "harpa-ai-alternative"
 author: "GPT Breeze"
 tags:
   - "Merlin AI alternative"
