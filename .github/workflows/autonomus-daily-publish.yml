@@ -32,6 +32,10 @@ jobs:
       - name: Install deps
         run: npm ci
 
+      - name: Ensure topic bank unused buffer
+        run: |
+          node AUTONOMUS/tools/topic-bank-expand.mjs --buffer 30
+
       - name: Generate blog post (Asia/Saigon date)
         run: |
           DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)

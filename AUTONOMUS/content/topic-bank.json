@@ -193,6 +193,673 @@
         "Privacy notes",
         "FAQ"
       ]
+    },
+
+    {
+      "id": "harpa-ai-alternative",
+      "title": "HARPA AI Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
+      "description": "A comparison guide for people using HARPA AI (automation + web scraping) who want more control over models, costs, and privacy via BYOK.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": [
+        "HARPA AI alternative",
+        "BYOK",
+        "Chrome extension",
+        "privacy",
+        "summarizer"
+      ],
+      "sections": [
+        "Why people look for alternatives",
+        "The checklist: quality, speed, and reliability",
+        "BYOK cost control vs subscription pricing",
+        "Privacy: what data gets sent where",
+        "A clean setup in GPT Breeze (step-by-step)",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "sider-alternative",
+      "title": "Sider Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
+      "description": "A comparison guide for people using Sider (sidebar assistant) who want more control over models, costs, and privacy via BYOK.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": [
+        "Sider alternative",
+        "BYOK",
+        "Chrome extension",
+        "privacy",
+        "summarizer"
+      ],
+      "sections": [
+        "Why people look for alternatives",
+        "The checklist: quality, speed, and reliability",
+        "BYOK cost control vs subscription pricing",
+        "Privacy: what data gets sent where",
+        "A clean setup in GPT Breeze (step-by-step)",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "monica-ai-alternative",
+      "title": "Monica AI Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
+      "description": "A comparison guide for people using Monica AI (browser copilot) who want more control over models, costs, and privacy via BYOK.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": [
+        "Monica AI alternative",
+        "BYOK",
+        "Chrome extension",
+        "privacy",
+        "summarizer"
+      ],
+      "sections": [
+        "Why people look for alternatives",
+        "The checklist: quality, speed, and reliability",
+        "BYOK cost control vs subscription pricing",
+        "Privacy: what data gets sent where",
+        "A clean setup in GPT Breeze (step-by-step)",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "chatgpt-for-google-alternative",
+      "title": "ChatGPT for Google Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
+      "description": "A comparison guide for people using ChatGPT for Google (search overlay) who want more control over models, costs, and privacy via BYOK.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": [
+        "ChatGPT for Google alternative",
+        "BYOK",
+        "Chrome extension",
+        "privacy",
+        "summarizer"
+      ],
+      "sections": [
+        "Why people look for alternatives",
+        "The checklist: quality, speed, and reliability",
+        "BYOK cost control vs subscription pricing",
+        "Privacy: what data gets sent where",
+        "A clean setup in GPT Breeze (step-by-step)",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "wiseone-alternative",
+      "title": "Wiseone Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
+      "description": "A comparison guide for people using Wiseone (reading assistant) who want more control over models, costs, and privacy via BYOK.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": [
+        "Wiseone alternative",
+        "BYOK",
+        "Chrome extension",
+        "privacy",
+        "summarizer"
+      ],
+      "sections": [
+        "Why people look for alternatives",
+        "The checklist: quality, speed, and reliability",
+        "BYOK cost control vs subscription pricing",
+        "Privacy: what data gets sent where",
+        "A clean setup in GPT Breeze (step-by-step)",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "liner-alternative",
+      "title": "LINER Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
+      "description": "A comparison guide for people using LINER (highlighting + summaries) who want more control over models, costs, and privacy via BYOK.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": [
+        "LINER alternative",
+        "BYOK",
+        "Chrome extension",
+        "privacy",
+        "summarizer"
+      ],
+      "sections": [
+        "Why people look for alternatives",
+        "The checklist: quality, speed, and reliability",
+        "BYOK cost control vs subscription pricing",
+        "Privacy: what data gets sent where",
+        "A clean setup in GPT Breeze (step-by-step)",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "glasp-alternative",
+      "title": "Glasp Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
+      "description": "A comparison guide for people using Glasp (highlights + knowledge base) who want more control over models, costs, and privacy via BYOK.",
+      "pillar": "Competitor comparisons",
+      "intent": "commercial",
+      "tags": [
+        "Glasp alternative",
+        "BYOK",
+        "Chrome extension",
+        "privacy",
+        "summarizer"
+      ],
+      "sections": [
+        "Why people look for alternatives",
+        "The checklist: quality, speed, and reliability",
+        "BYOK cost control vs subscription pricing",
+        "Privacy: what data gets sent where",
+        "A clean setup in GPT Breeze (step-by-step)",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "summarize-youtube-lectures-into-study-notes",
+      "title": "How to Summarize YouTube Lectures into Study Notes (Outline + Flashcards)",
+      "description": "A repeatable workflow for turning long lectures into structured notes, key concepts, and flashcards you can review later.",
+      "pillar": "YouTube summarizer",
+      "intent": "how-to",
+      "tags": [
+        "YouTube summarizer",
+        "study notes",
+        "flashcards",
+        "transcript"
+      ],
+      "sections": [
+        "What to capture (concepts, examples, definitions)",
+        "Step-by-step: lecture → notes → flashcards",
+        "Prompt templates for study notes",
+        "How to verify key claims quickly",
+        "Turn notes into a spaced-repetition routine",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "summarize-youtube-podcasts-into-actionable-takeaways",
+      "title": "Summarize YouTube Podcasts into Actionable Takeaways (with Timestamps)",
+      "description": "A podcast workflow: extract decisions, principles, and action items with timestamps so you can revisit the exact moment later.",
+      "pillar": "YouTube summarizer",
+      "intent": "how-to",
+      "tags": [
+        "YouTube",
+        "podcast",
+        "timestamps",
+        "action items"
+      ],
+      "sections": [
+        "Why podcasts are hard to summarize",
+        "The workflow: chapters + timestamps + takeaways",
+        "Prompt templates you can save as shortcuts",
+        "How to build a personal “idea library”",
+        "Common mistakes (and fixes)",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "youtube-summary-for-product-research",
+      "title": "Use YouTube Summaries for Product Research (Extract Features, Pricing, and Claims)",
+      "description": "How to watch competitor demos faster: extract features, pricing claims, limitations, and questions to validate.",
+      "pillar": "YouTube summarizer",
+      "intent": "how-to",
+      "tags": [
+        "product research",
+        "competitor research",
+        "YouTube summary",
+        "workflow"
+      ],
+      "sections": [
+        "What to extract from product demos",
+        "Step-by-step: demo → feature list → checklist",
+        "Prompt templates for extracting claims",
+        "How to validate claims (without rewatching)",
+        "Turn it into a comparison table",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "summarize-research-papers-in-browser",
+      "title": "How to Summarize Research Papers in Your Browser (Without Skimming for Hours)",
+      "description": "A workflow for extracting the thesis, methods, results, and limitations — plus questions to ask before you cite anything.",
+      "pillar": "Web/article summary",
+      "intent": "how-to",
+      "tags": [
+        "research paper",
+        "summary",
+        "workflow",
+        "Chrome"
+      ],
+      "sections": [
+        "The 5 things you need from any paper",
+        "Step-by-step: paper → structured summary",
+        "Prompts for “limitations” and “what would change my mind”",
+        "How to compare 3 papers quickly",
+        "Turn summaries into notes you can reuse",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "summarize-github-repos-for-onboarding",
+      "title": "Summarize GitHub Repos for Onboarding (README → Setup Steps → Gotchas)",
+      "description": "A practical way to turn messy READMEs into a clean “run it locally” checklist and a list of likely pitfalls.",
+      "pillar": "Web/article summary",
+      "intent": "how-to",
+      "tags": [
+        "GitHub",
+        "onboarding",
+        "README",
+        "developer productivity"
+      ],
+      "sections": [
+        "What to extract (setup, env vars, commands)",
+        "Step-by-step: README → checklist",
+        "Prompts for troubleshooting and “unknown unknowns”",
+        "How to keep your checklist up to date",
+        "Shareable notes for teammates",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "prompt-library-for-browser-ai",
+      "title": "Prompt Library for Browser AI: How to Build a “Start Here” Menu (Not a Blank Box)",
+      "description": "Why most users struggle with the first prompt — and how a searchable prompt library (cached + fast) changes onboarding and retention.",
+      "pillar": "Chrome extension AI",
+      "intent": "use-case",
+      "tags": [
+        "prompt library",
+        "shortcuts",
+        "onboarding",
+        "workflow"
+      ],
+      "sections": [
+        "The real UX problem: the blank prompt box",
+        "What a good library includes (roles + sites + outcomes)",
+        "Implementation: Notion as DB → extension cache",
+        "Distribution: where to surface it in onboarding",
+        "How to collect and iterate prompts safely",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "build-shortcuts-for-customer-support",
+      "title": "Build One-Click Shortcuts for Customer Support (Triage → Repro → Next Step)",
+      "description": "Turn repetitive support work into a consistent workflow: summarize the ticket, ask for missing info, and propose a repro checklist.",
+      "pillar": "Chrome extension AI",
+      "intent": "how-to",
+      "tags": [
+        "customer support",
+        "shortcuts",
+        "workflow",
+        "product"
+      ],
+      "sections": [
+        "What support teams repeat every day",
+        "Step-by-step: ticket → summary → questions",
+        "Prompt templates to save as shortcuts",
+        "How to avoid hallucinated “facts” in support",
+        "Internal links: turn support into docs",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "byok-cost-control-for-browser-ai",
+      "title": "BYOK Cost Control for Browser AI: How to Stop Paying for “Unlimited” Plans",
+      "description": "A practical guide to estimate token costs, set budgets, and choose models intentionally — especially for summarizing video and web pages.",
+      "pillar": "BYOK / Privacy",
+      "intent": "commercial",
+      "tags": [
+        "BYOK",
+        "cost control",
+        "pricing",
+        "tokens"
+      ],
+      "sections": [
+        "Subscriptions vs BYOK: what you’re really paying for",
+        "How to estimate costs for your workflows",
+        "Model selection: fast vs cheap vs quality",
+        "Budget guardrails (habits, not just settings)",
+        "A simple setup in GPT Breeze",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "api-key-hygiene-for-teams",
+      "title": "API Key Hygiene for Teams Using BYOK (Browser Extensions + Shared Machines)",
+      "description": "Rules and workflows for keeping keys safe: least privilege, rotation, and what to do when a key leaks.",
+      "pillar": "BYOK / Privacy",
+      "intent": "trust",
+      "tags": [
+        "API keys",
+        "security",
+        "team",
+        "BYOK"
+      ],
+      "sections": [
+        "Threat model: how keys leak in real life",
+        "Key storage and rotation basics",
+        "Shared machines and browser profiles",
+        "Incident response: if a key leaks",
+        "Policy template you can copy",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "turn-webinars-into-sales-followups",
+      "title": "Turn Webinars into Sales Follow-Ups (Objections, Quotes, and Next Steps)",
+      "description": "A playbook for extracting objections, quotes, and follow-ups from long webinars so sales teams can act fast.",
+      "pillar": "Meeting/video notes",
+      "intent": "use-case",
+      "tags": [
+        "webinar",
+        "sales",
+        "follow-ups",
+        "notes"
+      ],
+      "sections": [
+        "What to extract from webinars (not just summaries)",
+        "Step-by-step: webinar → follow-up pack",
+        "Prompt templates for objections and quotes",
+        "How to verify claims with timestamps",
+        "Turn it into a reusable sales asset",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "turn-interviews-into-insights",
+      "title": "Turn User Interviews into Insights (Themes, Quotes, and a Prioritized List)",
+      "description": "A workflow for converting messy interview transcripts into themes, quotes, and a prioritized set of product actions.",
+      "pillar": "Meeting/video notes",
+      "intent": "use-case",
+      "tags": [
+        "user interviews",
+        "product",
+        "research",
+        "themes"
+      ],
+      "sections": [
+        "The 3 outputs you actually need from interviews",
+        "Step-by-step: transcript → themes",
+        "Prompt templates for quotes and evidence",
+        "How to avoid confirmation bias",
+        "Turn themes into a roadmap input",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "summarize-privacy-policy-in-plain-english",
+      "title": "How to Summarize a Privacy Policy in Plain English (What to Look For)",
+      "description": "A workflow to scan privacy policies fast: data collected, retention, sharing, and the few clauses that should make you pause.",
+      "pillar": "Web/article summary",
+      "intent": "trust",
+      "tags": [
+        "privacy policy",
+        "summary",
+        "checklist",
+        "privacy-first"
+      ],
+      "sections": [
+        "The 7 clauses that matter most",
+        "Step-by-step: policy → plain-English summary",
+        "Red flags (data sharing, retention, training)",
+        "Questions to ask before you accept",
+        "How to keep a personal “tool trust” checklist",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "summarize-terms-and-conditions-checklist",
+      "title": "Summarize Terms & Conditions into a Checklist (Refunds, Liability, Termination)",
+      "description": "Turn long T&C pages into a short checklist so you can spot the important parts without reading legal text line by line.",
+      "pillar": "Web/article summary",
+      "intent": "how-to",
+      "tags": [
+        "terms and conditions",
+        "checklist",
+        "summary"
+      ],
+      "sections": [
+        "What T&C usually hides in plain sight",
+        "Step-by-step: T&C → checklist",
+        "Common traps (termination, refunds, arbitration)",
+        "What to do when you find a red flag",
+        "Save as a reusable shortcut",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "summarize-competitor-pricing-pages",
+      "title": "Summarize Competitor Pricing Pages (Plans, Limits, Hidden Costs)",
+      "description": "A repeatable workflow to extract plan limits, fair-usage rules, and hidden costs from pricing pages and help you compare quickly.",
+      "pillar": "Web/article summary",
+      "intent": "commercial",
+      "tags": [
+        "pricing page",
+        "competitor research",
+        "comparison",
+        "cost"
+      ],
+      "sections": [
+        "What to extract (limits, caps, add-ons)",
+        "Step-by-step: pricing page → comparison table",
+        "Questions to ask before you buy",
+        "BYOK vs subscription: how to compare fairly",
+        "How to save this as a shortcut",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "turn-web-pages-into-sops",
+      "title": "Turn Web Pages into SOPs (Step-by-Step Checklists You Can Reuse)",
+      "description": "Convert messy documentation into a clean SOP: steps, prerequisites, warnings, and a final verification checklist.",
+      "pillar": "Web/article summary",
+      "intent": "use-case",
+      "tags": [
+        "SOP",
+        "checklist",
+        "documentation",
+        "workflow"
+      ],
+      "sections": [
+        "What makes an SOP actually usable",
+        "Step-by-step: docs → SOP",
+        "Prompts for prerequisites and “gotchas”",
+        "How to add a verification step",
+        "Shareable SOP templates",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "chat-with-any-web-page-workflow",
+      "title": "Chat with Any Web Page: A Workflow for Faster Research (Without Copy/Paste)",
+      "description": "A practical workflow: summarize first, then ask targeted questions and extract citations/quotes from the page.",
+      "pillar": "Web/article summary",
+      "intent": "how-to",
+      "tags": [
+        "web page chat",
+        "research",
+        "workflow",
+        "Chrome extension"
+      ],
+      "sections": [
+        "Why “just ask questions” fails",
+        "Step-by-step: page → summary → Q&A",
+        "Prompts for extracting quotes and citations",
+        "How to avoid hallucinated claims",
+        "Turn findings into notes you can reuse",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "save-and-reuse-prompts-across-sites",
+      "title": "Save and Reuse Prompts Across Sites (YouTube, Notion, GitHub, Docs)",
+      "description": "How to turn your best prompts into site-specific shortcuts so you can run the same workflow anywhere in seconds.",
+      "pillar": "Chrome extension AI",
+      "intent": "how-to",
+      "tags": [
+        "shortcuts",
+        "prompts",
+        "workflow",
+        "productivity"
+      ],
+      "sections": [
+        "Why reuse beats “prompting from scratch”",
+        "Step-by-step: turn prompts into shortcuts",
+        "Site-specific examples (YouTube, GitHub, Notion)",
+        "How to name and organize shortcuts",
+        "Sharing shortcuts with a team",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "site-specific-shortcuts-youtube-github-notion",
+      "title": "Site-Specific Shortcuts: The Fastest Way to Make Browser AI Feel “Native”",
+      "description": "A playbook to design shortcuts per site: what to summarize, what to extract, and what to ask next.",
+      "pillar": "Chrome extension AI",
+      "intent": "use-case",
+      "tags": [
+        "shortcuts",
+        "onboarding",
+        "UX",
+        "workflow"
+      ],
+      "sections": [
+        "The “context gap” problem in browser AI",
+        "How to design a shortcut per site",
+        "Examples: YouTube, GitHub, Notion, docs",
+        "Naming conventions that scale",
+        "How to iterate without breaking trust",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "prompt-hygiene-for-repeatable-shortcuts",
+      "title": "Prompt Hygiene for Repeatable Shortcuts (How to Stop Getting Random Outputs)",
+      "description": "A practical guide to writing shortcuts that behave: constraints, examples, and verification steps to reduce hallucinations.",
+      "pillar": "Chrome extension AI",
+      "intent": "trust",
+      "tags": [
+        "prompt hygiene",
+        "shortcuts",
+        "reliability",
+        "workflow"
+      ],
+      "sections": [
+        "Why prompts drift over time",
+        "Constraints that increase reliability",
+        "Add a verification step (always)",
+        "When to use templates vs free-form",
+        "A checklist for “safe shortcuts”",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "byok-setup-guide-for-beginners",
+      "title": "BYOK Setup Guide for Beginners (Pick a Provider, Add a Key, Avoid Mistakes)",
+      "description": "A beginner-friendly guide to BYOK: choose a provider, add your API key safely, and set up a model that won’t surprise you.",
+      "pillar": "BYOK / Privacy",
+      "intent": "how-to",
+      "tags": [
+        "BYOK",
+        "setup",
+        "API key",
+        "privacy"
+      ],
+      "sections": [
+        "What BYOK is (and what it isn’t)",
+        "Pick a provider: tradeoffs that matter",
+        "Step-by-step: add a key safely",
+        "Common mistakes (and how to fix them)",
+        "A simple “safe default” configuration",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "privacy-first-ai-chrome-extension-checklist",
+      "title": "Privacy-First AI Chrome Extension Checklist (Before You Install Anything)",
+      "description": "A checklist for evaluating AI extensions: permissions, data flows, retention, and whether BYOK actually protects you.",
+      "pillar": "BYOK / Privacy",
+      "intent": "trust",
+      "tags": [
+        "privacy-first",
+        "Chrome extension",
+        "security",
+        "checklist"
+      ],
+      "sections": [
+        "Permissions: what’s reasonable vs risky",
+        "Data flow: what gets sent to models",
+        "Retention and training policies",
+        "BYOK: what it protects (and what it doesn’t)",
+        "A simple evaluation scorecard",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "summarize-youtube-coding-tutorials",
+      "title": "Summarize YouTube Coding Tutorials into a Build Plan (Steps + Gotchas)",
+      "description": "Turn long coding videos into an actionable build plan: prerequisites, steps, pitfalls, and a verification checklist.",
+      "pillar": "YouTube summarizer",
+      "intent": "how-to",
+      "tags": [
+        "coding tutorials",
+        "YouTube",
+        "workflow",
+        "checklist"
+      ],
+      "sections": [
+        "What to extract from coding tutorials",
+        "Step-by-step: tutorial → build plan",
+        "Prompts for prerequisites and environment setup",
+        "How to capture “gotchas” and edge cases",
+        "Turn it into a reusable checklist",
+        "FAQ"
+      ]
+    },
+
+    {
+      "id": "extract-quotes-from-youtube-with-timestamps",
+      "title": "Extract Quotes from YouTube (with Timestamps) for Writing and Research",
+      "description": "A workflow to pull the few quotable lines with timestamps so you can cite and revisit them instantly.",
+      "pillar": "YouTube summarizer",
+      "intent": "use-case",
+      "tags": [
+        "quotes",
+        "timestamps",
+        "research",
+        "writing"
+      ],
+      "sections": [
+        "What makes a quote usable",
+        "Step-by-step: video → quotes list",
+        "Prompts for claims + supporting context",
+        "How to avoid misquoting",
+        "Turn quotes into a writing outline",
+        "FAQ"
+      ]
     }
+
   ]
 }
