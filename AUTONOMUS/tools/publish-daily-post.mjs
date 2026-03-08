@@ -118,6 +118,223 @@ function computeUsedTopicIds() {
   return used;
 }
 
+const STOPWORDS = new Set([
+  'a',
+  'an',
+  'and',
+  'are',
+  'as',
+  'at',
+  'be',
+  'but',
+  'by',
+  'for',
+  'from',
+  'how',
+  'i',
+  'in',
+  'into',
+  'is',
+  'it',
+  'of',
+  'on',
+  'or',
+  'our',
+  'so',
+  'that',
+  'the',
+  'their',
+  'then',
+  'this',
+  'to',
+  'vs',
+  'we',
+  'what',
+  'when',
+  'with',
+  'you',
+  'your',
+]);
+
+const GENERIC_INTENT_TOKENS = new Set([
+  // Intent words
+  'alternative',
+  'alternatives',
+  'best',
+  'comparison',
+  'compare',
+  'guide',
+  'how',
+  'list',
+  'review',
+  'reviews',
+  'tool',
+  'tools',
+  'top',
+  'vs',
+  'workflow',
+
+  // Domain/generic terms (too broad to be a “core entity”)
+  'ai',
+  'article',
+  'browser',
+  'chrome',
+  'extension',
+  'extensions',
+  'meeting',
+  'note',
+  'notes',
+  'pdf',
+  'prompt',
+  'prompts',
+  'recording',
+  'summaries',
+  'summarize',
+  'summarizer',
+  'summary',
+  'timestamp',
+  'timestamps',
+  'transcript',
+  'transcripts',
+  'video',
+  'videos',
+  'web',
+  'youtube',
+]);
+
+function stemToken(t) {
+  const x = String(t).toLowerCase();
+  if (x.length <= 3) return x;
+  if (x.endsWith('ies') && x.length > 4) return x.slice(0, -3) + 'y';
+  if (x.endsWith('s') && !x.endsWith('ss')) return x.slice(0, -1);
+  return x;
+}
+
+function tokenizeIntentText(text) {
+  const s = String(text ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+
+  if (!s) return [];
+
+  return s
+    .split(/\s+/)
+    .map(stemToken)
+    .filter(Boolean)
+    .filter((t) => !STOPWORDS.has(t))
+    .filter((t) => !/^\d{4}$/.test(t));
+}
+
+function jaccard(a, b) {
+  const A = new Set(a);
+  const B = new Set(b);
+  if (A.size === 0 || B.size === 0) return 0;
+  let inter = 0;
+  for (const x of A) if (B.has(x)) inter++;
+  const union = A.size + B.size - inter;
+  return union === 0 ? 0 : inter / union;
+}
+
+function coreTokens(tokens) {
+  return tokens.filter((t) => !GENERIC_INTENT_TOKENS.has(t));
+}
+
+function buildBlogIndex() {
+  const out = [];
+  for (const file of listMarkdown(blogDir)) {
+    try {
+      const content = fs.readFileSync(file, 'utf8');
+      const { data } = parseFrontmatter(content);
+      const slug = path.basename(file, '.md');
+      const title = data.title ? String(data.title) : '';
+      const description = data.description ? String(data.description) : '';
+
+      const tokens = tokenizeIntentText(`${title} ${slug} ${description}`);
+      out.push({
+        file,
+        slug,
+        title,
+        description,
+        topicId: data.topicId ? String(data.topicId) : null,
+        tokens,
+      });
+    } catch {
+      // ignore
+    }
+  }
+  return out;
+}
+
+function findCloseIntentMatch(topic, index) {
+  const tTokens = tokenizeIntentText(`${topic?.title ?? ''} ${topic?.id ?? ''} ${topic?.description ?? ''}`);
+  const tCore = coreTokens(tTokens);
+
+  let best = null;
+  for (const page of index) {
+    const scoreBase = jaccard(tTokens, page.tokens);
+
+    const pCore = coreTokens(page.tokens);
+    const coreOverlap = (() => {
+      const A = new Set(tCore);
+      let n = 0;
+      for (const x of pCore) if (A.has(x)) n++;
+      return n;
+    })();
+
+    let score = scoreBase;
+    if (coreOverlap >= 1) score += 0.35;
+
+    if (!best || score > best.score) {
+      best = { page, score, scoreBase, coreOverlap };
+    }
+  }
+
+  if (!best) return null;
+
+  // Threshold tuned for “close intent” — must share a core entity token or be very similar.
+  if (best.score >= 0.6) return best;
+  if (best.coreOverlap >= 1 && best.score >= 0.45) return best;
+
+  return null;
+}
+
+function upsertFrontmatterLine(fmRaw, key, valueLine) {
+  const lines = fmRaw.split(/\r?\n/);
+  const idx = lines.findIndex((l) => l.trim().startsWith(`${key}:`));
+  if (idx !== -1) {
+    lines[idx] = valueLine;
+    return lines.join('\n');
+  }
+
+  // Insert after pubDate when present; else append.
+  const pubIdx = lines.findIndex((l) => l.trim().startsWith('pubDate:'));
+  const insertAt = pubIdx !== -1 ? pubIdx + 1 : lines.length;
+  lines.splice(insertAt, 0, valueLine);
+  return lines.join('\n');
+}
+
+function updateExistingPost({ filePath, topic, pubDate }) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  if (!content.startsWith('---')) {
+    throw new Error(`Refusing to update: missing frontmatter in ${path.relative(root, filePath)}`);
+  }
+  const end = content.indexOf('\n---', 3);
+  if (end === -1) {
+    throw new Error(`Refusing to update: malformed frontmatter in ${path.relative(root, filePath)}`);
+  }
+
+  const fmRaw = content.slice(3, end).trimEnd();
+  const body = content.slice(end + 4);
+
+  let updatedFm = fmRaw;
+  updatedFm = upsertFrontmatterLine(updatedFm, 'topicId', `topicId: "${topic.id}"`);
+  updatedFm = upsertFrontmatterLine(updatedFm, 'updatedDate', `updatedDate: ${pubDate}T00:00:00.000Z`);
+
+  const out = `---\n${updatedFm}\n---${body}`;
+  fs.writeFileSync(filePath, out, 'utf8');
+}
+
 function pickTopicStrict(topics, forcedId) {
   if (forcedId) {
     const t = topics.find((x) => x.id === forcedId);
@@ -491,6 +708,45 @@ const research = rg.research;
 
 const now = new Date();
 const pubDate = args.date ?? toISODate(now);
+
+// Close-intent de-dup / update mode:
+// If there is already an existing post that matches this topic’s intent,
+// we update that canonical file instead of creating a new URL.
+const blogIndex = buildBlogIndex();
+const close = findCloseIntentMatch(topic, blogIndex);
+if (close) {
+  const rel = path.relative(root, close.page.file);
+  console.log(
+    `[update] Close intent match found for topicId="${topic.id}" (score=${close.score.toFixed(
+      2,
+    )}, coreOverlap=${close.coreOverlap}). Updating existing: ${rel}`,
+  );
+
+  if (args.dryRun) {
+    console.log(`[dry-run] Would update: ${rel}`);
+    process.exit(0);
+  }
+
+  updateExistingPost({ filePath: close.page.file, topic, pubDate });
+
+  const ledgerEntry = {
+    at: new Date().toISOString(),
+    topicId: topic.id,
+    title: topic.title,
+    action: 'update',
+    matched: {
+      slug: close.page.slug,
+      file: rel,
+      score: Number(close.score.toFixed(3)),
+    },
+    pubDate,
+  };
+  fs.appendFileSync(ledgerPath, `${JSON.stringify(ledgerEntry)}\n`, 'utf8');
+
+  console.log(`Updated: ${rel}`);
+  console.log(`Ledger: ${path.relative(root, ledgerPath)}`);
+  process.exit(0);
+}
 
 const baseSlug = slugify(topic.title);
 const outPath = path.join(blogDir, `${baseSlug}.md`);

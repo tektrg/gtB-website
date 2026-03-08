@@ -36,6 +36,10 @@ jobs:
         run: |
           node AUTONOMUS/tools/topic-bank-expand.mjs --buffer 30
 
+      - name: Auto-generate research for upcoming topics (so blog publish doesn’t stall)
+        run: |
+          node AUTONOMUS/tools/research-auto.mjs --max-topics 6 || true
+
       - name: Generate blog post (Asia/Saigon date)
         run: |
           DATE=$(TZ=Asia/Ho_Chi_Minh date +%F)

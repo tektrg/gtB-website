@@ -1,667 +1,590 @@
-#!/usr/bin/env node
-/**
- * Ensure AUTONOMUS/content/topic-bank.json always has >=N UNUSED topicIds.
- *
- * Strict mode context:
- * - publish-daily-post.mjs only publishes topics from topic-bank.json
- * - one topicId => one canonical URL (no -2/-3 duplicates)
- * - if the bank has no unused topicIds, blog publishing must skip
- *
- * This tool appends new, strategy-aligned topic definitions when the unused buffer is low.
- * It is intentionally deterministic (no web calls) to keep diffs reviewable.
- *
- * Usage:
- *   node AUTONOMUS/tools/topic-bank-expand.mjs --buffer 30
- *   node AUTONOMUS/tools/topic-bank-expand.mjs --buffer 30 --dry-run
- */
-
 import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const topicBankPath = path.join(root, 'AUTONOMUS/content/topic-bank.json');
-const ledgerPath = path.join(root, 'AUTONOMUS/state/published.jsonl');
-const blogDir = path.join(root, 'src/content/blog');
+const topicBankPath = path.join(root, 'AUTONOMUS', 'content', 'topic-bank.json');
+const ledgerPath = path.join(root, 'AUTONOMUS', 'state', 'published.jsonl');
+const blogDir = path.join(root, 'src', 'content', 'blog');
 
 function parseArgs(argv) {
-  const out = { buffer: 30, dryRun: false };
+  const args = {
+    // Keep backward compatibility with older workflow flag: --buffer N
+    // Newer flags let us tune expansion more precisely.
+    minUnused: 12,
+    targetUnused: 40,
+    maxAdd: 50,
+    dryRun: false,
+  };
+
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
-    if (a === '--dry-run') out.dryRun = true;
-    else if (a === '--buffer') {
+    if (a === '--buffer') {
       const v = Number(argv[++i]);
-      if (!Number.isFinite(v) || v <= 0) throw new Error(`Invalid --buffer: ${v}`);
-      out.buffer = Math.floor(v);
-    } else {
-      throw new Error(`Unknown arg: ${a}`);
-    }
+      args.minUnused = v;
+      args.targetUnused = Math.max(args.targetUnused, v);
+    } else if (a === '--min-unused') args.minUnused = Number(argv[++i]);
+    else if (a === '--target-unused') args.targetUnused = Number(argv[++i]);
+    else if (a === '--max-add') args.maxAdd = Number(argv[++i]);
+    else if (a === '--dry-run') args.dryRun = true;
+    else throw new Error(`Unknown arg: ${a}`);
   }
-  return out;
+
+  if (!Number.isFinite(args.minUnused) || args.minUnused < 0) throw new Error('Invalid --min-unused/--buffer');
+  if (!Number.isFinite(args.targetUnused) || args.targetUnused < 0) throw new Error('Invalid --target-unused');
+  if (!Number.isFinite(args.maxAdd) || args.maxAdd < 0) throw new Error('Invalid --max-add');
+
+  return args;
 }
 
-function readJson(file) {
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
+function slugify(input) {
+  return String(input)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/-{2,}/g, '-');
 }
 
-function readLines(file) {
-  if (!fs.existsSync(file)) return [];
-  return fs.readFileSync(file, 'utf8').split(/\r?\n/).filter(Boolean);
+function readJson(p) {
+  return JSON.parse(fs.readFileSync(p, 'utf8'));
 }
 
-function collectUsedTopicIds() {
+function writeJson(p, data) {
+  fs.writeFileSync(p, JSON.stringify(data, null, 2) + '\n', 'utf8');
+}
+
+function listMarkdown(dir) {
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => path.join(dir, f));
+}
+
+function parseFrontmatter(content) {
+  if (!content.startsWith('---')) return { data: {}, body: content };
+  const end = content.indexOf('\n---', 3);
+  if (end === -1) return { data: {}, body: content };
+  const fmRaw = content.slice(3, end).trim();
+  const body = content.slice(end + 4);
+  const data = {};
+  const lines = fmRaw.split(/\r?\n/);
+  for (const line of lines) {
+    const m = line.match(/^([^:]+):\s*(.*)$/);
+    if (!m) continue;
+    const key = m[1].trim();
+    const value = m[2].trim().replace(/^"|"$/g, '').replace(/^'|'$/g, '');
+    data[key] = value;
+  }
+  return { data, body };
+}
+
+function computeUsedTopicIds() {
   const used = new Set();
 
-  // Published ledger.
-  for (const line of readLines(ledgerPath)) {
-    try {
-      const j = JSON.parse(line);
-      if (j && typeof j.topicId === 'string') used.add(j.topicId);
-    } catch {
-      // ignore malformed lines
+  if (fs.existsSync(ledgerPath)) {
+    const lines = fs.readFileSync(ledgerPath, 'utf8').split(/\r?\n/).filter(Boolean);
+    for (const line of lines) {
+      try {
+        const obj = JSON.parse(line);
+        if (obj?.topicId) used.add(String(obj.topicId));
+      } catch {
+        // ignore
+      }
     }
   }
 
-  // Existing blog frontmatter topicIds (extra safety in case of manual edits).
-  if (fs.existsSync(blogDir)) {
-    const files = fs.readdirSync(blogDir).filter((f) => f.endsWith('.md'));
-    for (const f of files) {
-      const p = path.join(blogDir, f);
-      const txt = fs.readFileSync(p, 'utf8');
-      const m = txt.match(/^topicId:\s*"?([a-z0-9\-]+)"?\s*$/m);
-      if (m) used.add(m[1]);
+  for (const file of listMarkdown(blogDir)) {
+    try {
+      const md = fs.readFileSync(file, 'utf8');
+      const { data } = parseFrontmatter(md);
+      if (data.topicId) used.add(String(data.topicId));
+    } catch {
+      // ignore
     }
   }
 
   return used;
 }
 
-/**
- * Deterministic topic candidates (strategy-aligned).
- *
- * Keep these focused on GPT Breeze user intent (workflows, comparisons, privacy/BYOK, shortcuts).
- * Avoid "SEO meta" topics aimed at other builders.
- */
-function candidateTopics() {
-  const topics = [];
+function computeExistingBlogSlugs() {
+  const slugs = new Set();
+  if (!fs.existsSync(blogDir)) return slugs;
+  for (const f of fs.readdirSync(blogDir)) {
+    if (f.endsWith('.md')) slugs.add(path.basename(f, '.md'));
+  }
+  return slugs;
+}
 
-  // Competitor comparisons (high-intent).
-  const competitors = [
-    { id: 'harpa-ai', name: 'HARPA AI', angle: 'automation + web scraping' },
-    { id: 'sider', name: 'Sider', angle: 'sidebar assistant' },
-    { id: 'monica-ai', name: 'Monica AI', angle: 'browser copilot' },
-    { id: 'chatgpt-for-google', name: 'ChatGPT for Google', angle: 'search overlay' },
-    { id: 'wiseone', name: 'Wiseone', angle: 'reading assistant' },
-    { id: 'liner', name: 'LINER', angle: 'highlighting + summaries' },
-    { id: 'glasp', name: 'Glasp', angle: 'highlights + knowledge base' },
+const STOPWORDS = new Set([
+  'a',
+  'an',
+  'and',
+  'are',
+  'as',
+  'at',
+  'be',
+  'but',
+  'by',
+  'for',
+  'from',
+  'how',
+  'in',
+  'into',
+  'is',
+  'it',
+  'of',
+  'on',
+  'or',
+  'so',
+  'that',
+  'the',
+  'their',
+  'then',
+  'this',
+  'to',
+  'vs',
+  'we',
+  'what',
+  'when',
+  'with',
+  'you',
+  'your',
+]);
+
+const GENERIC_INTENT_TOKENS = new Set([
+  // Intent words
+  'alternative',
+  'alternatives',
+  'best',
+  'comparison',
+  'compare',
+  'guide',
+  'how',
+  'list',
+  'review',
+  'reviews',
+  'tool',
+  'tools',
+  'top',
+  'vs',
+  'workflow',
+
+  // Domain/generic terms (too broad to be a “core entity”)
+  'ai',
+  'article',
+  'browser',
+  'chrome',
+  'extension',
+  'extensions',
+  'meeting',
+  'note',
+  'notes',
+  'pdf',
+  'prompt',
+  'prompts',
+  'recording',
+  'summaries',
+  'summarize',
+  'summarizer',
+  'summary',
+  'timestamp',
+  'timestamps',
+  'transcript',
+  'transcripts',
+  'video',
+  'videos',
+  'web',
+  'youtube',
+]);
+
+function stemToken(t) {
+  const x = String(t).toLowerCase();
+  if (x.length <= 3) return x;
+  if (x.endsWith('ies') && x.length > 4) return x.slice(0, -3) + 'y';
+  if (x.endsWith('s') && !x.endsWith('ss')) return x.slice(0, -1);
+  return x;
+}
+
+function tokenizeIntentText(text) {
+  const s = String(text ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+
+  if (!s) return [];
+
+  return s
+    .split(/\s+/)
+    .map(stemToken)
+    .filter(Boolean)
+    .filter((t) => !STOPWORDS.has(t))
+    .filter((t) => !/^\d{4}$/.test(t));
+}
+
+function jaccard(a, b) {
+  const A = new Set(a);
+  const B = new Set(b);
+  if (A.size === 0 || B.size === 0) return 0;
+  let inter = 0;
+  for (const x of A) if (B.has(x)) inter++;
+  const union = A.size + B.size - inter;
+  return union === 0 ? 0 : inter / union;
+}
+
+function coreTokens(tokens) {
+  return tokens.filter((t) => !GENERIC_INTENT_TOKENS.has(t));
+}
+
+function buildBlogIndex() {
+  const out = [];
+  for (const file of listMarkdown(blogDir)) {
+    try {
+      const md = fs.readFileSync(file, 'utf8');
+      const { data } = parseFrontmatter(md);
+      const slug = path.basename(file, '.md');
+      const title = data.title ? String(data.title) : '';
+      const description = data.description ? String(data.description) : '';
+      const tokens = tokenizeIntentText(`${title} ${slug} ${description}`);
+      out.push({ slug, file, tokens });
+    } catch {
+      // ignore
+    }
+  }
+  return out;
+}
+
+function isCloseIntentDuplicate(spec, blogIndex) {
+  const tTokens = tokenizeIntentText(`${spec?.title ?? ''} ${spec?.id ?? ''} ${spec?.description ?? ''}`);
+  const tCore = coreTokens(tTokens);
+  if (tTokens.length === 0) return false;
+
+  for (const page of blogIndex) {
+    const scoreBase = jaccard(tTokens, page.tokens);
+
+    const pCore = coreTokens(page.tokens);
+    const coreOverlap = (() => {
+      const A = new Set(tCore);
+      let n = 0;
+      for (const x of pCore) if (A.has(x)) n++;
+      return n;
+    })();
+
+    let score = scoreBase;
+    if (coreOverlap >= 1) score += 0.35;
+
+    if (score >= 0.6) return true;
+    if (coreOverlap >= 1 && score >= 0.45) return true;
+  }
+
+  return false;
+}
+
+function topicSpecCatalog() {
+  // Deterministic, research-friendly topic specs aligned with docs/SEO-op-alignment.md pillars.
+  // Expandable catalogs: keep these broad so the topic bank never runs dry.
+  // Guardrail: all topics must map to the pillar clusters in docs/SEO-op-alignment.md.
+
+  const competitorNames = [
+    'Monica',
+    'HARPA AI',
+    'Sider',
+    'Wiseone',
+    'Glarity',
+    'MaxAI',
+    'Merlin AI',
+    'Eightify',
+    'YouTube Summary with ChatGPT',
+    'ChatGPT for Chrome',
+    'Perplexity extension',
+    'AIPRM',
+    'WebChatGPT',
+    'LINER',
+    'Tactiq',
+    'Fireflies',
+    'Notta',
+    'Otter',
+    'Readwise Reader',
+    'Glasp',
+    'Recall AI',
+    'SciSpace',
+    'Scholarcy',
+    'Upword',
+    'QuillBot',
+    'Grammarly',
+    'Jasper',
+    'Writesonic',
+    'Copy.ai',
   ];
-  for (const c of competitors) {
-    topics.push({
-      id: `${c.id}-alternative`,
-      title: `${c.name} Alternative: A Privacy-First BYOK Workflow for Summaries + Writing`,
-      description: `A comparison guide for people using ${c.name} (${c.angle}) who want more control over models, costs, and privacy via BYOK.`,
-      pillar: 'Competitor comparisons',
-      intent: 'commercial',
-      tags: [`${c.name} alternative`, 'BYOK', 'Chrome extension', 'privacy', 'summarizer'],
+
+  const youtubeVariants = [
+    'YouTube Shorts',
+    'YouTube playlists',
+    'podcasts (2–3 hours)',
+    'tutorials (step-by-step)',
+    'lectures (notes + action items)',
+    'webinars (takeaways + follow-ups)',
+    'product demos (feature checklist)',
+    'conference talks (summary + quotes)',
+    'news videos (claims + verification)',
+    'interviews (themes + quotes)',
+    'language-learning videos (vocab + drills)',
+    'coding videos (snippets + steps)',
+    'finance videos (numbers + risks)',
+    'fitness videos (routine + schedule)',
+  ];
+
+  const webVariants = [
+    'PDFs in the browser',
+    'documentation pages',
+    'research papers',
+    'newsletters',
+    'long reports',
+    'product pages (feature comparison)',
+    'GitHub issues (decision summary)',
+    'StackOverflow threads (best answer + caveats)',
+    'Hacker News threads (arguments + consensus)',
+    'Product Hunt pages (pros/cons)',
+    'Google Docs pages',
+    'Notion pages',
+    'legal policies (what changed)',
+    'pricing pages (what you really pay)',
+  ];
+
+  /** @type {Array<{id:string,title:string,description:string,pillar:string,intent:string,tags:string[],sections:string[]}>} */
+  const specs = [];
+
+  // YouTube summarizer
+  for (const v of youtubeVariants) {
+    const id = `youtube-summary-${slugify(v)}`;
+    specs.push({
+      id,
+      title: `How to Summarize ${v} with Timestamps (Fast Workflow)`,
+      description: `A practical workflow to summarize ${v} with clickable timestamps, key takeaways, and action items using a Chrome extension.`,
+      pillar: 'YouTube summarizer',
+      intent: 'how-to',
+      tags: ['YouTube', 'summarizer', 'timestamps', 'Chrome extension', 'productivity'],
       sections: [
-        'Why people look for alternatives',
-        'The checklist: quality, speed, and reliability',
-        'BYOK cost control vs subscription pricing',
-        'Privacy: what data gets sent where',
-        'A clean setup in GPT Breeze (step-by-step)',
+        'When this workflow beats a plain summary',
+        'Step-by-step: timestamps + sections + action items',
+        'Prompt templates (copy/paste)',
+        'How to verify accuracy quickly',
+        'Privacy notes (BYOK/BYOM)',
         'FAQ',
       ],
     });
   }
 
-  // YouTube summarizer workflows.
-  const yt = [
-    {
-      id: 'summarize-youtube-lectures-into-study-notes',
-      title: 'How to Summarize YouTube Lectures into Study Notes (Outline + Flashcards)',
-      description: 'A repeatable workflow for turning long lectures into structured notes, key concepts, and flashcards you can review later.',
-      tags: ['YouTube summarizer', 'study notes', 'flashcards', 'transcript'],
-      sections: [
-        'What to capture (concepts, examples, definitions)',
-        'Step-by-step: lecture → notes → flashcards',
-        'Prompt templates for study notes',
-        'How to verify key claims quickly',
-        'Turn notes into a spaced-repetition routine',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'summarize-youtube-podcasts-into-actionable-takeaways',
-      title: 'Summarize YouTube Podcasts into Actionable Takeaways (with Timestamps)',
-      description: 'A podcast workflow: extract decisions, principles, and action items with timestamps so you can revisit the exact moment later.',
-      tags: ['YouTube', 'podcast', 'timestamps', 'action items'],
-      sections: [
-        'Why podcasts are hard to summarize',
-        'The workflow: chapters + timestamps + takeaways',
-        'Prompt templates you can save as shortcuts',
-        'How to build a personal “idea library”',
-        'Common mistakes (and fixes)',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'youtube-summary-for-product-research',
-      title: 'Use YouTube Summaries for Product Research (Extract Features, Pricing, and Claims)',
-      description: 'How to watch competitor demos faster: extract features, pricing claims, limitations, and questions to validate.',
-      tags: ['product research', 'competitor research', 'YouTube summary', 'workflow'],
-      sections: [
-        'What to extract from product demos',
-        'Step-by-step: demo → feature list → checklist',
-        'Prompt templates for extracting claims',
-        'How to validate claims (without rewatching)',
-        'Turn it into a comparison table',
-        'FAQ',
-      ],
-    },
-  ];
-  for (const t of yt) {
-    topics.push({
-      ...t,
-      pillar: 'YouTube summarizer',
+  // Web/article summary
+  for (const v of webVariants) {
+    const id = `summarize-${slugify(v)}`;
+    specs.push({
+      id,
+      title: `How to Summarize ${v} (Without Copy-Pasting Everything)`,
+      description: `A step-by-step workflow to summarize ${v} in Chrome, extract key points/quotes, and keep the output reusable.`,
+      pillar: 'Web/article summary',
       intent: 'how-to',
-      tags: t.tags,
+      tags: ['article summarizer', 'Chrome', 'research', 'notes', 'productivity'],
+      sections: [
+        'When summaries help (and when they don’t)',
+        'Step-by-step workflow',
+        'Extract-ready outputs (bullets/quotes/tables)',
+        'Common mistakes + fixes',
+        'Privacy notes',
+        'FAQ',
+      ],
     });
   }
 
-  // Web/article summary workflows.
-  topics.push(
-    {
-      id: 'summarize-research-papers-in-browser',
-      title: 'How to Summarize Research Papers in Your Browser (Without Skimming for Hours)',
-      description: 'A workflow for extracting the thesis, methods, results, and limitations — plus questions to ask before you cite anything.',
-      pillar: 'Web/article summary',
-      intent: 'how-to',
-      tags: ['research paper', 'summary', 'workflow', 'Chrome'],
-      sections: [
-        'The 5 things you need from any paper',
-        'Step-by-step: paper → structured summary',
-        'Prompts for “limitations” and “what would change my mind”',
-        'How to compare 3 papers quickly',
-        'Turn summaries into notes you can reuse',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'summarize-github-repos-for-onboarding',
-      title: 'Summarize GitHub Repos for Onboarding (README → Setup Steps → Gotchas)',
-      description: 'A practical way to turn messy READMEs into a clean “run it locally” checklist and a list of likely pitfalls.',
-      pillar: 'Web/article summary',
-      intent: 'how-to',
-      tags: ['GitHub', 'onboarding', 'README', 'developer productivity'],
-      sections: [
-        'What to extract (setup, env vars, commands)',
-        'Step-by-step: README → checklist',
-        'Prompts for troubleshooting and “unknown unknowns”',
-        'How to keep your checklist up to date',
-        'Shareable notes for teammates',
-        'FAQ',
-      ],
-    },
-  );
-
-  // Shortcuts / prompt workflows.
-  topics.push(
-    {
-      id: 'prompt-library-for-browser-ai',
-      title: 'Prompt Library for Browser AI: How to Build a “Start Here” Menu (Not a Blank Box)',
-      description: 'Why most users struggle with the first prompt — and how a searchable prompt library (cached + fast) changes onboarding and retention.',
-      pillar: 'Chrome extension AI',
-      intent: 'use-case',
-      tags: ['prompt library', 'shortcuts', 'onboarding', 'workflow'],
-      sections: [
-        'The real UX problem: the blank prompt box',
-        'What a good library includes (roles + sites + outcomes)',
-        'Implementation: Notion as DB → extension cache',
-        'Distribution: where to surface it in onboarding',
-        'How to collect and iterate prompts safely',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'build-shortcuts-for-customer-support',
-      title: 'Build One-Click Shortcuts for Customer Support (Triage → Repro → Next Step)',
-      description: 'Turn repetitive support work into a consistent workflow: summarize the ticket, ask for missing info, and propose a repro checklist.',
-      pillar: 'Chrome extension AI',
-      intent: 'how-to',
-      tags: ['customer support', 'shortcuts', 'workflow', 'product'],
-      sections: [
-        'What support teams repeat every day',
-        'Step-by-step: ticket → summary → questions',
-        'Prompt templates to save as shortcuts',
-        'How to avoid hallucinated “facts” in support',
-        'Internal links: turn support into docs',
-        'FAQ',
-      ],
-    },
-  );
-
-  // BYOK / Privacy + trust.
-  topics.push(
-    {
-      id: 'byok-cost-control-for-browser-ai',
-      title: 'BYOK Cost Control for Browser AI: How to Stop Paying for “Unlimited” Plans',
-      description: 'A practical guide to estimate token costs, set budgets, and choose models intentionally — especially for summarizing video and web pages.',
-      pillar: 'BYOK / Privacy',
-      intent: 'commercial',
-      tags: ['BYOK', 'cost control', 'pricing', 'tokens'],
-      sections: [
-        'Subscriptions vs BYOK: what you’re really paying for',
-        'How to estimate costs for your workflows',
-        'Model selection: fast vs cheap vs quality',
-        'Budget guardrails (habits, not just settings)',
-        'A simple setup in GPT Breeze',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'api-key-hygiene-for-teams',
-      title: 'API Key Hygiene for Teams Using BYOK (Browser Extensions + Shared Machines)',
-      description: 'Rules and workflows for keeping keys safe: least privilege, rotation, and what to do when a key leaks.',
-      pillar: 'BYOK / Privacy',
-      intent: 'trust',
-      tags: ['API keys', 'security', 'team', 'BYOK'],
-      sections: [
-        'Threat model: how keys leak in real life',
-        'Key storage and rotation basics',
-        'Shared machines and browser profiles',
-        'Incident response: if a key leaks',
-        'Policy template you can copy',
-        'FAQ',
-      ],
-    },
-  );
-
-  // Meeting/video notes (use-case expansion).
-  topics.push(
-    {
-      id: 'turn-webinars-into-sales-followups',
-      title: 'Turn Webinars into Sales Follow-Ups (Objections, Quotes, and Next Steps)',
-      description: 'A playbook for extracting objections, quotes, and follow-ups from long webinars so sales teams can act fast.',
-      pillar: 'Meeting/video notes',
-      intent: 'use-case',
-      tags: ['webinar', 'sales', 'follow-ups', 'notes'],
-      sections: [
-        'What to extract from webinars (not just summaries)',
-        'Step-by-step: webinar → follow-up pack',
-        'Prompt templates for objections and quotes',
-        'How to verify claims with timestamps',
-        'Turn it into a reusable sales asset',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'turn-interviews-into-insights',
-      title: 'Turn User Interviews into Insights (Themes, Quotes, and a Prioritized List)',
-      description: 'A workflow for converting messy interview transcripts into themes, quotes, and a prioritized set of product actions.',
-      pillar: 'Meeting/video notes',
-      intent: 'use-case',
-      tags: ['user interviews', 'product', 'research', 'themes'],
-      sections: [
-        'The 3 outputs you actually need from interviews',
-        'Step-by-step: transcript → themes',
-        'Prompt templates for quotes and evidence',
-        'How to avoid confirmation bias',
-        'Turn themes into a roadmap input',
-        'FAQ',
-      ],
-    },
-  );
-
-  // Extra backlog to ensure we can always hit a healthy unused buffer.
-  // Keep titles user-intent + GPT Breeze aligned (workflows, comparisons, shortcuts, BYOK/privacy).
-  topics.push(
-    {
-      id: 'summarize-privacy-policy-in-plain-english',
-      title: 'How to Summarize a Privacy Policy in Plain English (What to Look For)',
-      description: 'A workflow to scan privacy policies fast: data collected, retention, sharing, and the few clauses that should make you pause.',
-      pillar: 'Web/article summary',
-      intent: 'trust',
-      tags: ['privacy policy', 'summary', 'checklist', 'privacy-first'],
-      sections: [
-        'The 7 clauses that matter most',
-        'Step-by-step: policy → plain-English summary',
-        'Red flags (data sharing, retention, training)',
-        'Questions to ask before you accept',
-        'How to keep a personal “tool trust” checklist',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'summarize-terms-and-conditions-checklist',
-      title: 'Summarize Terms & Conditions into a Checklist (Refunds, Liability, Termination)',
-      description: 'Turn long T&C pages into a short checklist so you can spot the important parts without reading legal text line by line.',
-      pillar: 'Web/article summary',
-      intent: 'how-to',
-      tags: ['terms and conditions', 'checklist', 'summary'],
-      sections: [
-        'What T&C usually hides in plain sight',
-        'Step-by-step: T&C → checklist',
-        'Common traps (termination, refunds, arbitration)',
-        'What to do when you find a red flag',
-        'Save as a reusable shortcut',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'summarize-competitor-pricing-pages',
-      title: 'Summarize Competitor Pricing Pages (Plans, Limits, Hidden Costs)',
-      description: 'A repeatable workflow to extract plan limits, fair-usage rules, and hidden costs from pricing pages and help you compare quickly.',
-      pillar: 'Web/article summary',
-      intent: 'commercial',
-      tags: ['pricing page', 'competitor research', 'comparison', 'cost'],
-      sections: [
-        'What to extract (limits, caps, add-ons)',
-        'Step-by-step: pricing page → comparison table',
-        'Questions to ask before you buy',
-        'BYOK vs subscription: how to compare fairly',
-        'How to save this as a shortcut',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'turn-web-pages-into-sops',
-      title: 'Turn Web Pages into SOPs (Step-by-Step Checklists You Can Reuse)',
-      description: 'Convert messy documentation into a clean SOP: steps, prerequisites, warnings, and a final verification checklist.',
-      pillar: 'Web/article summary',
-      intent: 'use-case',
-      tags: ['SOP', 'checklist', 'documentation', 'workflow'],
-      sections: [
-        'What makes an SOP actually usable',
-        'Step-by-step: docs → SOP',
-        'Prompts for prerequisites and “gotchas”',
-        'How to add a verification step',
-        'Shareable SOP templates',
-        'FAQ',
-      ],
-    },
-
-    {
-      id: 'chat-with-any-web-page-workflow',
-      title: 'Chat with Any Web Page: A Workflow for Faster Research (Without Copy/Paste)',
-      description: 'A practical workflow: summarize first, then ask targeted questions and extract citations/quotes from the page.',
-      pillar: 'Web/article summary',
-      intent: 'how-to',
-      tags: ['web page chat', 'research', 'workflow', 'Chrome extension'],
-      sections: [
-        'Why “just ask questions” fails',
-        'Step-by-step: page → summary → Q&A',
-        'Prompts for extracting quotes and citations',
-        'How to avoid hallucinated claims',
-        'Turn findings into notes you can reuse',
-        'FAQ',
-      ],
-    },
-
-    {
-      id: 'save-and-reuse-prompts-across-sites',
-      title: 'Save and Reuse Prompts Across Sites (YouTube, Notion, GitHub, Docs)',
-      description: 'How to turn your best prompts into site-specific shortcuts so you can run the same workflow anywhere in seconds.',
-      pillar: 'Chrome extension AI',
-      intent: 'how-to',
-      tags: ['shortcuts', 'prompts', 'workflow', 'productivity'],
-      sections: [
-        'Why reuse beats “prompting from scratch”',
-        'Step-by-step: turn prompts into shortcuts',
-        'Site-specific examples (YouTube, GitHub, Notion)',
-        'How to name and organize shortcuts',
-        'Sharing shortcuts with a team',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'site-specific-shortcuts-youtube-github-notion',
-      title: 'Site-Specific Shortcuts: The Fastest Way to Make Browser AI Feel “Native”',
-      description: 'A playbook to design shortcuts per site: what to summarize, what to extract, and what to ask next.',
-      pillar: 'Chrome extension AI',
-      intent: 'use-case',
-      tags: ['shortcuts', 'onboarding', 'UX', 'workflow'],
-      sections: [
-        'The “context gap” problem in browser AI',
-        'How to design a shortcut per site',
-        'Examples: YouTube, GitHub, Notion, docs',
-        'Naming conventions that scale',
-        'How to iterate without breaking trust',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'prompt-hygiene-for-repeatable-shortcuts',
-      title: 'Prompt Hygiene for Repeatable Shortcuts (How to Stop Getting Random Outputs)',
-      description: 'A practical guide to writing shortcuts that behave: constraints, examples, and verification steps to reduce hallucinations.',
-      pillar: 'Chrome extension AI',
-      intent: 'trust',
-      tags: ['prompt hygiene', 'shortcuts', 'reliability', 'workflow'],
-      sections: [
-        'Why prompts drift over time',
-        'Constraints that increase reliability',
-        'Add a verification step (always)',
-        'When to use templates vs free-form',
-        'A checklist for “safe shortcuts”',
-        'FAQ',
-      ],
-    },
-
-    {
-      id: 'byok-setup-guide-for-beginners',
-      title: 'BYOK Setup Guide for Beginners (Pick a Provider, Add a Key, Avoid Mistakes)',
-      description: 'A beginner-friendly guide to BYOK: choose a provider, add your API key safely, and set up a model that won’t surprise you.',
-      pillar: 'BYOK / Privacy',
-      intent: 'how-to',
-      tags: ['BYOK', 'setup', 'API key', 'privacy'],
-      sections: [
-        'What BYOK is (and what it isn’t)',
-        'Pick a provider: tradeoffs that matter',
-        'Step-by-step: add a key safely',
-        'Common mistakes (and how to fix them)',
-        'A simple “safe default” configuration',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'privacy-first-ai-chrome-extension-checklist',
-      title: 'Privacy-First AI Chrome Extension Checklist (Before You Install Anything)',
-      description: 'A checklist for evaluating AI extensions: permissions, data flows, retention, and whether BYOK actually protects you.',
-      pillar: 'BYOK / Privacy',
-      intent: 'trust',
-      tags: ['privacy-first', 'Chrome extension', 'security', 'checklist'],
-      sections: [
-        'Permissions: what’s reasonable vs risky',
-        'Data flow: what gets sent to models',
-        'Retention and training policies',
-        'BYOK: what it protects (and what it doesn’t)',
-        'A simple evaluation scorecard',
-        'FAQ',
-      ],
-    },
-
-    {
-      id: 'summarize-youtube-coding-tutorials',
-      title: 'Summarize YouTube Coding Tutorials into a Build Plan (Steps + Gotchas)',
-      description: 'Turn long coding videos into an actionable build plan: prerequisites, steps, pitfalls, and a verification checklist.',
-      pillar: 'YouTube summarizer',
-      intent: 'how-to',
-      tags: ['coding tutorials', 'YouTube', 'workflow', 'checklist'],
-      sections: [
-        'What to extract from coding tutorials',
-        'Step-by-step: tutorial → build plan',
-        'Prompts for prerequisites and environment setup',
-        'How to capture “gotchas” and edge cases',
-        'Turn it into a reusable checklist',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'extract-quotes-from-youtube-with-timestamps',
-      title: 'Extract Quotes from YouTube (with Timestamps) for Writing and Research',
-      description: 'A workflow to pull the few quotable lines with timestamps so you can cite and revisit them instantly.',
-      pillar: 'YouTube summarizer',
-      intent: 'use-case',
-      tags: ['quotes', 'timestamps', 'research', 'writing'],
-      sections: [
-        'What makes a quote usable',
-        'Step-by-step: video → quotes list',
-        'Prompts for claims + supporting context',
-        'How to avoid misquoting',
-        'Turn quotes into a writing outline',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'youtube-summaries-to-blog-post-drafts',
-      title: 'Turn YouTube Summaries into Blog Post Drafts (Outline + Key Points + Sources)',
-      description: 'A content workflow: extract the outline, key points, and citations from a video so you can draft faster without rewatching.',
-      pillar: 'YouTube summarizer',
-      intent: 'use-case',
-      tags: ['blog drafting', 'outline', 'YouTube', 'writing'],
-      sections: [
-        'What to extract for a real draft',
-        'Step-by-step: video → outline → draft',
-        'Prompts for sourcing and citations',
-        'How to add your point of view',
-        'Quality checks before publishing',
-        'FAQ',
-      ],
-    },
-
-    {
-      id: 'turn-meetings-into-jira-tickets',
-      title: 'Turn Meetings into Jira Tickets (Action Items, Owners, and Acceptance Criteria)',
-      description: 'A workflow to convert messy meeting notes into clean tickets: tasks, owners, deadlines, and acceptance criteria.',
-      pillar: 'Meeting/video notes',
-      intent: 'use-case',
-      tags: ['Jira', 'tickets', 'action items', 'meeting notes'],
-      sections: [
-        'What tickets need to be actionable',
-        'Step-by-step: meeting → tickets',
-        'Prompts for acceptance criteria',
-        'How to avoid vague tasks',
-        'A template you can reuse',
-        'FAQ',
-      ],
-    },
-    {
-      id: 'turn-sales-calls-into-followups',
-      title: 'Turn Sales Calls into Follow-Ups (Summary, Objections, Next Steps, Email Draft)',
-      description: 'A playbook to turn sales calls into follow-up packs: objections, quotes, next steps, and a draft email to send.',
-      pillar: 'Meeting/video notes',
-      intent: 'use-case',
-      tags: ['sales calls', 'follow-up', 'objections', 'email'],
-      sections: [
-        'What to capture from sales calls',
-        'Step-by-step: call → follow-up pack',
-        'Prompts for objections and quotes',
-        'Draft a follow-up email (with a CTA)',
-        'How to verify details quickly',
-        'FAQ',
-      ],
-    },
-  );
-
-  return topics;
-}
-
-function normalizeTopic(t) {
-  // Minimal safety checks.
-  if (!t.id || !t.title || !t.description) throw new Error(`Invalid topic: ${JSON.stringify(t).slice(0, 120)}`);
-  return {
-    id: String(t.id),
-    title: String(t.title),
-    description: String(t.description),
-    pillar: String(t.pillar || 'Blog'),
-    intent: String(t.intent || 'how-to'),
-    tags: Array.isArray(t.tags) ? t.tags.map(String) : [],
-    sections: Array.isArray(t.sections) ? t.sections.map(String) : [],
-  };
-}
-
-function computeUnused(topics, usedIds) {
-  const unused = [];
-  for (const t of topics) {
-    if (!usedIds.has(t.id)) unused.push(t.id);
-  }
-  return unused;
-}
-
-function appendTopicsPreservingFormat(rawText, newTopics) {
-  // Insert before the final topics array close: "\n  ]\n}".
-  const marker = '\n  ]\n}';
-  const idx = rawText.lastIndexOf(marker);
-  if (idx === -1) throw new Error('Could not find end-of-topics marker in topic-bank.json');
-
-  const insertAt = idx; // insert right before marker
-
-  // Create indented JSON blocks with 4-space indent inside the topics array.
-  const blocks = newTopics.map((t) => {
-    const json = JSON.stringify(t, null, 2);
-    return json
-      .split('\n')
-      .map((l) => (l.length ? '    ' + l : l))
-      .join('\n');
+  // Prompt shortcuts / productivity
+  specs.push({
+    id: 'prompt-shortcuts-starter-pack',
+    title: '10 Prompt Shortcuts to Save (So You Stop Rewriting the Same Instructions)',
+    description: 'A starter pack of high-leverage shortcuts for summarizing, extracting, rewriting, and decision-making—plus how to organize them.' ,
+    pillar: 'Chrome extension AI',
+    intent: 'how-to',
+    tags: ['shortcuts', 'prompts', 'workflow', 'productivity', 'Chrome extension'],
+    sections: [
+      'Why shortcuts beat “typing prompts”',
+      '10 shortcuts you can reuse daily',
+      'How to name/organize shortcuts',
+      'How to iterate safely',
+      'Team sharing patterns',
+      'FAQ',
+    ],
   });
 
-  // Ensure we add a comma after the existing last topic.
-  // We assume the file is valid JSON, so the last topic currently ends with "    }" before the marker.
-  const insertion = `,\n\n${blocks.join(',\n\n')}\n`;
+  // BYOK / Privacy
+  specs.push({
+    id: 'byok-api-key-safety',
+    title: 'How to Use API Keys Safely in AI Browser Extensions (BYOK Checklist)',
+    description: 'A practical BYOK checklist: key storage, permissions, provider settings, and the fastest ways keys leak in browser workflows.',
+    pillar: 'BYOK / Privacy',
+    intent: 'trust',
+    tags: ['BYOK', 'API keys', 'security', 'Chrome extension', 'privacy'],
+    sections: [
+      'Threat model: what can go wrong',
+      'Key storage + rotation basics',
+      'Browser permissions to avoid',
+      'Provider settings that matter',
+      'A safe default workflow',
+      'FAQ',
+    ],
+  });
 
-  return rawText.slice(0, insertAt) + insertion + rawText.slice(insertAt);
+  // Comparisons
+  for (const name of competitorNames) {
+    const id = `${slugify(name)}-alternative`;
+    specs.push({
+      id,
+      title: `${name} Alternative: Better Summaries with BYOK + More Control`,
+      description: `A comparison guide for people switching from ${name}: what features matter (timestamps, privacy, BYOK) and how to evaluate alternatives.`,
+      pillar: 'Competitor comparisons',
+      intent: 'commercial',
+      tags: [`${name} alternative`, 'Chrome extension', 'summarizer', 'BYOK', 'privacy'],
+      sections: [
+        'Why people look for alternatives',
+        'Comparison checklist (what matters)',
+        'BYOK vs subscription cost',
+        'Privacy & data handling',
+        'Migration tips',
+        'FAQ',
+      ],
+    });
+  }
+
+  // Use-cases (meeting/video notes + research workflows)
+  const useCases = [
+    {
+      id: 'turn-youtube-into-study-notes',
+      title: 'Turn YouTube Videos into Study Notes (with Timestamps + Flashcards)',
+      description: 'A study workflow: timestamped notes, key terms, and quick flashcards you can review later.',
+      pillar: 'YouTube summarizer',
+      intent: 'use-case',
+      tags: ['YouTube', 'study notes', 'timestamps', 'learning', 'productivity'],
+      sections: [
+        'What good study notes look like',
+        'Step-by-step workflow',
+        'Prompt templates (notes + flashcards)',
+        'How to verify the hard parts',
+        'Privacy notes',
+        'FAQ',
+      ],
+    },
+    {
+      id: 'turn-youtube-into-meeting-notes',
+      title: 'Turn YouTube (or a recording) into Meeting Notes + Action Items',
+      description: 'A workflow to convert a video into structured notes: agenda, decisions, action items, and follow-ups.',
+      pillar: 'Meeting/video notes',
+      intent: 'use-case',
+      tags: ['meeting notes', 'video notes', 'action items', 'productivity'],
+      sections: [
+        'What good meeting notes look like',
+        'Step-by-step workflow: transcript → notes',
+        'Prompt templates: decisions + action items',
+        'How to handle long recordings',
+        'Privacy notes',
+        'FAQ',
+      ],
+    },
+    {
+      id: 'turn-article-into-executive-summary',
+      title: 'Turn Any Long Article into an Executive Summary (1 page)',
+      description: 'A workflow to extract the 10% that matters: TL;DR, key claims, risks, and what to verify.',
+      pillar: 'Web/article summary',
+      intent: 'use-case',
+      tags: ['executive summary', 'article summarizer', 'research', 'productivity'],
+      sections: [
+        'What an executive summary should include',
+        'Step-by-step workflow',
+        'Extract-ready templates (bullets, tables)',
+        'Verification checklist',
+        'Privacy notes',
+        'FAQ',
+      ],
+    },
+    {
+      id: 'competitor-research-from-video',
+      title: 'Competitor Research from YouTube: Feature Checklist + Positioning',
+      description: 'A repeatable workflow to turn competitor videos into a feature matrix, positioning notes, and messaging angles.',
+      pillar: 'YouTube summarizer',
+      intent: 'use-case',
+      tags: ['competitor research', 'YouTube', 'product marketing', 'notes'],
+      sections: [
+        'What to capture (features, claims, proof)',
+        'Step-by-step workflow',
+        'Prompt templates (matrix + angles)',
+        'How to avoid hallucinated features',
+        'Privacy notes',
+        'FAQ',
+      ],
+    },
+  ];
+
+  for (const u of useCases) specs.push(u);
+
+  return specs;
 }
 
-function main() {
-  const args = parseArgs(process.argv);
+function uniqueByIdAndSlug(specs, { existingIds, existingSlugs, blogIndex }) {
+  const out = [];
+  for (const t of specs) {
+    if (existingIds.has(t.id)) continue;
 
-  if (!fs.existsSync(topicBankPath)) throw new Error(`Missing topic bank: ${topicBankPath}`);
-  const raw = fs.readFileSync(topicBankPath, 'utf8');
-  const bank = JSON.parse(raw);
-  const topics = Array.isArray(bank.topics) ? bank.topics : [];
-  if (topics.length === 0) throw new Error('Topic bank is empty');
+    // Exact slug de-dup.
+    const slug = slugify(t.title);
+    if (existingSlugs.has(slug)) continue;
 
-  const usedPublished = collectUsedTopicIds();
+    // Close-intent de-dup (title/slug similarity).
+    if (isCloseIntentDuplicate(t, blogIndex)) continue;
 
-  // Unused topics = present in bank but not yet in published ledger (or existing blog files).
-  const currentUnused = computeUnused(topics, usedPublished);
-
-  const buffer = args.buffer;
-  const need = Math.max(0, buffer - currentUnused.length);
-
-  if (need === 0) {
-    console.log(`[topic-bank-expand] OK: unused=${currentUnused.length} (>= buffer=${buffer}). No changes.`);
-    return;
+    out.push(t);
   }
-
-  const candidates = candidateTopics().map(normalizeTopic);
-  const add = [];
-
-  // Ensure uniqueness vs: published topicIds + existing bank topicIds.
-  const usedAll = new Set(usedPublished);
-  for (const t of topics) if (t && typeof t.id === 'string') usedAll.add(t.id);
-  for (const c of candidates) {
-    if (add.length >= need) break;
-    if (usedAll.has(c.id)) continue;
-    usedAll.add(c.id);
-    add.push(c);
-  }
-
-  if (add.length < need) {
-    throw new Error(
-      `[topic-bank-expand] Not enough candidates to reach buffer. need=${need}, added=${add.length}. Add more candidates in topic-bank-expand.mjs.`,
-    );
-  }
-
-  console.log(`[topic-bank-expand] Need ${need} new topics to reach unused buffer=${buffer}. Adding ${add.length}…`);
-  for (const t of add) console.log(`- + ${t.id} (${t.pillar} / ${t.intent})`);
-
-  if (args.dryRun) {
-    console.log('[topic-bank-expand] dry-run: not writing changes.');
-    return;
-  }
-
-  const updatedRaw = appendTopicsPreservingFormat(raw, add);
-  fs.writeFileSync(topicBankPath, updatedRaw, 'utf8');
-  console.log(`[topic-bank-expand] Updated: ${path.relative(root, topicBankPath)}`);
+  return out;
 }
 
-main();
+const args = parseArgs(process.argv);
+if (!fs.existsSync(topicBankPath)) throw new Error(`Missing topic bank: ${path.relative(root, topicBankPath)}`);
+
+const bank = readJson(topicBankPath);
+const topics = Array.isArray(bank.topics) ? bank.topics : [];
+
+const used = computeUsedTopicIds();
+const existingIds = new Set(topics.map((t) => String(t.id)));
+const existingSlugs = computeExistingBlogSlugs();
+const blogIndex = buildBlogIndex();
+
+const unusedCount = topics.filter((t) => !used.has(String(t.id))).length;
+
+if (unusedCount >= args.minUnused) {
+  console.log(`Topic bank OK: unused=${unusedCount} (min=${args.minUnused}). No expand needed.`);
+  process.exit(0);
+}
+
+const catalog = topicSpecCatalog();
+const candidates = uniqueByIdAndSlug(catalog, { existingIds, existingSlugs, blogIndex });
+
+if (candidates.length === 0) {
+  console.log('No topic candidates available (all would duplicate existing ids/slugs).');
+  process.exit(0);
+}
+
+let addCount = 0;
+for (const c of candidates) {
+  if (unusedCount + addCount >= args.targetUnused) break;
+  if (addCount >= args.maxAdd) break;
+  topics.push(c);
+  existingIds.add(c.id);
+  addCount++;
+}
+
+if (addCount === 0) {
+  console.log(`No topics added (unused=${unusedCount}).`);
+  process.exit(0);
+}
+
+const newUnused = topics.filter((t) => !used.has(String(t.id))).length;
+
+if (args.dryRun) {
+  console.log(`[dry-run] Would add ${addCount} topics. unused: ${unusedCount} -> ${newUnused}`);
+  process.exit(0);
+}
+
+writeJson(topicBankPath, { ...bank, topics });
+console.log(`Expanded topic bank: added=${addCount}; unused: ${unusedCount} -> ${newUnused}; total=${topics.length}`);

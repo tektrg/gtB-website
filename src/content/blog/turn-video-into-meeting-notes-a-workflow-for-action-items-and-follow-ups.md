@@ -12,7 +12,12 @@ tags:
 draft: false
 ---
 
-If you watch YouTube to *learn* (podcasts, lectures, tutorials), a plain summary is fine. But a **turn video into meeting notes** is way more useful because it gives you a map: what matters, where it happens, and how to jump there fast.
+A plain summary is fine when you’re just consuming content. But when a video is actually a **meeting recording** (Zoom/Meet), a sales call, a product review, or a long internal update, you need something different: **meeting notes you can act on**.
+
+Turning a video into meeting notes is more useful because it gives you a map (timestamps), plus the two things teams care about:
+
+- **Decisions** (what we agreed to)
+- **Action items** (who does what by when)
 
 ## What “good meeting notes” look like (decisions + action items, not a transcript)
 
@@ -41,7 +46,42 @@ Start here if you’re new: [/guide/getting-started/](/guide/getting-started/)
 
 ## A simple meeting-notes template you can reuse (owners + due dates)
 
-Keep this section practical: aim for a skimmable output, verify the parts you’ll rely on, and save the workflow as a shortcut once it works.
+If you only copy one thing from this post, copy this structure. It’s short enough to scan, but specific enough to run a follow-up without re-watching the whole recording.
+
+**Template (paste into your doc):**
+
+- **Title:** <meeting name>
+- **Date:** <YYYY-MM-DD>
+- **Participants:** <names>
+- **Context (2 lines):** why this meeting happened
+
+### Decisions (what we agreed to)
+- D1 — <decision> (timestamp)
+- D2 — <decision> (timestamp)
+
+### Action items (owner + due date)
+- A1 — <task> — **Owner:** <name> — **Due:** <date> — (timestamp)
+- A2 — <task> — **Owner:** <name> — **Due:** <date> — (timestamp)
+
+### Risks / blockers
+- R1 — <risk> (timestamp)
+- R2 — <blocker> (timestamp)
+
+### Follow-ups
+- Q1 — <question to clarify>
+- Q2 — <question to confirm>
+
+If you want the AI to fill this format, prompt it like this:
+
+```text
+Create meeting notes using this format:
+- Context (2 lines)
+- Decisions (3 max)
+- Action items (5 max) with Owner + Due date
+- Risks/blockers (3 max)
+- Follow-up questions (3 max)
+Include timestamps for every decision/action item.
+```
 
 ## Prompt patterns: decisions, risks, blockers, and follow-ups
 
@@ -57,6 +97,25 @@ Keep it skimmable.
 Extract: 5 takeaways, 5 action items, 3 things to verify in the source. Include timestamps.
 ```
 
+## Turn notes into a follow-up email (30 seconds)
+
+Once you have decisions + action items, the next real task is: send a follow-up that prevents "wait, what did we agree on?" later.
+
+Use this prompt (works great as a saved shortcut):
+
+```text
+Write a follow-up email based on these meeting notes.
+Constraints:
+- 6–10 sentences max
+- bullet the action items with Owner + Due date
+- include 1 line of "open questions"
+- keep tone neutral and professional
+```
+
+If you’re doing this for customer calls, you can also generate a second version: "internal-only" (more candid) vs "customer-facing" (polished).
+
+Rule of thumb: if your notes don’t name an owner + a due date, they’re not meeting notes yet — they’re just a recap.
+
 ## Handling long recordings (chunking, timestamps, and recap summaries)
 
 Long videos fail when the summary becomes vague or too expensive. Use this hybrid workflow:
@@ -69,7 +128,26 @@ Related guide: [/blog/how-to-get-video-transcripts-with-gpt-breeze-extension/](/
 
 ## Privacy + BYOK notes: what to avoid sending to an AI model
 
-Keep this section practical: aim for a skimmable output, verify the parts you’ll rely on, and save the workflow as a shortcut once it works.
+Meeting recordings often contain the stuff you *really* don’t want to leak:
+
+- customer names + deal terms
+- internal roadmaps
+- credentials, tokens, URLs
+- legal/HR details
+
+Two practical rules:
+
+1) **Decide your boundary before you summarize.**
+   - “Public-ish”: YouTube videos, public talks, marketing webinars → fine for cloud models.
+   - “Private”: customer calls, internal reviews → prefer BYOK, and consider local models.
+
+2) **Don’t ask the model to store secrets** inside “saved prompts”. Keep prompts generic, and put sensitive details only in the content being summarized (or redact).
+
+If you want the privacy-first baseline for GPT Breeze:
+- [/privacy-first](/privacy-first)
+
+And if you’re cost-sensitive while doing this daily, estimate your spend with:
+- [/ai-model-cost-calculator-and-price-comparation](/ai-model-cost-calculator-and-price-comparation)
 
 ---
 
