@@ -2,3 +2,4 @@
 {"key":"openai:gpt-5-mini","provider":"openai","model":"gpt-5-mini","slug":"gpt-5-mini-pricing-guide","date":"2026-03-04","ts":"2026-03-04T06:45:26.793Z"}
 {"key":"openai:gpt-4o-mini","provider":"openai","model":"gpt-4o-mini","slug":"gpt-4o-mini-pricing-guide","date":"2026-03-04","ts":"2026-03-04T15:34:48.848Z"}
 {"key":"openai:gpt-4.1","provider":"openai","model":"gpt-4.1","slug":"gpt-4-1-pricing-guide","date":"2026-03-05","ts":"2026-03-05T06:51:47.501Z"}
+{"key":"openai:gpt-4.1-mini","provider":"openai","model":"gpt-4.1-mini","slug":"gpt-4-1-mini-pricing-guide","date":"2026-03-08","ts":"2026-03-08T09:19:25.465Z"}
