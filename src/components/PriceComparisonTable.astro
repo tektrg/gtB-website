@@ -2,18 +2,37 @@
 // No props needed for this component
 ---
 
-<div class="table-wrapper">
-  <table class="data-table comparison-table">
-    <thead>
-      <tr id="comparisonTableHeader">
-        <th class="th-left">Cost Type</th>
-        <!-- Model columns will be populated by JavaScript -->
-      </tr>
-    </thead>
-    <tbody id="comparisonTableBody">
-      <!-- Populated by JavaScript -->
-    </tbody>
-  </table>
+<div class="comparison-table-shell">
+  <div class="comparison-table-toolbar">
+    <div class="search-panel">
+      <label for="searchInput" class="search-toolbar-label">Add model to comparison</label>
+      <div class="search-wrapper-compact">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input-compact"
+          placeholder="Search model or provider..."
+        />
+        <span class="search-icon">🔍</span>
+        <div id="searchDropdown" class="search-results-dropdown"></div>
+      </div>
+      <div class="search-hint-text">Search by model name, provider, or model ID.</div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="data-table comparison-table">
+      <thead>
+        <tr id="comparisonTableHeader">
+          <th class="th-left">Cost Type</th>
+          <!-- Model columns will be populated by JavaScript -->
+        </tr>
+      </thead>
+      <tbody id="comparisonTableBody">
+        <!-- Populated by JavaScript -->
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <script is:inline>
@@ -97,9 +116,6 @@
         `;
       });
 
-      // Add empty search column
-      thead.innerHTML += '<th class="th-center search-column"></th>';
-
       // Update table body
       const tbody = document.getElementById('comparisonTableBody');
       
@@ -109,22 +125,18 @@
           <tr>
             <td class="text-primary"><strong>Input Cost Rate</strong></td>
             ${costs.map(c => `<td class="text-center text-secondary">${c.inputRate.toFixed(2)}/1M</td>`).join('')}
-            <td class="search-column"></td>
           </tr>
           <tr>
             <td class="text-primary"><strong>Output Cost Rate</strong></td>
             ${costs.map(c => `<td class="text-center text-secondary">${c.outputRate.toFixed(2)}/1M</td>`).join('')}
-            <td class="search-column"></td>
           </tr>
           <tr class="highlighted">
             <td class="text-primary"><strong>Input Cost</strong><br/><span style="font-size: 0.875rem; color: #6b7280;">(${formatNumber(inputTokens)} tokens)</span></td>
             ${costs.map(c => `<td class="text-center"><strong>${formatCost(c.inputCost)}</strong></td>`).join('')}
-            <td class="search-column"></td>
           </tr>
           <tr class="highlighted">
             <td class="text-primary"><strong>Output Cost</strong><br/><span style="font-size: 0.875rem; color: #6b7280;">(${formatNumber(outputTokens)} tokens)</span></td>
             ${costs.map(c => `<td class="text-center"><strong>${formatCost(c.outputCost)}</strong></td>`).join('')}
-            <td class="search-column"></td>
           </tr>
         `;
 
@@ -133,7 +145,6 @@
             <tr>
               <td class="text-primary"><strong>Cache Read Cost</strong><br/><span style="font-size: 0.875rem; color: #6b7280;">(${formatNumber(cacheReadTokens)} tokens)</span></td>
             ${costs.map(c => `<td class="text-center">${formatCost(c.cacheCost)}</td>`).join('')}
-            <td class="search-column"></td>
           </tr>
           `;
         }
@@ -142,14 +153,13 @@
           <tr class="selected" style="background: #f0f9ff;">
             <td class="text-primary"><strong style="font-size: 1.125rem;">Total Cost</strong></td>
             ${costs.map(c => `<td class="text-center"><strong style="font-size: 1.25rem; color: #6366f1;">${formatCost(c.totalCost)}</strong></td>`).join('')}
-            <td class="search-column"></td>
           </tr>
         `;
       } else {
         // Show empty state
         rows = `
           <tr>
-            <td class="text-center" style="padding: 40px; color: #6b7280;" colspan="${selectedModels.length + 2}">
+            <td class="text-center" style="padding: 40px; color: #6b7280;" colspan="${Math.max(selectedModelsData.length + 1, 2)}">
               Select models to compare costs
             </td>
           </tr>
