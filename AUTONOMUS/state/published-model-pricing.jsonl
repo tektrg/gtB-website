@@ -5,3 +5,4 @@
 {"key":"openai:gpt-4.1-mini","provider":"openai","model":"gpt-4.1-mini","slug":"gpt-4-1-mini-pricing-guide","date":"2026-03-08","ts":"2026-03-08T09:19:25.465Z"}
 {"key":"openai:gpt-4.1-nano","provider":"openai","model":"gpt-4.1-nano","slug":"gpt-4-1-nano-pricing-guide","date":"2026-03-09","ts":"2026-03-08T18:44:32.325Z"}
 {"key":"anthropic:claude-opus-4-0","provider":"anthropic","model":"claude-opus-4-0","slug":"claude-opus-4-0-pricing-guide","date":"2026-03-09","ts":"2026-03-09T07:01:00.407Z"}
+{"key":"anthropic:claude-sonnet-4-0","provider":"anthropic","model":"claude-sonnet-4-0","slug":"claude-sonnet-4-0-pricing-guide","date":"2026-03-10","ts":"2026-03-09T19:02:13.525Z"}
