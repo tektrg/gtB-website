@@ -6,7 +6,13 @@
       "description": "A practical checklist to use BYOM (Bring Your Own Model) safely: protect API keys, reduce data exposure, and avoid common extension pitfalls.",
       "pillar": "BYOK / Privacy",
       "intent": "trust",
-      "tags": ["BYOM", "security", "API keys", "Chrome extension", "privacy"],
+      "tags": [
+        "BYOM",
+        "security",
+        "API keys",
+        "Chrome extension",
+        "privacy"
+      ],
       "sections": [
         "What BYOM changes (and what it doesn't)",
         "Threat model: where your key and data can leak",
@@ -22,7 +28,12 @@
       "description": "Rules of thumb for keeping sensitive data out of prompts while still getting great outputs.",
       "pillar": "BYOK / Privacy",
       "intent": "how-to",
-      "tags": ["privacy", "prompts", "security", "AI"],
+      "tags": [
+        "privacy",
+        "prompts",
+        "security",
+        "AI"
+      ],
       "sections": [
         "The 3 categories of sensitive data",
         "Redaction patterns that work",
@@ -30,14 +41,19 @@
         "Team workflows: docs, tickets, and logs"
       ]
     },
-
     {
       "id": "youtube-summary-with-timestamps",
       "title": "How to Summarize YouTube Videos with Timestamps (Chapters You Can Click)",
       "description": "A step-by-step workflow to turn long YouTube videos into clickable, time-stamped notes you can scan and revisit.",
       "pillar": "YouTube summarizer",
       "intent": "how-to",
-      "tags": ["YouTube", "summarizer", "timestamps", "notes", "Chrome extension"],
+      "tags": [
+        "YouTube",
+        "summarizer",
+        "timestamps",
+        "notes",
+        "Chrome extension"
+      ],
       "sections": [
         "When timestamp summaries beat plain bullet summaries",
         "Step-by-step: timestamp summary workflow in GPT Breeze",
@@ -53,7 +69,12 @@
       "description": "Transcripts are exhaustive. Summaries are useful. Here’s when to use each, and how to combine them into a faster workflow.",
       "pillar": "YouTube summarizer",
       "intent": "comparison",
-      "tags": ["YouTube", "transcript", "summary", "productivity"],
+      "tags": [
+        "YouTube",
+        "transcript",
+        "summary",
+        "productivity"
+      ],
       "sections": [
         "The difference: raw text vs compressed meaning",
         "Best use cases for transcripts",
@@ -69,7 +90,13 @@
       "description": "A buyer’s guide for picking a YouTube summarizer extension: timestamps, transcript access, privacy/BYOK, and cost control.",
       "pillar": "YouTube summarizer",
       "intent": "commercial",
-      "tags": ["YouTube summarizer", "Chrome extension", "BYOK", "privacy", "comparison"],
+      "tags": [
+        "YouTube summarizer",
+        "Chrome extension",
+        "BYOK",
+        "privacy",
+        "comparison"
+      ],
       "sections": [
         "The 6 features that actually matter",
         "Privacy & BYOK: what good looks like",
@@ -85,7 +112,12 @@
       "description": "A practical method to summarize very long videos: chunking, section titles, and extraction into a reusable knowledge base.",
       "pillar": "YouTube summarizer",
       "intent": "how-to",
-      "tags": ["YouTube", "summarizer", "long videos", "learning"],
+      "tags": [
+        "YouTube",
+        "summarizer",
+        "long videos",
+        "learning"
+      ],
       "sections": [
         "Why long videos are hard to summarize",
         "Step-by-step: chunk and summarize",
@@ -95,14 +127,18 @@
         "FAQ"
       ]
     },
-
     {
       "id": "summarize-web-articles-in-chrome",
       "title": "How to Summarize Web Articles in Chrome (Without Copy-Pasting Everything)",
       "description": "A workflow for summarizing articles directly in your browser, then asking follow-up questions to extract what you need.",
       "pillar": "Web/article summary",
       "intent": "how-to",
-      "tags": ["article summarizer", "Chrome", "research", "productivity"],
+      "tags": [
+        "article summarizer",
+        "Chrome",
+        "research",
+        "productivity"
+      ],
       "sections": [
         "When article summaries help (and when they don’t)",
         "Step-by-step: summarize an article in GPT Breeze",
@@ -118,7 +154,13 @@
       "description": "How to turn repeated prompts into shortcuts so you can run the same workflow on any page or video in seconds.",
       "pillar": "Chrome extension AI",
       "intent": "how-to",
-      "tags": ["shortcuts", "prompts", "workflow", "productivity", "Chrome extension"],
+      "tags": [
+        "shortcuts",
+        "prompts",
+        "workflow",
+        "productivity",
+        "Chrome extension"
+      ],
       "sections": [
         "What a shortcut is (and why it saves time)",
         "Step-by-step: create your first shortcut",
@@ -128,14 +170,18 @@
         "FAQ"
       ]
     },
-
     {
       "id": "eightify-alternative",
       "title": "Eightify Alternative: Better YouTube Summaries (with BYOK + Timestamps)",
       "description": "A comparison-focused guide for people looking for an Eightify alternative: what features matter and how to evaluate options.",
       "pillar": "Competitor comparisons",
       "intent": "commercial",
-      "tags": ["Eightify alternative", "YouTube summarizer", "Chrome extension", "BYOK"],
+      "tags": [
+        "Eightify alternative",
+        "YouTube summarizer",
+        "Chrome extension",
+        "BYOK"
+      ],
       "sections": [
         "Why people look for Eightify alternatives",
         "The comparison checklist (features that matter)",
@@ -151,7 +197,12 @@
       "description": "If you use Merlin AI but want more control over models, cost, and privacy, this guide shows what to compare.",
       "pillar": "Competitor comparisons",
       "intent": "commercial",
-      "tags": ["Merlin AI alternative", "Chrome extension", "summarizer", "BYOK"],
+      "tags": [
+        "Merlin AI alternative",
+        "Chrome extension",
+        "summarizer",
+        "BYOK"
+      ],
       "sections": [
         "Where Merlin works well (and where it doesn’t)",
         "What to compare: speed, quality, cost, privacy",
@@ -167,7 +218,12 @@
       "description": "A practical comparison guide for switching from MaxAI: what to keep, what to improve, and how to avoid rework.",
       "pillar": "Competitor comparisons",
       "intent": "commercial",
-      "tags": ["MaxAI alternative", "BYOK", "writing", "research"],
+      "tags": [
+        "MaxAI alternative",
+        "BYOK",
+        "writing",
+        "research"
+      ],
       "sections": [
         "Why people switch",
         "The feature checklist",
@@ -177,14 +233,18 @@
         "FAQ"
       ]
     },
-
     {
       "id": "ai-meeting-notes-from-video",
       "title": "Turn Video into Meeting Notes: A Workflow for Action Items and Follow-Ups",
       "description": "A use-case playbook: summarizing recordings into structured notes, decisions, and action items you can share.",
       "pillar": "Meeting/video notes",
       "intent": "use-case",
-      "tags": ["meeting notes", "video notes", "action items", "productivity"],
+      "tags": [
+        "meeting notes",
+        "video notes",
+        "action items",
+        "productivity"
+      ],
       "sections": [
         "What good meeting notes look like",
         "Step-by-step: from video to notes",
@@ -194,7 +254,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "harpa-ai-alternative",
       "title": "HARPA AI Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
@@ -217,7 +276,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "sider-alternative",
       "title": "Sider Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
@@ -240,7 +298,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "monica-ai-alternative",
       "title": "Monica AI Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
@@ -263,7 +320,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "chatgpt-for-google-alternative",
       "title": "ChatGPT for Google Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
@@ -286,7 +342,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "wiseone-alternative",
       "title": "Wiseone Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
@@ -309,7 +364,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "liner-alternative",
       "title": "LINER Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
@@ -332,7 +386,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "glasp-alternative",
       "title": "Glasp Alternative: A Privacy-First BYOK Workflow for Summaries + Writing",
@@ -355,7 +408,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "summarize-youtube-lectures-into-study-notes",
       "title": "How to Summarize YouTube Lectures into Study Notes (Outline + Flashcards)",
@@ -377,7 +429,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "summarize-youtube-podcasts-into-actionable-takeaways",
       "title": "Summarize YouTube Podcasts into Actionable Takeaways (with Timestamps)",
@@ -399,7 +450,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "youtube-summary-for-product-research",
       "title": "Use YouTube Summaries for Product Research (Extract Features, Pricing, and Claims)",
@@ -421,7 +471,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "summarize-research-papers-in-browser",
       "title": "How to Summarize Research Papers in Your Browser (Without Skimming for Hours)",
@@ -443,7 +492,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "summarize-github-repos-for-onboarding",
       "title": "Summarize GitHub Repos for Onboarding (README → Setup Steps → Gotchas)",
@@ -465,7 +513,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "prompt-library-for-browser-ai",
       "title": "Prompt Library for Browser AI: How to Build a “Start Here” Menu (Not a Blank Box)",
@@ -487,7 +534,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "build-shortcuts-for-customer-support",
       "title": "Build One-Click Shortcuts for Customer Support (Triage → Repro → Next Step)",
@@ -509,7 +555,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "byok-cost-control-for-browser-ai",
       "title": "BYOK Cost Control for Browser AI: How to Stop Paying for “Unlimited” Plans",
@@ -531,7 +576,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "api-key-hygiene-for-teams",
       "title": "API Key Hygiene for Teams Using BYOK (Browser Extensions + Shared Machines)",
@@ -553,7 +597,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "turn-webinars-into-sales-followups",
       "title": "Turn Webinars into Sales Follow-Ups (Objections, Quotes, and Next Steps)",
@@ -575,7 +618,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "turn-interviews-into-insights",
       "title": "Turn User Interviews into Insights (Themes, Quotes, and a Prioritized List)",
@@ -597,7 +639,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "summarize-privacy-policy-in-plain-english",
       "title": "How to Summarize a Privacy Policy in Plain English (What to Look For)",
@@ -619,7 +660,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "summarize-terms-and-conditions-checklist",
       "title": "Summarize Terms & Conditions into a Checklist (Refunds, Liability, Termination)",
@@ -640,7 +680,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "summarize-competitor-pricing-pages",
       "title": "Summarize Competitor Pricing Pages (Plans, Limits, Hidden Costs)",
@@ -662,7 +701,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "turn-web-pages-into-sops",
       "title": "Turn Web Pages into SOPs (Step-by-Step Checklists You Can Reuse)",
@@ -684,7 +722,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "chat-with-any-web-page-workflow",
       "title": "Chat with Any Web Page: A Workflow for Faster Research (Without Copy/Paste)",
@@ -706,7 +743,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "save-and-reuse-prompts-across-sites",
       "title": "Save and Reuse Prompts Across Sites (YouTube, Notion, GitHub, Docs)",
@@ -728,7 +764,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "site-specific-shortcuts-youtube-github-notion",
       "title": "Site-Specific Shortcuts: The Fastest Way to Make Browser AI Feel “Native”",
@@ -750,7 +785,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "prompt-hygiene-for-repeatable-shortcuts",
       "title": "Prompt Hygiene for Repeatable Shortcuts (How to Stop Getting Random Outputs)",
@@ -772,7 +806,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "byok-setup-guide-for-beginners",
       "title": "BYOK Setup Guide for Beginners (Pick a Provider, Add a Key, Avoid Mistakes)",
@@ -794,7 +827,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "privacy-first-ai-chrome-extension-checklist",
       "title": "Privacy-First AI Chrome Extension Checklist (Before You Install Anything)",
@@ -816,7 +848,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "summarize-youtube-coding-tutorials",
       "title": "Summarize YouTube Coding Tutorials into a Build Plan (Steps + Gotchas)",
@@ -838,7 +869,6 @@
         "FAQ"
       ]
     },
-
     {
       "id": "extract-quotes-from-youtube-with-timestamps",
       "title": "Extract Quotes from YouTube (with Timestamps) for Writing and Research",
@@ -859,7 +889,28 @@
         "Turn quotes into a writing outline",
         "FAQ"
       ]
+    },
+    {
+      "id": "prompt-shortcuts-starter-pack",
+      "title": "10 Prompt Shortcuts to Save (So You Stop Rewriting the Same Instructions)",
+      "description": "A starter pack of high-leverage shortcuts for summarizing, extracting, rewriting, and decision-making—plus how to organize them.",
+      "pillar": "Chrome extension AI",
+      "intent": "how-to",
+      "tags": [
+        "shortcuts",
+        "prompts",
+        "workflow",
+        "productivity",
+        "Chrome extension"
+      ],
+      "sections": [
+        "Why shortcuts beat “typing prompts”",
+        "10 shortcuts you can reuse daily",
+        "How to name/organize shortcuts",
+        "How to iterate safely",
+        "Team sharing patterns",
+        "FAQ"
+      ]
     }
-
   ]
 }
