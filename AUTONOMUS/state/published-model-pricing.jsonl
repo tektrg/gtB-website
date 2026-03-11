@@ -7,3 +7,4 @@
 {"key":"anthropic:claude-opus-4-0","provider":"anthropic","model":"claude-opus-4-0","slug":"claude-opus-4-0-pricing-guide","date":"2026-03-09","ts":"2026-03-09T07:01:00.407Z"}
 {"key":"anthropic:claude-sonnet-4-0","provider":"anthropic","model":"claude-sonnet-4-0","slug":"claude-sonnet-4-0-pricing-guide","date":"2026-03-10","ts":"2026-03-09T19:02:13.525Z"}
 {"key":"anthropic:claude-3-7-sonnet-latest","provider":"anthropic","model":"claude-3-7-sonnet-latest","slug":"claude-3-7-sonnet-latest-pricing-guide","date":"2026-03-10","ts":"2026-03-10T06:48:35.256Z"}
+{"key":"anthropic:claude-3-5-haiku-latest","provider":"anthropic","model":"claude-3-5-haiku-latest","slug":"claude-3-5-haiku-latest-pricing-guide","date":"2026-03-11","ts":"2026-03-11T06:53:15.253Z"}
