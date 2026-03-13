@@ -1,10 +1,11 @@
 ---
 
+
 title: "How to Summarize YouTube Videos with Timestamps (Chapters You Can Click)"
 description: "A practical workflow to turn long YouTube videos into clickable, timestamped notes—so you can jump to the good parts, verify claims fast, and save action items."
 pubDate: 2026-02-20T00:00:00.000Z
 updatedDate: 2026-03-13T00:00:00.000Z
-topicId: "summarize-youtube-lectures-into-study-notes"
+topicId: "summarize-youtube-podcasts-into-actionable-takeaways"
 author: "GPT Breeze"
 tags:
   - "YouTube"
