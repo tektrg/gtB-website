@@ -14,3 +14,4 @@
 {"key":"xai:grok-3-fast","provider":"xai","model":"grok-3-fast","slug":"grok-3-fast-pricing-guide","date":"2026-03-13","ts":"2026-03-13T06:52:51.894Z"}
 {"key":"deepseek:deepseek-reasoner","provider":"deepseek","model":"deepseek-reasoner","slug":"deepseek-reasoner-pricing-guide","date":"2026-03-14","ts":"2026-03-13T18:53:27.027Z"}
 {"key":"deepseek:deepseek-chat","provider":"deepseek","model":"deepseek-chat","slug":"deepseek-chat-pricing-guide","date":"2026-03-14","ts":"2026-03-14T06:44:29.311Z"}
+{"key":"moonshotai:kimi-k2.5","provider":"moonshotai","model":"kimi-k2.5","slug":"kimi-k2-5-pricing-guide","date":"2026-03-15","ts":"2026-03-14T18:49:58.306Z"}
