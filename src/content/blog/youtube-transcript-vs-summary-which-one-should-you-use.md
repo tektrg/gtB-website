@@ -1,8 +1,10 @@
 ---
+
 title: "YouTube Transcript vs Summary: Which One Should You Use?"
 description: "Transcripts are exhaustive. Summaries are useful. Here’s when to use each, and how to combine them into a faster workflow."
 pubDate: 2026-02-20T00:00:00.000Z
-topicId: "youtube-transcript-vs-summary"
+updatedDate: 2026-03-14T00:00:00.000Z
+topicId: "youtube-summary-for-product-research"
 author: "GPT Breeze"
 tags:
   - "YouTube"
