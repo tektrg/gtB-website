@@ -21,6 +21,7 @@
 - Add a daily chore stream: internal link maintenance + safe year rollover updates.
 
 ## Daily log
+- 2026-03-15: published src/content/blog/summarize-github-repos-for-onboarding-readme-setup-steps-gotchas.md (topic: summarize-github-repos-for-onboarding).
 - 2026-03-05: published src/content/blog/turn-video-into-meeting-notes-a-workflow-for-action-items-and-follow-ups.md (topic: ai-meeting-notes-from-video).
 - 2026-03-04: published src/content/blog/maxai-alternative-a-cleaner-byok-workflow-for-research-and-writing.md (topic: maxai-alternative); published src/content/blog/merlin-ai-alternative-faster-page-youtube-summaries-with-more-control.md (topic: merlin-ai-alternative).
 - 2026-03-03: published src/content/blog/eightify-alternative-better-youtube-summaries-with-byok-timestamps.md (topic: eightify-alternative); published src/content/blog/save-prompts-as-one-click-shortcuts-build-your-personal-ai-workflow.md (topic: save-prompts-as-one-click-shortcuts).
