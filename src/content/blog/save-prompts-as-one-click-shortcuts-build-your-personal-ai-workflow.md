@@ -1,8 +1,10 @@
 ---
+
 title: "Save Prompts as One-Click Shortcuts: Build Your Personal AI Workflow"
 description: "Turn your best prompts into reusable one-click shortcuts so you can summarize, extract, and transform content on any page or video in seconds."
 pubDate: 2026-03-03T00:00:00.000Z
-topicId: "save-prompts-as-one-click-shortcuts"
+updatedDate: 2026-03-16T00:00:00.000Z
+topicId: "build-shortcuts-for-customer-support"
 author: "GPT Breeze"
 tags:
   - "shortcuts"
