@@ -6,11 +6,12 @@
 
 
 
+
 title: "Merlin AI Alternative: Faster Page + YouTube Summaries with More Control"
 description: "If you use Merlin AI but want more control over models, cost, and privacy, this guide shows what to compare."
 pubDate: 2026-03-04T00:00:00.000Z
-updatedDate: 2026-03-12T00:00:00.000Z
-topicId: "glasp-alternative"
+updatedDate: 2026-03-17T00:00:00.000Z
+topicId: "byok-cost-control-for-browser-ai"
 author: "GPT Breeze"
 tags:
   - "Merlin AI alternative"
