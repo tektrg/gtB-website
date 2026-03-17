@@ -20,3 +20,4 @@
 {"key":"zai:glm-5","provider":"zai","model":"glm-5","slug":"glm-5-pricing-guide","date":"2026-03-16","ts":"2026-03-16T07:15:49.202Z"}
 {"key":"zai:glm-4.7","provider":"zai","model":"glm-4.7","slug":"glm-4-7-pricing-guide","date":"2026-03-17","ts":"2026-03-16T19:13:55.466Z"}
 {"key":"groq:llama-3.1-8b-instant","provider":"groq","model":"llama-3.1-8b-instant","slug":"llama-3-1-8b-instant-pricing-guide","date":"2026-03-17","ts":"2026-03-17T07:03:47.041Z"}
+{"key":"groq:llama-3.3-70b-versatile","provider":"groq","model":"llama-3.3-70b-versatile","slug":"llama-3-3-70b-versatile-pricing-guide","date":"2026-03-18","ts":"2026-03-17T19:12:26.281Z"}
