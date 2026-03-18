@@ -1,8 +1,10 @@
 ---
+
 title: "Turn Video into Meeting Notes: A Workflow for Action Items and Follow-Ups"
 description: "A use-case playbook: summarizing recordings into structured notes, decisions, and action items you can share."
 pubDate: 2026-03-05T00:00:00.000Z
-topicId: "ai-meeting-notes-from-video"
+updatedDate: 2026-03-18T00:00:00.000Z
+topicId: "turn-webinars-into-sales-followups"
 author: "GPT Breeze"
 tags:
   - "meeting notes"
