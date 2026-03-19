@@ -21,7 +21,7 @@
 - Add a daily chore stream: internal link maintenance + safe year rollover updates.
 
 ## Daily log
-- 2026-03-19: published src/content/blog/turn-user-interviews-into-insights-themes-quotes-and-a-prioritized-list.md (topic: turn-interviews-into-insights).
+- 2026-03-19: published src/content/blog/how-to-summarize-a-privacy-policy-in-plain-english-what-to-look-for.md (topic: summarize-privacy-policy-in-plain-english); published src/content/blog/turn-user-interviews-into-insights-themes-quotes-and-a-prioritized-list.md (topic: turn-interviews-into-insights).
 - 2026-03-16: published src/content/blog/prompt-library-for-browser-ai-how-to-build-a-start-here-menu-not-a-blank-box.md (topic: prompt-library-for-browser-ai).
 - 2026-03-15: published src/content/blog/summarize-github-repos-for-onboarding-readme-setup-steps-gotchas.md (topic: summarize-github-repos-for-onboarding).
 - 2026-03-05: published src/content/blog/turn-video-into-meeting-notes-a-workflow-for-action-items-and-follow-ups.md (topic: ai-meeting-notes-from-video).
