@@ -1,7 +1,9 @@
 ---
+
 title: "Gemini 3 Pro Pricing (Per 1M Tokens) + How to Use It in GPT Breeze"
 pubDate: 2025-11-20T14:00:00+07:00
-updatedDate: 2026-03-04T00:00:00+07:00
+topicId: "summarize-competitor-pricing-pages"
+updatedDate: 2026-03-20T00:00:00.000Z
 description: "Gemini 3 Pro pricing breakdown (input/output per 1M tokens), context limits, and how to run it in GPT Breeze with BYOK. Includes a quick cost-compare workflow."
 author: "GPT Breeze"
 tags: ["gemini", "gemini pricing", "ai model pricing", "google gemini", "byok", "gpt breeze", "cost calculator"]
