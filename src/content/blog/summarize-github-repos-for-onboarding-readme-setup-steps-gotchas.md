@@ -1,8 +1,10 @@
 ---
+
 title: "Summarize GitHub Repos for Onboarding (README → Setup Steps → Gotchas)"
 description: "A practical way to turn messy READMEs into a clean “run it locally” checklist and a list of likely pitfalls."
 pubDate: 2026-03-15T00:00:00.000Z
-topicId: "summarize-github-repos-for-onboarding"
+updatedDate: 2026-03-21T00:00:00.000Z
+topicId: "turn-web-pages-into-sops"
 author: "GPT Breeze"
 tags:
   - "GitHub"
