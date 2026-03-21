@@ -1,8 +1,10 @@
 ---
+
 title: "How to Summarize Web Articles in Chrome (Without Copy-Pasting Everything)"
 description: "Summarize any article directly from the page, then ask smarter follow-ups to extract decisions, takeaways, and quotes — without manual copy-paste."
 pubDate: 2026-03-02T00:00:00.000Z
-topicId: "summarize-web-articles-in-chrome"
+updatedDate: 2026-03-21T00:00:00.000Z
+topicId: "chat-with-any-web-page-workflow"
 author: "GPT Breeze"
 tags:
   - "article summarizer"
