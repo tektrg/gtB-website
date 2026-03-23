@@ -1,10 +1,11 @@
 ---
 
+
 title: "BYOM AI Security Checklist for Browser Extensions"
 description: "A practical checklist to use BYOM (Bring Your Own Model) safely: protect API keys, reduce data exposure, and avoid common extension pitfalls."
 pubDate: 2026-02-04T00:00:00.000Z
-updatedDate: 2026-03-18T00:00:00.000Z
-topicId: "api-key-hygiene-for-teams"
+updatedDate: 2026-03-23T00:00:00.000Z
+topicId: "byok-setup-guide-for-beginners"
 author: "GPT Breeze"
 tags:
   - "BYOM"
