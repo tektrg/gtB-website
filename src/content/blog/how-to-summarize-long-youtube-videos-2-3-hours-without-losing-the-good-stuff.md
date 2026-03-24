@@ -1,10 +1,11 @@
 ---
 
+
 title: "How to Summarize Long YouTube Videos (2–3 Hours) Without Losing the Good Stuff"
 description: "A practical, repeatable workflow for summarizing long videos: get a map first, then extract the few parts worth verifying with timestamps."
 pubDate: 2026-03-02T00:00:00.000Z
-updatedDate: 2026-03-15T00:00:00.000Z
-topicId: "summarize-research-papers-in-browser"
+updatedDate: 2026-03-25T00:00:00.000Z
+topicId: "extract-quotes-from-youtube-with-timestamps"
 author: "GPT Breeze"
 tags:
   - "YouTube"
