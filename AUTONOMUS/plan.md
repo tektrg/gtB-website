@@ -21,6 +21,7 @@
 - Add a daily chore stream: internal link maintenance + safe year rollover updates.
 
 ## Daily log
+- 2026-03-25: published src/content/blog/10-prompt-shortcuts-to-save-so-you-stop-rewriting-the-same-instructions.md (topic: prompt-shortcuts-starter-pack).
 - 2026-03-23: published src/content/blog/prompt-hygiene-for-repeatable-shortcuts-how-to-stop-getting-random-outputs.md (topic: prompt-hygiene-for-repeatable-shortcuts).
 - 2026-03-19: published src/content/blog/how-to-summarize-a-privacy-policy-in-plain-english-what-to-look-for.md (topic: summarize-privacy-policy-in-plain-english); published src/content/blog/turn-user-interviews-into-insights-themes-quotes-and-a-prioritized-list.md (topic: turn-interviews-into-insights).
 - 2026-03-16: published src/content/blog/prompt-library-for-browser-ai-how-to-build-a-start-here-menu-not-a-blank-box.md (topic: prompt-library-for-browser-ai).
