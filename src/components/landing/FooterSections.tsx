@@ -1,5 +1,26 @@
-import React from 'react';
-import { SlideUp, StaggerContainer, StaggerItem } from '../ui/motion';
+import { STUDIO_HOME_URL, STUDIO_LIVE_APPS } from '../../data/studio';
+import { SlideUp } from '../ui/motion';
+
+export const About = () => {
+    return (
+        <section id="about">
+            <div className="container">
+                <SlideUp>
+                    <h2 className="section-title">Built by theindie.app</h2>
+                    <p className="muted">
+                        GPT Breeze is part of theindie.app, a founder-led indie studio building small, focused software for calmer daily workflows.
+                    </p>
+                    <p className="stack" style={{ marginTop: 12 }}>
+                        <span><a href={STUDIO_HOME_URL}>theindie.app</a></span>
+                        {STUDIO_LIVE_APPS.map((app) => (
+                            <span key={app.name}><a href={app.href}>{app.name}</a></span>
+                        ))}
+                    </p>
+                </SlideUp>
+            </div>
+        </section>
+    );
+};
 
 export const Privacy = () => {
     return (

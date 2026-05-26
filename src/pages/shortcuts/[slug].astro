@@ -1,4 +1,5 @@
 ---
+import Base from '../../layouts/Base.astro'
 import shortcutsData from '../../data/shortcuts.json'
 
 type ShortcutRecord = {
@@ -30,17 +31,13 @@ const { shortcut } = Astro.props as { shortcut: ShortcutRecord }
 if (!shortcut) {
   throw new Error('Shortcut not found')
 }
+
+const title = `${shortcut.title} - GPT Breeze Shortcut`
+const description =
+  shortcut.description || `Use the ${shortcut.title} shortcut in the GPT Breeze static shortcut library.`
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>{shortcut.title} – GPT Breeze Shortcut</title>
-    {shortcut.description && <meta name="description" content={shortcut.description} />}
-  </head>
-  <body>
-    <main>
+<Base title={title} description={description}>
       <article>
         <header>
           <h1>{shortcut.title}</h1>
@@ -73,7 +70,4 @@ if (!shortcut) {
           browser extension.
         </p>
       </article>
-    </main>
-  </body>
-</html>
-
+</Base>

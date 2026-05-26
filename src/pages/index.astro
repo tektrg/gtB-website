@@ -6,7 +6,7 @@ import { Reviews } from "@/components/landing/Reviews";
 import { UseCases } from "@/components/landing/UseCases";
 import { Guide } from "@/components/landing/Guide";
 import { FAQ } from "@/components/landing/FAQ";
-import { Privacy, Contact } from "@/components/landing/FooterSections";
+import { About, Privacy, Contact } from "@/components/landing/FooterSections";
 ---
 <Base
   title="GPT Breeze — AI productivity shortcuts in your tab and Youtube summarizer"
@@ -95,8 +95,13 @@ import { Privacy, Contact } from "@/components/landing/FooterSections";
     "downloadUrl": "https://chromewebstore.google.com/detail/gpt-breeze-ai-shortcuts-y/plchckmceefljjjphgfcadhlfnlindog",
     "author": {
       "@type": "Organization",
-      "name": "GPT Breeze",
-      "url": "https://gptbreeze.io"
+      "name": "theindie.app",
+      "url": "https://theindie.app/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "theindie.app",
+      "url": "https://theindie.app/"
     },
     "offers": {
       "@type": "Offer",
@@ -135,6 +140,11 @@ import { Privacy, Contact } from "@/components/landing/FooterSections";
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "GPT Breeze",
+    "brand": {
+      "@type": "Brand",
+      "name": "theindie.app",
+      "url": "https://theindie.app/"
+    },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5",
@@ -262,6 +272,7 @@ import { Privacy, Contact } from "@/components/landing/FooterSections";
 
   <Guide client:visible />
 
+  <About client:visible />
   <Privacy client:visible />
 
   <Contact client:visible />

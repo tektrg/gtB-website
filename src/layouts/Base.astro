@@ -1,5 +1,11 @@
 ---
 import '../styles/global.css';
+import {
+  STUDIO_CONTACT_EMAIL,
+  STUDIO_HOME_URL,
+  STUDIO_LIVE_APPS,
+  STUDIO_ORGANIZATION_SCHEMA,
+} from '../data/studio';
 // Conditionally import landing page styles for landing pages only
 if (Astro.props.isLandingPage) {
   await import('../styles/landing-pages.css');
@@ -97,6 +103,7 @@ if (!breadcrumbs) {
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-30EX1TYBPM" is:inline></script>
     <script src="/js/analytics.js" defer is:inline></script>
     <script src="/js/toc.js" defer is:inline></script>
+    <script type="application/ld+json" set:html={JSON.stringify(STUDIO_ORGANIZATION_SCHEMA)} is:inline />
     <style>
       html,
       body {
@@ -538,6 +545,10 @@ if (!breadcrumbs) {
         <div style="display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
           <div>
             <div style="margin-bottom: 12px;">©2025 GPT Breeze — All Rights Reserved</div>
+            <div style="margin-bottom: 12px; max-width: 34ch;">
+              GPT Breeze is built by
+              <a href={STUDIO_HOME_URL}>theindie.app</a>, a founder-led indie studio.
+            </div>
             <div><a href="/privacy">Privacy Policy</a></div>
             <div><a href="/terms-of-use">Terms of Use</a></div>
             <div><a href="/ai-model-cost-calculator-and-price-comparation">LLM Cost Calculator</a></div>
@@ -551,6 +562,16 @@ if (!breadcrumbs) {
               <a href="/for-power-users">For Power Users</a>
               <a href="/for-teams">For Teams</a>
               <a href="/for-educators">For Educators</a>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight: 600; margin-bottom: 8px; color: var(--fg);">theindie.app</div>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <a href={STUDIO_HOME_URL}>theindie.app</a>
+              {STUDIO_LIVE_APPS.map((app) => (
+                <a href={app.href}>{app.name}</a>
+              ))}
+              <a href={`mailto:${STUDIO_CONTACT_EMAIL}`}>{STUDIO_CONTACT_EMAIL}</a>
             </div>
           </div>
         </div>
